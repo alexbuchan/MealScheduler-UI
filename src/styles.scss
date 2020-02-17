@@ -1,0 +1,45 @@
+html, body {
+  margin: 0;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.footer-copyright {
+  color: white;
+}
+
+.signup-view {
+  display: flex;
+}
+
+.signup-background {
+  margin: 0;
+  padding: 0;
+}
+
+.signup-background-image {
+  width: 100%;
+}
+
+.user-signup {
+  width: 30%;
+  background-image: linear-gradient(#FFF, #EEE);
+  border-left: 3px double black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7px;
+}
