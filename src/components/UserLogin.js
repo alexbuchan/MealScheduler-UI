@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 
 class UserLogin extends React.Component {
   constructor(props) {
@@ -6,7 +7,8 @@ class UserLogin extends React.Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      redirect: false
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -20,19 +22,22 @@ class UserLogin extends React.Component {
   }
 
   handleOnSubmit(ev) {
+    ev.preventDefault();
+
     const { name, email, password } = this.state;
     let user = { name, email, password };
 
     this.props.loginUser(user);
     this.setState({
       email: '',
-      password: ''
+      password: '',
+      redirect: true
     });
-
-    ev.preventDefault();
   }
 
   render() {
+    if (this.state.redirect && this.props.auth) return <Redirect to='/contacts' />;
+
     return (
       <div className='col-lg-4 flex-sm-column justify-content-center align-items-center user-signup'>
         <form className='signup-form' onSubmit={ this.handleOnSubmit }>

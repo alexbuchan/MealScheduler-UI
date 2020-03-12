@@ -9,7 +9,7 @@ class UserSignup extends React.Component {
       name: '',
       email: '',
       password: '',
-      redirectToContacts: false
+      redirect: false
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -23,6 +23,8 @@ class UserSignup extends React.Component {
   }
 
   handleOnSubmit(ev) {
+    ev.preventDefault();
+
     const { name, email, password } = this.state;
     let user = { name, email, password };
 
@@ -31,18 +33,13 @@ class UserSignup extends React.Component {
       name: '',
       email: '',
       password: '',
-      redirectToContacts: true
+      redirect: true
     });
-
-    ev.preventDefault();
   }
 
   render() {
-    const redirectToContacts = this.state.redirectToContacts;
-    if (redirectToContacts === true) {
-        return <Redirect to="/contacts" />
-    }
-
+    if (this.state.redirect && this.props.auth) return <Redirect to='/contacts' />;
+   
     return (
       <div className='col-lg-4 flex-sm-column justify-content-center align-items-center user-signup'>
         <form className='signup-form' onSubmit={ this.handleOnSubmit }>
