@@ -1,9 +1,9 @@
 import { EventEmitter } from 'events';
 import Dispatcher from '../dispatcher/dispatcher';
-import ActionTypes from '../constants/userConstants';
+import Constants from '../constants/userConstants';
 
 const CHANGE = 'CHANGE';
-let _userState = [];
+let userState = {};
 
 class UserStore extends EventEmitter {
   constructor() {
@@ -15,20 +15,38 @@ class UserStore extends EventEmitter {
     // Switches over the action's type when an action is dispatched.
     _registerToActions(action) {
       switch(action.actionType) {
-        case ActionTypes.CREATE_USER:
-          this._createUser(action.payload);
+        case Constants.REGISTER_USER:
+          this.loginUser(action.response);
+          break;
+
+        case Constants.LOGIN_USER:
+          this.loginUser(action.response);
+          break;
+        
+        case Constants.LOGOUT_USER:
+          this.logoutUser(action.response);
           break;
       }
     }
 
     // Adds a new item to the list and emits a CHANGED event.
-    _createUser(user) {
-        _userState.push(user);
-        this.emit(CHANGE);
+    loginUser(response) {
+      userState.user = response.user;
+      userState.auth = response.auth;
+      userState.token = response.token;
+      userState.message = response.message;
+      this.emit(CHANGE);
     }
 
-    _getUser() {
-      return _userState[0];
+    logoutUser = (response) => {
+      userState.auth = response.auth;
+      userState.token = '';
+      userState.message = response.message;
+      this.emit(CHANGE);
+    }
+
+    getUserState() {
+      return userState;
     }
 
     // Hooks a React component's callback to the CHANGED event.

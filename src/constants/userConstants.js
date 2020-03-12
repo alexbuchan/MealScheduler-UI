@@ -1,3 +1,5 @@
 export default {
-    createUser: 'CREATE_USER'
+    REGISTER_USER: 'registerUser',
+    LOGIN_USER: 'loginUser',
+    LOGOUT_USER: 'logoutUser'
 }
