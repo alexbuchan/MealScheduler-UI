@@ -1,0 +1,32 @@
+.flash-message {
+  bottom: -17px;
+  position: absolute;
+  width: 100%;
+
+  .alert {
+    border-radius: 0;
+    color: white;
+    padding: 20px;
+    z-index: 1111;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .alert p {
+    margin: 0;
+  }
+
+  .alert-error {
+    background-color: #fb2a2a;
+  }
+
+  .alert-success {
+    background: lightgreen;
+  }
+
+  .close {
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 
 class UserSignup extends React.Component {
   constructor(props) {
@@ -9,11 +9,24 @@ class UserSignup extends React.Component {
       name: '',
       email: '',
       password: '',
-      redirect: false
+      redirect: false,
+      disableSubmitButton: false
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.state.disableSubmitButton) {
+      this.turnOffSubmitButtonDisable = setTimeout(() => { 
+        this.setState(() => ({ disableSubmitButton: false }))
+      }, 1000);
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.turnOffSubmitButtonDisable);
   }
 
   handleOnChange(ev) {
@@ -33,16 +46,17 @@ class UserSignup extends React.Component {
       name: '',
       email: '',
       password: '',
-      redirect: true
+      redirect: true,
+      disableSubmitButton: true
     });
   }
 
   render() {
-    if (this.state.redirect && this.props.auth) return <Redirect to='/contacts' />;
+    if (this.state.redirect && this.props.cookie) return <Redirect to='/contacts' />;
    
     return (
-      <div className='col-lg-4 flex-sm-column justify-content-center align-items-center user-signup'>
-        <form className='signup-form' onSubmit={ this.handleOnSubmit }>
+      <div className='user-signup'>
+        <div className='signup-form'>
           <div className='form-element'>
             <p>Name:</p>
             <input name='name' type='text' value={ this.state.name } onChange={ this.handleOnChange }/>
@@ -55,8 +69,8 @@ class UserSignup extends React.Component {
             <p>Password:</p>
             <input name='password' type='password' value={ this.state.password } onChange={ this.handleOnChange }/>
           </div>
-          <input type='submit' value='Register!'/>
-        </form>
+          <button disabled={ this.state.disableSubmitButton } onClick={ this.handleOnSubmit }>Register!</button>
+        </div>
       </div>
     );
   }

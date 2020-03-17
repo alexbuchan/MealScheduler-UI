@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import UserActions from '../actions/user';
+import UserActions from '../../actions/user';
 
 class NavBar extends React.Component {
   handleLogout = (ev) => {
@@ -9,10 +9,10 @@ class NavBar extends React.Component {
   }
 
   renderUsername() {
-    if (this.props.isLoggedIn && this.props.userName) {
+    if (this.props.cookie) {
       return (
         <li className="nav-item">
-          <Link className="nav-link" to="/contacts">{ this.props.userName }<span className="sr-only">(current)</span></Link>
+          <Link className="nav-link" to="/contacts">{ this.props.cookie.user.name }<span className="sr-only">(current)</span></Link>
         </li>
       );
     }
@@ -21,7 +21,7 @@ class NavBar extends React.Component {
   }
 
   renderSignup() {
-    if (!this.props.isLoggedIn) {
+    if (!this.props.cookie) {
       return (
         <li className="nav-item">
           <Link className="nav-link" to="/">Signup</Link>
@@ -33,7 +33,7 @@ class NavBar extends React.Component {
   }
 
   renderLogin() {
-    if (this.props.isLoggedIn) {
+    if (this.props.cookie) {
       return (
         <li className="nav-item">
           <Link onClick={ this.handleLogout } className="nav-link" to="/login">Log out<span className="sr-only">(current)</span></Link>
@@ -50,7 +50,7 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand" to="">Goldenspear Contacts App</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

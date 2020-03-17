@@ -1,0 +1,34 @@
+.footer {
+  position: fixed; 
+  bottom: 0;
+  width: 100%;
+  background-color: $headerAndFooterColor;
+  color: rgba(255,255,255,.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.footer-copyright {
+  color: white;
+}
+
+@media only screen and (max-width: 649px) {
+  .footer {
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    background-color: $headerAndFooterColor;
+    color: rgba(255,255,255,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .footer-copyright {
+    color: white;
+    font-size: small;
+  }
+}

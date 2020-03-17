@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
+import UserActions from '../../actions/user';
 
 class UserLogin extends React.Component {
   constructor(props) {
@@ -8,11 +9,24 @@ class UserLogin extends React.Component {
     this.state = {
       email: '',
       password: '',
-      redirect: false
+      redirect: false,
+      disableSubmitButton: false
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.state.disableSubmitButton) {
+      this.turnOffSubmitButtonDisable = setTimeout(() => { 
+        this.setState(() => ({ disableSubmitButton: false }))
+      }, 1000);
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.turnOffSubmitButtonDisable);
   }
 
   handleOnChange(ev) {
@@ -23,6 +37,7 @@ class UserLogin extends React.Component {
 
   handleOnSubmit(ev) {
     ev.preventDefault();
+    // UserActions.disableButtonDuringSubmit();
 
     const { name, email, password } = this.state;
     let user = { name, email, password };
@@ -31,16 +46,17 @@ class UserLogin extends React.Component {
     this.setState({
       email: '',
       password: '',
-      redirect: true
+      redirect: true,
+      disableSubmitButton: true
     });
   }
 
   render() {
-    if (this.state.redirect && this.props.auth) return <Redirect to='/contacts' />;
+    if (this.state.redirect && this.props.cookie) return <Redirect to='/contacts' />;
 
     return (
       <div className='col-lg-4 flex-sm-column justify-content-center align-items-center user-signup'>
-        <form className='signup-form' onSubmit={ this.handleOnSubmit }>
+        <div className='signup-form'>
           <div className='form-element'>
             <p>Email:</p>
             <input name='email' type='text' value={ this.state.email } onChange={ this.handleOnChange }/>
@@ -49,8 +65,8 @@ class UserLogin extends React.Component {
             <p>Password:</p>
             <input name='password' type='password' value={ this.state.password } onChange={ this.handleOnChange }/>
           </div>
-          <input type='submit' value='Register!'/>
-        </form>
+          <button disabled={ this.state.disableSubmitButton } onClick={ this.handleOnSubmit }>Login!</button>
+        </div>
       </div>
     );
   }
