@@ -5,10 +5,15 @@ class Validator {
     this.validation_rules = validation_rules;
   }
 
-  validate = (state) => {
-    let validation = this.valid(); // isValid: true, validation: { username: { isInvalid: false, message: '' }, etc... }
+  validate = (state, ...args) => {
+    const fields = args;
+    let validation = this.valid(...fields); // isValid: true, validation: { username: { isInvalid: false, message: '' }, etc... }
 
     this.validation_rules.forEach(rule => {
+      if (!fields.includes(rule.field)) {
+        return;
+      }
+
       const field_value = state[rule.field];
 
       if(rule.method(field_value) !== rule.validWhen) {
@@ -20,12 +25,15 @@ class Validator {
     return validation;
   }
 
-  valid() {
+  valid(...args) {
+    const fields = args;
     const validation = {} // username = { isInvalid: false, message: '' }, etc...
-    this.validation_rules.map(rule => ( // rule.field = username
-      validation[rule.field] = { isInvalid: false, message: '' }
-    ));
 
+    if (fields) {
+      fields.map(field => ( // rule.field = username
+        validation[field] = { isInvalid: false, message: '' }
+      ));
+    }
     return { isValid: true, ...validation };
   }
 }
