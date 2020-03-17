@@ -1,7 +1,7 @@
 import React from 'react';
 import UserActions from '../actions/user';
-import SignupLoginBackground from '../components/SignupLoginBackground';
-import UserLogin from '../components/UserLogin';
+import SignupLoginBackground from '../components/SignupLoginBackground/SignupLoginBackground';
+import UserLogin from '../components/UserLogin/UserLogin';
 
 class LoginView extends React.Component {
   loginUser(user) {
@@ -10,9 +10,11 @@ class LoginView extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        <SignupLoginBackground />
-        <UserLogin auth={ this.props.auth } loginUser={ this.loginUser.bind(this) } />
+      <div className='signup-login-view-wrapper'>
+        <div className='signup-login-view'>
+          <SignupLoginBackground />
+          <UserLogin cookie={ this.props.cookie } loginUser={ this.loginUser.bind(this) } />
+        </div>
       </div>
     );
   }
