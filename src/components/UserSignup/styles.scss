@@ -1,0 +1,13 @@
+.help-block {
+  color: #fb2a2a;
+  font-size: 12px;
+  text-align: center;
+}
+
+.input-field-error {
+  border: 1px solid #fb2a2a;
+}
+
+.input-field-error:focus {
+  outline: 1px solid rgba($color: #fb2a2a, $alpha: 0.2);
+}

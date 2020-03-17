@@ -5,10 +5,12 @@ class Validator {
     this.validation_rules = validation_rules;
   }
 
-  validate = (stateErrorFields) => {
+  validate = (state) => {
     let validation = this.valid(); // isValid: true, validation: { username: { isInvalid: false, message: '' }, etc... }
 
     this.validation_rules.forEach(rule => {
+      const field_value = state[rule.field];
+
       if(rule.method(field_value) !== rule.validWhen) {
         validation[rule.field] = { isInvalid: true, message: rule.message }
         validation.isValid = false;
@@ -20,8 +22,7 @@ class Validator {
 
   valid() {
     const validation = {} // username = { isInvalid: false, message: '' }, etc...
-
-    this.validations.map(rule => ( // rule.field = username
+    this.validation_rules.map(rule => ( // rule.field = username
       validation[rule.field] = { isInvalid: false, message: '' }
     ));
 

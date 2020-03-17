@@ -4,7 +4,27 @@
 /* COMPONENT IMPORTS */
 @import '../components/NavBar/styles';
 @import '../components/Footer/styles';
+@import '../components/UserSignup/styles';
 @import '../components/FlashMessage/styles';
+
+p {
+  margin: 0;
+}
+
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+.form-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 86px;
+}
 
 @media only screen and (min-width: 1080px) {
   html, body {
@@ -63,16 +83,9 @@
     height: 100%;
   }
 
-  .signup-form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .form-element {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 7px;
+  .formSubmitButton {
+    width: 60%;
+    margin-top: 10px;
   }
 }
 
@@ -135,16 +148,9 @@
     border-radius: 11px;
   }
 
-  .signup-form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .form-element {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 7px;
+  .formSubmitButton {
+    width: 90%;
+    margin-top: 10px;
   }
 }
 
@@ -205,15 +211,8 @@
     height: 65%;
   }
 
-  .signup-form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .form-element {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 7px;
+  .formSubmitButton {
+    width: 60%;
+    margin-top: 10px;
   }
 }

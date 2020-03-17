@@ -1,17 +1,24 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
+import Validator from '../../lib/Validator';
+
 class UserSignup extends React.Component {
   constructor(props) {
     super(props);
 
+    this.validator = new Validator();
+
     this.state = {
-      name: '',
+      username: '',
       email: '',
       password: '',
       redirect: false,
-      disableSubmitButton: false
+      disableSubmitButton: false,
+      validation: this.validator.valid()
     };
+
+    this.submitted = false;
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
@@ -30,6 +37,8 @@ class UserSignup extends React.Component {
   }
 
   handleOnChange(ev) {
+    ev.preventDefault();
+
     this.setState({
       [ev.target.name]: ev.target.value
     });
@@ -37,39 +46,75 @@ class UserSignup extends React.Component {
 
   handleOnSubmit(ev) {
     ev.preventDefault();
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
 
-    const { name, email, password } = this.state;
-    let user = { name, email, password };
+    if (validation.isValid) {
+      const { username, email, password } = this.state;
+      let user = { username, email, password };
 
-    this.props.signupUser(user);
+      this.props.signupUser(user);
+      this.clearFormState();
+    }
+  }
+
+  clearFormState = () => {
     this.setState({
-      name: '',
+      username: '',
       email: '',
       password: '',
       redirect: true,
-      disableSubmitButton: true
+      disableSubmitButton: true,
+      validation: this.validator.valid()
     });
+  }
+
+  inputFieldClass = (field, validation) => {
+    return (!validation[field].isInvalid) ? "" : "input-field-error";
   }
 
   render() {
     if (this.state.redirect && this.props.cookie) return <Redirect to='/contacts' />;
+    let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation
    
     return (
       <div className='user-signup'>
         <div className='signup-form'>
           <div className='form-element'>
             <p>Name:</p>
-            <input name='name' type='text' value={ this.state.name } onChange={ this.handleOnChange }/>
+            <input 
+              className={ this.inputFieldClass('username', validation) }
+              name='username'
+              type='text'
+              value={ this.state.username }
+              onChange={ this.handleOnChange }
+            />
+            <span className="help-block">{validation.username.message}</span>
           </div>
           <div className='form-element'>
             <p>Email:</p>
-            <input name='email' type='text' value={ this.state.email } onChange={ this.handleOnChange }/>
+            <input
+              className={ this.inputFieldClass('email', validation) }
+              name='email'
+              type='text'
+              value={ this.state.email }
+              onChange={ this.handleOnChange }
+            />
+            <span className="help-block">{validation.email.message}</span>
           </div>
           <div className='form-element'>
             <p>Password:</p>
-            <input name='password' type='password' value={ this.state.password } onChange={ this.handleOnChange }/>
+            <input
+              className={ this.inputFieldClass('password', validation) }
+              name='password'
+              type='password'
+              value={ this.state.password }
+              onChange={ this.handleOnChange }
+            />
+            <span className="help-block">{validation.password.message}</span>
           </div>
-          <button disabled={ this.state.disableSubmitButton } onClick={ this.handleOnSubmit }>Register!</button>
+          <button className='formSubmitButton' disabled={ this.state.disableSubmitButton } onClick={ this.handleOnSubmit }>Register!</button>
         </div>
       </div>
     );
