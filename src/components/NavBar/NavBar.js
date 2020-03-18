@@ -12,7 +12,7 @@ class NavBar extends React.Component {
     if (this.props.cookie) {
       return (
         <li className="nav-item">
-          <Link className="nav-link" to="/contacts">{ this.props.cookie.user.name }<span className="sr-only">(current)</span></Link>
+          <Link className="nav-link" to="/contacts">{ this.props.cookie.user.username }<span className="sr-only">(current)</span></Link>
         </li>
       );
     }
