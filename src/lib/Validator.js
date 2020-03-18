@@ -1,22 +1,22 @@
 import validation_rules from './validation_rules';
 
 class Validator {
-  constructor() {
+  constructor(...args) {
     this.validation_rules = validation_rules;
+    this.fields = args;
   }
 
-  validate = (state, ...args) => {
-    const fields = args;
-    let validation = this.valid(...fields); // isValid: true, validation: { username: { isInvalid: false, message: '' }, etc... }
+  validate = (state) => {
+    let validation = this.valid(); // isValid: true, validation: { username: { isInvalid: false, message: '' }, etc... }
 
     this.validation_rules.forEach(rule => {
-      if (!fields.includes(rule.field)) {
+      if (!this.fields.includes(rule.field)) {
         return;
       }
 
       const field_value = state[rule.field];
 
-      if(rule.method(field_value) !== rule.validWhen) {
+      if (rule.method(field_value) !== rule.validWhen) {
         validation[rule.field] = { isInvalid: true, message: rule.message }
         validation.isValid = false;
       }
@@ -25,15 +25,13 @@ class Validator {
     return validation;
   }
 
-  valid(...args) {
-    const fields = args;
+  valid() {
     const validation = {} // username = { isInvalid: false, message: '' }, etc...
 
-    if (fields) {
-      fields.map(field => ( // rule.field = username
-        validation[field] = { isInvalid: false, message: '' }
-      ));
-    }
+    this.fields.map(field => ( // rule.field = username
+      validation[field] = { isInvalid: false, message: '' }
+    ));
+
     return { isValid: true, ...validation };
   }
 }

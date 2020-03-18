@@ -7,7 +7,7 @@ class UserSignup extends React.Component {
   constructor(props) {
     super(props);
 
-    this.validator = new Validator();
+    this.validator = new Validator('username', 'email', 'password');
 
     this.state = {
       username: '',
@@ -15,7 +15,7 @@ class UserSignup extends React.Component {
       password: '',
       redirect: false,
       disableSubmitButton: false,
-      validation: this.validator.valid('username', 'email', 'password')
+      validation: this.validator.valid()
     };
 
     this.submitted = false;
@@ -49,7 +49,7 @@ class UserSignup extends React.Component {
 
   handleOnSubmit(ev) {
     ev.preventDefault();
-    const validation = this.validator.validate(this.state, 'username', 'email', 'password');
+    const validation = this.validator.validate(this.state);
     this.setState({ validation });
     this.submitted = true;
 
@@ -67,7 +67,7 @@ class UserSignup extends React.Component {
       password: '',
       redirect: true,
       disableSubmitButton: true,
-      validation: this.validator.valid('username', 'email', 'password')
+      validation: this.validator.valid()
     });
   }
 
@@ -77,7 +77,7 @@ class UserSignup extends React.Component {
 
   render() {
     if (this.state.redirect && this.props.cookie) return <Redirect to='/contacts' />;
-    let validation = this.submitted ? this.validator.validate(this.state, 'username', 'email', 'password') : this.state.validation;
+    let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
    
     return (
       <div className='user-signup'>
