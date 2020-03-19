@@ -68,7 +68,7 @@ class UserStore extends EventEmitter {
     }
 
     addErrorMessage(err) {
-      userState.error = err.data.error;
+      userState.error = (Array.isArray(err.data.error)) ? err.data.error : [err.data.error];
       userState.closeFlashMessage = false;
 
       this.emit(CHANGE);

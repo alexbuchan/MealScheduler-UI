@@ -21,9 +21,11 @@ class FlashMessage extends React.Component {
   }
 
   renderErrorMessage() {
-    const messageArr = this.props.message.split(' ');
-    const [first, email, ...rest] = messageArr
-    return <p>{ first } <strong>{ email }</strong> { rest.join(' ') }</p>;
+    return (
+      <ul>
+        { this.props.message.map(err => <li>{ err.field }: { err.message }</li>) }
+      </ul>
+    );
   }
 
   render() {
