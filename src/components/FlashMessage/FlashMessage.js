@@ -21,11 +21,15 @@ class FlashMessage extends React.Component {
   }
 
   renderErrorMessage() {
-    return (
-      <ul>
-        { this.props.message.map(err => <li>{ err.field }: { err.message }</li>) }
-      </ul>
-    );
+    if (Object.keys(this.props.message).includes('field')) {
+      return (
+        <ul>
+          { this.props.message.map(err => <li>{ err.field }: { err.message }</li>) }
+        </ul>
+      );
+    }
+
+    return <li>{ this.props.message }</li>
   }
 
   render() {
