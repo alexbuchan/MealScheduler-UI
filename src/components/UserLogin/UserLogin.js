@@ -28,7 +28,7 @@ class UserLogin extends React.Component {
       }, 1000);
     }
 
-    if (this.props.cookie) {
+    if (this.props.user) {
       this.clearFormState();
     }
   }
@@ -74,7 +74,7 @@ class UserLogin extends React.Component {
   }
 
   render() {
-    if (this.state.redirect && this.props.cookie) return <Redirect to='/contacts' />;
+    if (this.state.redirect && this.props.user) return <Redirect to='/contacts' />;
     let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
 
     return (

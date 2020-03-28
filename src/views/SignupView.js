@@ -13,7 +13,7 @@ class SignupView extends React.Component {
       <div className='signup-login-view-wrapper'>
         <div className='signup-login-view'>
           <SignupLoginBackground />
-          <UserSignup cookie={ this.props.cookie } signupUser={ this.signupUser.bind(this) } />
+          <UserSignup user={ this.props.user } signupUser={ this.signupUser.bind(this) } />
         </div>
       </div>
     );

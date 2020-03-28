@@ -3,5 +3,6 @@ export default {
     LOGIN_USER: 'loginUser',
     LOGOUT_USER: 'logoutUser',
     ERROR_MESSAGE: 'errorMessage',
-    CLOSE_FLASH_MESSAGE: 'closeFlashMessage'
+    CLOSE_FLASH_MESSAGE: 'closeFlashMessage',
+    RETRIEVE_USER_DATA_ON_REFRESH: 'retrieveUserDataOnRefresh'
 }

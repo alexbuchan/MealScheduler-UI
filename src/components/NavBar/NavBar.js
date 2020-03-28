@@ -9,10 +9,10 @@ class NavBar extends React.Component {
   }
 
   renderUsername() {
-    if (this.props.cookie) {
+    if (this.props.user) {
       return (
         <li className="nav-item">
-          <Link className="nav-link" to="/contacts">{ this.props.cookie.user.username }<span className="sr-only">(current)</span></Link>
+          <Link className="nav-link" to="/contacts">{ this.props.user.username }<span className="sr-only">(current)</span></Link>
         </li>
       );
     }
@@ -21,7 +21,7 @@ class NavBar extends React.Component {
   }
 
   renderSignup() {
-    if (!this.props.cookie) {
+    if (!this.props.user) {
       return (
         <li className="nav-item">
           <Link className="nav-link" to="/">Signup</Link>
@@ -33,7 +33,7 @@ class NavBar extends React.Component {
   }
 
   renderLogin() {
-    if (this.props.cookie) {
+    if (this.props.user) {
       return (
         <li className="nav-item">
           <Link onClick={ this.handleLogout } className="nav-link" to="/login">Log out<span className="sr-only">(current)</span></Link>

@@ -2,55 +2,38 @@ import Cookie from 'universal-cookie';
 require('es6-promise').polyfill();
 const request = require('axios');
 
-import JWT from '../lib/JWT';
 import Dispatcher from '../dispatcher/dispatcher';
+import ActionDispatch from './actionDispatch';
 import Constants from '../constants/userConstants';
+import JWT from '../lib/JWT';
 
 class UserActions {
   registerUser = user => {
     const _endpoint = 'http://localhost:3000/signup';
     request.post(_endpoint, user)
       .then(response => {
-        if (response.status === 200) {
-          const data = JWT.decodeJWTToken(response.data.token);
-          const cookie = this.setCookie(data);
-          data.cookie = cookie;
-
-          this.dispatchRegisterUser(data);
-        }
+        this.handleSignupLoginResponse(response, ActionDispatch.dispatchRegisterUser);
       })
       .catch(err => {
-        this.dispatchErrorMessage(err);
+        ActionDispatch.dispatchErrorMessage(err);
       });
   }
 
   loginUser = user => {
     const _endpoint = 'http://localhost:3000/login';
-    request.post(_endpoint, user)
+    const jwt = this.getCookie('user');
+    request.post(_endpoint, {headers: `Bearer ${jwt}`}, user)
       .then(response => {
-        if (response.status === 200) {
-          const data = JWT.decodeJWTToken(response.data.token);
-          const cookie = this.setCookie(data);
-          data.cookie = cookie;
-
-          this.dispatchLoginUser(data)
-        }
+        this.handleSignupLoginResponse(response, ActionDispatch.dispatchLoginUser);
       })
       .catch(err => {
-        this.dispatchErrorMessage(err);
+        ActionDispatch.dispatchErrorMessage(err);
       });
   }
 
-  logoutUser = user => {
-    const _endpoint = 'http://localhost:3000/logout';
-    request.post(_endpoint, user)
-      .then(response => {
-        this.removeCookie();
-        this.dispatchLogoutUser(response)  
-      })
-      .catch(err => {
-        this.dispatchErrorMessage(err);
-      });
+  logoutUser = () => {
+    this.removeCookie();
+    ActionDispatch.dispatchLogoutUser();
   }
 
   closeFlashMessage = () => {
@@ -59,38 +42,31 @@ class UserActions {
     });
   }
 
-  dispatchRegisterUser = (data) => {
-    Dispatcher.dispatch({
-      actionType: Constants.REGISTER_USER,
-      data
-    });
+  retrieveUserDataOnRefresh = () => {
+    const cookie = this.getCookie('user');
+    if (cookie) {
+      const data = JWT.decodeJWTToken(cookie);
+      ActionDispatch.dispatchUserDataOnRefresh(data);
+    }
   }
 
-  dispatchLoginUser = (data) => {
-    Dispatcher.dispatch({
-      actionType: Constants.LOGIN_USER,
-      data
-    });
+  handleSignupLoginResponse = (response, dispatchFunction) => {
+    if (response.status === 200) {
+      const data = JWT.decodeJWTToken(response.data.token);
+      this.setCookie('user', response.data.token);
+
+      dispatchFunction(data);
+    }
   }
 
-  dispatchLogoutUser = (data) => {
-    Dispatcher.dispatch({
-      actionType: Constants.LOGOUT_USER,
-      data
-    });
-  }
-
-  dispatchErrorMessage = (err) => {
-    Dispatcher.dispatch({
-      actionType: Constants.ERROR_MESSAGE,
-      err
-    });
-  }
-
-  setCookie = user => {
+  getCookie = (type) => {
     const cookie = new Cookie();
-    cookie.set('user', user, { path: '/' });
-    return cookie.get('user');
+    return cookie.get(type);
+  }
+
+  setCookie = (type, token) => {
+    const cookie = new Cookie();
+    cookie.set(type, token, { path: '/' });
   }
 
   removeCookie = () => {

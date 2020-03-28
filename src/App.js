@@ -28,6 +28,8 @@ class App extends React.Component {
   constructor() {
     super();
 
+    UserActions.retrieveUserDataOnRefresh();
+
     this.state = {
       userStore: UserStore.getUserState(),
       closeFlashMessage: UserStore.getCloseFlashMessage(),
@@ -54,7 +56,7 @@ class App extends React.Component {
   }
 
   isLoggedIn = () => {
-    if (this.state.userStore.cookie) return <Contacts />;
+    if (this.state.userStore.auth) return <Contacts />;
 
     return <Redirect to='/login' />;
   }
@@ -76,12 +78,12 @@ class App extends React.Component {
       <Router>
         <div className='container-fluid'>
           <NavBar 
-            cookie={ this.state.userStore.cookie }
+            user={ this.state.userStore.user }
           />
 
           <Switch>
-            <Route exact path="/" render={ () => <SignupView cookie={ this.state.userStore.cookie } /> } />
-            <Route exact path="/login" render={ () => <LoginView cookie={ this.state.userStore.cookie } /> } />
+            <Route exact path="/" render={ () => <SignupView user={ this.state.userStore.user } /> } />
+            <Route exact path="/login" render={ () => <LoginView user={ this.state.userStore.user } /> } />
             <Route exact path="/contacts" render={ this.isLoggedIn } />
             <Route path='/*' component={ GenericNotFound } />
           </Switch>

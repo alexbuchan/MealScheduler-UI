@@ -1,12 +1,10 @@
 import { EventEmitter } from 'events';
 import Dispatcher from '../dispatcher/dispatcher';
 import Constants from '../constants/userConstants';
-import Cookie from 'universal-cookie';
 
 const CHANGE = 'CHANGE';
-const cookie = new Cookie;
 let userState = {
-  cookie: cookie.get('user') || null,
+  auth: false,
   closeFlashMessage: true
 };
 
@@ -21,7 +19,7 @@ class UserStore extends EventEmitter {
     _registerToActions(action) {
       switch(action.actionType) {
         case Constants.REGISTER_USER:
-          this.loginUser(action.data);
+          this.registerUser(action.data);
           break;
 
         case Constants.LOGIN_USER:
@@ -39,24 +37,39 @@ class UserStore extends EventEmitter {
         case Constants.CLOSE_FLASH_MESSAGE:
           this.closeFlashMessage();
           break;
+        case Constants.RETRIEVE_USER_DATA_ON_REFRESH:
+          this.populateUserDataOnRefresh(action.data);
+          break;
       }
     }
 
     // Adds a new item to the list and emits a CHANGED event.
-    loginUser(data) {
-      userState.cookie = data.cookie;
-      userState.auth = data.auth;
-      userState.user = data.user;
-      userState.message = data.message;
+    registerUser = data => {
+      this.populateUserData(data);
+      this.emit(CHANGE);
+    }
 
+    loginUser = data => {
+      this.populateUserData(data);
+      this.emit(CHANGE);
+    }
+
+    populateUserDataOnRefresh = data => {
+      this.populateUserData(data);
       this.emit(CHANGE);
     }
 
     logoutUser = (data) => {
-      userState.auth = data.auth;
-      userState.message = data.message;
-      userState.cookie = null;
+      userState.user = null;
+      userState.auth = false;
+      userState.message = null;
       this.emit(CHANGE);
+    }
+
+    populateUserData = (data) => {
+      userState.auth = data.auth;
+      userState.user = data.user;
+      userState.message = data.message;
     }
 
     getUserState() {
@@ -70,7 +83,6 @@ class UserStore extends EventEmitter {
     addErrorMessage(err) {
       userState.error = (Array.isArray(err.data.error)) ? err.data.error : [err.data.error];
       userState.closeFlashMessage = false;
-
       this.emit(CHANGE);
     }
 
@@ -85,12 +97,12 @@ class UserStore extends EventEmitter {
 
     // Hooks a React component's callback to the CHANGED event.
     addChangeListener(callback) {
-        this.on(CHANGE, callback);
+      this.on(CHANGE, callback);
     }
 
     // Removes the listener from the CHANGED event.
     removeChangeListener(callback) {
-        this.removeListener(CHANGE, callback);
+      this.removeListener(CHANGE, callback);
     }
 }
 
