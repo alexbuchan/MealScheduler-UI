@@ -5,9 +5,10 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 
 /* STORE IMPORTS */
 import UserStore from './stores/user';
+import ContactStore from './stores/contact';
 
 /* ACTION IMPORTS */
-import UserActions from './actions/user';
+import UserActions from './actions/user/user';
 
 /* VIEW IMPORTS */
 import SignupView from './views/SignupView';
@@ -33,7 +34,8 @@ class App extends React.Component {
     this.state = {
       userStore: UserStore.getUserState(),
       closeFlashMessage: UserStore.getCloseFlashMessage(),
-      error: ''
+      error: '',
+      contacts: ContactStore.getContactState()
     }
 
     this._onChange = this._onChange.bind(this);
@@ -43,20 +45,23 @@ class App extends React.Component {
     this.setState({
       userStore: UserStore.getUserState(),
       error: UserStore.getError(),
-      closeFlashMessage: UserStore.getCloseFlashMessage()
+      closeFlashMessage: UserStore.getCloseFlashMessage(),
+      contacts: ContactStore.getContactState().contacts
     });
   }
 
   componentDidMount() {
     UserStore.addChangeListener(this._onChange);
+    ContactStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
     UserStore.removeChangeListener(this._onChange);
+    ContactStore.removeChangeListener(this._onChange);
   }
 
   isLoggedIn = () => {
-    if (this.state.userStore.auth) return <Contacts />;
+    if (this.state.userStore.auth) return <Contacts contacts={ this.state.contacts }/>;
 
     return <Redirect to='/login' />;
   }

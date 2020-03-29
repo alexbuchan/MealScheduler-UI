@@ -1,5 +1,5 @@
-import Dispatcher from '../dispatcher/dispatcher';
-import Constants from '../constants/userConstants';
+import Dispatcher from '../../dispatcher/dispatcher';
+import Constants from '../../constants/userConstants';
 
 class ActionDispatch {
   dispatchRegisterUser = (data) => {

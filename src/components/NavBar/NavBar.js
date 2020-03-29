@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import UserActions from '../../actions/user';
+import UserActions from '../../actions/user/user';
 
 class NavBar extends React.Component {
   handleLogout = (ev) => {

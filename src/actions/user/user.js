@@ -1,11 +1,11 @@
-import Cookie from 'universal-cookie';
 require('es6-promise').polyfill();
 const request = require('axios');
 
-import Dispatcher from '../dispatcher/dispatcher';
+import Dispatcher from '../../dispatcher/dispatcher';
 import ActionDispatch from './actionDispatch';
-import Constants from '../constants/userConstants';
-import JWT from '../lib/JWT';
+import Constants from '../../constants/userConstants';
+import ActionsHelper from '../actionsHelper';
+import JWT from '../../lib/JWT';
 
 class UserActions {
   registerUser = user => {
@@ -21,8 +21,7 @@ class UserActions {
 
   loginUser = user => {
     const _endpoint = 'http://localhost:3000/login';
-    const jwt = this.getCookie('user');
-    request.post(_endpoint, {headers: `Bearer ${jwt}`}, user)
+    request.post(_endpoint, user)
       .then(response => {
         this.handleSignupLoginResponse(response, ActionDispatch.dispatchLoginUser);
       })
@@ -32,7 +31,7 @@ class UserActions {
   }
 
   logoutUser = () => {
-    this.removeCookie();
+    ActionsHelper.removeCookie();
     ActionDispatch.dispatchLogoutUser();
   }
 
@@ -43,7 +42,7 @@ class UserActions {
   }
 
   retrieveUserDataOnRefresh = () => {
-    const cookie = this.getCookie('user');
+    const cookie = ActionsHelper.getCookie('user');
     if (cookie) {
       const data = JWT.decodeJWTToken(cookie);
       ActionDispatch.dispatchUserDataOnRefresh(data);
@@ -53,25 +52,10 @@ class UserActions {
   handleSignupLoginResponse = (response, dispatchFunction) => {
     if (response.status === 200) {
       const data = JWT.decodeJWTToken(response.data.token);
-      this.setCookie('user', response.data.token);
+      ActionsHelper.setCookie('user', response.data.token);
 
       dispatchFunction(data);
     }
-  }
-
-  getCookie = (type) => {
-    const cookie = new Cookie();
-    return cookie.get(type);
-  }
-
-  setCookie = (type, token) => {
-    const cookie = new Cookie();
-    cookie.set(type, token, { path: '/' });
-  }
-
-  removeCookie = () => {
-    const cookie = new Cookie();
-    cookie.remove('user');
   }
 }
 

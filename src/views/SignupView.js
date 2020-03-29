@@ -1,5 +1,5 @@
 import React from 'react';
-import UserActions from '../actions/user';
+import UserActions from '../actions/user/user';
 import SignupLoginBackground from '../components/SignupLoginBackground/SignupLoginBackground';
 import UserSignup from '../components/UserSignup/UserSignup';
 

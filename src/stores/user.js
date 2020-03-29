@@ -37,6 +37,7 @@ class UserStore extends EventEmitter {
         case Constants.CLOSE_FLASH_MESSAGE:
           this.closeFlashMessage();
           break;
+
         case Constants.RETRIEVE_USER_DATA_ON_REFRESH:
           this.populateUserDataOnRefresh(action.data);
           break;
