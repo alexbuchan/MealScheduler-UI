@@ -13,7 +13,7 @@ import UserActions from './actions/user/user';
 /* VIEW IMPORTS */
 import SignupView from './views/SignupView';
 import LoginView from './views/LoginView';
-import Contacts from './views/ContactsView';
+import Contacts from './views/Contacts/ContactsView';
 
 /* COMPONENT IMPORTS */
 import NavBar from './components/NavBar/NavBar';
@@ -35,7 +35,7 @@ class App extends React.Component {
       userStore: UserStore.getUserState(),
       closeFlashMessage: UserStore.getCloseFlashMessage(),
       error: '',
-      contacts: ContactStore.getContactState()
+      contacts: ContactStore.getContactState().contacts
     }
 
     this._onChange = this._onChange.bind(this);

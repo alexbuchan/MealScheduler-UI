@@ -1,0 +1,11 @@
+/* Navbar Heights */
+$navbarHeight: 56px;
+$navbarPaddingTop: 8px;
+$navbarPaddingRight: 16px;
+
+/* Footer Haights */
+$footerHeight: 60px;
+
+/* Main content heights*/
+$mainHeightOffset: $navbarHeight + $navbarPaddingTop + $footerHeight;
+$contentHeight: calc(100% - #{$mainHeightOffset})

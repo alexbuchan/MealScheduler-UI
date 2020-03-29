@@ -1,5 +1,9 @@
 /* GLOBAL VARIABLES */
 @import './colors';
+@import './variables';
+
+/* VIEW IMPORTS */
+@import '../views/Contacts/styles';
 
 /* COMPONENT IMPORTS */
 @import '../components/NavBar/styles';
@@ -52,7 +56,7 @@ p {
   }
 
   .signup-login-view-wrapper {
-    height: calc(100% - 100px);
+    height: calc(100% - $mainHeightOffset);
   }
 
   .signup-login-view {

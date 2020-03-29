@@ -3,7 +3,9 @@ import Dispatcher from '../dispatcher/dispatcher';
 import Constants from '../constants/contactConstants';
 
 const CHANGE = 'CHANGE';
-let contactState = {};
+let contactState = {
+  contacts: []
+};
 
 class UserStore extends EventEmitter {
   constructor() {
@@ -20,7 +22,7 @@ class UserStore extends EventEmitter {
   }
 
   getContactsData = (data) => {
-    contactState.contacts = data.contacts;
+    contactState.contacts = data;
     this.emit(CHANGE);
   }
 
