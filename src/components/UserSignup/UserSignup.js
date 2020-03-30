@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import Validator from '../../lib/Validator';
 
@@ -115,7 +115,8 @@ class UserSignup extends React.Component {
             />
             <span className="help-block">{validation.password.message}</span>
           </div>
-          <button className='formSubmitButton' disabled={ this.state.disableSubmitButton } onClick={ this.handleOnSubmit }>Register!</button>
+          <button className='form-submit-button' disabled={ this.state.disableSubmitButton } onClick={ this.handleOnSubmit }>Register!</button>
+          <p className="form-link">Already have an account? <Link className="" to="/login">Log in</Link></p>
         </div>
       </div>
     );

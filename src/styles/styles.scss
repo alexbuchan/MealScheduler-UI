@@ -15,7 +15,6 @@ p {
   margin: 0;
 }
 
-
 .signup-form {
   display: flex;
   flex-direction: column;
@@ -28,6 +27,16 @@ p {
   flex-direction: column;
   align-items: center;
   height: 86px;
+}
+
+.form-submit-button {
+  width: 178px;
+  margin-top: -10px;
+}
+
+.form-link {
+  font-size: small;
+  margin-top: 10px;
 }
 
 @media only screen and (min-width: 1080px) {
@@ -56,7 +65,7 @@ p {
   }
 
   .signup-login-view-wrapper {
-    height: calc(100% - $mainHeightOffset);
+    height: $contentHeight;
   }
 
   .signup-login-view {
@@ -85,11 +94,6 @@ p {
     align-items: center;
     width: 33%;
     height: 100%;
-  }
-
-  .formSubmitButton {
-    width: 60%;
-    margin-top: 10px;
   }
 }
 

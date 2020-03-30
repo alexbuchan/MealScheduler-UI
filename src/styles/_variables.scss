@@ -7,5 +7,5 @@ $navbarPaddingRight: 16px;
 $footerHeight: 60px;
 
 /* Main content heights*/
-$mainHeightOffset: $navbarHeight + $navbarPaddingTop + $footerHeight;
+$mainHeightOffset: $navbarHeight + $footerHeight;
 $contentHeight: calc(100% - #{$mainHeightOffset})
