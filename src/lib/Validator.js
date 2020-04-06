@@ -7,7 +7,7 @@ class Validator {
   }
 
   validate = (state) => {
-    let validation = this.valid(); // isValid: true, validation: { username: { isInvalid: false, message: '' }, etc... }
+    let validation = this.valid();
 
     this.validation_rules.forEach(rule => {
       if (!this.fields.includes(rule.field)) {
@@ -26,9 +26,9 @@ class Validator {
   }
 
   valid() {
-    const validation = {} // username = { isInvalid: false, message: '' }, etc...
+    const validation = {};
 
-    this.fields.map(field => ( // rule.field = username
+    this.fields.map(field => (
       validation[field] = { isInvalid: false, message: '' }
     ));
 

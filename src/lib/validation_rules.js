@@ -1,10 +1,4 @@
-import ValidationMethods from './validation_methods'
-const {
-  isEmpty,
-  usernameLength,
-  isValidEmail,
-  passwordLength
-} = ValidationMethods;
+import { isEmpty, usernameLength, isValidEmail, passwordLength } from './validation_methods';
 
 const validations = [
   {
