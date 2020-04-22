@@ -8,6 +8,7 @@ This project is meant to help me learn how to write a React application with Flu
 * [React](https://reactjs.org/)
 * [Flux](https://facebook.github.io/flux/)
 * [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+* [Jest](https://jestjs.io/)
 * [Axios](https://github.com/axios/axios)
 * [Universal Cookie](https://www.npmjs.com/package/universal-cookie)
 * [JWT](https://jwt.io/)
@@ -28,6 +29,12 @@ This project is meant to help me learn how to write a React application with Flu
 
 ## To run the tests:
 
-The tests run with Mocha and Chai libraries, and are found in the `test` folder.
+The tests run with Jest. Tests are found in the same folder as the file it's testing.
+
+To run in watch mode:
 
 `npm test`
+
+To run regular jest:
+
+`npm run jest`
