@@ -14,7 +14,6 @@ class ContactStore extends EventEmitter {
   }
 
   _registerToActions(action) {
-    console.log('action', action)
     switch(action.actionType) {
       case Constants.GET_CONTACTS_DATA:
         this.getContactsData(action.data);

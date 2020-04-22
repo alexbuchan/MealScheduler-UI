@@ -4,8 +4,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 /* STORE IMPORTS */
-import UserStore from './stores/user';
-import ContactStore from './stores/contact';
+import UserStore from './stores/UserStore/UserStore';
+import ContactStore from './stores/ContactStore/ContactStore';
 
 /* ACTION IMPORTS */
 import UserActions from './actions/user/user';

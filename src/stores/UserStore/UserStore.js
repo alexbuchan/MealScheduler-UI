@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import Dispatcher from '../dispatcher/dispatcher';
-import Constants from '../constants/userConstants';
+import Dispatcher from '../../dispatcher/dispatcher';
+import Constants from '../../constants/userConstants';
 
 const CHANGE = 'CHANGE';
 let userState = {
@@ -51,6 +51,7 @@ class UserStore extends EventEmitter {
     }
 
     loginUser = data => {
+
       this.populateUserData(data);
       this.emit(CHANGE);
     }
@@ -73,14 +74,6 @@ class UserStore extends EventEmitter {
       userState.message = data.message;
     }
 
-    getUserState() {
-      return userState;
-    }
-
-    getError() {
-      return userState.error;
-    }
-
     addErrorMessage(err) {
       userState.error = (Array.isArray(err.data.error)) ? err.data.error : [err.data.error];
       userState.closeFlashMessage = false;
@@ -90,6 +83,14 @@ class UserStore extends EventEmitter {
     closeFlashMessage() {
       userState.closeFlashMessage = true;
       this.emit(CHANGE);
+    }
+
+    getUserState() {
+      return userState;
+    }
+
+    getError() {
+      return userState.error;
     }
 
     getCloseFlashMessage() {

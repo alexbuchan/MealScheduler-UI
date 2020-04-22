@@ -19,7 +19,7 @@ describe('ContactStore', () => {
     expect(Dispatcher.register.mock.calls.length).toBe(1);
   });
 
-  it('initializes contacts with empty array', () => {
+  it('initializes ContactStore with default values', () => {
     const getContactState = ContactStore.getContactState();
     expect(getContactState).toEqual({ contacts: [] });
   });
