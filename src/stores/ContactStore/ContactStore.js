@@ -1,19 +1,20 @@
 import { EventEmitter } from 'events';
-import Dispatcher from '../dispatcher/dispatcher';
-import Constants from '../constants/contactConstants';
+import Dispatcher from '../../dispatcher/dispatcher';
+import Constants from '../../constants/contactConstants';
 
 const CHANGE = 'CHANGE';
 let contactState = {
   contacts: []
 };
 
-class UserStore extends EventEmitter {
+class ContactStore extends EventEmitter {
   constructor() {
     super();
     Dispatcher.register(this._registerToActions.bind(this));
   }
 
   _registerToActions(action) {
+    console.log('action', action)
     switch(action.actionType) {
       case Constants.GET_CONTACTS_DATA:
         this.getContactsData(action.data);
@@ -39,4 +40,4 @@ class UserStore extends EventEmitter {
   }
 }
 
-export default new UserStore();
+export default new ContactStore();
