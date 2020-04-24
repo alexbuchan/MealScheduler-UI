@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactActions from '../../actions/contact/contact';
+import ContactActions from '../../actions/contact/ContactActions';
 import SignupLoginBackground from '../../components/SignupLoginBackground/SignupLoginBackground';
 
 class ContactsView extends React.Component {
