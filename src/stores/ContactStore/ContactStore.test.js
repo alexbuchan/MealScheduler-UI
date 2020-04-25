@@ -1,17 +1,13 @@
-jest.enableAutomock();
-jest.dontMock('./ContactStore');
-jest.dontMock('../../constants/contactConstants');
-
+import ContactStore from './ContactStore';
+import Dispatcher from '../../dispatcher/dispatcher';
 import Constants from '../../constants/contactConstants';
 
+jest.mock('../../dispatcher/dispatcher');
+
 describe('ContactStore', () => {
-  let Dispatcher;
-  let ContactStore;
   let callback;
 
   beforeEach(() => {
-    ContactStore = require('./ContactStore').default;
-    Dispatcher = require('../../dispatcher/dispatcher').default;
     callback = Dispatcher.register.mock.calls[0][0];
   });
 

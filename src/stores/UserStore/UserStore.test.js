@@ -1,17 +1,13 @@
-jest.enableAutomock();
-jest.dontMock('./UserStore');
-jest.dontMock('../../constants/userConstants');
-
+import UserStore from './UserStore';
+import Dispatcher from '../../dispatcher/dispatcher';
 import Constants from '../../constants/userConstants';
 
+jest.mock('../../dispatcher/dispatcher');
+
 describe('UserStore', () => {
-  let Dispatcher;
-  let UserStore;
   let callback;
 
   beforeEach(() => {
-    UserStore = require('./UserStore').default;
-    Dispatcher = require('../../dispatcher/dispatcher').default;
     callback = Dispatcher.register.mock.calls[0][0];
   });
 
