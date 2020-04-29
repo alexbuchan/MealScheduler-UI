@@ -11,10 +11,6 @@ describe('UserStore', () => {
     callback = Dispatcher.register.mock.calls[0][0];
   });
 
-  it('registers a callback with the dispatcher', () => {
-    expect(Dispatcher.register.mock.calls.length).toBe(1);
-  });
-
   it("initializes UserStore with default values", () => {
     const getUserState = UserStore.getUserState();
     expect(getUserState).toEqual({ auth: false, closeFlashMessage: true });
@@ -79,60 +75,6 @@ describe('UserStore', () => {
       expect(getUserState.user).toEqual(null);
       expect(getUserState.message).toEqual(null);
       expect(getUserState.auth).toEqual(false);
-    });
-  });
-
-  describe('#addErrorMessage', () => {
-    describe('when receiving a single error message', () => {
-      it('wraps error message in array and adds it to the store', () => {
-        const actionMock = {
-          actionType: Constants.ERROR_MESSAGE,
-          err: {
-            response: {
-              data: {
-                error: 'Email or password incorrect.'
-              }
-            }
-          }
-        };
-  
-        callback(actionMock);
-        const getUserState = UserStore.getUserState();
-        expect(getUserState.error).toEqual(['Email or password incorrect.']);
-        expect(getUserState.closeFlashMessage).toEqual(false);
-      });
-    });
-
-    describe('when receiving multiple error messages', () => {
-      it('wraps error messages in array and adds them to the store', () => {
-        const actionMock = {
-          actionType: Constants.ERROR_MESSAGE,
-          err: {
-            response: {
-              data: {
-                error: ['Password must be longer than 6 characters', 'email is invalid']
-              }
-            }
-          }
-        };
-  
-        callback(actionMock);
-        const getUserState = UserStore.getUserState();
-        expect(getUserState.error).toEqual(['Password must be longer than 6 characters', 'email is invalid']);
-        expect(getUserState.closeFlashMessage).toEqual(false);
-      });
-    });
-  });
-  
-  describe('#closeFlashMessage', () => {
-    it('sets closeFlashMessage to true', () => {
-      const actionMock = {
-        actionType: Constants.CLOSE_FLASH_MESSAGE
-      };
-
-      callback(actionMock);
-      const getUserState = UserStore.getUserState();
-      expect(getUserState.closeFlashMessage).toEqual(true);
     });
   });
 

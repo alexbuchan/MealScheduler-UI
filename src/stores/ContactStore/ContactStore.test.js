@@ -11,16 +11,12 @@ describe('ContactStore', () => {
     callback = Dispatcher.register.mock.calls[0][0];
   });
 
-  it('registers a callback with the dispatcher', () => {
-    expect(Dispatcher.register.mock.calls.length).toBe(1);
-  });
-
   it('initializes ContactStore with default values', () => {
     const getContactState = ContactStore.getContactState();
     expect(getContactState).toEqual({ contacts: [] });
   });
 
-  describe('getContacts', () => {
+  describe('#getContactsData', () => {
     it('adds contacts to contactState', () => {
       const getContactsMock = {
         actionType: Constants.GET_CONTACTS_DATA,

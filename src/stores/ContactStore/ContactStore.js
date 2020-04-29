@@ -1,16 +1,13 @@
-import { EventEmitter } from 'events';
-import Dispatcher from '../../dispatcher/dispatcher';
+import Store from '../Store/Store';
 import Constants from '../../constants/contactConstants';
 
-const CHANGE = 'CHANGE';
 let contactState = {
   contacts: []
 };
 
-class ContactStore extends EventEmitter {
+class ContactStore extends Store {
   constructor() {
     super();
-    Dispatcher.register(this._registerToActions.bind(this));
   }
 
   _registerToActions(action) {
@@ -23,19 +20,11 @@ class ContactStore extends EventEmitter {
 
   getContactsData = (data) => {
     contactState.contacts = data;
-    this.emit(CHANGE);
+    this.emitChange();
   }
 
   getContactState = () => {
     return contactState;
-  }
-
-  addChangeListener(callback) {
-    this.on(CHANGE, callback);
-  }
-
-  removeChangeListener(callback) {
-    this.removeListener(CHANGE, callback);
   }
 }
 
