@@ -1,16 +1,46 @@
 import React from 'react';
+import Actions from '../../actions/FlashMessageActions/FlashMessageActions';
+import Store from '../../stores/FlashMessageStore/FlashMessageStore';
 
 class FlashMessage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      message: Store.getMessage(),
+      open: Store.getOpen(),
+      type: Store.getType(),
+      duration: this.props.duration || Store.getDuration()
+    }
+  }
+
+  _onChange = () => {
+    this.setState({
+      message: Store.getMessage(),
+      open: Store.getOpen(),
+      type: Store.getType(),
+      duration: this.props.duration || Store.getDuration()
+    });
+  }
+
+  componentDidMount() {
+    Store.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    Store.removeChangeListener(this._onChange);
+  }
+
   _onClick() {
-    this.props.closeFlashMessage();
+    Actions.closeFlashMessage();
   }
 
   renderFlashMessage() {
-    if (!this.props.close) {
-      setTimeout(() => this.props.closeFlashMessage(), this.props.timeout);
+    if (this.state.open) {
+      setTimeout(() => Actions.closeFlashMessage(), this.state.duration);
 
       return (
-        <div className={`alert alert-${this.props.type}`}>
+        <div className={`alert alert-${this.state.type}`}>
           <p></p>
           { this.renderErrorMessage() }
           <span className="close" onClick={ () => this._onClick() }><strong>X</strong></span>
@@ -21,15 +51,15 @@ class FlashMessage extends React.Component {
   }
 
   renderErrorMessage() {
-    if (Object.keys(this.props.message).includes('field')) {
+    if (Object.keys(this.state.message).includes('field')) {
       return (
         <ul>
-          { this.props.message.map(err => <li>{ err.field }: { err.message }</li>) }
+          { this.state.message.map(err => <li>{ err.field }: { err.message }</li>) }
         </ul>
       );
     }
 
-    return <li>{ this.props.message }</li>
+    return <li>Error: { this.state.message }</li>
   }
 
   render() {

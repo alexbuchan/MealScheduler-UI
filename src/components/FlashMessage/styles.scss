@@ -1,9 +1,10 @@
 .flash-message {
-  bottom: -17px;
+  bottom: 0px;
   position: absolute;
   width: 100%;
 
   .alert {
+    margin: 0;
     border-radius: 0;
     color: white;
     padding: 20px;
