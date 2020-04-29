@@ -2,43 +2,46 @@ require('es6-promise').polyfill();
 const request = require('axios');
 
 import Dispatcher from '../../dispatcher/dispatcher';
-import ActionDispatch from './actionDispatch';
+import ActionDispatch from './ActionDispatch';
+import FlashMessageActions from '../FlashMessageActions/FlashMessageActions';
 import Constants from '../../constants/userConstants';
-import ActionsHelper from '../actionsHelper';
+import ActionsHelper from '../ActionsHelper';
 import JWT from '../../lib/JWT';
 
 class UserActions {
-  registerUser = user => {
+  registerUser = async user => {
     const _endpoint = 'http://localhost:3000/signup';
-    request.post(_endpoint, user)
-      .then(response => {
-        this.handleSignupLoginResponse(response, ActionDispatch.dispatchRegisterUser);
-      })
-      .catch(err => {
-        ActionDispatch.dispatchErrorMessage(err);
-      });
+
+    let error, response;
+    [error, response] = await ActionsHelper.asyncHelper(
+      request.post(_endpoint, user)
+    );
+    
+    if (error) {
+      FlashMessageActions.dispatchErrorMessage(error.response);
+    } else {
+      this.handleSignupLoginResponse(response, ActionDispatch.dispatchRegisterUser);
+    }
   }
 
-  loginUser = user => {
+  loginUser = async user => {
     const _endpoint = 'http://localhost:3000/login';
-    request.post(_endpoint, user)
-      .then(response => {
-        this.handleSignupLoginResponse(response, ActionDispatch.dispatchLoginUser);
-      })
-      .catch(err => {
-        ActionDispatch.dispatchErrorMessage(err);
-      });
+
+    let error, response;
+    [error, response] = await ActionsHelper.asyncHelper(
+      request.post(_endpoint, user)
+    );
+    
+    if (error) {
+      FlashMessageActions.dispatchErrorMessage(error.response);
+    } else {
+      this.handleSignupLoginResponse(response, ActionDispatch.dispatchLoginUser);
+    }
   }
 
   logoutUser = () => {
     ActionsHelper.removeCookie();
     ActionDispatch.dispatchLogoutUser();
-  }
-
-  closeFlashMessage = () => {
-    Dispatcher.dispatch({
-      actionType: Constants.CLOSE_FLASH_MESSAGE
-    });
   }
 
   retrieveUserDataOnRefresh = () => {

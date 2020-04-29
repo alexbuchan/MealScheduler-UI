@@ -22,13 +22,6 @@ class ActionDispatch {
     });
   }
 
-  dispatchErrorMessage = (err) => {
-    Dispatcher.dispatch({
-      actionType: Constants.ERROR_MESSAGE,
-      err
-    });
-  }
-
   dispatchUserDataOnRefresh = (data) => {
     Dispatcher.dispatch({
       actionType: Constants.RETRIEVE_USER_DATA_ON_REFRESH,
