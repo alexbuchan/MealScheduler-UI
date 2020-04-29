@@ -15,6 +15,13 @@ class ActionsHelper {
     const cookie = new Cookie();
     cookie.remove('user');
   }
+
+  asyncHelper = (promise) => {
+    return promise.then(data => {
+       return [null, data];
+    })
+    .catch(err => [err]);
+  }
 }
 
 export default new ActionsHelper();
