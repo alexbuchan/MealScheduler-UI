@@ -8,7 +8,7 @@ import UserStore from './stores/UserStore/UserStore';
 import ContactStore from './stores/ContactStore/ContactStore';
 
 /* ACTION IMPORTS */
-import UserActions from './actions/user/user';
+import UserActions from './actions/user/UserActions';
 
 /* VIEW IMPORTS */
 import SignupView from './views/SignupView';
@@ -33,8 +33,6 @@ class App extends React.Component {
 
     this.state = {
       userStore: UserStore.getUserState(),
-      closeFlashMessage: UserStore.getCloseFlashMessage(),
-      error: '',
       contacts: ContactStore.getContactState().contacts
     }
 
@@ -44,8 +42,6 @@ class App extends React.Component {
   _onChange() {
     this.setState({
       userStore: UserStore.getUserState(),
-      error: UserStore.getError(),
-      closeFlashMessage: UserStore.getCloseFlashMessage(),
       contacts: ContactStore.getContactState().contacts
     });
   }
@@ -66,18 +62,6 @@ class App extends React.Component {
     return <Redirect to='/login' />;
   }
 
-  renderFlashMessage() {
-    return (
-        <FlashMessage
-          message={ this.state.error }
-          type='error'
-          close={ this.state.closeFlashMessage }
-          closeFlashMessage={ UserActions.closeFlashMessage }
-          timeout={ 3000 }
-        />
-    );
-  }
-
   render() {
     return (
       <Router>
@@ -93,7 +77,7 @@ class App extends React.Component {
             <Route path='/*' component={ GenericNotFound } />
           </Switch>
 
-          { this.renderFlashMessage() }
+          <FlashMessage />
           <Footer />
         </div>
       </Router>
