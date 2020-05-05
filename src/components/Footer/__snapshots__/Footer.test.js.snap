@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Should render without errors 1`] = `
+<footer
+  className="footer"
+  data-test="footer"
+>
+  <div
+    className="footer-copyright"
+  >
+    © 2020 Copyright:
+    <a
+      data-test="author-link"
+      href="https://github.com/alexbuchan"
+    >
+       alex.buchan@telefonica.net
+    </a>
+  </div>
+</footer>
+`;
