@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar When user is logged in Should render username, contacts, and logout in the navbar 1`] = `
+<nav
+  className="navbar-height navbar navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg navbar-dark bg-dark"
+>
+  <Link
+    className="navbar-brand"
+    to=""
+  >
+    Signup and Login App
+  </Link>
+  <button
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    className="navbar-toggler"
+    data-target="#navbarNav"
+    data-toggle="collapse"
+    type="button"
+  >
+    <span
+      className="navbar-toggler-icon"
+    />
+  </button>
+  <div
+    className="collapse navbar-collapse justify-content-sm-end"
+    id="navbarNav"
+  >
+    <ul
+      className="navbar-nav"
+    >
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link"
+          to="/contacts"
+        >
+          username
+          <span
+            className="sr-only"
+          >
+            (current)
+          </span>
+        </Link>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link"
+          to="/contacts"
+        >
+          Contacts
+        </Link>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link"
+          data-test="logout-nav-link"
+          onClick={[Function]}
+          to="/login"
+        >
+          Log out
+          <span
+            className="sr-only"
+          >
+            (current)
+          </span>
+        </Link>
+      </li>
+    </ul>
+  </div>
+</nav>
+`;
+
+exports[`NavBar When user is not logged in Should render contacts, login, and signup in the navbar 1`] = `
+<nav
+  className="navbar-height navbar navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg navbar-dark bg-dark"
+>
+  <Link
+    className="navbar-brand"
+    to=""
+  >
+    Signup and Login App
+  </Link>
+  <button
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    className="navbar-toggler"
+    data-target="#navbarNav"
+    data-toggle="collapse"
+    type="button"
+  >
+    <span
+      className="navbar-toggler-icon"
+    />
+  </button>
+  <div
+    className="collapse navbar-collapse justify-content-sm-end"
+    id="navbarNav"
+  >
+    <ul
+      className="navbar-nav"
+    >
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link"
+          to="/contacts"
+        >
+          Contacts
+        </Link>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link"
+          to="/"
+        >
+          Signup
+        </Link>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link"
+          to="/login"
+        >
+          Login
+          <span
+            className="sr-only"
+          >
+            (current)
+          </span>
+        </Link>
+      </li>
+    </ul>
+  </div>
+</nav>
+`;

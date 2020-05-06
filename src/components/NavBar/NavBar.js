@@ -36,7 +36,7 @@ const NavBar = ({ user }) => {
     if (user) {
       return (
         <li className="nav-item">
-          <Link onClick={ handleLogout } className="nav-link" to="/login">Log out<span className="sr-only">(current)</span></Link>
+          <Link onClick={ handleLogout } className="nav-link" data-test='logout-nav-link' to="/login">Log out<span className="sr-only">(current)</span></Link>
         </li>
       );
     }
