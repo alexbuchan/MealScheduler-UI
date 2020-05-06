@@ -1,6 +1,6 @@
 import React from 'react';
 import UserActions from '../actions/user/UserActions';
-import SignupLoginBackground from '../components/SignupLoginBackground/SignupLoginBackground';
+import Background from '../components/Background/Background';
 import UserSignup from '../components/UserSignup/UserSignup';
 
 class SignupView extends React.Component {
@@ -12,7 +12,7 @@ class SignupView extends React.Component {
     return (
       <div className='signup-login-view-wrapper'>
         <div className='signup-login-view'>
-          <SignupLoginBackground />
+          <Background />
           <UserSignup user={ this.props.user } signupUser={ this.signupUser.bind(this) } />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import ContactActions from '../../actions/contact/ContactActions';
-import SignupLoginBackground from '../../components/SignupLoginBackground/SignupLoginBackground';
+import Background from '../../components/Background/Background';
 
 class ContactsView extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class ContactsView extends React.Component {
   render() {
     return (
       <div className="contacts-view">
-        <SignupLoginBackground />
+        <Background />
         <h1 className="contacts-title">Contacts</h1>
         <div className="contacts-info-wrapper">
           { this.renderContacts() }

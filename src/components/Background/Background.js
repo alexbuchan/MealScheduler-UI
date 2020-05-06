@@ -1,17 +1,17 @@
 import React from 'react';
 
-class SignupBackground extends React.Component {
+class Background extends React.Component {
   render() {
     return (
-      <div className='signup-background'>
+      <div className='background'>
         <img
           src='https://productstewardshipinstitute.files.wordpress.com/2015/09/phonebookwithfingers-pg.jpg'
           alt='background-image'
-          className='signup-background-image'>
+          className='background-image'>
         </img>
       </div>
     );
   }
 }
 
-export default SignupBackground;
+export default Background;
