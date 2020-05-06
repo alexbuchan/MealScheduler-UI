@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenericNotFound Should render without errors 1`] = `
+<div
+  className="generic-not-found"
+>
+  <h1>
+    404: Not Found
+  </h1>
+  <h3>
+    Page not found.
+  </h3>
+</div>
+`;

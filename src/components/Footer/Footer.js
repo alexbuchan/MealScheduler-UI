@@ -1,7 +1,7 @@
 import React from 'react';
 
 // No props.
-// Footer.propTypes = {};
+// const propTypes = {};
 
 const Footer = () => {
   return (
@@ -13,4 +13,5 @@ const Footer = () => {
   );
 }
 
+// Footer.propTypes = propTypes;
 export default Footer;

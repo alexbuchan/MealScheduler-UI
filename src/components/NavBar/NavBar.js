@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import UserActions from '../../actions/user/UserActions';
 
-NavBar.propTypes = {
+const propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string.isRequired
   })
-}
+};
 
 const NavBar = ({ user }) => {
   const handleLogout = (ev) => {
@@ -74,4 +74,5 @@ const NavBar = ({ user }) => {
   );
 }
 
+NavBar.propTypes = propTypes;
 export default NavBar;
