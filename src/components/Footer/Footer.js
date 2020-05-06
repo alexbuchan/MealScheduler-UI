@@ -1,5 +1,8 @@
 import React from 'react';
 
+// No props.
+// Footer.propTypes = {};
+
 const Footer = () => {
   return (
     <footer data-test='footer' className="footer">

@@ -1,7 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-
 import UserActions from '../../actions/user/UserActions';
+
+NavBar.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired
+  })
+}
 
 const NavBar = ({ user }) => {
   const handleLogout = (ev) => {
