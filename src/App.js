@@ -1,6 +1,5 @@
 /* LIBRARY IMPORTS */
 import React from "react";
-import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 /* STORE IMPORTS */
@@ -86,5 +85,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-ReactDOM.render(<App />, document.getElementById("root"));
