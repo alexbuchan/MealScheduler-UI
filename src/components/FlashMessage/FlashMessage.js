@@ -31,7 +31,7 @@ class FlashMessage extends React.Component {
     Store.removeChangeListener(this._onChange);
   }
 
-  _onClick() {
+  handleCloseMessageClick() {
     Actions.closeFlashMessage();
   }
 
@@ -43,7 +43,7 @@ class FlashMessage extends React.Component {
         <div className={`alert alert-${this.state.type}`}>
           <p></p>
           { this.renderErrorMessage() }
-          <span className="close" onClick={ () => this._onClick() }><strong>X</strong></span>
+          <span data-test='close-flash-message' className="close" onClick={ () => this.handleCloseMessageClick() }><strong>X</strong></span>
         </div>
       );
     }
@@ -51,10 +51,10 @@ class FlashMessage extends React.Component {
   }
 
   renderErrorMessage() {
-    if (Object.keys(this.state.message).includes('field')) {
+    if (Object.keys(this.state.message[0]).includes('field')) {
       return (
         <ul>
-          { this.state.message.map(err => <li>{ err.field }: { err.message }</li>) }
+          { this.state.message.map((err, i) => <li key={i}>{ err.field }: { err.message }</li>) }
         </ul>
       );
     }

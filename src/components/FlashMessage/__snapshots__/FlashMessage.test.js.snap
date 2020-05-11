@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlashMessage #renderErrorMessage When error message contains a field and message Should render a list element for each error in the flash message 1`] = `
+<div
+  className="flash-message"
+>
+  <div
+    className="alert alert-error"
+  >
+    <p />
+    <ul>
+      <li
+        key="0"
+      >
+        email
+        : 
+        Invalid email
+      </li>
+      <li
+        key="1"
+      >
+        username
+        : 
+        Username too short
+      </li>
+    </ul>
+    <span
+      className="close"
+      data-test="close-flash-message"
+      onClick={[Function]}
+    >
+      <strong>
+        X
+      </strong>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`FlashMessage #renderErrorMessage When error message contains only a string Should render only one list item for the error in the flash message 1`] = `
+<div
+  className="flash-message"
+>
+  <div
+    className="alert alert-error"
+  >
+    <p />
+    <li>
+      Error: 
+      Invalid email
+    </li>
+    <span
+      className="close"
+      data-test="close-flash-message"
+      onClick={[Function]}
+    >
+      <strong>
+        X
+      </strong>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`FlashMessage When there are no errors in the store Should not render 1`] = `
+<div
+  className="flash-message"
+/>
+`;
+
+exports[`FlashMessage When there is an error in the store Should render, wait for 3 seconds, then stop rendering 1`] = `
+<div
+  className="flash-message"
+>
+  <div
+    className="alert alert-error"
+  >
+    <p />
+    <li>
+      Error: 
+      Invalid email
+    </li>
+    <span
+      className="close"
+      data-test="close-flash-message"
+      onClick={[Function]}
+    >
+      <strong>
+        X
+      </strong>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`FlashMessage When there is an error in the store Should render, wait for 3 seconds, then stop rendering 2`] = `
+<div
+  className="flash-message"
+/>
+`;
+
+exports[`FlashMessage when there are multiple error messages in the store Should render, wait for 3 seconds, then stop rendering 1`] = `
+<div
+  className="flash-message"
+>
+  <div
+    className="alert alert-error"
+  >
+    <p />
+    <li>
+      Error: 
+      Invalid email
+      invalid username
+    </li>
+    <span
+      className="close"
+      data-test="close-flash-message"
+      onClick={[Function]}
+    >
+      <strong>
+        X
+      </strong>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`FlashMessage when there are multiple error messages in the store Should render, wait for 3 seconds, then stop rendering 2`] = `
+<div
+  className="flash-message"
+/>
+`;
