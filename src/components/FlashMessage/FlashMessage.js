@@ -1,6 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Actions from '../../actions/FlashMessageActions/FlashMessageActions';
 import Store from '../../stores/FlashMessageStore/FlashMessageStore';
+
+const propTypes = {
+  duration: PropTypes.number // Amount of time component is displayed before "disappearing".
+};
 
 class FlashMessage extends React.Component {
   constructor(props) {
@@ -71,4 +76,5 @@ class FlashMessage extends React.Component {
   }
 }
 
+FlashMessage.propTypes = propTypes;
 export default FlashMessage;

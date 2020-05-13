@@ -1,5 +1,8 @@
 import React from 'react';
 
+// No props.
+// const propTypes = {};
+
 const Background = () => {
   return (
     <div className='background'>
@@ -11,5 +14,7 @@ const Background = () => {
     </div>
   );
 }
+
+// Background.propTypes = propTypes
 
 export default Background;
