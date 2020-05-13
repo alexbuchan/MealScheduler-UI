@@ -1,14 +1,38 @@
 import React from 'react';
+import { Redirect, Link } from 'react-router-dom';
 import ContactActions from '../../actions/contact/ContactActions';
+import ContactStore from '../../stores/ContactStore/ContactStore';
+import UserStore from '../../stores/UserStore/UserStore';
 import Background from '../../components/Background/Background';
 
 class ContactsView extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+
+    this.state = {
+      auth: UserStore.getUserState().auth,
+      contacts: ContactStore.getContactState().contacts
+    }
+
+    this._onChange = this._onChange.bind(this);
+  }
+
+  _onChange() {
+    this.setState({
+      userStore: UserStore.getUserState(),
+      contacts: ContactStore.getContactState().contacts
+    });
   }
 
   componentDidMount() {
     ContactActions.getContacts();
+    UserStore.addChangeListener(this._onChange);
+    ContactStore.addChangeListener(this._onChange)
+  }
+
+  componentWillUnmount() {
+    UserStore.removeChangeListener(this._onChange);
+    ContactStore.removeChangeListener(this._onChange);
   }
 
   renderContactAddress = (contact) => {
@@ -22,8 +46,8 @@ class ContactsView extends React.Component {
   }
 
   renderContacts = () => {
-    if (!(this.props.contacts.length === 0)) {
-      return this.props.contacts.map((contact) => {
+    if (!(this.state.contacts.length === 0)) {
+      return this.state.contacts.map((contact) => {
         return (
           <ul key={ contact.email } className="contact-info">
             <div className="contact-name-wrapper">
@@ -45,6 +69,10 @@ class ContactsView extends React.Component {
   }
 
   render() {
+    if (!this.state.auth) {
+      return <Redirect to='/login' />;
+    }
+
     return (
       <div className="contacts-view">
         <Background />

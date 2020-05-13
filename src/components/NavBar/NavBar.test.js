@@ -1,4 +1,5 @@
 import NavBar from './NavBar';
+import UserStore from '../../stores/UserStore/UserStore';
 import UserActions from '../../actions/user/UserActions';
 import { componentSetup, findByTestAttribute } from '../../testUtils/testUtils';
 
@@ -19,14 +20,14 @@ describe('NavBar', () => {
 
   describe('When user is logged in', () => {
     let instance;
-    let props = {
-      user: {
-        username: 'username'
-      }
-    }
 
     beforeEach(() => {
-      instance = componentSetup(NavBar, props);
+      instance = componentSetup(NavBar);
+      UserStore.loginUser({
+        auth: true,
+        user: { username: 'username', email: 'user@email.com' },
+        message: 'User is logged in.'
+      })
     });
 
     it('Should render username, contacts, and logout in the navbar', () => {

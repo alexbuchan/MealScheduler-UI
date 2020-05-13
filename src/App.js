@@ -1,23 +1,20 @@
 /* LIBRARY IMPORTS */
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-
-/* STORE IMPORTS */
-import UserStore from './stores/UserStore/UserStore';
-import ContactStore from './stores/ContactStore/ContactStore';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 /* ACTION IMPORTS */
 import UserActions from './actions/user/UserActions';
 
 /* VIEW IMPORTS */
 import SignupView from './views/SignupView';
-import LoginView from './views/LoginView';
+import LoginView from './views/LoginView/LoginView';
 import Contacts from './views/Contacts/ContactsView';
+import Settings from './views/Settings';
+import GenericNotFound from './views/GenericNotFoundPage/GenericNotFound';
 
 /* COMPONENT IMPORTS */
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
-import GenericNotFound from './components/GenericNotFound/GenericNotFound';
 import FlashMessage from './components/FlashMessage/FlashMessage';
 
 /* STYLES IMPORTS */
@@ -29,50 +26,19 @@ class App extends React.Component {
     super();
 
     UserActions.retrieveUserDataOnRefresh();
-
-    this.state = {
-      userStore: UserStore.getUserState(),
-      contacts: ContactStore.getContactState().contacts
-    }
-
-    this._onChange = this._onChange.bind(this);
-  }
-
-  _onChange() {
-    this.setState({
-      userStore: UserStore.getUserState(),
-      contacts: ContactStore.getContactState().contacts
-    });
-  }
-
-  componentDidMount() {
-    UserStore.addChangeListener(this._onChange);
-    ContactStore.addChangeListener(this._onChange)
-  }
-
-  componentWillUnmount() {
-    UserStore.removeChangeListener(this._onChange);
-    ContactStore.removeChangeListener(this._onChange);
-  }
-
-  isLoggedIn = () => {
-    if (this.state.userStore.auth) return <Contacts contacts={ this.state.contacts }/>;
-
-    return <Redirect to='/login' />;
   }
 
   render() {
     return (
       <Router>
         <div className='container-fluid'>
-          <NavBar 
-            user={ this.state.userStore.user }
-          />
+          <NavBar />
 
           <Switch>
-            <Route exact path="/" render={ () => <SignupView user={ this.state.userStore.user } /> } />
-            <Route exact path="/login" render={ () => <LoginView user={ this.state.userStore.user } /> } />
-            <Route exact path="/contacts" render={ this.isLoggedIn } />
+            <Route exact path="/" component={ SignupView } />
+            <Route exact path="/login" component={ LoginView } />
+            <Route exact path="/contacts" component={ Contacts } />
+            <Route exact path="/settings" component={ Settings } />
             <Route path='/*' component={ GenericNotFound } />
           </Switch>
 

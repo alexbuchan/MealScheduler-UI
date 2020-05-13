@@ -1,24 +1,42 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import UserActions from '../../actions/user/UserActions';
+import UserStore from '../../stores/UserStore/UserStore';
 
-const propTypes = {
-  user: PropTypes.shape({
-    username: PropTypes.string.isRequired
-  })
-};
+class NavBar extends React.Component  {
+  constructor() {
+    super();
 
-const NavBar = ({ user }) => {
-  const handleLogout = (ev) => {
+    this.state = {
+      user: UserStore.getUserState().user
+    }
+
+    this._onChange = this._onChange.bind(this);
+  }
+
+  handleLogout = (ev) => {
     UserActions.logoutUser();
   }
 
-  const renderUsername = () => {
-    if (user) {
+  _onChange() {
+    this.setState({
+      user: UserStore.getUserState().user,
+    });
+  }
+
+  componentDidMount() {
+    UserStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    UserStore.removeChangeListener(this._onChange);
+  }
+
+  renderUsername = () => {
+    if (this.state.user) {
       return (
         <li className="nav-item">
-          <Link className="nav-link" to="/contacts">{ user.username }<span className="sr-only">(current)</span></Link>
+          <Link className="nav-link" to="/contacts">{ this.state.user.username }<span className="sr-only">(current)</span></Link>
         </li>
       );
     }
@@ -26,8 +44,8 @@ const NavBar = ({ user }) => {
     return null;
   }
 
-  const renderSignup = () => {
-    if (!user) {
+  renderSignup = () => {
+    if (!this.state.user) {
       return (
         <li className="nav-item">
           <Link className="nav-link" to="/">Signup</Link>
@@ -38,11 +56,11 @@ const NavBar = ({ user }) => {
     return null;
   }
 
-  const renderLogin = () => {
-    if (user) {
+  renderLogin = () => {
+    if (this.state.user) {
       return (
         <li className="nav-item">
-          <Link onClick={ handleLogout } className="nav-link" data-test='logout-nav-link' to="/login">Log out<span className="sr-only">(current)</span></Link>
+          <Link onClick={ this.handleLogout } className="nav-link" data-test='logout-nav-link' to="/login">Log out<span className="sr-only">(current)</span></Link>
         </li>
       );
     }
@@ -54,25 +72,26 @@ const NavBar = ({ user }) => {
     );
   }
 
-  return (
-    <nav className="navbar-height navbar navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg navbar-dark bg-dark">
-      <Link className="navbar-brand" to="">Signup and Login App</Link>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse justify-content-sm-end" id="navbarNav">
-        <ul className="navbar-nav">
-          { renderUsername() }
-          <li className="nav-item">
-            <Link className="nav-link" to="/contacts">Contacts</Link>
-          </li>
-          { renderSignup() }
-          { renderLogin() }
-        </ul>
-      </div>
-    </nav>
-  );
+  render() {
+    return (
+      <nav className="navbar-height navbar navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg navbar-dark bg-dark">
+        <Link className="navbar-brand" to="">Signup and Login App</Link>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse justify-content-sm-end" id="navbarNav">
+          <ul className="navbar-nav">
+            { this.renderUsername() }
+            <li className="nav-item">
+              <Link className="nav-link" to="/contacts">Contacts</Link>
+            </li>
+            { this.renderSignup() }
+            { this.renderLogin() }
+          </ul>
+        </div>
+      </nav>
+    );
+  }
 }
 
-NavBar.propTypes = propTypes;
 export default NavBar;
