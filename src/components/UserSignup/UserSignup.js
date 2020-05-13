@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
-
+import UserActions from '../../actions/user/UserActions';
+import Form from '../Form/Form';
+import Input from '../Input/Input';
 import Validator from '../../lib/Validator';
 
 class UserSignup extends React.Component {
@@ -12,34 +14,13 @@ class UserSignup extends React.Component {
     this.state = {
       username: '',
       email: '',
-      password: '',
-      redirect: false,
-      disableSubmitButton: false,
-      validation: this.validator.valid()
+      password: ''
     };
 
     this.submitted = false;
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
-  componentDidUpdate() {
-    if (this.state.disableSubmitButton) {
-      this.turnOffSubmitButtonDisable = setTimeout(() => { 
-        this.setState(() => ({ disableSubmitButton: false }))
-      }, 1000);
-    }
-
-    if (this.props.user) {
-      this.clearFormState();
-    }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.turnOffSubmitButtonDisable);
-  }
-
-  handleOnChange(ev) {
+  handleOnChange = (ev) => {
     ev.preventDefault();
 
     this.setState({
@@ -47,75 +28,45 @@ class UserSignup extends React.Component {
     });
   }
 
-  handleOnSubmit(ev) {
-    ev.preventDefault();
-    const validation = this.validator.validate(this.state);
-    this.setState({ validation });
-    this.submitted = true;
-
-    if (validation.isValid) {
-      const { username, email, password } = this.state;
-      let user = { username, email, password };
-      this.props.signupUser(user);
-    }
-  }
-
-  clearFormState = () => {
-    this.setState({
-      username: '',
-      email: '',
-      password: '',
-      redirect: true,
-      disableSubmitButton: true,
-      validation: this.validator.valid()
-    });
-  }
-
-  inputFieldClass = (field, validation) => {
-    return (!validation[field].isInvalid) ? "" : "input-field-error";
+  handleOnSubmit = (fields) => {
+    UserActions.registerUser(fields);
   }
 
   render() {
-    if (this.state.redirect && this.props.user) return <Redirect to='/contacts' />;
-    let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
+    if (this.props.user) return <Redirect to='/contacts' />;
    
     return (
       <div className='user-signup'>
         <div className='signup-form'>
-          <div className='form-element'>
-            <p>Name:</p>
-            <input 
-              className={ this.inputFieldClass('username', validation) }
+          <Form
+            validate={ true }
+            fields={ { username: this.state.username, email: this.state.email, password: this.state.password } }
+            onSubmit={ this.handleOnSubmit }
+          >
+            <Input
+              label='Username'
               name='username'
               type='text'
               value={ this.state.username }
               onChange={ this.handleOnChange }
             />
-            <span className="help-block">{validation.username.message}</span>
-          </div>
-          <div className='form-element'>
-            <p>Email:</p>
-            <input
-              className={ this.inputFieldClass('email', validation) }
+
+            <Input
+              label='Email'
               name='email'
               type='text'
               value={ this.state.email }
               onChange={ this.handleOnChange }
             />
-            <span className="help-block">{validation.email.message}</span>
-          </div>
-          <div className='form-element'>
-            <p>Password:</p>
-            <input
-              className={ this.inputFieldClass('password', validation) }
+
+            <Input
+              label='Password'
               name='password'
               type='password'
               value={ this.state.password }
               onChange={ this.handleOnChange }
             />
-            <span className="help-block">{validation.password.message}</span>
-          </div>
-          <button className='form-submit-button' disabled={ this.state.disableSubmitButton } onClick={ this.handleOnSubmit }>Register!</button>
+          </Form>
           <p className="form-link">Already have an account? <Link className="" to="/login">Log in</Link></p>
         </div>
       </div>
