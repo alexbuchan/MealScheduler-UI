@@ -1,10 +1,8 @@
 require('es6-promise').polyfill();
 const request = require('axios');
 
-import Dispatcher from '../../dispatcher/dispatcher';
 import ActionDispatch from './ActionDispatch';
 import FlashMessageActions from '../FlashMessageActions/FlashMessageActions';
-import Constants from '../../constants/userConstants';
 import ActionsHelper from '../ActionsHelper';
 import JWT from '../../lib/JWT';
 

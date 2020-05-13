@@ -4,13 +4,13 @@
 
 /* VIEW IMPORTS */
 @import '../views/Contacts/styles';
+@import '../views/GenericNotFoundPage/styles';
 
 /* COMPONENT IMPORTS */
 @import '../components/NavBar/styles';
 @import '../components/Footer/styles';
 @import '../components/UserSignup/styles';
 @import '../components/FlashMessage/styles';
-@import '../components/GenericNotFound/styles';
 
 p {
   margin: 0;

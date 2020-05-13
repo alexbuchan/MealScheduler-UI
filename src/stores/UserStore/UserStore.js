@@ -22,7 +22,7 @@ class UserStore extends Store {
         break;
       
       case Constants.LOGOUT_USER:
-        this.logoutUser(action.data);
+        this.logoutUser();
         break;
 
       case Constants.RETRIEVE_USER_DATA_ON_REFRESH:
@@ -46,7 +46,7 @@ class UserStore extends Store {
     this.emitChange();
   }
 
-  logoutUser = (data) => {
+  logoutUser = () => {
     userState.user = null;
     userState.auth = false;
     userState.message = null;
