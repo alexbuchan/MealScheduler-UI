@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import UserActions from '../../actions/user/UserActions';
 import Form from '../Form/Form';
-import Input from '../Input/Input';
+import TextField from '../TextField/TextField';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -41,26 +41,25 @@ class SignupForm extends React.Component {
             validate={ true }
             fields={ this.state }
             onSubmit={ this.handleOnSubmit }
+            redirect={ true }
             redirectTo='/contacts'
             shouldRedirect={ this.formRedirect }
           >
-            <Input
+            <TextField
               label='Username'
               name='username'
-              type='text'
               value={ this.state.username }
               onChange={ this.handleOnChange }
             />
 
-            <Input
+            <TextField
               label='Email'
               name='email'
-              type='text'
               value={ this.state.email }
               onChange={ this.handleOnChange }
             />
 
-            <Input
+            <TextField
               label='Password'
               name='password'
               type='password'

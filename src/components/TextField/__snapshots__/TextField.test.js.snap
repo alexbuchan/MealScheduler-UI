@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextField When validation is disabled When all props are specified expect validationField Should render correctly 1`] = `
+<div
+  className="form-element"
+>
+  <label>
+    label
+  </label>
+  <input
+    name="name"
+    onChange={[Function]}
+    type="text"
+    value="value"
+  />
+</div>
+`;
+
+exports[`TextField When validation is disabled When no label is specified Should not render a label 1`] = `
+<div
+  className="form-element"
+>
+  <label />
+  <input
+    name="name"
+    onChange={[Function]}
+    type="text"
+    value="value"
+  />
+</div>
+`;
+
+exports[`TextField When validation is disabled When no type is specified Should render as type text 1`] = `
+<div
+  className="form-element"
+>
+  <label>
+    label
+  </label>
+  <input
+    name="name"
+    onChange={[Function]}
+    type="text"
+    value="value"
+  />
+</div>
+`;
+
+exports[`TextField When validation is enabled When input is NOT valid should render validation error message 1`] = `
+<div
+  className="form-element"
+>
+  <label>
+    label
+  </label>
+  <input
+    className="input-field-error"
+    data-test="input-with-validation"
+    name="name"
+    onChange={[Function]}
+    type="text"
+    value="invalid value"
+  />
+  <span
+    className="help-block"
+  >
+    Value must be valid
+  </span>
+</div>
+`;
+
+exports[`TextField When validation is enabled When input is valid should not render validation error message 1`] = `
+<div
+  className="form-element"
+>
+  <label>
+    label
+  </label>
+  <input
+    className=""
+    data-test="input-with-validation"
+    name="name"
+    onChange={[Function]}
+    type="text"
+    value="valid value"
+  />
+  <span
+    className="help-block"
+  />
+</div>
+`;

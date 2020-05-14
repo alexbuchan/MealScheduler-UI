@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from '../components/Form/Form';
-import Input from '../components/Input/Input';
+import TextField from '../components/TextField/TextField';
 import Checkbox from '../components/Checkbox/Checkbox';
 // import Actions from '../actions/Settings/Settings';
 
@@ -43,10 +43,9 @@ class Settings extends React.Component {
           fields={ this.state }
           onSubmit={ this.handleOnSubmit }
         >
-          <Input
+          <TextField
             label='Username'
             name='username'
-            type='text'
             value={ this.state.username }
             onChange={ this.handleOnChange }
           />

@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  label: PropTypes.string,  // The name on the label that renders in the UI
-  name: PropTypes.string,   // The name of the field
-  type: PropTypes.string,   // The type of input for the field
-  value: PropTypes.string,  // The value of the input in the field
-  onChange: PropTypes.func,  // The onChange function for updating the field
-  validationField: PropTypes.object   // Validation object returned from the Validator instance.
+  label: PropTypes.string,              // The name on the label that renders in the UI. /Optional
+  name: PropTypes.string.isRequired,    // The name of the field
+  type: PropTypes.string,               // The type of input for the field
+  value: PropTypes.string.isRequired,   // The value of the input in the field
+  onChange: PropTypes.func.isRequired,  // The onChange function for updating the field
+  validationField: PropTypes.object     // Validation object returned from the Validator instance.
 };
 
-const Input = ({ label, name, type, value, onChange, validationField }) => {
+const TextField = ({ label, name, type, value, onChange, validationField }) => {
   const inputFieldClass = () => {
     return (!validationField.isInvalid) ? "" : "input-field-error";
   }
@@ -18,8 +18,9 @@ const Input = ({ label, name, type, value, onChange, validationField }) => {
   const withValidation = () => {
     return (
       <div className='form-element'>
-        <p>{label}:</p>
+        <label>{ label }</label>
         <input
+          data-test='input-with-validation'
           className={ inputFieldClass() }
           name={ name }
           type={ type }
@@ -34,7 +35,7 @@ const Input = ({ label, name, type, value, onChange, validationField }) => {
   const noValidation = () => {
     return (
       <div className='form-element'>
-        <p>{label}:</p>
+        <label>{ label }</label>
         <input
           name={ name }
           type={ type }
@@ -52,5 +53,9 @@ const Input = ({ label, name, type, value, onChange, validationField }) => {
   return noValidation();
 }
 
-Input.propTypes = propTypes;
-export default Input;
+TextField.defaultProps = {
+  type: 'text'
+}
+
+TextField.propTypes = propTypes;
+export default TextField;
