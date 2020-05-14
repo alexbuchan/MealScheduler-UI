@@ -17,15 +17,15 @@ class ContactsView extends React.Component {
     this._onChange = this._onChange.bind(this);
   }
 
-  _onChange() {
+  _onChange = () => {
     this.setState({
-      userStore: UserStore.getUserState(),
+      auth: UserStore.getUserState().auth,
       contacts: ContactStore.getContactState().contacts
     });
   }
 
   componentDidMount() {
-    ContactActions.getContacts();
+    if (this.state.auth) ContactActions.getContacts();
     UserStore.addChangeListener(this._onChange);
     ContactStore.addChangeListener(this._onChange)
   }

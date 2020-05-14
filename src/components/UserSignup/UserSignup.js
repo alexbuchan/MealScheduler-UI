@@ -1,23 +1,18 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UserActions from '../../actions/user/UserActions';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
-import Validator from '../../lib/Validator';
 
 class UserSignup extends React.Component {
   constructor(props) {
     super(props);
-
-    this.validator = new Validator('username', 'email', 'password');
 
     this.state = {
       username: '',
       email: '',
       password: ''
     };
-
-    this.submitted = false;
   }
 
   handleOnChange = (ev) => {
@@ -32,16 +27,22 @@ class UserSignup extends React.Component {
     UserActions.registerUser(fields);
   }
 
+  formRedirect = () => {
+    if (this.props.user) return true;
+    else return false;
+  }
+
   render() {
-    if (this.props.user) return <Redirect to='/contacts' />;
-   
     return (
       <div className='user-signup'>
         <div className='signup-form'>
           <Form
+            submitButtonLabel='Register!'
             validate={ true }
-            fields={ { username: this.state.username, email: this.state.email, password: this.state.password } }
+            fields={ this.state }
             onSubmit={ this.handleOnSubmit }
+            redirectTo='/contacts'
+            shouldRedirect={ this.formRedirect }
           >
             <Input
               label='Username'

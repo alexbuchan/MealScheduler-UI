@@ -1,11 +1,15 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Validator from '../../lib/Validator';
 
 const propTypes = {
-  validate: PropTypes.bool,   // Should the form be validated
-  fields: PropTypes.object.isRequired,   // Provide the fields for validation
-  onSubmit: PropTypes.func.isRequired,   // Provide the onSubmit function to handle form submittion
+  submitButtonLabel: PropTypes.string,  // Provide a label name for the submit button
+  validate: PropTypes.bool,             // Should the form be validated
+  fields: PropTypes.object.isRequired,  // Provide the fields for validation
+  onSubmit: PropTypes.func.isRequired,  // Provide the onSubmit function to handle form submittion,
+  redirectTo: PropTypes.string,         // If redirect enabled, pass route to be redirected to
+  shouldRedirect: PropTypes.func,       // If redirect enabled, pass conditions to Form for redirect
 };
 
 class Form extends React.Component {
@@ -22,6 +26,16 @@ class Form extends React.Component {
     }
 
     this.submitted = false;
+  }
+
+  componentDidUpdate() {
+    if (this.state.disableSubmitButton) {
+      this.turnOffSubmitButtonDisable = setTimeout(() => {
+        this.setState(() => ({ disableSubmitButton: false }))
+      }, 1000);
+    }
+
+    this.redirect();
   }
 
   handleOnSubmit = (ev) => {
@@ -48,7 +62,15 @@ class Form extends React.Component {
     });
   }
 
+  redirect = () => {
+    if (this.props.shouldRedirect()) {
+      this.setState({ redirect: true });
+    }
+  }
+
   render() {
+    if (this.state.redirect) return <Redirect to={ this.props.redirectTo } />;
+
     let validation = this.submitted ? this.validator.validate(this.props.fields) : this.state.validation;
     const children = React.Children.toArray(this.props.children);
     const clonedChildren = children.map(child => React.cloneElement(child, { validationField: validation[child.props.name] }));
@@ -56,13 +78,20 @@ class Form extends React.Component {
     return (
       <div className='my-form'>
         { clonedChildren }
-        <button className="form-submit-button" disabled={ this.state.disableSubmitButton } onClick={ this.handleOnSubmit }>Submit settings</button>
+        <button
+          className="form-submit-button"
+          disabled={ this.state.disableSubmitButton }
+          onClick={ this.handleOnSubmit }
+        >
+          { this.props.submitButtonLabel }
+        </button>
       </div>
     );
   }
 }
 
 Form.defaultProps = {
+  submitButtonLabel: 'Submit',
   validate: false
 }
 

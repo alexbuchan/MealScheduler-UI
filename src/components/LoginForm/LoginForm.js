@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UserActions from '../../actions/user/UserActions';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
@@ -12,8 +12,6 @@ class LoginForm extends React.Component {
       email: '',
       password: ''
     };
-
-    this.submitted = false;
   }
 
   handleOnChange = (ev) => {
@@ -28,15 +26,21 @@ class LoginForm extends React.Component {
     UserActions.loginUser(fields);
   }
 
-  render() {
-    if (this.props.user) return <Redirect to='/contacts' />;
+  formRedirect = () => {
+    if (this.props.user) return true;
+    else return false;
+  }
 
+  render() {
     return (
       <div className='col-lg-4 flex-sm-column justify-content-center align-items-center user-signup'>
         <Form
+          submitButtonLabel='Log in'
           validate={ true }
-          fields={ { email: this.state.email, password: this.state.password } }
+          fields={ this.state }
           onSubmit={ this.handleOnSubmit }
+          redirectTo='/contacts'
+          shouldRedirect={ this.formRedirect }
         >
           <Input
             label='Email'
