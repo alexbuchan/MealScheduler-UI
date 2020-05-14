@@ -4,7 +4,7 @@ import UserActions from '../../actions/user/UserActions';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 
-class UserSignup extends React.Component {
+class SignupForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -75,4 +75,4 @@ class UserSignup extends React.Component {
   }
 }
 
-export default UserSignup;
+export default SignupForm;

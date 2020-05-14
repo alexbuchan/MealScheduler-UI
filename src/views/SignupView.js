@@ -1,7 +1,7 @@
 import React from 'react';
 import UserStore from '../stores/UserStore/UserStore';
 import Background from '../components/Background/Background';
-import UserSignup from '../components/UserSignup/UserSignup';
+import SignupForm from '../components/SignupForm/SignupForm';
 
 class SignupView extends React.Component {
   constructor() {
@@ -31,7 +31,7 @@ class SignupView extends React.Component {
       <div className='signup-login-view-wrapper'>
         <div className='signup-login-view'>
           <Background />
-          <UserSignup user={ this.state.user } />
+          <SignupForm user={ this.state.user } />
         </div>
       </div>
     );
