@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox When all props are passed Should render correctly 1`] = `
+<div
+  className="form-element"
+>
+  <label>
+    label
+  </label>
+  <input
+    defaultChecked={false}
+    name="name"
+    onChange={[Function]}
+    type="text"
+  />
+</div>
+`;
+
+exports[`Checkbox When no label is specified Should not render a label 1`] = `
+<div
+  className="form-element"
+>
+  <label />
+  <input
+    defaultChecked={false}
+    name="name"
+    onChange={[Function]}
+    type="text"
+  />
+</div>
+`;
+
+exports[`Checkbox When no value is specified Value should be false 1`] = `
+<div
+  className="form-element"
+>
+  <label />
+  <input
+    defaultChecked={false}
+    name="name"
+    onChange={[Function]}
+    type="text"
+  />
+</div>
+`;

@@ -2,38 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  label: PropTypes.string,  // The name on the label that renders in the UI
-  name: PropTypes.string,   // The name of the field
-  type: PropTypes.string,   // The type of input for the field
-  value: PropTypes.string,  // The value of the input in the field
-  onChange: PropTypes.func,  // The onChange function for updating the field
-  validationField: PropTypes.object   // Validation object returned from the Validator instance.
+  label: PropTypes.string,              // The name on the label that renders in the UI. /Default empty string
+  name: PropTypes.string.isRequired,    // The name of the field.
+  type: PropTypes.string.isRequired,    // The type of input for the field.
+  value: PropTypes.bool,                // The value of the input in the field. /Default is false
+  onChange: PropTypes.func.isRequired   // The onChange function for updating the field.
 };
 
-const Checkbox = ({ label, name, type, value, onChange, validationField }) => {
-  const withValidation = () => {
-    return (
-      <div className="form-element">
-        <label>{ label }</label>
-        <input name={ name } type={ type } defaultChecked={ value } onChange={ onChange } />
-      </div>
-    );
-  }
+const Checkbox = ({ label, name, type, value, onChange }) => {
+  return (
+    <div className="form-element">
+      <label>{ label }</label>
+      <input name={ name } type={ type } defaultChecked={ value } onChange={ onChange } />
+    </div>
+  );;
+}
 
-  const noValidation = () => {
-    return (
-      <div className="form-element">
-        <label>{ label }</label>
-        <input name={ name } type={ type } defaultChecked={ value } onChange={ onChange } />
-      </div>
-    );
-  }
-
-  if (validationField) {
-    return withValidation();
-  }
-
-  return noValidation();
+Checkbox.defaultProps = {
+  label: '',
+  value: false
 }
 
 Checkbox.propTypes = propTypes;
