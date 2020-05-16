@@ -43,7 +43,7 @@ class SignupForm extends React.Component {
             onSubmit={ this.handleOnSubmit }
             redirect={ true }
             redirectTo='/contacts'
-            shouldRedirect={ this.formRedirect }
+            shouldRedirect={ this.formRedirect() }
           >
             <TextField
               label='Username'

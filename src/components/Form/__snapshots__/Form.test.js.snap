@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form #render when passing only required props when a form element is passed to the form should render that element and a submit button 1`] = `
+<div
+  className="my-form"
+>
+  <TextField
+    key="1"
+    name="textField1"
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+  <button
+    className="form-submit-button"
+    data-test="form-submit-button"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Submit
+  </button>
+</div>
+`;
+
+exports[`Form #render when passing only required props when no form elements are passed to the form should render just a submit button 1`] = `
+<div
+  className="my-form"
+>
+  <button
+    className="form-submit-button"
+    data-test="form-submit-button"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Submit
+  </button>
+</div>
+`;
+
+exports[`Form #render when redirect is enabled redirects to path specified in prop redirectTo 1`] = `
+<Form
+  fields={
+    Object {
+      "password": "password",
+      "username": "username",
+    }
+  }
+  onSubmit={[Function]}
+  redirect={true}
+  redirectTo="/route"
+  shouldRedirect={false}
+  submitButtonLabel="Submit"
+  validate={false}
+>
+  <div
+    className="my-form"
+  >
+    <button
+      className="form-submit-button"
+      data-test="form-submit-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Submit
+    </button>
+  </div>
+</Form>
+`;
+
+exports[`Form #render when redirect is enabled redirects to path specified in prop redirectTo 2`] = `
+<Form
+  fields={
+    Object {
+      "password": "password",
+      "username": "username",
+    }
+  }
+  onSubmit={[Function]}
+  redirect={true}
+  redirectTo="/route"
+  shouldRedirect={true}
+  submitButtonLabel="Submit"
+  validate={false}
+>
+  <Redirect
+    to="/route"
+  >
+    <Lifecycle
+      onMount={[Function]}
+      onUpdate={[Function]}
+      to="/route"
+    />
+  </Redirect>
+</Form>
+`;

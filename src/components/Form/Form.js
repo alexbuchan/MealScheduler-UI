@@ -8,9 +8,9 @@ const propTypes = {
   validate: PropTypes.bool,             // Should the form be validated. /Default is false
   fields: PropTypes.object.isRequired,  // Provide the fields for validation
   onSubmit: PropTypes.func.isRequired,  // Provide the onSubmit function to handle form submittion
-  redirect: PropTypes.bool,             // Should the form redirect. /Default is false
+  redirect: PropTypes.bool,             // Enable redirecting. /Will redirect on component render unless shouldRedirect prop is used
   redirectTo: PropTypes.string,         // If redirect enabled, pass route to be redirected to
-  shouldRedirect: PropTypes.func,       // If redirect enabled, pass conditions to Form for redirect
+  shouldRedirect: PropTypes.bool        // Tells the form when it should redirect
 };
 
 class Form extends React.Component {
@@ -18,7 +18,6 @@ class Form extends React.Component {
     super(props);
 
     this.state = {
-      redirect: false,
       disableSubmitButton: false
     }
 
@@ -37,8 +36,6 @@ class Form extends React.Component {
         this.setState(() => ({ disableSubmitButton: false }))
       }, 1000);
     }
-
-    this.redirect();
   }
 
   handleOnSubmit = (ev) => {
@@ -65,12 +62,6 @@ class Form extends React.Component {
     });
   }
 
-  redirect = () => {
-    if (this.props.redirect && this.props.shouldRedirect()) {
-      this.setState({ redirect: true });
-    }
-  }
-
   validationEnabled = () => {
     let validation = this.submitted ? this.validator.validate(this.props.fields) : this.state.validation;
     const children = React.Children.toArray(this.props.children);
@@ -78,7 +69,7 @@ class Form extends React.Component {
   }
 
   render() {
-    if (this.state.redirect) return <Redirect to={ this.props.redirectTo } />;
+    if (this.props.redirect && this.props.shouldRedirect) return <Redirect to={ this.props.redirectTo } />
 
     const children = (this.props.validate) ? this.validationEnabled() : this.props.children;
 

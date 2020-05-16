@@ -1,8 +1,10 @@
-import Form from './Form';
 import React from 'react';
+import { MemoryRouter } from "react-router-dom";
 import { mount } from 'enzyme';
 import { componentSetup, findByTestAttribute } from '../../testUtils/testUtils';
-    
+import Form from './Form';
+import TextField from '../TextField/TextField';
+
 describe('Form', () => {
   let instance;
 
@@ -40,37 +42,66 @@ describe('Form', () => {
 
     describe('when passing only required props', () => {
       describe('when no form elements are passed to the form', () => {
-        it('should render just a submit button', () => {
+        let instance;
 
+        beforeEach(() => {
+          const props = {
+            fields: { username: 'username', password: 'password' },
+            onSubmit: () => {}
+          }
+
+          instance = componentSetup(Form, props);
         });
 
-        it('submit button should contain the value "Submit"', () => {
-
+        it('should render just a submit button', () => {
+          expect(instance).toMatchSnapshot();
         });
       });
 
       describe('when a form element is passed to the form', () => {
-        it('should render that element and a submit button', () => {
+        let instance;
 
+        beforeEach(() => {
+          const props = {
+            fields: { username: 'username', password: 'password' },
+            onSubmit: () => {},
+            children: <TextField key={ 1 } value='' name='textField1' onChange={ () => {} } />
+          }
+
+          instance = componentSetup(Form, props);
         });
 
-        it('submit button should contain the value "Submit"', () => {
-
+        it('should render that element and a submit button', () => {
+          expect(instance).toMatchSnapshot();
         });
       });
     });
 
     describe('when redirect is enabled', () => {
-      describe('when state redirect is true', () => {
-        it('redirects to path specified in prop redirectTo', () => {
+      let instance;
+        
+      beforeEach(() => {
+        const props = {
+          fields: { username: 'username', password: 'password' },
+          onSubmit: () => {},
+          redirect: true,
+          redirectTo: '/route',
+          shouldRedirect: false
+        }
 
-        });
+        instance = mount(React.createElement(props => (
+          <MemoryRouter>
+            <Form {...props} />
+          </MemoryRouter>
+        ), props));
       });
 
-      describe('when state redirect is false', () => {
-        it('renders form correctly', () => {
-
-        });
+      it('redirects to path specified in prop redirectTo', () => {
+        const form = instance.find(Form);
+        expect(form).toMatchSnapshot();
+        instance.setProps({ shouldRedirect: true });
+        const form2 = instance.find(Form);
+        expect(form2).toMatchSnapshot();
       });
     });
 
