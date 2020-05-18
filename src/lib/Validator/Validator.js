@@ -25,7 +25,7 @@ class Validator {
     return validation;
   }
 
-  valid() {
+  valid = () => {
     const validation = {};
 
     this.fields.map(field => (
