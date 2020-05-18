@@ -1,5 +1,5 @@
 import request from "axios";
-import JWT from '../../lib/JWT';
+import JWT from '../../lib/JWT/JWT';
 import Actions from './UserActions';
 import ActionDispatch from './ActionDispatch';
 import FlashMessageActions from '../FlashMessageActions/FlashMessageActions';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Validator from '../../lib/Validator';
+import Validator from '../../lib/Validator/Validator';
 
 const propTypes = {
   submitButtonLabel: PropTypes.string,  // Provide a label name for the submit button. /Default is 'Submit'

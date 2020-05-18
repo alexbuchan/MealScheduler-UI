@@ -4,7 +4,7 @@ const request = require('axios');
 import ActionDispatch from './ActionDispatch';
 import FlashMessageActions from '../FlashMessageActions/FlashMessageActions';
 import ActionsHelper from '../ActionsHelper';
-import JWT from '../../lib/JWT';
+import JWT from '../../lib/JWT/JWT';
 
 class UserActions {
   registerUser = async user => {
