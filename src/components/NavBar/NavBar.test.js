@@ -43,4 +43,18 @@ describe('NavBar', () => {
       });
     });
   });
+
+  describe('#componentWillUnmount', () => {
+    let instance;
+
+    beforeEach(() => {
+      instance = componentSetup(NavBar);
+    });
+
+    it('Should remove the Store event listener', () => {
+      const removeChangeListenerSpy = jest.spyOn(UserStore, 'removeChangeListener');
+      instance.unmount();
+      expect(removeChangeListenerSpy).toHaveBeenCalled();
+    });
+  });
 });

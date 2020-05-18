@@ -175,9 +175,13 @@ describe('Form', () => {
       beforeEach(() => {
         const props = {
           validate: true,
-          fields: { username: 'username' },
+          fields: { username: 'username', email: 'user@email.com', password: 'password' },
           onSubmit: jest.fn(),
-          children: <TextField key={ 1 } value='' data-test='text-field1' name='username' onChange={ () => {} } />
+          children: [
+            <TextField key={ 1 } value='' data-test='text-field-username' name='username' onChange={ () => {} } />,
+            <TextField key={ 1 } value='' data-test='text-field-email' name='email' onChange={ () => {} } />,
+            <TextField key={ 1 } value='' data-test='text-field-password' name='password' onChange={ () => {} } />
+          ]
         }
 
         instance = componentSetup(Form, props);
@@ -213,9 +217,13 @@ describe('Form', () => {
         beforeEach(() => {
           const props = {
             validate: true,
-            fields: { username: 'us' },
+            fields: { username: 'us', email: 'email', password: 'pass' },
             onSubmit: jest.fn(),
-            children: <TextField key={ 1 } value='' data-test='text-field1' name='username' onChange={ () => {} } />
+            children: [
+              <TextField key={ 1 } value='' data-test='text-field-username' name='username' onChange={ () => {} } />,
+              <TextField key={ 1 } value='' data-test='text-field-email' name='email' onChange={ () => {} } />,
+              <TextField key={ 1 } value='' data-test='text-field-password' name='password' onChange={ () => {} } />
+            ]
           }
 
           instance = componentSetup(Form, props);
