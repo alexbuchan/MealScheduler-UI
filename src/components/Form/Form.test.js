@@ -10,7 +10,6 @@ describe('Form', () => {
 
   beforeEach(() => {
     const props = {
-      fields: { username: 'username', password: 'password' },
       onSubmit: () => {}
     }
 
@@ -46,7 +45,6 @@ describe('Form', () => {
 
         beforeEach(() => {
           const props = {
-            fields: { username: 'username', password: 'password' },
             onSubmit: () => {}
           }
 
@@ -63,7 +61,6 @@ describe('Form', () => {
 
         beforeEach(() => {
           const props = {
-            fields: { username: 'username', password: 'password' },
             onSubmit: () => {},
             children: <TextField key={ 1 } value='' name='textField1' onChange={ () => {} } />
           }
@@ -82,7 +79,6 @@ describe('Form', () => {
         
       beforeEach(() => {
         const props = {
-          fields: { username: 'username', password: 'password' },
           onSubmit: () => {},
           redirect: true,
           redirectTo: '/route',
@@ -106,31 +102,31 @@ describe('Form', () => {
     });
 
     describe('when validation is enabled', () => {
-      it('instance should contain validation in state', () => {
+      let instance;
 
+      beforeEach(() => {
+        const props = {
+          validate: true,
+          fields: { username: 'username' },
+          onSubmit: () => {},
+          children: <TextField key={ 1 } value='' data-test='text-field1' name='username' onChange={ () => {} } />
+        }
+
+        instance = componentSetup(Form, props);
       });
 
-      describe('when no form elements are passed to the form', () => {
-        it('should render just a submit button', () => {
-
-        });
-
-        it('submit button should contain the value "Submit"', () => {
-
-        });
+      it('instance should contain validation in state', () => {
+        expect(instance.state().validation).toBeDefined();
       });
 
       describe('when a form element is passed to the form', () => {
         it('should render that element and a submit button', () => {
-
-        });
-
-        it('submit button should contain the value "Submit"', () => {
-
+          expect(instance).toMatchSnapshot();
         });
 
         it('child element should contain a new prop called ValidationField', () => {
-
+          const textField = findByTestAttribute(instance, 'text-field1');
+          expect(textField.prop('validationField')).toBeDefined();
         });
       });
     });
@@ -138,37 +134,109 @@ describe('Form', () => {
 
   describe('#handleOnSubmit', () => {
     describe('when validate is disabled', () => {
-      it('should call props function "onSubmit"', () => {
+      let instance;
+      let onSubmitMock;
+      let disableSubmitButtonOnSubmitSpy;
+      let preventDefault;
+      let formSubmitButton;
 
+      beforeEach(() => {
+        const props = {
+          onSubmit: jest.fn(),
+          children: <TextField key={ 1 } value='' data-test='text-field1' name='textField1' onChange={ () => {} } />
+        }
+
+        instance = componentSetup(Form, props);
+
+        onSubmitMock = instance.instance().props.onSubmit;
+        disableSubmitButtonOnSubmitSpy = jest.spyOn(instance.instance(), 'disableSubmitButtonOnSubmit');
+        preventDefault = jest.fn();
+        formSubmitButton = findByTestAttribute(instance, 'form-submit-button');
+
+        formSubmitButton.simulate('click', { button: 0, preventDefault: preventDefault });
+      });
+
+      it('should call props function "onSubmit"', () => {
+        expect(onSubmitMock).toHaveBeenCalledTimes(1);
       });
 
       it('should call "disableSubmitButtonOnSubmit"', () => {
-
+        expect(disableSubmitButtonOnSubmitSpy).toHaveBeenCalledTimes(1);
       });
     });
 
     describe('when validate is enabled', () => {
-      it('this.submitted should be true', () => {
+      let instance;
+      let onSubmitMock;
+      let disableSubmitButtonOnSubmitSpy;
+      let preventDefault;
+      let formSubmitButton;
 
+      beforeEach(() => {
+        const props = {
+          validate: true,
+          fields: { username: 'username' },
+          onSubmit: jest.fn(),
+          children: <TextField key={ 1 } value='' data-test='text-field1' name='username' onChange={ () => {} } />
+        }
+
+        instance = componentSetup(Form, props);
+        onSubmitMock = instance.instance().props.onSubmit;
+        disableSubmitButtonOnSubmitSpy = jest.spyOn(instance.instance(), 'disableSubmitButtonOnSubmit');
+        preventDefault = jest.fn();
+        formSubmitButton = findByTestAttribute(instance, 'form-submit-button');
+
+        formSubmitButton.simulate('click', { button: 0, preventDefault: preventDefault });
+      });
+
+      it('form attribute "submitted" should be true', () => {
+        expect(instance.instance().submitted).toBe(true);
       });
 
       describe('when fields are valid', () => {
         it('should call props function "onSubmit"', () => {
-
+          expect(onSubmitMock).toHaveBeenCalledTimes(1);
         });
 
         it('should call "disableSubmitButtonOnSubmit"', () => {
-
+          expect(disableSubmitButtonOnSubmitSpy).toHaveBeenCalledTimes(1);
         });
       });
 
       describe('when fields are NOT valid', () => {
-        it('should NOT call props function "onSubmit"', () => {
+        let instance;
+        let onSubmitMock;
+        let disableSubmitButtonOnSubmitSpy;
+        let preventDefault;
+        let formSubmitButton;
 
+        beforeEach(() => {
+          const props = {
+            validate: true,
+            fields: { username: 'us' },
+            onSubmit: jest.fn(),
+            children: <TextField key={ 1 } value='' data-test='text-field1' name='username' onChange={ () => {} } />
+          }
+
+          instance = componentSetup(Form, props);
+          onSubmitMock = instance.instance().props.onSubmit;
+          disableSubmitButtonOnSubmitSpy = jest.spyOn(instance.instance(), 'disableSubmitButtonOnSubmit');
+          preventDefault = jest.fn();
+          formSubmitButton = findByTestAttribute(instance, 'form-submit-button');
+
+          formSubmitButton.simulate('click', { button: 0, preventDefault: preventDefault });
+        });
+
+        it('form attribute "submitted" should be true', () => {
+          expect(instance.instance().submitted).toBe(true);
+        });
+
+        it('should NOT call props function "onSubmit"', () => {
+          expect(onSubmitMock).not.toHaveBeenCalled();
         });
         
         it('should NOT call "disableSubmitButtonOnSubmit"', () => {
-
+          expect(disableSubmitButtonOnSubmitSpy).not.toHaveBeenCalled();
         });
       });
     });

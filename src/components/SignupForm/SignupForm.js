@@ -23,8 +23,8 @@ class SignupForm extends React.Component {
     });
   }
 
-  handleOnSubmit = (fields) => {
-    UserActions.registerUser(fields);
+  handleOnSubmit = () => {
+    UserActions.registerUser(this.state);
   }
 
   formRedirect = () => {

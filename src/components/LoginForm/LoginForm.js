@@ -22,7 +22,7 @@ class LoginForm extends React.Component {
     });
   }
 
-  handleOnSubmit = (fields) => {
+  handleOnSubmit = () => {
     UserActions.loginUser(fields);
   }
 

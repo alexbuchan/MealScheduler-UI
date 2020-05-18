@@ -39,12 +39,6 @@ exports[`Form #render when passing only required props when no form elements are
 
 exports[`Form #render when redirect is enabled redirects to path specified in prop redirectTo 1`] = `
 <Form
-  fields={
-    Object {
-      "password": "password",
-      "username": "username",
-    }
-  }
   onSubmit={[Function]}
   redirect={true}
   redirectTo="/route"
@@ -69,12 +63,6 @@ exports[`Form #render when redirect is enabled redirects to path specified in pr
 
 exports[`Form #render when redirect is enabled redirects to path specified in prop redirectTo 2`] = `
 <Form
-  fields={
-    Object {
-      "password": "password",
-      "username": "username",
-    }
-  }
   onSubmit={[Function]}
   redirect={true}
   redirectTo="/route"
@@ -92,4 +80,33 @@ exports[`Form #render when redirect is enabled redirects to path specified in pr
     />
   </Redirect>
 </Form>
+`;
+
+exports[`Form #render when validation is enabled when a form element is passed to the form should render that element and a submit button 1`] = `
+<div
+  className="my-form"
+>
+  <TextField
+    data-test="text-field1"
+    key=".$1"
+    name="username"
+    onChange={[Function]}
+    type="text"
+    validationField={
+      Object {
+        "isInvalid": false,
+        "message": "",
+      }
+    }
+    value=""
+  />
+  <button
+    className="form-submit-button"
+    data-test="form-submit-button"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Submit
+  </button>
+</div>
 `;
