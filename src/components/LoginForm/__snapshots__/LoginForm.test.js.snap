@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm renders correctly 1`] = `
+<div
+  className="col-lg-4 flex-sm-column justify-content-center align-items-center user-signup"
+>
+  <Form
+    fields={
+      Object {
+        "email": "",
+        "password": "",
+      }
+    }
+    onSubmit={[Function]}
+    redirect={true}
+    redirectTo="/contacts"
+    shouldRedirect={false}
+    submitButtonLabel="Log in"
+    validate={true}
+  >
+    <TextField
+      label="Email"
+      name="email"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <TextField
+      label="Password"
+      name="password"
+      onChange={[Function]}
+      type="password"
+      value=""
+    />
+  </Form>
+  <p
+    className="form-link"
+  >
+    Don't have an account? 
+    <Link
+      className=""
+      to="/"
+    >
+      Register
+    </Link>
+  </p>
+</div>
+`;

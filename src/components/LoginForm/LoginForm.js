@@ -1,8 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import UserActions from '../../actions/user/UserActions';
 import Form from '../Form/Form';
 import TextField from '../TextField/TextField';
+
+const propTypes = {
+  user: PropTypes.object   // User prop makes sure once login has taken place that form can redirect.
+}
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -22,13 +27,13 @@ class LoginForm extends React.Component {
     });
   }
 
-  handleOnSubmit = () => {
-    UserActions.loginUser(fields);
-  }
-
   formRedirect = () => {
     if (this.props.user) return true;
     else return false;
+  }
+
+  handleOnSubmit = () => {
+    UserActions.loginUser(this.state);
   }
 
   render() {
@@ -66,4 +71,5 @@ class LoginForm extends React.Component {
   }
 }
 
+LoginForm.propTypes = propTypes;
 export default LoginForm;
