@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import UserActions from '../../actions/user/UserActions';
 import Form from '../Form/Form';

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupForm renders correctly 1`] = `
+<div
+  className="user-signup"
+>
+  <div
+    className="signup-form"
+  >
+    <Form
+      fields={
+        Object {
+          "email": "",
+          "password": "",
+          "username": "",
+        }
+      }
+      onSubmit={[Function]}
+      redirect={true}
+      redirectTo="/contacts"
+      shouldRedirect={false}
+      submitButtonLabel="Register!"
+      validate={true}
+    >
+      <TextField
+        label="Username"
+        name="username"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <TextField
+        label="Email"
+        name="email"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <TextField
+        label="Password"
+        name="password"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </Form>
+    <p
+      className="form-link"
+    >
+      Already have an account? 
+      <Link
+        className=""
+        to="/login"
+      >
+        Log in
+      </Link>
+    </p>
+  </div>
+</div>
+`;

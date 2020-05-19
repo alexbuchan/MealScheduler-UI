@@ -1,8 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import UserActions from '../../actions/user/UserActions';
 import Form from '../Form/Form';
 import TextField from '../TextField/TextField';
+
+const propTypes = {
+  user: PropTypes.object   // User prop makes sure once registration has taken place that form can redirect.
+}
+
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -74,4 +80,5 @@ class SignupForm extends React.Component {
   }
 }
 
+SignupForm.propTypes = propTypes;
 export default SignupForm;
