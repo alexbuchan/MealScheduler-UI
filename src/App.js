@@ -6,8 +6,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UserActions from './actions/user/UserActions';
 
 /* VIEW IMPORTS */
-import SignupView from './views/SignupView';
-import LoginView from './views/LoginView/LoginView';
 import Contacts from './views/Contacts/ContactsView';
 import Settings from './views/Settings';
 import GenericNotFound from './views/GenericNotFoundPage/GenericNotFound';
@@ -16,6 +14,11 @@ import GenericNotFound from './views/GenericNotFoundPage/GenericNotFound';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import FlashMessage from './components/FlashMessage/FlashMessage';
+import SignupForm from './components/SignupForm/SignupForm';
+import LoginForm from "./components/LoginForm/LoginForm";
+
+/* HOC IMPORTS */
+import withUserEntry from './HOC/UserEntryView/UserEntryView';
 
 /* STYLES IMPORTS */
 import './styles/styles.scss';
@@ -35,8 +38,8 @@ class App extends React.Component {
           <NavBar />
 
           <Switch>
-            <Route exact path="/" component={ SignupView } />
-            <Route exact path="/login" component={ LoginView } />
+            <Route exact path="/" component={ withUserEntry(SignupForm) } />
+            <Route exact path="/login" component={ withUserEntry(LoginForm) } />
             <Route exact path="/contacts" component={ Contacts } />
             <Route exact path="/settings" component={ Settings } />
             <Route path='/*' component={ GenericNotFound } />

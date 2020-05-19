@@ -27,7 +27,7 @@ describe('NavBar', () => {
         auth: true,
         user: { username: 'username', email: 'user@email.com' },
         message: 'User is logged in.'
-      })
+      });
     });
 
     it('Should render username, contacts, and logout in the navbar', () => {
