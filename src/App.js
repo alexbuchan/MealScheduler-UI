@@ -19,6 +19,7 @@ import LoginForm from "./components/LoginForm/LoginForm";
 
 /* HOC IMPORTS */
 import withUserEntry from './HOC/UserEntryView/UserEntryView';
+import withAuthentication from './HOC/Authentication/Authentication';
 
 /* STYLES IMPORTS */
 import './styles/styles.scss';
@@ -40,8 +41,8 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={ withUserEntry(SignupForm) } />
             <Route exact path="/login" component={ withUserEntry(LoginForm) } />
-            <Route exact path="/contacts" component={ Contacts } />
-            <Route exact path="/settings" component={ Settings } />
+            <Route exact path="/contacts" component={ withAuthentication(Contacts) } />
+            <Route exact path="/settings" component={ withAuthentication(Settings) } />
             <Route path='/*' component={ GenericNotFound } />
           </Switch>
 

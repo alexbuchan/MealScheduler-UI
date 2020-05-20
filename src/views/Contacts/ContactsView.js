@@ -1,8 +1,6 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
 import ContactActions from '../../actions/contact/ContactActions';
 import ContactStore from '../../stores/ContactStore/ContactStore';
-import UserStore from '../../stores/UserStore/UserStore';
 import Background from '../../components/Background/Background';
 
 class ContactsView extends React.Component {
@@ -10,28 +8,22 @@ class ContactsView extends React.Component {
     super();
 
     this.state = {
-      auth: UserStore.getUserState().auth,
       contacts: ContactStore.getContactState().contacts
     }
-
-    this._onChange = this._onChange.bind(this);
   }
 
   _onChange = () => {
     this.setState({
-      auth: UserStore.getUserState().auth,
       contacts: ContactStore.getContactState().contacts
     });
   }
 
   componentDidMount() {
-    if (this.state.auth) ContactActions.getContacts();
-    UserStore.addChangeListener(this._onChange);
+    ContactActions.getContacts();
     ContactStore.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    UserStore.removeChangeListener(this._onChange);
     ContactStore.removeChangeListener(this._onChange);
   }
 
@@ -69,10 +61,6 @@ class ContactsView extends React.Component {
   }
 
   render() {
-    if (!this.state.auth) {
-      return <Redirect to='/login' />;
-    }
-
     return (
       <div className="contacts-view">
         <Background />
