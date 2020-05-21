@@ -30,7 +30,7 @@ describe('NavBar', () => {
       });
     });
 
-    it('Should render username, contacts, and logout in the navbar', () => {
+    it('Should render username, contacts, settings, and logout in the navbar', () => {
       expect(instance).toMatchSnapshot();
     });
 
