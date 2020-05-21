@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Should render without errors 1`] = `
+<BrowserRouter>
+  <div
+    className="container-fluid"
+  >
+    <NavBar />
+    <Switch>
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/login"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/contacts"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/settings"
+      />
+      <Route
+        component={[Function]}
+        path="/*"
+      />
+    </Switch>
+    <FlashMessage />
+    <Footer />
+  </div>
+</BrowserRouter>
+`;
