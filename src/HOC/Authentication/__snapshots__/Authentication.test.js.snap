@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authentication #render when user is NOT authenticated should redirect to /login 1`] = `
+<Redirect
+  to="/login"
+/>
+`;
+
+exports[`Authentication #render when user is authenticated should render the wrapped component 1`] = `<mockConstructor />`;
