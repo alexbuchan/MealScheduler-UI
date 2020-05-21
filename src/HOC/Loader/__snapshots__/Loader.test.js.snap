@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader #render when wrapped component is finished retrieving data should render the wrapped component 1`] = `<mockConstructor />`;
+
+exports[`Loader #render when wrapped component is retrieving data should display the loader 1`] = `
+<div
+  className="loaderClassName-wrapper"
+>
+  <h3
+    className="loaderClassName"
+  >
+    Loading...
+  </h3>
+</div>
+`;
