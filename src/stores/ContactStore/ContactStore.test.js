@@ -17,15 +17,18 @@ describe('ContactStore', () => {
   });
 
   describe('#getContactsData', () => {
-    it('adds contacts to contactState', () => {
+    beforeEach(() => {
       const getContactsMock = {
         actionType: Constants.GET_CONTACTS_DATA,
         data: ['contact1', 'contact2']
       };
 
       callback(getContactsMock);
-      const getContactState = ContactStore.getContactState();
-      expect(getContactState).toEqual({ contacts: ['contact1', 'contact2'] })
+    });
+
+    it('adds contacts to contactState', () => {
+      const contacts = ContactStore.getContactState().contacts;
+      expect(contacts).toEqual(['contact1', 'contact2'])
     });
   });
 });
