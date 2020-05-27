@@ -7,7 +7,7 @@ import FlashMessageActions from '../FlashMessageActions/FlashMessageActions';
 
 class ContactActions {
   getContacts = async () => {
-    const _endpoint = 'http://localhost:3000/contacts';
+    const _endpoint = 'http://localhost:3000/auth/contacts';
     const jwt = ActionsHelper.getCookie('user');
 
     let error, response;

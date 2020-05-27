@@ -8,32 +8,32 @@ import JWT from '../../lib/JWT/JWT';
 
 class UserActions {
   registerUser = async user => {
-    const _endpoint = 'http://localhost:3000/signup';
+    const _endpoint = 'http://localhost:3000/users';
 
     let error, response;
     [error, response] = await ActionsHelper.asyncHelper(
       request.post(_endpoint, user)
     );
-    
+
     if (error) {
       FlashMessageActions.dispatchErrorMessage(error.response);
     } else {
-      this.handleSignupLoginResponse(response, ActionDispatch.dispatchRegisterUser);
+      ActionsHelper.handleTokenResponse(response, ActionDispatch.dispatchRegisterUser);
     }
   }
 
   loginUser = async user => {
-    const _endpoint = 'http://localhost:3000/login';
+    const _endpoint = 'http://localhost:3000/auth/login';
 
     let error, response;
     [error, response] = await ActionsHelper.asyncHelper(
       request.post(_endpoint, user)
     );
-    
+
     if (error) {
       FlashMessageActions.dispatchErrorMessage(error.response);
     } else {
-      this.handleSignupLoginResponse(response, ActionDispatch.dispatchLoginUser);
+      ActionsHelper.handleTokenResponse(response, ActionDispatch.dispatchLoginUser);
     }
   }
 
@@ -47,15 +47,6 @@ class UserActions {
     if (cookie) {
       const data = JWT.decodeJWTToken(cookie);
       ActionDispatch.dispatchUserDataOnRefresh(data);
-    }
-  }
-
-  handleSignupLoginResponse = (response, dispatchFunction) => {
-    if (response.status === 200) {
-      const data = JWT.decodeJWTToken(response.data.token);
-      ActionsHelper.setCookie('user', response.data.token);
-
-      dispatchFunction(data);
     }
   }
 }
