@@ -6,11 +6,12 @@ const propTypes = {
   name: PropTypes.string.isRequired,    // The name of the field
   type: PropTypes.string,               // The type of input for the field
   value: PropTypes.string.isRequired,   // The value of the input in the field
+  placeholder: PropTypes.string,         // Optional placeholder for textfield
   onChange: PropTypes.func.isRequired,  // The onChange function for updating the field
   validationField: PropTypes.object     // Validation object returned from the Validator instance.
 };
 
-const TextField = ({ label, name, type, value, onChange, validationField }) => {
+const TextField = ({ label, name, type, value, placeholder, onChange, validationField }) => {
   const inputFieldClass = () => {
     return (!validationField.isInvalid) ? "" : "input-field-error";
   }
@@ -25,6 +26,7 @@ const TextField = ({ label, name, type, value, onChange, validationField }) => {
           name={ name }
           type={ type }
           value={ value }
+          placeholder={ placeholder }
           onChange={ onChange }
         />
         <span className="help-block">{ validationField.message }</span>
@@ -40,6 +42,7 @@ const TextField = ({ label, name, type, value, onChange, validationField }) => {
           name={ name }
           type={ type }
           value={ value }
+          placeholder={ placeholder }
           onChange={ onChange }
         />
       </div>

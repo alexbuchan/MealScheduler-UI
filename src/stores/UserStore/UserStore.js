@@ -62,6 +62,10 @@ class UserStore extends Store {
   getUserState() {
     return userState;
   }
+
+  getUser() {
+    return userState.user;
+  }
 }
 
 export default new UserStore();
