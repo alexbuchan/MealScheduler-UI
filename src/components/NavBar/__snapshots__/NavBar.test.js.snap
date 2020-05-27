@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NavBar When user is logged in Should render username, contacts, and logout in the navbar 1`] = `
+exports[`NavBar When user is logged in Should render username, contacts, settings, and logout in the navbar 1`] = `
 <nav
   className="navbar-height navbar navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg navbar-dark bg-dark"
 >
@@ -33,8 +33,8 @@ exports[`NavBar When user is logged in Should render username, contacts, and log
       <li
         className="nav-item"
       >
-        <Link
-          className="nav-link"
+        <span
+          className="nav-link user-profile"
           to="/contacts"
         >
           username
@@ -43,7 +43,7 @@ exports[`NavBar When user is logged in Should render username, contacts, and log
           >
             (current)
           </span>
-        </Link>
+        </span>
       </li>
       <li
         className="nav-item"
@@ -53,6 +53,22 @@ exports[`NavBar When user is logged in Should render username, contacts, and log
           to="/contacts"
         >
           Contacts
+        </Link>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <Link
+          className="nav-link"
+          data-test="settings-nav-link"
+          to="/settings"
+        >
+          Settings
+          <span
+            className="sr-only"
+          >
+            (current)
+          </span>
         </Link>
       </li>
       <li

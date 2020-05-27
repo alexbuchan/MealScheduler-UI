@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactCard Should render without errors 1`] = `
+<ul
+  className="contact-info"
+>
+  <div
+    className="contact-name-wrapper"
+  >
+    <h3
+      className="contact-name"
+    >
+      Mr Test
+    </h3>
+  </div>
+  <div
+    className="contact-info-list"
+  >
+    <li
+      className="contact-item"
+    >
+      <strong>
+        Username
+      </strong>
+      : 
+      Testa Bomb
+    </li>
+    <li
+      className="contact-item"
+    >
+      <strong>
+        Email
+      </strong>
+      : 
+      testa.bomb@email.com
+    </li>
+    <li
+      className="contact-item"
+    >
+      <strong>
+        Address
+      </strong>
+      : 
+      <ul
+        className="address-list"
+      >
+        <ContactAddress
+          item={
+            Array [
+              "street",
+              "Test Street",
+            ]
+          }
+          key="0"
+        />
+        <ContactAddress
+          item={
+            Array [
+              "suite",
+              "Describe",
+            ]
+          }
+          key="1"
+        />
+        <ContactAddress
+          item={
+            Array [
+              "city",
+              "Jest City",
+            ]
+          }
+          key="2"
+        />
+        <ContactAddress
+          item={
+            Array [
+              "zipcode",
+              "98798",
+            ]
+          }
+          key="3"
+        />
+      </ul>
+    </li>
+    <li
+      className="contact-item"
+    >
+      <strong>
+        Phone
+      </strong>
+      : 
+      0989876554
+    </li>
+    <li
+      className="contact-item"
+    >
+      <strong>
+        Website
+      </strong>
+      : 
+      www.thetestway.com
+    </li>
+  </div>
+</ul>
+`;

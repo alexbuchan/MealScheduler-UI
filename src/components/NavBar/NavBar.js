@@ -36,7 +36,7 @@ class NavBar extends React.Component  {
     if (this.state.user) {
       return (
         <li className="nav-item">
-          <Link className="nav-link" to="/contacts">{ this.state.user.username }<span className="sr-only">(current)</span></Link>
+          <span className="nav-link user-profile" to="/contacts">{ this.state.user.username }<span className="sr-only">(current)</span></span>
         </li>
       );
     }
@@ -72,6 +72,18 @@ class NavBar extends React.Component  {
     );
   }
 
+  renderSettings = () => {
+    if (this.state.user) {
+      return (
+        <li className="nav-item">
+          <Link className="nav-link" data-test='settings-nav-link' to="/settings">Settings<span className="sr-only">(current)</span></Link>
+        </li>
+      );
+    }
+
+    return null;
+  }
+
   render() {
     return (
       <nav className="navbar-height navbar navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg navbar-dark bg-dark">
@@ -85,6 +97,8 @@ class NavBar extends React.Component  {
             <li className="nav-item">
               <Link className="nav-link" to="/contacts">Contacts</Link>
             </li>
+
+            { this.renderSettings() }
             { this.renderSignup() }
             { this.renderLogin() }
           </ul>
