@@ -16,10 +16,7 @@ class SettingsActions {
     [error, response] = await ActionsHelper.asyncHelper(
       request.put(_endpoint, settings, { headers: { Authorization: `Bearer ${jwt}` } })
     );
-
     
-    debugger
-
     // error = {
     //   response: {
     //     data: {

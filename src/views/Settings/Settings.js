@@ -7,10 +7,10 @@ import FlashMessage from '../../components/FlashMessage/FlashMessage';
 // import UserStore from '../stores/UserStore/UserStore';
 
 class Settings extends React.Component {
-  constructor(props) {
-    super(props);
-debugger
-    this.state = {
+  constructor() {
+    super();
+
+    this.initialState = {
       username: '',
       email: '',
       password: '',
@@ -20,6 +20,7 @@ debugger
       }
     }
 
+    this.state = this.initialState;
     this.submitted = false;
   }
 
@@ -48,16 +49,10 @@ debugger
     });
   }
 
-  handleLightModeChange = () => {
-    this.setState({
-      lightMode: !this.state.lightMode
-    });
-  }
-
   handleOnSubmit = () => {
     const fields = { username: this.state.username, email: this.state.email, password: this.state.password };
-    console.log('updateUserSettings() !!!', fields);
     Actions.updateUserSettings(fields);
+    this.setState(this.initialState);
   }
 
   render() {

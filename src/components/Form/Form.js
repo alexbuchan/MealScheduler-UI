@@ -31,6 +31,16 @@ class Form extends React.Component {
     this.submitted = false;
   }
 
+  shouldComponentUpdate(_, nextState) {
+    if (nextState.validation.isValid && this.submitted) {
+      this.resetValidation();
+      this.submitted = false;
+      return false;
+    }
+
+    return true;
+  }
+
   componentDidUpdate() {
     if (this.state.disableSubmitButton) {
       this.turnOffSubmitButtonDisable = setTimeout(() => {
@@ -55,6 +65,12 @@ class Form extends React.Component {
       this.props.onSubmit();
       this.disableSubmitButtonOnSubmit();
     }
+  }
+
+  resetValidation = () => {
+    this.setState({
+      validation: this.validator.valid()
+    })
   }
 
   disableSubmitButtonOnSubmit = () => {
