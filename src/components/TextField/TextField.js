@@ -13,13 +13,16 @@ const propTypes = {
   isRequired: PropTypes.bool            // When validation from a form is turned on, this marks the field as required
 };
 
-const TextField = ({ label, name, type, value, disabled, placeholder, onChange, validationField, isRequired }) => {
+const TextField = ({ label, name, type, value, disabled, placeholder, onChange, validationField }) => {
   const inputFieldClass = () => {
     return (!validationField.isInvalid) ? "" : "input-field-error";
   }
 
   const isRequiredLabel = () => {
-    if (isRequired) return <span className='text-field-is-required'>*</span>;
+    if (validationField.isRequired) {
+      return <span data-test='text-field-is-required' className='text-field-is-required'>*</span>;
+    }
+
     return null;
   }
 
@@ -71,8 +74,7 @@ const TextField = ({ label, name, type, value, disabled, placeholder, onChange, 
 }
 
 TextField.defaultProps = {
-  type: 'text',
-  isRequired: false
+  type: 'text'
 }
 
 TextField.propTypes = propTypes;

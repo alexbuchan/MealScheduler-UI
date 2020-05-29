@@ -23,9 +23,10 @@ class Form extends React.Component {
     }
 
     if (this.props.validate) {
+      const areRequired = this.props.areRequired || [];
       let formChildren = React.Children.toArray(this.props.children);
       const validationFields = formChildren.map(child => child.props.name);
-      this.validator = new Validator(this.props.areRequired, ...validationFields);
+      this.validator = new Validator(areRequired, ...validationFields);
       this.state.validation = this.validator.valid();
     }
 
@@ -33,9 +34,8 @@ class Form extends React.Component {
   }
 
   shouldComponentUpdate(_, nextState) {
-    if (nextState.validation.isValid && this.submitted) {
+    if (this.props.validate && nextState.validation.isValid && this.submitted) {
       this.resetValidation();
-      this.submitted = false;
       return false;
     }
 
@@ -44,7 +44,7 @@ class Form extends React.Component {
 
   componentDidUpdate() {
     if (this.state.disableSubmitButton) {
-      this.turnOffSubmitButtonDisable = setTimeout(() => {
+      setTimeout(() => {
         this.setState(() => ({ disableSubmitButton: false }))
       }, 1000);
     }
@@ -57,7 +57,7 @@ class Form extends React.Component {
       const validation = this.validator.validate(this.props.fields);
       this.setState({ validation });
       this.submitted = true;
-  
+
       if (validation.isValid) {
         this.props.onSubmit();
         this.disableSubmitButtonOnSubmit();
@@ -71,7 +71,10 @@ class Form extends React.Component {
   resetValidation = () => {
     this.setState({
       validation: this.validator.valid()
-    })
+    });
+
+    this.disableSubmitButton = false;
+    this.submitted = false;
   }
 
   disableSubmitButtonOnSubmit = () => {

@@ -12,7 +12,7 @@ describe('Validator', () => {
       password: 'password'
     };
 
-    validator = new Validator(...fields);
+    validator = new Validator([], ...fields);
   });
 
   describe('#validate', () => {
@@ -22,6 +22,68 @@ describe('Validator', () => {
       validator.validate(state);
 
       expect(validSpy).toHaveBeenCalledTimes(1);
+    });
+
+    describe('when Validator field arguments are NOT required', () => {
+      let validator;
+      let state;
+
+      beforeEach(() => {
+        const fields = ['email', 'password'];
+        state = {
+          email: '',
+          password: ''
+        };
+
+        validator = new Validator([], ...fields);
+      });
+
+      it('should NOT validate fields when empty', () => {
+        expect(validator.validate(state)).toEqual({
+          'isValid': true,
+          'email': {
+            'isInvalid': false,
+            'message': '',
+            'isRequired': false
+          },
+          'password': {
+            'isInvalid': false,
+            'message': '',
+            'isRequired': false
+          }
+        });
+      });
+    });
+
+    describe('when Validator field arguments are required', () => {
+      let validator;
+      let state;
+
+      beforeEach(() => {
+        const fields = ['email', 'password'];
+        state = {
+          email: '',
+          password: ''
+        };
+
+        validator = new Validator(['email', 'password'], ...fields);
+      });
+
+      it('should validate fields when empty', () => {
+        expect(validator.validate(state)).toEqual({
+          'isValid': false,
+          'email': {
+            'isInvalid': true,
+            'message': 'Email is required.',
+            'isRequired': true
+          },
+          'password': {
+            'isInvalid': true,
+            'message': 'Password is required.',
+            'isRequired': true
+          }
+        });
+      });
     });
 
     describe('when Validator field arguments do NOT have a validation rule', () => {
@@ -34,7 +96,7 @@ describe('Validator', () => {
           noRule: 'noRule'
         };
 
-        validator = new Validator(...fields);
+        validator = new Validator([], ...fields);
       });
 
       it('should return the default validation object', () => {
@@ -42,7 +104,8 @@ describe('Validator', () => {
           'isValid': true,
           'noRule': {
             'isInvalid': false,
-            'message': ''
+            'message': '',
+            'isRequired': false
           }
         });
       });
@@ -60,18 +123,20 @@ describe('Validator', () => {
             password: 'password'
           };
 
-          validator = new Validator(...fields);
+          validator = new Validator([], ...fields);
         });
         it('should return the default validation object', () => {
           expect(validator.validate(state)).toEqual({
             'isValid': true,
             'email': {
               'isInvalid': false,
-              'message': ''
+              'message': '',
+              'isRequired': false
             },
             'password': {
               'isInvalid': false,
-              'message': ''
+              'message': '',
+              'isRequired': false
             }
           });
         });
@@ -88,7 +153,7 @@ describe('Validator', () => {
             password: 'pass'
           }
 
-          validator = new Validator(...fields);
+          validator = new Validator([], ...fields);
         });
 
         it('should return a validation object that contains an invalid field and rule message', () => {
@@ -96,11 +161,13 @@ describe('Validator', () => {
             'isValid': false,
             'email': {
               'isInvalid': true,
-              'message': 'That is not a valid email.'
+              'message': 'That is not a valid email.',
+              'isRequired': false
             },
             'password': {
               'isInvalid': true,
-              'message': 'Password should be longer than 6 characters.'
+              'message': 'Password should be longer than 6 characters.',
+              'isRequired': false
             }
           });
         });

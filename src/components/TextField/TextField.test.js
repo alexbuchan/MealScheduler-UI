@@ -72,7 +72,7 @@ describe('TextField', () => {
           type: 'text',
           value: 'valid value',
           onChange: () => {},
-          validationField: { isInvalid: false, message: '' }
+          validationField: { isInvalid: false, message: '', isRequired: false }
         };
 
         instance = componentSetup(TextField, props);
@@ -97,7 +97,7 @@ describe('TextField', () => {
           type: 'text',
           value: 'invalid value',
           onChange: () => {},
-          validationField: { isInvalid: true, message: 'Value must be valid' }
+          validationField: { isInvalid: true, message: 'Value must be valid', isRequired: false }
         };
 
         instance = componentSetup(TextField, props);
@@ -109,6 +109,48 @@ describe('TextField', () => {
 
       it('input className should be "input-field-error"', () => {
         expect(findByTestAttribute(instance, 'input-with-validation').hasClass('input-field-error')).toBe(true);
+      });
+    });
+
+    describe('when textfield is required', () => {
+      let instance;
+
+      beforeEach(() => {
+        const props = {
+          label: 'label',
+          name: 'name',
+          type: 'text',
+          value: 'invalid value',
+          onChange: () => {},
+          validationField: { isInvalid: true, message: 'Value must be valid', isRequired: true }
+        };
+
+        instance = componentSetup(TextField, props);
+      });
+
+      it('should display required field span', () => {
+        expect(findByTestAttribute(instance, 'text-field-is-required').exists()).toBe(true);
+      });
+    });
+
+    describe('when textfield is NOT required', () => {
+      let instance;
+
+      beforeEach(() => {
+        const props = {
+          label: 'label',
+          name: 'name',
+          type: 'text',
+          value: 'invalid value',
+          onChange: () => {},
+          validationField: { isInvalid: true, message: 'Value must be valid', isRequired: false }
+        };
+
+        instance = componentSetup(TextField, props);
+      });
+
+      it('should NOT display required field span', () => {
+        expect(findByTestAttribute(instance, 'text-field-is-required').exists()).toBe(false);
       });
     });
   });

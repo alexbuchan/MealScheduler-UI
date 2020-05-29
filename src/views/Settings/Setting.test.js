@@ -3,33 +3,21 @@ import UserStore from '../../stores/UserStore/UserStore';
 import { componentSetup } from '../../testUtils/testUtils';
 
 describe('Settings', () => {
+  beforeEach(() => {
+    const data = {
+      auth: true,
+      message: 'User logged in',
+      user: {
+        username: 'user',
+        email: 'user@email.com'
+      }
+    };
+
+    UserStore.loginUser(data);
+  });
+
   describe('#render', () => {
-    describe('when contacts are loading', () => {
-      let instance;
 
-      beforeEach(() => {
-        instance = componentSetup(Settings);
-      });
-      
-      it('should pass loading state to loader isLoading prop', () => {
-        const loader = instance.find('Loader');
-        expect(loader.prop('isLoading')).toBe(true);
-      });
-    });
-
-    describe('when contacts are NOT loading', () => {
-      let instance;
-
-      beforeEach(() => {
-        instance = componentSetup(Settings);
-      });
-      
-      it('should pass loading state to loader isLoading prop', () => {
-        UserStore.getContactsData(['contact1', 'contact2']);
-        const loader = instance.find('Loader');
-        expect(loader.prop('isLoading')).toBe(false);
-      });
-    });
   });
 
   describe('#componentWillUnmount', () => {

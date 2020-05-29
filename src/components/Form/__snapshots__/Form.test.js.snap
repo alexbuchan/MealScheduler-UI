@@ -95,6 +95,7 @@ exports[`Form #render when validation is enabled when a form element is passed t
     validationField={
       Object {
         "isInvalid": false,
+        "isRequired": false,
         "message": "",
       }
     }
