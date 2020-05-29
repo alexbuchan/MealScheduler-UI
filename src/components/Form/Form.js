@@ -7,6 +7,7 @@ const propTypes = {
   submitButtonLabel: PropTypes.string,  // Provide a label name for the submit button. /Default is 'Submit'
   validate: PropTypes.bool,             // Should the form be validated. /Default is false
   fields: PropTypes.object,             // Provide the fields for validation if validation is enabled
+  areRequired: PropTypes.array,         // Provide an array of strings that are fields that should be required
   onSubmit: PropTypes.func.isRequired,  // Provide the onSubmit function to handle form submittion
   redirect: PropTypes.bool,             // Enable redirecting. /Will redirect on component render unless shouldRedirect prop is used
   redirectTo: PropTypes.string,         // If redirect enabled, pass route to be redirected to
@@ -24,7 +25,7 @@ class Form extends React.Component {
     if (this.props.validate) {
       let formChildren = React.Children.toArray(this.props.children);
       const validationFields = formChildren.map(child => child.props.name);
-      this.validator = new Validator(...validationFields);
+      this.validator = new Validator(this.props.areRequired, ...validationFields);
       this.state.validation = this.validator.valid();
     }
 
