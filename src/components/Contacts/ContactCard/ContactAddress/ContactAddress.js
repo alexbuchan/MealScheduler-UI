@@ -6,9 +6,8 @@ const propTypes = {
 };
 
 const ContactAddress = ({ index, item }) => {
-  if (item[0] === 'geo') return null;
   const label = item[0].replace(/^\w/, c => c.toUpperCase());
-  
+
   return (
     <li className="contact-item address-item" ><strong>{ label }</strong>: { item[1] }</li>
   );

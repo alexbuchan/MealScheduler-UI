@@ -15,7 +15,8 @@ const propTypes = {
 
 const ContactCard = ({ contact }) => {
   const renderContactAddress = (contact) => {
-    const contactAddress = Object.entries(contact.address);
+    const contactAddress = Object.entries(contact.address).filter(item => item[0] !== 'geo');
+
     return (
       <ul className="address-list">{
         contactAddress.map((item, index) => <ContactAddress key={ index } item={ item } />) 
