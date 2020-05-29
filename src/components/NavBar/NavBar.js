@@ -60,7 +60,15 @@ class NavBar extends React.Component  {
     if (this.state.user) {
       return (
         <li className="nav-item">
-          <Link onClick={ this.handleLogout } className="nav-link" data-test='logout-nav-link' to="/login">Log out<span className="sr-only">(current)</span></Link>
+          <Link
+            onClick={ this.handleLogout }
+            className="nav-link"
+            data-test='logout-nav-link'
+            to="/login"
+          >
+            Log out
+            <span className="sr-only">(current)</span>
+          </Link>
         </li>
       );
     }

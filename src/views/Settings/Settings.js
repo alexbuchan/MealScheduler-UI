@@ -4,20 +4,15 @@ import TextField from '../../components/TextField/TextField';
 import Actions from '../../actions/settings/SettingsActions';
 import UserStore from '../../stores/UserStore/UserStore';
 import FlashMessage from '../../components/FlashMessage/FlashMessage';
-// import UserStore from '../stores/UserStore/UserStore';
 
 class Settings extends React.Component {
   constructor() {
     super();
 
     this.initialState = {
-      username: '',
-      email: '',
-      password: '',
-      placerholders: {
-        username: UserStore.getUser().username,
-        email: UserStore.getUser().email
-      }
+      username: UserStore.getUser().username,
+      email: UserStore.getUser().email,
+      userDetailsEdit: false,
     }
 
     this.state = this.initialState;
@@ -25,12 +20,14 @@ class Settings extends React.Component {
   }
 
   _onChange = () => {
-    this.setState({
-      placerholders: {
+    if (UserStore.getUser()) {
+      this.setState({
         username: UserStore.getUser().username,
         email: UserStore.getUser().email
-      }
-    });
+      });
+      
+      this.initialState = this.state;
+    }
   }
 
   componentDidMount() {
@@ -41,6 +38,16 @@ class Settings extends React.Component {
     UserStore.removeChangeListener(this._onChange);
   }
 
+  handleUserDetailsEditClick = (ev) => {
+    this.setState({
+      userDetailsEdit: true
+    });
+  }
+
+  handleUserDetailsCancelEditClick = (ev) => {
+    this.setState(this.initialState);
+  }
+
   handleOnChange = (ev) => {
     ev.preventDefault();
 
@@ -49,53 +56,52 @@ class Settings extends React.Component {
     });
   }
 
-  handleOnSubmit = () => {
-    const fields = { username: this.state.username, email: this.state.email, password: this.state.password };
+  handleUserDetailsOnSubmit = () => {
+    const fields = { username: this.state.username, email: this.state.email };
     Actions.updateUserSettings(fields);
     this.setState(this.initialState);
   }
 
   render() {
-    const fields = { username: this.state.username, email: this.state.email, password: this.state.password };
+    const userDetailFields = { username: this.state.username, email: this.state.email };
 
     return (
-      <div className="settings">
-        <div className="user-signup">
-          <h1>Settings</h1>
-          <h3>Change User Details</h3>
+      <div className="settings-view">
+        <h1 className="settings-header">Settings</h1>
 
-          <Form
-            validate={ true }
-            fields={ fields }
-            onSubmit={ this.handleOnSubmit }
-          >
-            <TextField
-              label='Username'
-              name='username'
-              type='text'
-              placeholder={ this.state.placerholders.username }
-              value={ this.state.username }
-              onChange={ this.handleOnChange }
-            />
+        <div className="settings">
+          <div className="user-signup">
+            <h3>Change User Details</h3>
+            { (!this.state.userDetailsEdit) ? <button onClick={ this.handleUserDetailsEditClick }>Edit</button> : null }
+            { (this.state.userDetailsEdit) ? <button onClick={ this.handleUserDetailsCancelEditClick }>X</button> : null }
 
-            <TextField
-              label='Email'
-              name='email'
-              type='text'
-              placeholder={ this.state.placerholders.email }
-              value={ this.state.email }
-              onChange={ this.handleOnChange }
-            />
+            <Form
+              validate={ true }
+              fields={ userDetailFields }
+              areRequired={ ['username', 'email'] }
+              onSubmit={ this.handleUserDetailsOnSubmit }
+            >
+              <TextField
+                label='Username'
+                name='username'
+                type='text'
+                value={ this.state.username }
+                disabled={ !this.state.userDetailsEdit }
+                onChange={ this.handleOnChange }
+                isRequired={ true }
+              />
 
-            <TextField
-              label='Password'
-              name='password'
-              type='password'
-              placeholder='password'
-              value={ this.state.password }
-              onChange={ this.handleOnChange }
-            />
-          </Form>
+              <TextField
+                label='Email'
+                name='email'
+                type='text'
+                value={ this.state.email }
+                onChange={ this.handleOnChange }
+                disabled={ !this.state.userDetailsEdit }
+                isRequired={ true }
+              />
+            </Form>
+          </div>
         </div>
 
         <FlashMessage />

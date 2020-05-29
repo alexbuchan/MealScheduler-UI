@@ -1,6 +1,20 @@
-.settings {
+.settings-view {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: $contentHeight;
+
+  .settings-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
 }
