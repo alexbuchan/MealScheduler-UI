@@ -8,6 +8,12 @@ exports[`SignupForm renders correctly 1`] = `
     className="signup-form"
   >
     <Form
+      areRequired={
+        Array [
+          "email",
+          "password",
+        ]
+      }
       fields={
         Object {
           "email": "",

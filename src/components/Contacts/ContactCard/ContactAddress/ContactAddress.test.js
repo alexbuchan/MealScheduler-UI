@@ -17,22 +17,4 @@ describe('ContactAddress', () => {
   it('Should render without errors', () => {
     expect(instance).toMatchSnapshot();
   });
-
-  describe('when item is geo', () => {
-    let instance;
-    let props;
-    
-    beforeEach(() => {
-      props = {
-        index: 0,
-        item: ['geo', 'lat: -34.397, lng: 150.644']
-      };
-
-      instance = componentSetup(ContactAddress, props);
-    });
-
-    it('should return null', () => {
-      expect(instance.type()).toBeNull();
-    });
-  });
 });

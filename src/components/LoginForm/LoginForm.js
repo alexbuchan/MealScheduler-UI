@@ -43,6 +43,7 @@ class LoginForm extends React.Component {
           submitButtonLabel='Log in'
           validate={ true }
           fields={ this.state }
+          areRequired={ ['email', 'password'] }
           onSubmit={ this.handleOnSubmit }
           redirect={ true }
           redirectTo='/contacts'

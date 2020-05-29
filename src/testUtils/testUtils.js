@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-export const componentSetup = (Component, props = {}) => {
-  const instance = shallow(<Component { ...props } />);
+export const componentSetup = (Component, props = {}, options = {}) => {
+  const instance = shallow(<Component { ...props } />, options);
   return instance;
 }
 

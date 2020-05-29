@@ -5,6 +5,12 @@ exports[`LoginForm renders correctly 1`] = `
   className="col-lg-4 flex-sm-column justify-content-center align-items-center user-signup"
 >
   <Form
+    areRequired={
+      Array [
+        "email",
+        "password",
+      ]
+    }
     fields={
       Object {
         "email": "",

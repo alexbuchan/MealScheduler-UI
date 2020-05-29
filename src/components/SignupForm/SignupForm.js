@@ -46,6 +46,7 @@ class SignupForm extends React.Component {
             submitButtonLabel='Register!'
             validate={ true }
             fields={ this.state }
+            areRequired={ ['email', 'password'] }
             onSubmit={ this.handleOnSubmit }
             redirect={ true }
             redirectTo='/contacts'

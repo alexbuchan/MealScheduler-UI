@@ -12,8 +12,8 @@ jest.mock('axios');
 describe('UserActions', () => {
   describe('#registerUser', () => {
     describe('when user has registered correctly', () => {
-      it('calls handleSignupLoginResponse', async () => {  
-        const handleSignupLoginResponseSpy = jest.spyOn(Actions, 'handleSignupLoginResponse');
+      it('calls handleTokenResponse', async () => {
+        const handleSignupLoginResponseSpy = jest.spyOn(ActionsHelper, 'handleTokenResponse');
         const response = { data: { username: 'username', email: 'user@email.com' } };
         request.post.mockImplementation(() => Promise.resolve(response));
 
@@ -24,7 +24,7 @@ describe('UserActions', () => {
     });
 
     describe('when user registration returns an error', () => {
-      it('calls FlashMessage dispatch error action with error object', async () => {  
+      it('calls FlashMessage dispatch error action with error object', async () => {
         const error = { response: { data: { error: 'error1' } } };
         request.post.mockImplementation(() => Promise.reject(error));
         await Actions.registerUser();
@@ -36,8 +36,8 @@ describe('UserActions', () => {
 
   describe('#loginUser', () => {
     describe('when user has logged in correctly', () => {
-      it('calls handleSignupLoginResponse', async () => {  
-        const handleSignupLoginResponseSpy = jest.spyOn(Actions, 'handleSignupLoginResponse');
+      it('calls handleTokenResponse', async () => {
+        const handleSignupLoginResponseSpy = jest.spyOn(ActionsHelper, 'handleTokenResponse');
         const response = { data: { username: 'username', email: 'user@email.com' } };
         request.post.mockImplementation(() => Promise.resolve(response));
 
@@ -48,7 +48,7 @@ describe('UserActions', () => {
     });
 
     describe('when user registration returns an error', () => {
-      it('calls FlashMessage dispatch error action with error object', async () => {  
+      it('calls FlashMessage dispatch error action with error object', async () => {
         const error = { response: { data: { error: 'error2' } } };
         request.post.mockImplementation(() => Promise.reject(error));
         await Actions.loginUser();
@@ -60,13 +60,13 @@ describe('UserActions', () => {
 
   describe('#logoutUser', () => {
     describe('when user has logged out correctly', () => {
-      it('removes user cookie', () => {  
+      it('removes user cookie', () => {
         const removeCookieSpy = jest.spyOn(ActionsHelper, 'removeCookie');
         Actions.logoutUser();
         expect(removeCookieSpy).toHaveBeenCalled();
       });
 
-      it('calls logout dispatch method', () => {  
+      it('calls logout dispatch method', () => {
         Actions.logoutUser();
         expect(ActionDispatch.dispatchLogoutUser).toHaveBeenCalled();
       });
@@ -88,28 +88,6 @@ describe('UserActions', () => {
         Actions.retrieveUserDataOnRefresh();
 
         expect(ActionDispatch.dispatchUserDataOnRefresh).toHaveBeenCalledWith(data)
-      });
-    });
-  });
-
-  describe('#handleSignupLoginResponse', () => {
-    describe('when status 200', () => {
-      it('decode JWT, set user cookie, and dispatch data to UserStore', () => {
-        const response = {
-          status: 200, 
-          data: { token: 'fbjdsbfs.fbsdfbisdfbdsjbf.fgydsbfbd' } 
-        };
-
-        const data = { username: 'username', email: 'user@email.com' };
-
-        const decodeJWTTokenSpy = jest.spyOn(JWT, 'decodeJWTToken');
-        decodeJWTTokenSpy.mockImplementation(jwt => data);
-
-        const dispatchRegisterUserSpy = jest.spyOn(ActionDispatch, 'dispatchRegisterUser');
-
-        Actions.handleSignupLoginResponse(response, dispatchRegisterUserSpy);
-
-        expect(ActionDispatch.dispatchRegisterUser).toHaveBeenCalledWith(data)
       });
     });
   });
