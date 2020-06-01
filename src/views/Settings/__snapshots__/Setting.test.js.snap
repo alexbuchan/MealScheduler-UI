@@ -15,15 +15,22 @@ exports[`Settings #render renders correctly 1`] = `
     <div
       className="user-signup"
     >
-      <h3>
-        Change User Details
-      </h3>
-      <button
-        data-test="edit-button"
-        onClick={[Function]}
+      <div
+        className="user-details"
       >
-        Edit
-      </button>
+        <h4
+          className="user-details-title"
+        >
+          User Details
+        </h4>
+        <button
+          className="edit-form-button"
+          data-test="edit-button"
+          onClick={[Function]}
+        >
+          Edit
+        </button>
+      </div>
       <Form
         areRequired={
           Array [
@@ -64,6 +71,5 @@ exports[`Settings #render renders correctly 1`] = `
       </Form>
     </div>
   </div>
-  <FlashMessage />
 </div>
 `;

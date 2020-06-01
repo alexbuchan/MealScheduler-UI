@@ -24,16 +24,13 @@ class ActionsHelper {
     .catch(err => [err]);
   }
 
-  handleTokenResponse = (response, dispatchFunction) => {
+  handleTokenResponse = (response) => {
     switch(response.status) {
       case 200:
       case 201:
       case 202:
-        const data = JWT.decodeJWTToken(response.data.token);
         this.setCookie('user', response.data.token);
-
-        dispatchFunction(data);
-        break;
+        return JWT.decodeJWTToken(response.data.token);
 
       default:
         return;

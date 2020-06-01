@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FlashMessage #renderErrorMessage When error message array length larger than 1 Should render a list element for each error in the flash message 1`] = `
+exports[`FlashMessage #renderMessage When error message array length larger than 1 Should render a list element for each error in the flash message 1`] = `
 <div
   className="flash-message"
 >
@@ -33,7 +33,7 @@ exports[`FlashMessage #renderErrorMessage When error message array length larger
 </div>
 `;
 
-exports[`FlashMessage #renderErrorMessage When error message contains only a string Should render only one list item for the error in the flash message 1`] = `
+exports[`FlashMessage #renderMessage When error message contains only a string Should render only one list item for the error in the flash message 1`] = `
 <div
   className="flash-message"
 >
@@ -57,13 +57,13 @@ exports[`FlashMessage #renderErrorMessage When error message contains only a str
 </div>
 `;
 
-exports[`FlashMessage When there are no errors in the store Should not render 1`] = `
+exports[`FlashMessage When there are no messages in the store Should not render 1`] = `
 <div
   className="flash-message"
 />
 `;
 
-exports[`FlashMessage When there is an error in the store Should render, wait for 3 seconds, then stop rendering 1`] = `
+exports[`FlashMessage When there is a message in the store Should render, wait for 3 seconds, then stop rendering 1`] = `
 <div
   className="flash-message"
 >
@@ -87,13 +87,13 @@ exports[`FlashMessage When there is an error in the store Should render, wait fo
 </div>
 `;
 
-exports[`FlashMessage When there is an error in the store Should render, wait for 3 seconds, then stop rendering 2`] = `
+exports[`FlashMessage When there is a message in the store Should render, wait for 3 seconds, then stop rendering 2`] = `
 <div
   className="flash-message"
 />
 `;
 
-exports[`FlashMessage when there are multiple error messages in the store Should render, wait for 3 seconds, then stop rendering 1`] = `
+exports[`FlashMessage when there are multiple messages in the store Should render, wait for 3 seconds, then stop rendering 1`] = `
 <div
   className="flash-message"
 >
@@ -126,7 +126,7 @@ exports[`FlashMessage when there are multiple error messages in the store Should
 </div>
 `;
 
-exports[`FlashMessage when there are multiple error messages in the store Should render, wait for 3 seconds, then stop rendering 2`] = `
+exports[`FlashMessage when there are multiple messages in the store Should render, wait for 3 seconds, then stop rendering 2`] = `
 <div
   className="flash-message"
 />

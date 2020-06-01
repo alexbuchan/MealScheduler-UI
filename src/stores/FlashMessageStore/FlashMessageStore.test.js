@@ -48,6 +48,22 @@ describe('FlashMessageStore', () => {
       });
     });
   });
+
+  describe('#addSuccessMessage', () => {
+    it('wraps success message in array and adds it to the store', () => {
+      const actionMock = {
+        actionType: Constants.DISPATCH_SUCCESS_MESSAGE,
+        data: {
+          message: 'Email successfully updated.'
+        }
+      };
+
+      callback(actionMock);
+      const flashMessageState = FlashMessageStore.getFlashMessageState();
+      expect(flashMessageState.message).toEqual(['Email successfully updated.']);
+      expect(flashMessageState.open).toEqual(true);
+    });
+  });
   
   describe('#closeFlashMessage', () => {
     it('sets closeFlashMessage to true', () => {

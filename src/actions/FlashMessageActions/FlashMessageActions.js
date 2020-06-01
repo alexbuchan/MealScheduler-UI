@@ -8,13 +8,20 @@ class FlashMessageActions {
     Dispatcher.dispatch({
       actionType: Constants.DISPATCH_ERROR_MESSAGE,
       data
-    })
+    });
+  }
+
+  dispatchSuccessMessage = (data) => {
+    Dispatcher.dispatch({
+      actionType: Constants.DISPATCH_SUCCESS_MESSAGE,
+      data
+    });
   }
 
   closeFlashMessage = () => {
     Dispatcher.dispatch({
       actionType: Constants.CLOSE_FLASH_MESSAGE
-    })
+    });
   }
 }
 

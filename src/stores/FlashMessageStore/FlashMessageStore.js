@@ -18,7 +18,11 @@ class FlashMessageStore extends Store {
       case Constants.DISPATCH_ERROR_MESSAGE:
         this.addErrorMessage(action.data);
         break;
-      
+
+      case Constants.DISPATCH_SUCCESS_MESSAGE:
+        this.addSuccessMessage(action.data);
+        break;
+
       case Constants.CLOSE_FLASH_MESSAGE:
         this.closeFlashMessage();
         break;
@@ -29,6 +33,14 @@ class FlashMessageStore extends Store {
     flashMessageState.message = (Array.isArray(error.data.error)) ? error.data.error : [error.data.error]
     flashMessageState.open = true;
     flashMessageState.type = 'error';
+
+    this.emitChange();
+  }
+
+  addSuccessMessage = (data) => {
+    flashMessageState.message = [data.message];
+    flashMessageState.open = true;
+    flashMessageState.type = 'success';
 
     this.emitChange();
   }

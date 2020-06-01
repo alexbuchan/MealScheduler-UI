@@ -19,7 +19,7 @@ describe('UserActions', () => {
 
         await Actions.registerUser();
 
-        expect(handleSignupLoginResponseSpy).toHaveBeenCalledWith(response, ActionDispatch.dispatchRegisterUser);
+        expect(handleSignupLoginResponseSpy).toHaveBeenCalledWith(response);
       });
     });
 
@@ -43,7 +43,7 @@ describe('UserActions', () => {
 
         await Actions.loginUser();
 
-        expect(handleSignupLoginResponseSpy).toHaveBeenCalledWith(response, ActionDispatch.dispatchRegisterUser);
+        expect(handleSignupLoginResponseSpy).toHaveBeenCalledWith(response);
       });
     });
 

@@ -18,7 +18,8 @@ class UserActions {
     if (error) {
       FlashMessageActions.dispatchErrorMessage(error.response);
     } else {
-      ActionsHelper.handleTokenResponse(response, ActionDispatch.dispatchRegisterUser);
+      const data = ActionsHelper.handleTokenResponse(response);
+      ActionDispatch.dispatchRegisterUser(data);
     }
   }
 
@@ -33,7 +34,8 @@ class UserActions {
     if (error) {
       FlashMessageActions.dispatchErrorMessage(error.response);
     } else {
-      ActionsHelper.handleTokenResponse(response, ActionDispatch.dispatchLoginUser);
+      const data = ActionsHelper.handleTokenResponse(response);
+      ActionDispatch.dispatchLoginUser(data);
     }
   }
 

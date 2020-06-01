@@ -125,8 +125,6 @@ class Settings extends React.Component {
             </Form>
           </div>
         </div>
-
-        <FlashMessage />
       </div>
     );
   }

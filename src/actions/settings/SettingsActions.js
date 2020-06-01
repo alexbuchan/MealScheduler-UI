@@ -20,8 +20,9 @@ class SettingsActions {
     if (error) {
       FlashMessageActions.dispatchErrorMessage(error.response);
     } else {
-      //FlashMessageActions.dispatchSuccessMessage(response.data.message);
-      ActionsHelper.handleTokenResponse(response, ActionDispatch.dispatchRegisterUser);
+      const data = ActionsHelper.handleTokenResponse(response);
+      ActionDispatch.dispatchRegisterUser(data);
+      FlashMessageActions.dispatchSuccessMessage(data);
     }
   }
 }

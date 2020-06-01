@@ -24,7 +24,7 @@ describe('SettingsActions', () => {
 
         await Actions.updateUserSettings();
 
-        expect(handleTokenResponseSpy).toHaveBeenCalledWith(response, UserActionDispatch.dispatchRegisterUser);
+        expect(handleTokenResponseSpy).toHaveBeenCalledWith(response);
       });
     });
 

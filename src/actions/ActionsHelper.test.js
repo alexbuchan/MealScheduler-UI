@@ -4,7 +4,7 @@ import JWT from '../lib/JWT/JWT';
 
 describe('#handleTokenResponse', () => {
   describe('when status 200', () => {
-    it('decode JWT, set user cookie, and dispatch data to UserStore', () => {
+    it('set user cookie, and return decoded jwt ', () => {
       const response = {
         status: 200, 
         data: { token: 'fbjdsbfs.fbsdfbisdfbdsjbf.fgydsbfbd' } 
@@ -15,11 +15,9 @@ describe('#handleTokenResponse', () => {
       const decodeJWTTokenSpy = jest.spyOn(JWT, 'decodeJWTToken');
       decodeJWTTokenSpy.mockImplementation(jwt => data);
 
-      const dispatchRegisterUserSpy = jest.spyOn(UserActionDispatch, 'dispatchRegisterUser');
+      ActionsHelper.handleTokenResponse(response);
 
-      ActionsHelper.handleTokenResponse(response, dispatchRegisterUserSpy);
-
-      expect(dispatchRegisterUserSpy).toHaveBeenCalledWith(data)
+      expect(ActionsHelper.handleTokenResponse(response)).toEqual(data)
     });
   });
 });

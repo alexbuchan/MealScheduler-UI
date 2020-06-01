@@ -47,7 +47,7 @@ class FlashMessage extends React.Component {
       return (
         <div className={`alert alert-${this.state.type}`}>
           <p></p>
-          { this.renderErrorMessage() }
+          { this.renderMessage() }
           <span data-test='close-flash-message' className="close" onClick={ () => this.handleCloseMessageClick() }><strong>X</strong></span>
         </div>
       );
@@ -55,11 +55,11 @@ class FlashMessage extends React.Component {
     return null;
   }
 
-  renderErrorMessage() {
+  renderMessage() {
       if (this.state.message.length > 1) {
       return (
         <ul>
-          { this.state.message.map((err, i) => <li key={i}>{ err }</li>) }
+          { this.state.message.map((message, i) => <li key={i}>{ message }</li>) }
         </ul>
       );
     }

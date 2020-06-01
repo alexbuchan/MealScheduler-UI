@@ -18,13 +18,13 @@ describe('FlashMessage', () => {
     Actions.closeFlashMessage.mockClear();
   });
 
-  describe('When there are no errors in the store', () => {
+  describe('When there are no messages in the store', () => {
     it('Should not render', () => {
       expect(instance).toMatchSnapshot();
     });
   });
 
-  describe('When there is an error in the store', () => {
+  describe('When there is a message in the store', () => {
     it('Should render, wait for 3 seconds, then stop rendering', () => {
       // Simulate state change triggered by store
       const error = { data: { error: 'Invalid email' } };
@@ -43,7 +43,7 @@ describe('FlashMessage', () => {
     });
   });
 
-  describe('when there are multiple error messages in the store', () => {
+  describe('when there are multiple messages in the store', () => {
     it('Should render, wait for 3 seconds, then stop rendering', () => {
       // Simulate state change triggered by store
       const error = { data: { error: ['Invalid email', 'invalid username'] } };
@@ -75,7 +75,7 @@ describe('FlashMessage', () => {
     });
   });
 
-  describe('#renderErrorMessage', () => {
+  describe('#renderMessage', () => {
     describe('When error message array length larger than 1', () => {
       it('Should render a list element for each error in the flash message', () => {
         // Simulate state change triggered by store
