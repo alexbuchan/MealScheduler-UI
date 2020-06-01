@@ -10,6 +10,7 @@ exports[`SignupForm renders correctly 1`] = `
     <Form
       areRequired={
         Array [
+          "username",
           "email",
           "password",
         ]

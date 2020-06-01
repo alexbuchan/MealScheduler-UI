@@ -64,7 +64,7 @@ class FlashMessage extends React.Component {
       );
     }
 
-    return <li>Error: { this.state.message }</li>
+    return <li>{ this.state.message[0] }</li>
   }
 
   render() {

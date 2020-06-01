@@ -76,14 +76,14 @@ describe('FlashMessage', () => {
   });
 
   describe('#renderErrorMessage', () => {
-    describe('When error message contains a field and message', () => {
+    describe('When error message array length larger than 1', () => {
       it('Should render a list element for each error in the flash message', () => {
         // Simulate state change triggered by store
         const error = {
           data: {
             error: [
-              { field: 'email', message: 'Invalid email'},
-              { field: 'username', message: 'Username too short' }
+              'Invalid email',
+              'Username too short'
             ] 
           } 
         };
@@ -97,7 +97,7 @@ describe('FlashMessage', () => {
 
     describe('When error message contains only a string', () => {
       it('Should render only one list item for the error in the flash message', () => {
-        const error = { data: { error: 'Invalid email' } };
+        const error = { data: { error: ['Invalid email'] } };
         Store.addErrorMessage(error);
 
         // component is rendering

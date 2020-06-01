@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FlashMessage #renderErrorMessage When error message contains a field and message Should render a list element for each error in the flash message 1`] = `
+exports[`FlashMessage #renderErrorMessage When error message array length larger than 1 Should render a list element for each error in the flash message 1`] = `
 <div
   className="flash-message"
 >
@@ -12,15 +12,11 @@ exports[`FlashMessage #renderErrorMessage When error message contains a field an
       <li
         key="0"
       >
-        email
-        : 
         Invalid email
       </li>
       <li
         key="1"
       >
-        username
-        : 
         Username too short
       </li>
     </ul>
@@ -46,7 +42,6 @@ exports[`FlashMessage #renderErrorMessage When error message contains only a str
   >
     <p />
     <li>
-      Error: 
       Invalid email
     </li>
     <span
@@ -77,7 +72,6 @@ exports[`FlashMessage When there is an error in the store Should render, wait fo
   >
     <p />
     <li>
-      Error: 
       Invalid email
     </li>
     <span
@@ -107,11 +101,18 @@ exports[`FlashMessage when there are multiple error messages in the store Should
     className="alert alert-error"
   >
     <p />
-    <li>
-      Error: 
-      Invalid email
-      invalid username
-    </li>
+    <ul>
+      <li
+        key="0"
+      >
+        Invalid email
+      </li>
+      <li
+        key="1"
+      >
+        invalid username
+      </li>
+    </ul>
     <span
       className="close"
       data-test="close-flash-message"
