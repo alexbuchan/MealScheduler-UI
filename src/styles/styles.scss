@@ -25,6 +25,12 @@ p {
   width: 90%;
 }
 
+.my-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .form-element {
   display: flex;
   flex-direction: column;
@@ -34,7 +40,6 @@ p {
 
 .form-submit-button {
   width: 178px;
-  margin-top: -10px;
 }
 
 .form-link {
