@@ -292,6 +292,42 @@ describe('Form', () => {
     });
   });
 
+  describe('#renderSubmitButton', () => {
+    describe('when disableSubmitButton prop is true', () => {
+      let instance;
+
+      beforeEach(() => {
+        const props = {
+          disableSubmitButton: true,
+          onSubmit: () => {}
+        };
+
+        instance = componentSetup(Form, props);
+      });
+
+      it('returns a disabled button', () => {
+        expect(instance).toMatchSnapshot();
+      });
+    });
+
+    describe('when disableSubmitButton prop is false', () => {
+      let instance;
+
+      beforeEach(() => {
+        const props = {
+          disableSubmitButton: false,
+          onSubmit: () => {}
+        };
+
+        instance = componentSetup(Form, props);
+      });
+
+      it('returns an enabled button', () => {
+        expect(instance).toMatchSnapshot();
+      });
+    });
+  });
+
   describe('#shouldComponentUpdate', () => {
     let instance;
     let disableSubmitButtonOnSubmitSpy;

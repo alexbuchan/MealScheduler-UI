@@ -39,6 +39,7 @@ exports[`Form #render when passing only required props when no form elements are
 
 exports[`Form #render when redirect is enabled redirects to path specified in prop redirectTo 1`] = `
 <Form
+  disableSubmitButton={false}
   onSubmit={[Function]}
   redirect={true}
   redirectTo="/route"
@@ -63,6 +64,7 @@ exports[`Form #render when redirect is enabled redirects to path specified in pr
 
 exports[`Form #render when redirect is enabled redirects to path specified in prop redirectTo 2`] = `
 <Form
+  disableSubmitButton={false}
   onSubmit={[Function]}
   redirect={true}
   redirectTo="/route"
@@ -106,6 +108,35 @@ exports[`Form #render when validation is enabled when a form element is passed t
     data-test="form-submit-button"
     disabled={false}
     onClick={[Function]}
+  >
+    Submit
+  </button>
+</div>
+`;
+
+exports[`Form #renderSubmitButton when disableSubmitButton prop is false returns an enabled button 1`] = `
+<div
+  className="my-form"
+>
+  <button
+    className="form-submit-button"
+    data-test="form-submit-button"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Submit
+  </button>
+</div>
+`;
+
+exports[`Form #renderSubmitButton when disableSubmitButton prop is true returns a disabled button 1`] = `
+<div
+  className="my-form"
+>
+  <button
+    className="form-submit-button"
+    data-test="form-submit-button"
+    disabled={true}
   >
     Submit
   </button>

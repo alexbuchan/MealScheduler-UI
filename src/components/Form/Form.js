@@ -5,11 +5,12 @@ import Validator from '../../lib/Validator/Validator';
 
 const propTypes = {
   submitButtonLabel: PropTypes.string,  // Provide a label name for the submit button. /Default is 'Submit'
+  disableSubmitButton: PropTypes.bool,  // Disables submit button. /Default is false
   validate: PropTypes.bool,             // Should the form be validated. /Default is false
   fields: PropTypes.object,             // Provide the fields for validation if validation is enabled
   areRequired: PropTypes.array,         // Provide an array of strings that are fields that should be required
   onSubmit: PropTypes.func.isRequired,  // Provide the onSubmit function to handle form submittion
-  redirect: PropTypes.bool,             // Enable redirecting. /Will redirect on component render unless shouldRedirect prop is used
+  redirect: PropTypes.bool,             // Enable redirecting. Will redirect on component render unless shouldRedirect prop is used /Default is false
   redirectTo: PropTypes.string,         // If redirect enabled, pass route to be redirected to
   shouldRedirect: PropTypes.bool        // Tells the form when it should redirect
 };
@@ -89,6 +90,31 @@ class Form extends React.Component {
     return children.map(child => React.cloneElement(child, { validationField: validation[child.props.name] }));
   }
 
+  renderSubmitButton = () => {
+    if (this.props.disableSubmitButton) {
+      return (
+        <button
+          data-test="form-submit-button"
+          className="form-submit-button"
+          disabled={ true }
+        >
+          { this.props.submitButtonLabel }
+        </button>
+      );
+    }
+
+    return (
+      <button
+        data-test="form-submit-button"
+        className="form-submit-button"
+        disabled={ this.state.disableSubmitButton }
+        onClick={ this.handleOnSubmit }
+      >
+        { this.props.submitButtonLabel }
+      </button>
+    );
+  }
+
   render() {
     if (this.props.redirect && this.props.shouldRedirect) return <Redirect to={ this.props.redirectTo } />
 
@@ -97,14 +123,7 @@ class Form extends React.Component {
     return (
       <div className='my-form'>
         { children }
-        <button
-          data-test="form-submit-button"
-          className="form-submit-button"
-          disabled={ this.state.disableSubmitButton }
-          onClick={ this.handleOnSubmit }
-        >
-          { this.props.submitButtonLabel }
-        </button>
+        { this.renderSubmitButton() }
       </div>
     );
   }
@@ -113,7 +132,8 @@ class Form extends React.Component {
 Form.defaultProps = {
   submitButtonLabel: 'Submit',
   validate: false,
-  redirect: false
+  redirect: false,
+  disableSubmitButton: false
 }
 
 Form.propTypes = propTypes;
