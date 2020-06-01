@@ -17,4 +17,30 @@
     height: 100%;
     width: 100%;
   }
+
+  .user-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .user-details-title {
+      margin-right: 10px;
+    }
+
+    .edit-form-button {
+      width: 45px;
+      height: 90%;
+      color: blue;
+      border: 1px solid cornflowerblue;
+      border-radius: 4px;
+    }
+
+    .cancel-edit-form-button {
+      width: 45px;
+      height: 90%;
+      color: crimson;
+      border: 1px solid crimson;
+      border-radius: 4px;
+    }
+  }
 }

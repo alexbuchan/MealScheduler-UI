@@ -15,6 +15,7 @@ exports[`SignupForm renders correctly 1`] = `
           "password",
         ]
       }
+      disableSubmitButton={false}
       fields={
         Object {
           "email": "",

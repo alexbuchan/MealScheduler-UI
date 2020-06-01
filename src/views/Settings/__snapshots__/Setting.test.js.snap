@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings #render renders correctly 1`] = `
+<div
+  className="settings-view"
+>
+  <h1
+    className="settings-header"
+  >
+    Settings
+  </h1>
+  <div
+    className="settings"
+  >
+    <div
+      className="user-signup"
+    >
+      <h3>
+        Change User Details
+      </h3>
+      <button
+        data-test="edit-button"
+        onClick={[Function]}
+      >
+        Edit
+      </button>
+      <Form
+        areRequired={
+          Array [
+            "username",
+            "email",
+          ]
+        }
+        disableSubmitButton={true}
+        fields={
+          Object {
+            "email": "user@email.com",
+            "username": "user",
+          }
+        }
+        onSubmit={[Function]}
+        redirect={false}
+        submitButtonLabel="Submit"
+        validate={true}
+      >
+        <TextField
+          disabled={true}
+          isRequired={true}
+          label="Username"
+          name="username"
+          onChange={[Function]}
+          type="text"
+          value="user"
+        />
+        <TextField
+          disabled={true}
+          isRequired={true}
+          label="Email"
+          name="email"
+          onChange={[Function]}
+          type="text"
+          value="user@email.com"
+        />
+      </Form>
+    </div>
+  </div>
+  <FlashMessage />
+</div>
+`;

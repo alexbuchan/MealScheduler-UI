@@ -12,7 +12,8 @@ class Settings extends React.Component {
     this.initialState = {
       username: UserStore.getUser().username,
       email: UserStore.getUser().email,
-      userDetailsEdit: false,
+      edit: false,
+      disableSubmitButton: true
     }
 
     this.state = this.initialState;
@@ -25,7 +26,7 @@ class Settings extends React.Component {
         username: UserStore.getUser().username,
         email: UserStore.getUser().email
       });
-      
+
       this.initialState = this.state;
     }
   }
@@ -38,14 +39,31 @@ class Settings extends React.Component {
     UserStore.removeChangeListener(this._onChange);
   }
 
-  handleUserDetailsEditClick = (ev) => {
+  handleEditClick = (ev) => {
     this.setState({
-      userDetailsEdit: true
+      edit: true,
+      disableSubmitButton: false
     });
   }
 
-  handleUserDetailsCancelEditClick = (ev) => {
+  renderEditClick = () => {
+    if (!this.state.edit) {
+      return <button data-test='edit-button' className="edit-form-button" onClick={ this.handleEditClick }>Edit</button>;
+    }
+
+    return null;
+  }
+
+  handleCancelEditClick = (ev) => {
     this.setState(this.initialState);
+  }
+
+  renderCancelEditClick = () => {
+    if (this.state.edit) {
+      return <button data-test='cancel-edit-button' className="cancel-edit-form-button" onClick={ this.handleCancelEditClick }>X</button>;
+    }
+
+    return null;
   }
 
   handleOnChange = (ev) => {
@@ -56,14 +74,14 @@ class Settings extends React.Component {
     });
   }
 
-  handleUserDetailsOnSubmit = () => {
+  handleOnSubmit = () => {
     const fields = { username: this.state.username, email: this.state.email };
     Actions.updateUserSettings(fields);
     this.setState(this.initialState);
   }
 
   render() {
-    const userDetailFields = { username: this.state.username, email: this.state.email };
+    const fields = { username: this.state.username, email: this.state.email };
 
     return (
       <div className="settings-view">
@@ -71,22 +89,26 @@ class Settings extends React.Component {
 
         <div className="settings">
           <div className="user-signup">
-            <h3>Change User Details</h3>
-            { (!this.state.userDetailsEdit) ? <button onClick={ this.handleUserDetailsEditClick }>Edit</button> : null }
-            { (this.state.userDetailsEdit) ? <button onClick={ this.handleUserDetailsCancelEditClick }>X</button> : null }
+            <div className="user-details">
+              <h4 className="user-details-title">User Details</h4>
+              { this.renderEditClick() }
+              { this.renderCancelEditClick() }
+
+            </div>
 
             <Form
+              disableSubmitButton={ this.state.disableSubmitButton }
               validate={ true }
-              fields={ userDetailFields }
+              fields={ fields }
               areRequired={ ['username', 'email'] }
-              onSubmit={ this.handleUserDetailsOnSubmit }
+              onSubmit={ this.handleOnSubmit }
             >
               <TextField
                 label='Username'
                 name='username'
                 type='text'
                 value={ this.state.username }
-                disabled={ !this.state.userDetailsEdit }
+                disabled={ !this.state.edit }
                 onChange={ this.handleOnChange }
                 isRequired={ true }
               />
@@ -97,7 +119,7 @@ class Settings extends React.Component {
                 type='text'
                 value={ this.state.email }
                 onChange={ this.handleOnChange }
-                disabled={ !this.state.userDetailsEdit }
+                disabled={ !this.state.edit }
                 isRequired={ true }
               />
             </Form>
