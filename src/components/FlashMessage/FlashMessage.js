@@ -56,11 +56,10 @@ class FlashMessage extends React.Component {
   }
 
   renderErrorMessage() {
-    //if (Object.keys(this.state.message[0]).includes('field')) {
-      if (this.state.message) {
+      if (this.state.message.length > 1) {
       return (
         <ul>
-          { this.state.message.map((err, i) => <li key={i}>{ err.field }: { err.message }</li>) }
+          { this.state.message.map((err, i) => <li key={i}>{ err }</li>) }
         </ul>
       );
     }

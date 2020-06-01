@@ -16,16 +16,6 @@ class SettingsActions {
     [error, response] = await ActionsHelper.asyncHelper(
       request.put(_endpoint, settings, { headers: { Authorization: `Bearer ${jwt}` } })
     );
-    
-    // error = {
-    //   response: {
-    //     data: {
-    //       error: 'stub'
-    //     }
-    //   }
-    // }
-
-    error = undefined;
 
     if (error) {
       FlashMessageActions.dispatchErrorMessage(error.response);
