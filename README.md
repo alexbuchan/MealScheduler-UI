@@ -1,7 +1,7 @@
 This is a React with Flux template I wrote with signup, login, and GET /contacts routes that are authenticated with passport and JWT.
 I have a matching repository which contains the backend API with Ruby on Rails here: [SignupAndLoginTemplateRails](https://github.com/alexbuchan/SignupAndLoginTemplateRails).
 
-I also have a matching repository which contains a backend API in Node.js Express here: [SignupAndLoginTemplate](https://github.com/alexbuchan/SignupAndLoginTemplate). To use it, just change to the express branch in this repo. This version doesn't contain the settings page.
+I also have a matching repository which contains a backend API in Node.js Express here: [SignupAndLoginTemplate](https://github.com/alexbuchan/SignupAndLoginTemplate). To use it, just change to the `express` branch in this repo. This version doesn't contain the settings page.
 
 This project is meant to help me learn how to write a React application with Flux, which I can then turn into real applications.
 
