@@ -5,10 +5,11 @@ import ActionDispatch from './ActionDispatch';
 import FlashMessageActions from '../FlashMessageActions/FlashMessageActions';
 import ActionsHelper from '../ActionsHelper';
 import JWT from '../../lib/JWT/JWT';
+import ServiceConfig from '../../services/config';
 
 class UserActions {
   registerUser = async user => {
-    const _endpoint = 'http://localhost:3000/users';
+    const _endpoint = `${ServiceConfig}/users`;
 
     let error, response;
     [error, response] = await ActionsHelper.asyncHelper(
@@ -24,7 +25,7 @@ class UserActions {
   }
 
   loginUser = async user => {
-    const _endpoint = 'http://localhost:3000/auth/login';
+    const _endpoint = `${ServiceConfig}/auth/login`;
 
     let error, response;
     [error, response] = await ActionsHelper.asyncHelper(

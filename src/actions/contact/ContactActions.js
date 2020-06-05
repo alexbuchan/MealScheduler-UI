@@ -4,10 +4,11 @@ const request = require('axios');
 import ActionDispatch from './ActionDispatch';
 import ActionsHelper from '../ActionsHelper';
 import FlashMessageActions from '../FlashMessageActions/FlashMessageActions';
+import ServiceConfig from '../../services/config';
 
 class ContactActions {
   getContacts = async () => {
-    const _endpoint = 'http://localhost:3000/auth/contacts';
+    const _endpoint = `${ServiceConfig}/auth/contacts`;
     const jwt = ActionsHelper.getCookie('user');
 
     let error, response;

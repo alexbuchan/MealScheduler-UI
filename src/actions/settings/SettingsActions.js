@@ -5,12 +5,13 @@ import JWT from '../../lib/JWT/JWT';
 import ActionDispatch from '../user/ActionDispatch';
 import FlashMessageActions from '../FlashMessageActions/FlashMessageActions';
 import ActionsHelper from '../ActionsHelper';
+import ServiceConfig from '../../services/config';
 
 class SettingsActions {
   updateUserSettings = async settings => {
     const jwt = ActionsHelper.getCookie('user');
     const currentUserID = JWT.decodeJWTToken(jwt).user.user_id;
-    const _endpoint = `http://localhost:3000/users/${currentUserID}`;
+    const _endpoint = `${ServiceConfig}/users/${currentUserID}`;
 
     let error, response;
     [error, response] = await ActionsHelper.asyncHelper(
