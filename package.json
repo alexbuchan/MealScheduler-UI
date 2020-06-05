@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config=webpack.config.dev.js",
-    "build-dev": "webpack --config=webpack.config.dev.js",
-    "build": "webpack -p --config=webpack.config.prod.js",
+    "start": "NODE_ENV=development webpack-dev-server --config=webpack.config.dev.js",
+    "build-dev": "NODE_ENV=development webpack --config=webpack.config.dev.js",
+    "build": "NODE_ENV=production webpack -p --config=webpack.config.prod.js",
     "test": "jest --watchAll --coverage",
     "jest": "jest"
   },
