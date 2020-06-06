@@ -4,16 +4,44 @@
   padding-right: $navbarPaddingRight;
 }
 
-.user-profile {
-  border: 1px solid gray;
-  background-color: #ffe4c4;
-  color: black !important;
-  height: 43px;
-  margin-right: 7px;
+@media only screen and (min-width: 650px) {
+  .user-profile {
+    display: flex;
+    justify-content: center;
+    height: 43px;
+    width: 100%;
+    margin-right: 7px;
+    border: 1px solid gray;
+    background-color: #ffe4c4;
+    color: black !important;
+  }
 }
 
 @media only screen and (max-width: 649px) {
   .navbar-brand {
     font-size: medium;
+  }
+
+  .user-profile {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: black;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border: 1px solid black;
+    background-color: lightgray;
+  }
+
+  .navbar-nav {
+    margin-top: 7px;
+  }
+
+  .nav-link {
+    color: black !important;
   }
 }

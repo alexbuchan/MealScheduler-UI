@@ -35,7 +35,7 @@ class NavBar extends React.Component  {
   renderUsername = () => {
     if (this.state.user) {
       return (
-        <li className="nav-item">
+        <li className="nav-item mobile-nav-item">
           <span className="nav-link user-profile" to="/contacts">{ this.state.user.username }<span className="sr-only">(current)</span></span>
         </li>
       );
@@ -47,7 +47,7 @@ class NavBar extends React.Component  {
   renderSignup = () => {
     if (!this.state.user) {
       return (
-        <li className="nav-item">
+        <li className="nav-item mobile-nav-item">
           <Link className="nav-link" to="/">Signup</Link>
         </li>
       );
@@ -59,7 +59,7 @@ class NavBar extends React.Component  {
   renderLogin = () => {
     if (this.state.user) {
       return (
-        <li className="nav-item">
+        <li className="nav-item mobile-nav-item">
           <Link
             onClick={ this.handleLogout }
             className="nav-link"
@@ -74,7 +74,7 @@ class NavBar extends React.Component  {
     }
 
     return (
-      <li className="nav-item">
+      <li className="nav-item mobile-nav-item">
         <Link className="nav-link" to="/login">Login<span className="sr-only">(current)</span></Link>
       </li>
     );
@@ -83,7 +83,7 @@ class NavBar extends React.Component  {
   renderSettings = () => {
     if (this.state.user) {
       return (
-        <li className="nav-item">
+        <li className="nav-item mobile-nav-item">
           <Link className="nav-link" data-test='settings-nav-link' to="/settings">Settings<span className="sr-only">(current)</span></Link>
         </li>
       );
@@ -102,7 +102,7 @@ class NavBar extends React.Component  {
         <div className="collapse navbar-collapse justify-content-sm-end" id="navbarNav">
           <ul className="navbar-nav">
             { this.renderUsername() }
-            <li className="nav-item">
+            <li className="nav-item mobile-nav-item">
               <Link className="nav-link" to="/contacts">Contacts</Link>
             </li>
 
