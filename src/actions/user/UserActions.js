@@ -9,11 +9,11 @@ import ServiceConfig from '../../services/config';
 
 class UserActions {
   registerUser = async user => {
-    const _endpoint = `${ServiceConfig}/users`;
+    const _endpoint = `${ServiceConfig}/users/register`;
 
     let error, response;
     [error, response] = await ActionsHelper.asyncHelper(
-      request.post(_endpoint, user)
+      request.post(_endpoint, { user: user })
     );
 
     if (error) {
@@ -25,11 +25,11 @@ class UserActions {
   }
 
   loginUser = async user => {
-    const _endpoint = `${ServiceConfig}/auth/login`;
+    const _endpoint = `${ServiceConfig}/users/login`;
 
     let error, response;
     [error, response] = await ActionsHelper.asyncHelper(
-      request.post(_endpoint, user)
+      request.post(_endpoint, { user: user })
     );
 
     if (error) {

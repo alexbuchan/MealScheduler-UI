@@ -95,7 +95,7 @@ class NavBar extends React.Component  {
   render() {
     return (
       <nav className="navbar-height navbar navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg navbar-dark bg-dark">
-        <Link className="navbar-brand" to="">Signup and Login App</Link>
+        <Link className="navbar-brand" to="">Meal Scheduler</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

@@ -10,21 +10,21 @@ class ContactsView extends React.Component {
     super();
 
     this.state = {
-      isLoading: true,
-      contacts: ContactStore.getContactState().contacts
+      isLoading: true
+      // contacts: ContactStore.getContactState().contacts
     }
   }
 
-  _onChange = () => {
-    this.setState({
-      contacts: ContactStore.getContactState().contacts
-    });
-  }
+  // _onChange = () => {
+  //   this.setState({
+  //     contacts: ContactStore.getContactState().contacts
+  //   });
+  // }
 
-  componentDidMount() {
-    ContactActions.getContacts();
-    ContactStore.addChangeListener(this._onChange);
-  }
+  // componentDidMount() {
+  //   ContactActions.getContacts();
+  //   ContactStore.addChangeListener(this._onChange);
+  // }
 
   componentDidUpdate() {
     if (this.state.isLoading) {
@@ -32,9 +32,9 @@ class ContactsView extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    ContactStore.removeChangeListener(this._onChange);
-  }
+  // componentWillUnmount() {
+  //   ContactStore.removeChangeListener(this._onChange);
+  // }
 
   render() {
     const ContactsWithLoader = withLoader(Contacts);
@@ -45,7 +45,7 @@ class ContactsView extends React.Component {
         <div className="contacts-info-wrapper">
           <ContactsWithLoader
             isLoading={ this.state.isLoading } 
-            contacts={ this.state.contacts }
+            // contacts={ this.state.contacts }
             loaderClassName="contacts-loader"
           />
         </div>
