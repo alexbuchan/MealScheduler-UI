@@ -1,15 +1,15 @@
-.contacts-view {
+.schedule-view {
   height: $contentHeight;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .contacts-title {
+  .schedule-title {
     margin: 30px;
     font-size: xx-large;
   }
 
-  .contacts-info-wrapper {
+  .schedule-info-wrapper {
     display: flex;
     justify-content: center;
     box-shadow: 0 0 10px;
@@ -20,14 +20,14 @@
     overflow: scroll;
     background-color: rgba(255, 255, 255, 0.7);
 
-    .contacts-loader-wrapper {
+    .schedule-loader-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 100%;
       height: 100%;
 
-      .contacts-loader {
+      .schedule-loader {
         margin: 1px;
       }
     }
@@ -76,11 +76,11 @@
     }
   }
 
-  .contacts-info-wrapper::-webkit-scrollbar {
+  .schedule-info-wrapper::-webkit-scrollbar {
     display: none;
   }
   
-  .contacts-info-wrapper {
+  .schedule-info-wrapper {
     -ms-overflow-style: none;
   }
 }

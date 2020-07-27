@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UserActions from '../actions/user/UserActions';
 
 /* VIEW IMPORTS */
-import Contacts from '../views/Contacts/ContactsView';
+import Schedule from '../views/Schedule/ScheduleView';
 import Settings from '../views/Settings/Settings';
 import GenericNotFound from '../views/GenericNotFoundPage/GenericNotFound';
 
@@ -41,7 +41,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={ withUserEntry(SignupForm) } />
             <Route exact path="/login" component={ withUserEntry(LoginForm) } />
-            <Route exact path="/contacts" component={ withAuthentication(Contacts) } />
+            <Route exact path="/contacts" component={ withAuthentication(Schedule) } />
             <Route exact path="/settings" component={ withAuthentication(Settings) } />
             <Route path='/*' component={ GenericNotFound } />
           </Switch>

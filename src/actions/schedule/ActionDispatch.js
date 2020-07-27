@@ -1,10 +1,10 @@
 import Dispatcher from '../../dispatcher/dispatcher';
-import Constants from '../../constants/contactConstants';
+import Constants from '../../constants/scheduleConstants';
 
 class ActionDispatch {
-  dispatchContactsData = (data) => {
+  dispatchScheduleData = (data) => {
     Dispatcher.dispatch({
-      actionType: Constants.GET_CONTACTS_DATA,
+      actionType: Constants.GET_SCHEDULE_DATA,
       data
     });
   }

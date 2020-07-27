@@ -1,14 +1,14 @@
-import ContactsView from './ContactsView';
-import Store from '../../stores/ContactStore/ContactStore';
+import ScheduleView from './ScheduleView';
+import Store from '../../stores/ScheduleStore/ScheduleStore';
 import { componentSetup } from '../../testUtils/testUtils';
 
-describe('ContactsView', () => {
+describe('ScheduleView', () => {
   describe('#render', () => {
-    describe('when contacts are loading', () => {
+    describe('when schedule is loading', () => {
       let instance;
 
       beforeEach(() => {
-        instance = componentSetup(ContactsView);
+        instance = componentSetup(ScheduleView);
       });
       
       it('should pass loading state to loader isLoading prop', () => {
@@ -17,15 +17,15 @@ describe('ContactsView', () => {
       });
     });
 
-    describe('when contacts are NOT loading', () => {
+    describe('when schedule is NOT loading', () => {
       let instance;
 
       beforeEach(() => {
-        instance = componentSetup(ContactsView);
+        instance = componentSetup(ScheduleView);
       });
       
       it('should pass loading state to loader isLoading prop', () => {
-        Store.getContactsData(['contact1', 'contact2']);
+        Store.getScheduleData(['contact1', 'contact2']);
         const loader = instance.find('Loader');
         expect(loader.prop('isLoading')).toBe(false);
       });
@@ -36,7 +36,7 @@ describe('ContactsView', () => {
     let instance;
   
     beforeEach(() => {
-      instance = componentSetup(ContactsView);
+      instance = componentSetup(ScheduleView);
     });
     
     it('Should remove the Store event listener', () => {
