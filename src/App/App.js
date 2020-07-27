@@ -41,7 +41,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={ withUserEntry(SignupForm) } />
             <Route exact path="/login" component={ withUserEntry(LoginForm) } />
-            <Route exact path="/contacts" component={ withAuthentication(Schedule) } />
+            <Route exact path="/schedule" component={ withAuthentication(Schedule) } />
             <Route exact path="/settings" component={ withAuthentication(Settings) } />
             <Route path='/*' component={ GenericNotFound } />
           </Switch>

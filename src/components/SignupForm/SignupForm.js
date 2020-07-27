@@ -49,7 +49,7 @@ class SignupForm extends React.Component {
             areRequired={ ['username', 'email', 'password'] }
             onSubmit={ this.handleOnSubmit }
             redirect={ true }
-            redirectTo='/contacts'
+            redirectTo='/schedule'
             shouldRedirect={ this.formRedirect() }
           >
             <TextField

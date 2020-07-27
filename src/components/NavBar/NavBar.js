@@ -36,7 +36,7 @@ class NavBar extends React.Component  {
     if (this.state.user) {
       return (
         <li className="nav-item mobile-nav-item">
-          <span className="nav-link user-profile" to="/contacts">{ this.state.user.username }<span className="sr-only">(current)</span></span>
+          <span className="nav-link user-profile" to="/schedule">{ this.state.user.username }<span className="sr-only">(current)</span></span>
         </li>
       );
     }
@@ -103,7 +103,7 @@ class NavBar extends React.Component  {
           <ul className="navbar-nav">
             { this.renderUsername() }
             <li className="nav-item mobile-nav-item">
-              <Link className="nav-link" to="/contacts">Contacts</Link>
+              <Link className="nav-link" to="/schedule">Schedule</Link>
             </li>
 
             { this.renderSettings() }
