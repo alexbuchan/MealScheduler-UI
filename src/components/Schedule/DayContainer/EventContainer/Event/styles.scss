@@ -1,0 +1,20 @@
+.event-title {
+  margin: 0;
+  font-size: small;
+  border: 1px solid black;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.food-event-color {
+  background-color: #4fd44f;
+}
+
+.cooking-event-color {
+  background-color: yellow;
+}
+
+.shopping-event-color {
+  background-color: #e85f5f;
+}

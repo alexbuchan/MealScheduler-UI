@@ -9,7 +9,7 @@ const propTypes = {
 const Schedule = ({ schedule }) => {
   if (!(schedule.length === 0)) {
     return schedule.map((day) => {
-      return <DayContainer key={ day.date } day={ day } />
+      return <DayContainer key={ day.date } day={ day } numberOfDayContainers={ schedule.length } />
     });
   }
 

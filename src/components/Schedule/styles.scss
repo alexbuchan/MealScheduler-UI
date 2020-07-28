@@ -1,16 +1,25 @@
 .schedule-info-wrapper {
 
   // CLASSES FOR ACTIVE DAYS
+  .height-for-5-columns {
+    height: 20%;
+  }
+
+  .height-for-6-columns {
+    height: calc(6 / 100);
+  }
+
   .day-container {
     border: 1px solid gray;
     box-shadow: 0 0 8px;
     padding: 0;
     background-color: ghostwhite;
+    overflow: hidden;
 
     .title-wrapper {
       display: flex;
       border-bottom: 2px solid black;
-      height: 30px;
+      height: 19%;
 
       .day-of-the-week-wrapper {
         display: flex;
