@@ -1,4 +1,4 @@
-import Contacts from './Contacts';
+import Contacts from './Schedule';
 import { componentSetup } from '../../testUtils/testUtils';
 
 describe('Contacts', () => {

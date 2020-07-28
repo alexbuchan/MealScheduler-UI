@@ -1,0 +1,84 @@
+.schedule-info-wrapper {
+
+  // CLASSES FOR ACTIVE DAYS
+  .day-container {
+    border: 1px solid gray;
+    box-shadow: 0 0 8px;
+    padding: 0;
+    background-color: ghostwhite;
+
+    .title-wrapper {
+      display: flex;
+      border-bottom: 2px solid black;
+      height: 30px;
+
+      .day-of-the-week-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 22%;
+        background-color: bisque;
+
+        .day-of-the-week {
+          text-align: center;
+          font-size: larger;
+          font-weight: 500;
+          width: 88%;
+        }
+      }
+
+      .day-of-the-week-name-wrapper {
+        display: flex;
+        margin-left: 4px;
+        align-items: center;
+
+        .day-of-the-week-name {
+          font-size: small;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  // CLASSES FOR INACTIVE DAYS
+  .day-container-inactive {
+    border: 1px solid gray;
+    box-shadow: 0 0 8px;
+    padding: 0;
+    background-color: #dedede;
+
+    .title-wrapper-inactive {
+      display: flex;
+      border-bottom: 2px solid gray;
+      height: 30px;
+
+      .day-of-the-week-wrapper-inactive {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 22%;
+        background-color: #cccccc;
+
+        .day-of-the-week-inactive {
+          color: gray;
+          text-align: center;
+          font-size: larger;
+          font-weight: 500;
+          width: 88%;
+        }
+      }
+
+      .day-of-the-week-name-wrapper-inactive {
+        display: flex;
+        margin-left: 4px;
+        align-items: center;
+
+        .day-of-the-week-name-inactive {
+          color: gray;
+          font-size: small;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

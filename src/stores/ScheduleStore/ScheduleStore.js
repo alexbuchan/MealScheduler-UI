@@ -5,7 +5,7 @@ let scheduleState = {
   month: '',
   year: '',
   number_of_days: '',
-  events: []
+  schedule: []
 };
 
 class ScheduleStore extends Store {
@@ -25,7 +25,7 @@ class ScheduleStore extends Store {
     scheduleState.month = data.month;
     scheduleState.year = data.year;
     scheduleState.number_of_days = data.number_of_days;
-    scheduleState.events = data.events;
+    scheduleState.schedule = data.schedule;
     this.emitChange();
   }
 
