@@ -4,20 +4,20 @@ import Event from './Event/Event';
 
 const propTypes = {
   events: PropTypes.array,
-  columns: PropTypes.number,
+  rows: PropTypes.number,
   openSidebar: PropTypes.func
 };
 
-const EventContainer = ({ events, columns, openSidebar }) => {
+const EventContainer = ({ events, rows, openSidebar }) => {
   let spliced;
 
   const formatEventQuantity = () => {
-    if (columns === 6 && events.length > 4) {
+    if (rows === 6 && events.length > 4) {
       spliced = true;
       const displayedEvents = [...events]
       return displayedEvents.splice(0, 3);
     }
-    if (columns === 5 && events.length > 5) {
+    if (rows === 5 && events.length > 5) {
       spliced = true;
       const displayedEvents = [...events]
       return displayedEvents.splice(0, 4);

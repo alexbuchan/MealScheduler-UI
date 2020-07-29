@@ -32,14 +32,14 @@ class DayContainer extends React.Component {
   }
 
   dynamicHeight = () => {
-    if (this.numberOfColumns() === 6) {
-      return 'height-for-6-columns';
+    if (this.numberOfRows() === 6) {
+      return 'height-for-6-rows';
     }
 
-    return 'height-for-5-columns';
+    return 'height-for-5-rows';
   }
 
-  numberOfColumns = () => {
+  numberOfRows = () => {
     if (this.props.numberOfDayContainers > 35) {
       return 6;
     }
@@ -59,7 +59,7 @@ class DayContainer extends React.Component {
           </div> */}
         </div>
 
-        <EventContainer events={ this.props.day.events } columns={ this.numberOfColumns() } openSidebar={ this.props.openSidebar }/>
+        <EventContainer events={ this.props.day.events } rows={ this.numberOfRows() } openSidebar={ this.props.openSidebar }/>
       </div>
     );
   }
