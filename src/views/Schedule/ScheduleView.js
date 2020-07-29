@@ -3,6 +3,7 @@ import Background from '../../components/Background/Background';
 import ScheduleActions from '../../actions/schedule/ScheduleActions';
 import ScheduleStore from '../../stores/ScheduleStore/ScheduleStore';
 import Schedule from '../../components/Schedule/Schedule';
+import ScheduleSidebar from '../../components/ScheduleSidebar/ScheduleSidebar';
 import withLoader from '../../HOC/Loader/Loader';
 
 class ScheduleView extends React.Component {
@@ -11,7 +12,8 @@ class ScheduleView extends React.Component {
 
     this.state = {
       isLoading: true,
-      schedule: ScheduleStore.getScheduleState()
+      schedule: ScheduleStore.getScheduleState(),
+      sidebarActive: false
     }
   }
 
@@ -27,7 +29,7 @@ class ScheduleView extends React.Component {
   }
 
   componentDidUpdate() {
-    // this.wait(750) // REMOVE THIS LINE AFTER TESTING THE SPINNER FOR THE LOADING HOC
+    // this.wait(300) // REMOVE THIS LINE AFTER TESTING THE SPINNER FOR THE LOADING HOC
     if (this.state.isLoading) {
       this.setState({ isLoading: false });
     }
@@ -46,19 +48,64 @@ class ScheduleView extends React.Component {
     }
   }
 
+  scheduleInfoWrapperWidth = () => {
+    if (this.state.sidebarActive) {
+      return 'schedule-info-wrapper-sidebar';
+    }
+
+    return 'schedule-info-wrapper-no-sidebar';
+  }
+
+  openSidebar = () => {
+    this.setState({ sidebarActive: true });
+  }
+
+  closeSidebar = () => {
+    this.setState({ sidebarActive: false });
+  }
+
   render() {
     const ScheduleWithLoader = withLoader(Schedule);
     return (
       <div className="schedule-view">
         <Background />
-        <h1 className="schedule-title">Schedule</h1>
-        <div className="schedule-info-wrapper">
-          <ScheduleWithLoader
-            isLoading={ this.state.isLoading }
-            loaderClassName='schedule'
-            schedule={ this.state.schedule.schedule }
-          />
+        <div className={ `schedule-info-wrapper ${this.scheduleInfoWrapperWidth()}` }>
+          <h1 className="schedule-title">Schedule</h1>
+          <div className='schedule-info-header'>
+            <div className='day-column'>
+              <p>Monday</p>
+            </div>
+            <div className='day-column'>
+              <p>Tuesday</p>
+            </div>
+            <div className='day-column'>
+              <p>Wednesday</p>
+            </div>
+            <div className='day-column'>
+              <p>Thursday</p>
+            </div>
+            <div className='day-column'>
+              <p>Friday</p>
+            </div>
+            <div className='day-column'>
+              <p>Saturday</p>
+            </div>
+            <div className='day-column'>
+              <p>Sunday</p>
+            </div>
+          </div>
+
+          <div className="schedule-info-body">
+            <ScheduleWithLoader
+              isLoading={ this.state.isLoading }
+              loaderClassName='schedule-loader'
+              schedule={ this.state.schedule.schedule }
+              openSidebar={ this.openSidebar }
+            />
+          </div>
         </div>
+
+        <ScheduleSidebar visible={ this.state.sidebarActive } closeSidebar={ this.closeSidebar } />
       </div>
     );
   }

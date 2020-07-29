@@ -1,0 +1,41 @@
+.schedule-sidebar-hidden {
+  margin-right: -400px;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.schedule-sidebar-visible {
+  visibility: visible;
+  height: 100%;
+  width: 25%;
+  background-color: ghostwhite;
+  box-shadow:-4px 0px 8px 0px #4e4e4e;
+  transition: all 0.3s;
+
+  .schedule-sidebar-close-button-wrapper {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 5px 15px 0 0;
+
+    .schedule-sidebar-close-button-visible {
+      visibility: visible;
+      height: 100%;
+      width: 40px;
+      border: 0px solid transparent;
+      background: none;
+      box-shadow: 2px 2px 4px 0px grey;
+      font-size: x-large;
+      font-weight: 300;
+    }
+
+    .schedule-sidebar-close-button-hidden {
+      visibility: hidden;
+    }
+
+    .schedule-sidebar-close-button-visible:hover {
+      background-color: grey;
+    }
+  }
+}

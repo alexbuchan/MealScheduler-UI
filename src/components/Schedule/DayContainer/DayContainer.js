@@ -10,12 +10,17 @@ const propTypes = {
     day_name: PropTypes.string,
     events: PropTypes.array
   }),
-  numberOfDayContainers: PropTypes.number
+  numberOfDayContainers: PropTypes.number,
+  openSidebar: PropTypes.func
 };
 
 class DayContainer extends React.Component {
-  state = {
-    active: this.props.day.active
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      active: this.props.day.active
+    }
   }
 
   postpendClassNameActiveness = () => {
@@ -27,11 +32,19 @@ class DayContainer extends React.Component {
   }
 
   dynamicHeight = () => {
-    if (this.props.numberOfDayContainers > 35) {
+    if (this.numberOfColumns() === 6) {
       return 'height-for-6-columns';
     }
 
     return 'height-for-5-columns';
+  }
+
+  numberOfColumns = () => {
+    if (this.props.numberOfDayContainers > 35) {
+      return 6;
+    }
+
+    return 5;
   }
 
   render() {
@@ -41,12 +54,12 @@ class DayContainer extends React.Component {
           <div className={ `day-of-the-week-wrapper${this.postpendClassNameActiveness()}` }>
             <p className={ `day-of-the-week${this.postpendClassNameActiveness()}` }>{ this.props.day.day }</p>
           </div>
-          <div className={ `day-of-the-week-name-wrapper${this.postpendClassNameActiveness()}` }>
+          {/* <div className={ `day-of-the-week-name-wrapper${this.postpendClassNameActiveness()}` }>
             <p className={ `day-of-the-week-name${this.postpendClassNameActiveness()}` }>{ this.props.day.day_name }</p>
-          </div>
+          </div> */}
         </div>
 
-        <EventContainer events={ this.props.day.events }/>
+        <EventContainer events={ this.props.day.events } columns={ this.numberOfColumns() } openSidebar={ this.props.openSidebar }/>
       </div>
     );
   }
