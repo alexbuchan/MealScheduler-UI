@@ -7,8 +7,12 @@
 @import '../views/Settings/styles';
 @import '../views/GenericNotFoundPage/styles';
 
+/* HOC IMPORTS */
+@import '../HOC/Loader/styles';
+
 /* COMPONENT IMPORTS */
 @import '../components/Schedule/styles';
+@import '../components/ScheduleNavbar/styles';
 @import '../components/Schedule/DayContainer/EventContainer/styles';
 @import '../components/Schedule/DayContainer/EventContainer/Event/styles';
 @import '../components/ScheduleSidebar/styles';

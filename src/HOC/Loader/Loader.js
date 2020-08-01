@@ -8,11 +8,11 @@ const withLoader = (WrappedComponent) => {
     props: PropTypes.object             // Props to be passed to the wrapped component
   };
 
-  const Loader = ({ isLoading, loaderClassName, ...props }) => {
+  const Loader = ({ isLoading, ...props }) => {
     if (!isLoading) return <WrappedComponent { ...props } />;
     return (
-      <div className={ `${loaderClassName}-wrapper` }>
-        <h3 className={ loaderClassName } >Loading...</h3>
+      <div className='loader-wrapper'>
+        <h3 className='loader'></h3>
       </div>
     );
   }
