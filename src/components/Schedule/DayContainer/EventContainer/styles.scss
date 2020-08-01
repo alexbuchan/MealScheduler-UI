@@ -1,9 +1,12 @@
 .more-events {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 19px;
   margin-top: 1px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   background-color: lightgray;
-  text-align: center;
   cursor: pointer;
 }

@@ -1,0 +1,26 @@
+.schedule-navbar {
+  margin: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 80%;
+
+  .invisible-wrapper {
+    width: 33%;
+  }
+
+  .select-month-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 33%;
+  }
+
+  .create-event-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 33%;
+  }
+}

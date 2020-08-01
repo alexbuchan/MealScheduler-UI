@@ -47,16 +47,19 @@ class DayContainer extends React.Component {
     return 5;
   }
 
+  handleOpenSidebar = (ev) => {
+    if (this.props.day.events.length > 0) {
+      this.props.openSidebar();
+    }
+  }
+
   render() {
     return (
       <div className={ `day-container${this.postpendClassNameActiveness()} ${ this.dynamicHeight() }` }>
-        <div className={ `title-wrapper${this.postpendClassNameActiveness()}` }>
+        <div onClick={ this.handleOpenSidebar } className={ `title-wrapper${this.postpendClassNameActiveness()}` }>
           <div className={ `day-of-the-week-wrapper${this.postpendClassNameActiveness()}` }>
             <p className={ `day-of-the-week${this.postpendClassNameActiveness()}` }>{ this.props.day.day }</p>
           </div>
-          {/* <div className={ `day-of-the-week-name-wrapper${this.postpendClassNameActiveness()}` }>
-            <p className={ `day-of-the-week-name${this.postpendClassNameActiveness()}` }>{ this.props.day.day_name }</p>
-          </div> */}
         </div>
 
         <EventContainer events={ this.props.day.events } rows={ this.numberOfRows() } openSidebar={ this.props.openSidebar }/>

@@ -1,17 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Background from '../../components/Background/Background';
 import ScheduleActions from '../../actions/schedule/ScheduleActions';
 import ScheduleStore from '../../stores/ScheduleStore/ScheduleStore';
 import Schedule from '../../components/Schedule/Schedule';
 import ScheduleSidebar from '../../components/ScheduleSidebar/ScheduleSidebar';
+import ScheduleNavbar from '../../components/ScheduleNavbar/ScheduleNavbar';
 import withLoader from '../../HOC/Loader/Loader';
+
+const propTypes = {};
 
 class ScheduleView extends React.Component {
   constructor() {
     super();
 
+    this.loadingTime = 500;
     this.state = {
-      isLoading: true,
+      isLoading: false,
       schedule: ScheduleStore.getScheduleState(),
       sidebarActive: false
     }
@@ -24,28 +30,18 @@ class ScheduleView extends React.Component {
   }
 
   componentDidMount() {
-    ScheduleActions.getSchedule({ month: 'July', year: 2020 });
-    ScheduleStore.addChangeListener(this._onChange);
-  }
+    this.setState({ isLoading: true }, () => {
+      ScheduleActions.getSchedule({ month: this.state.schedule.month, year: this.state.schedule.year });
+      setTimeout(() => {
+        this.setState({ isLoading: false });
+      }, this.loadingTime);
+    });
 
-  componentDidUpdate() {
-    // this.wait(300) // REMOVE THIS LINE AFTER TESTING THE SPINNER FOR THE LOADING HOC
-    if (this.state.isLoading) {
-      this.setState({ isLoading: false });
-    }
+    ScheduleStore.addChangeListener(this._onChange);
   }
 
   componentWillUnmount() {
     ScheduleStore.removeChangeListener(this._onChange);
-  }
-
-  // REMOVE THIS FUNCTION AFTER TESTING THE SPINNER FOR THE LOADING HOC
-  wait = (ms) => {
-    var start = new Date().getTime();
-    var end = start;
-    while(end < start + ms) {
-      end = new Date().getTime();
-    }
   }
 
   scheduleInfoWrapperWidth = () => {
@@ -64,6 +60,38 @@ class ScheduleView extends React.Component {
     this.setState({ sidebarActive: false });
   }
 
+  handleMoveForwardOneMonth = (ev) => {
+    this.setState({ isLoading: true }, () => {
+      let monthIndex = ScheduleStore.monthNames.indexOf(this.state.schedule.month)
+      let month = ScheduleStore.monthNames[this.modulo((monthIndex + 1), 12)];
+      let year = this.state.schedule.year;
+      if (monthIndex === 11) year += 1;
+      ScheduleActions.getSchedule({ month: month, year: year });
+
+      setTimeout(() => {
+        this.setState({ isLoading: false });
+      }, this.loadingTime);
+    });
+  }
+
+  handleMoveBackwardOneMonth = (ev) => {
+    this.setState({ isLoading: true }, () => {
+      let monthIndex = ScheduleStore.monthNames.indexOf(this.state.schedule.month)
+      let month = ScheduleStore.monthNames[this.modulo((monthIndex - 1), 12)];
+      let year = this.state.schedule.year;
+      if (monthIndex === 0) year -= 1;
+      ScheduleActions.getSchedule({ month: month, year: year });
+
+      setTimeout(() => {
+        this.setState({ isLoading: false });
+      }, this.loadingTime);
+    });
+  }
+
+  modulo = (x, m) => {
+    return (x % m + m) % m;
+  }
+
   render() {
     const ScheduleWithLoader = withLoader(Schedule);
     return (
@@ -71,6 +99,12 @@ class ScheduleView extends React.Component {
         <Background />
         <div className={ `schedule-info-wrapper ${this.scheduleInfoWrapperWidth()}` }>
           <h1 className="schedule-title">Schedule</h1>
+          <ScheduleNavbar
+            month={ this.state.schedule.month }
+            year={ this.state.schedule.year }
+            handleMoveForwardOneMonth={ this.handleMoveForwardOneMonth }
+            handleMoveBackwardOneMonth={ this.handleMoveBackwardOneMonth }
+          />
           <div className='schedule-info-header'>
             <div className='day-column'>
               <p>Monday</p>
@@ -98,7 +132,6 @@ class ScheduleView extends React.Component {
           <div className="schedule-info-body">
             <ScheduleWithLoader
               isLoading={ this.state.isLoading }
-              loaderClassName='schedule-loader'
               schedule={ this.state.schedule.schedule }
               openSidebar={ this.openSidebar }
             />
@@ -111,4 +144,5 @@ class ScheduleView extends React.Component {
   }
 }
 
+ScheduleView.propTypes = propTypes;
 export default ScheduleView;

@@ -1,16 +1,18 @@
 import Store from '../Store/Store';
 import Constants from '../../constants/scheduleConstants';
 
-let scheduleState = {
-  month: '',
-  year: '',
-  number_of_days: '',
-  schedule: []
-};
-
 class ScheduleStore extends Store {
   constructor() {
     super();
+
+    this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+    this.scheduleState = {
+      month: this.getCurrentMonthName(),
+      year: this.getCurrentYear(),
+      number_of_days: '',
+      schedule: []
+    };
   }
 
   _registerToActions(action) {
@@ -22,15 +24,23 @@ class ScheduleStore extends Store {
   }
 
   getScheduleData = (data) => {
-    scheduleState.month = data.month;
-    scheduleState.year = data.year;
-    scheduleState.number_of_days = data.number_of_days;
-    scheduleState.schedule = data.schedule;
+    this.scheduleState.month = data.month;
+    this.scheduleState.year = data.year;
+    this.scheduleState.number_of_days = data.number_of_days;
+    this.scheduleState.schedule = data.schedule;
     this.emitChange();
   }
 
   getScheduleState = () => {
-    return scheduleState;
+    return this.scheduleState;
+  }
+
+  getCurrentMonthName = () => {
+    return this.monthNames[new Date().getMonth()];
+  }
+
+  getCurrentYear = () => {
+    return new Date().getFullYear();
   }
 }
 
