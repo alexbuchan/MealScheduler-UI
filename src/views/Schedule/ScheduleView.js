@@ -60,25 +60,14 @@ class ScheduleView extends React.Component {
     this.setState({ sidebarActive: false });
   }
 
-  handleMoveForwardOneMonth = (ev) => {
+  handleMoveOneMonth = (direction) => {
     this.setState({ isLoading: true }, () => {
-      let monthIndex = ScheduleStore.monthNames.indexOf(this.state.schedule.month)
-      let month = ScheduleStore.monthNames[this.modulo((monthIndex + 1), 12)];
+      let month;
+      let monthIndex = ScheduleStore.monthNames.indexOf(this.state.schedule.month);
+      if (direction === 'forward') month = ScheduleStore.monthNames[this.modulo((monthIndex + 1), 12)];
+      if (direction === 'backward') month = ScheduleStore.monthNames[this.modulo((monthIndex - 1), 12)];
       let year = this.state.schedule.year;
       if (monthIndex === 11) year += 1;
-      ScheduleActions.getSchedule({ month: month, year: year });
-
-      setTimeout(() => {
-        this.setState({ isLoading: false });
-      }, this.loadingTime);
-    });
-  }
-
-  handleMoveBackwardOneMonth = (ev) => {
-    this.setState({ isLoading: true }, () => {
-      let monthIndex = ScheduleStore.monthNames.indexOf(this.state.schedule.month)
-      let month = ScheduleStore.monthNames[this.modulo((monthIndex - 1), 12)];
-      let year = this.state.schedule.year;
       if (monthIndex === 0) year -= 1;
       ScheduleActions.getSchedule({ month: month, year: year });
 
@@ -102,8 +91,7 @@ class ScheduleView extends React.Component {
           <ScheduleNavbar
             month={ this.state.schedule.month }
             year={ this.state.schedule.year }
-            handleMoveForwardOneMonth={ this.handleMoveForwardOneMonth }
-            handleMoveBackwardOneMonth={ this.handleMoveBackwardOneMonth }
+            handleMoveOneMonth={ this.handleMoveOneMonth }
           />
           <div className='schedule-info-header'>
             <div className='day-column'>
