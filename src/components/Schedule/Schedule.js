@@ -8,13 +8,21 @@ const propTypes = {
 };
 
 const Schedule = ({ schedule, openSidebar }) => {
-  if (!(schedule.length === 0)) {
-    return schedule.map((day) => {
-      return <DayContainer key={ day.date } day={ day } numberOfDayContainers={ schedule.length } openSidebar={ openSidebar } />
-    });
+  const scheduleDayContainers = () => {
+    if (!(schedule.length === 0)) {
+      return schedule.map((day) => {
+        return <DayContainer key={ day.date } day={ day } numberOfDayContainers={ schedule.length } openSidebar={ openSidebar } />;
+      });
+    }
+
+    return null;
   }
 
-  return null;
+  return (
+    <div className="schedule-info-body">
+      { scheduleDayContainers() }
+    </div>
+  );
 }
 
 Schedule.propTypes = propTypes;
