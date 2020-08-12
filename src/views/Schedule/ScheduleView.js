@@ -9,6 +9,7 @@ import ScheduleSidebar from '../../components/ScheduleSidebar/ScheduleSidebar';
 import ScheduleNavbar from '../../components/ScheduleNavbar/ScheduleNavbar';
 import ScheduleHeader from '../../components/ScheduleHeader/ScheduleHeader';
 import withLoader from '../../HOC/Loader/Loader';
+import { modulo } from '../../lib/Helpers/helpers';
 
 const propTypes = {};
 
@@ -65,8 +66,8 @@ class ScheduleView extends React.Component {
     this.setState({ isLoading: true }, () => {
       let month;
       let monthIndex = ScheduleStore.monthNames.indexOf(this.state.schedule.month);
-      if (direction === 'forward') month = ScheduleStore.monthNames[this.modulo((monthIndex + 1), 12)];
-      if (direction === 'backward') month = ScheduleStore.monthNames[this.modulo((monthIndex - 1), 12)];
+      if (direction === 'forward') month = ScheduleStore.monthNames[modulo((monthIndex + 1), 12)];
+      if (direction === 'backward') month = ScheduleStore.monthNames[modulo((monthIndex - 1), 12)];
       let year = this.state.schedule.year;
       if (monthIndex === 11) year += 1;
       if (monthIndex === 0) year -= 1;
@@ -76,10 +77,6 @@ class ScheduleView extends React.Component {
         this.setState({ isLoading: false });
       }, this.loadingTime);
     });
-  }
-
-  modulo = (x, m) => {
-    return (x % m + m) % m;
   }
 
   render() {
