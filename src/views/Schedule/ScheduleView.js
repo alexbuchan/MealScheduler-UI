@@ -7,6 +7,7 @@ import ScheduleStore from '../../stores/ScheduleStore/ScheduleStore';
 import Schedule from '../../components/Schedule/Schedule';
 import ScheduleSidebar from '../../components/ScheduleSidebar/ScheduleSidebar';
 import ScheduleNavbar from '../../components/ScheduleNavbar/ScheduleNavbar';
+import ScheduleHeader from '../../components/ScheduleHeader/ScheduleHeader';
 import withLoader from '../../HOC/Loader/Loader';
 
 const propTypes = {};
@@ -88,34 +89,14 @@ class ScheduleView extends React.Component {
         <Background />
         <div className={ `schedule-info-wrapper ${this.scheduleInfoWrapperWidth()}` }>
           <h1 className="schedule-title">Schedule</h1>
+
           <ScheduleNavbar
             month={ this.state.schedule.month }
             year={ this.state.schedule.year }
             handleMoveOneMonth={ this.handleMoveOneMonth }
           />
-          <div className='schedule-info-header'>
-            <div className='day-column'>
-              <p>Monday</p>
-            </div>
-            <div className='day-column'>
-              <p>Tuesday</p>
-            </div>
-            <div className='day-column'>
-              <p>Wednesday</p>
-            </div>
-            <div className='day-column'>
-              <p>Thursday</p>
-            </div>
-            <div className='day-column'>
-              <p>Friday</p>
-            </div>
-            <div className='day-column'>
-              <p>Saturday</p>
-            </div>
-            <div className='day-column'>
-              <p>Sunday</p>
-            </div>
-          </div>
+
+          <ScheduleHeader />
 
           <div className="schedule-info-body">
             <ScheduleWithLoader

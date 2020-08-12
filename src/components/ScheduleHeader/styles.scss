@@ -1,0 +1,20 @@
+.schedule-view {
+  .schedule-info-wrapper {
+    .schedule-info-header {
+      width: 80%;
+      height: 50px;
+      background-color: #e6e6e6;
+      display: flex;
+      justify-content: space-between;
+
+      .day-column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 14.285%;
+        box-shadow: gray;
+        box-shadow: 4px 0px 8px -3px grey;
+      }
+    }
+  }
+}

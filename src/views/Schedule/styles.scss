@@ -24,23 +24,6 @@
     align-items: center;
     transition: 0.5s;
 
-    .schedule-info-header {
-      width: 80%;
-      height: 50px;
-      background-color: #e6e6e6;
-      display: flex;
-      justify-content: space-between;
-
-      .day-column {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 14.285%;
-        box-shadow: gray;
-        box-shadow: 4px 0px 8px -3px grey;
-      }
-    }
-
     .schedule-info-body {
       display: flex;
       box-shadow: 4px 6px 13px 0px #4e4e4e;
