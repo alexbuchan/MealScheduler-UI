@@ -11,6 +11,7 @@
   background-color: ghostwhite;
   box-shadow:-4px 0px 8px 0px #4e4e4e;
   transition: all 0.3s;
+  overflow: scroll;
 
   .schedule-sidebar-close-button-wrapper {
     display: flex;
@@ -36,6 +37,14 @@
 
     .schedule-sidebar-close-button-visible:hover {
       background-color: grey;
+    }
+  }
+
+  .schedule-sidebar-body {
+    .schedule-sidebar-title-wrapper {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid gray;
     }
   }
 }

@@ -1,4 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  event: PropTypes.object,
+};
 
 const EventCard = ({ event }) => {
   const foodEventRecipe = () => {
@@ -28,10 +33,21 @@ const EventCard = ({ event }) => {
     }
   }
 
+  const eventCardColor = () => {
+    switch(event.event_type) {
+      case 'FOOD':
+        return '#4fd44fEE';
+      case 'SHOPPING':
+        return '#e85f5fEE';
+      default:
+        return 'gray';
+    }
+  }
+
   return (
-    <div className={ `event-card` }>
+    <div className={ `event-card` } style={ { backgroundColor: eventCardColor() } }>
       <div className='event-title-wrapper'>
-        <h5>{ event.title }</h5>
+        <h5 className='event-title'>{ event.title }</h5>
       </div>
 
       <p>Date: { event.date }</p>
@@ -46,6 +62,7 @@ const EventCard = ({ event }) => {
   );
 }
 
+EventCard.propTypes = propTypes;
 export default EventCard;
 
 // begin_at: "09:00"

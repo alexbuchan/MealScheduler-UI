@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 import Event from './Event/Event';
 
 const propTypes = {
-  events: PropTypes.array,
+  day: PropTypes.shape({
+    active: PropTypes.bool,
+    date: PropTypes.string,
+    day: PropTypes.number,
+    day_name: PropTypes.string,
+    events: PropTypes.array
+  }),
   rows: PropTypes.number,
   openSidebar: PropTypes.func,
   openPopup: PropTypes.func
 };
 
-const EventContainer = ({ events, rows, openSidebar, openPopup }) => {
+const EventContainer = ({ day, rows, openSidebar, openPopup }) => {
   let spliced;
+  let events = day.events;
 
   const formatEventQuantity = () => {
     if (rows === 6 && events.length > 4) {
@@ -30,7 +37,7 @@ const EventContainer = ({ events, rows, openSidebar, openPopup }) => {
 
   const handleOpenSidebar = (ev) => {
     ev.preventDefault();
-    openSidebar();
+    openSidebar(day);
   }
 
   const renderSpliced = () => {

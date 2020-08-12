@@ -21,7 +21,8 @@ class ScheduleView extends React.Component {
     this.state = {
       isLoading: false,
       schedule: ScheduleStore.getScheduleState(),
-      sidebarActive: false
+      sidebarActive: false,
+      day: {}
     }
   }
 
@@ -54,8 +55,8 @@ class ScheduleView extends React.Component {
     return 'schedule-info-wrapper-no-sidebar';
   }
 
-  openSidebar = () => {
-    this.setState({ sidebarActive: true });
+  openSidebar = (day) => {
+    this.setState({ sidebarActive: true, day });
   }
 
   closeSidebar = () => {
@@ -101,7 +102,7 @@ class ScheduleView extends React.Component {
           />
         </div>
 
-        <ScheduleSidebar visible={ this.state.sidebarActive } closeSidebar={ this.closeSidebar } />
+        <ScheduleSidebar visible={ this.state.sidebarActive } closeSidebar={ this.closeSidebar } day={ this.state.day } />
       </div>
     );
   }

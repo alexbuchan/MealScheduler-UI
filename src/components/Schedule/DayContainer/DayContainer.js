@@ -50,7 +50,7 @@ class DayContainer extends React.Component {
 
   handleOpenSidebar = (ev) => {
     if (this.props.day.events.length > 0) {
-      this.props.openSidebar();
+      this.props.openSidebar(this.props.day);
     }
   }
 
@@ -63,7 +63,7 @@ class DayContainer extends React.Component {
           </div>
         </div>
 
-        <EventContainer events={ this.props.day.events } rows={ this.numberOfRows() } openSidebar={ this.props.openSidebar } openPopup={ this.props.openPopup } />
+        <EventContainer day={ this.props.day } rows={ this.numberOfRows() } openSidebar={ this.props.openSidebar } openPopup={ this.props.openPopup } />
       </div>
     );
   }
