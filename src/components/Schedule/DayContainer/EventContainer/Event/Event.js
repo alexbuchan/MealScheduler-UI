@@ -8,10 +8,11 @@ const propTypes = {
     day: PropTypes.number,
     day_name: PropTypes.string,
     events: PropTypes.array
-  })
+  }),
+  openPopup: PropTypes.func
 };
 
-const Event = ({ event }) => {
+const Event = ({ event, openPopup }) => {
   const eventColor = () => {
     switch(event.event_type) {
       case 'FOOD':
@@ -24,7 +25,7 @@ const Event = ({ event }) => {
   }
 
   return (
-    <p className={ `event-title ${eventColor()}` }>{ event.title }</p>
+    <p className={ `event-click event-title ${eventColor()}` } onClick={ () => openPopup(event) }>{ event.title }</p>
   );
 }
 

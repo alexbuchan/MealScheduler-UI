@@ -24,17 +24,6 @@
     align-items: center;
     transition: 0.5s;
 
-    .schedule-info-body {
-      display: flex;
-      box-shadow: 4px 6px 13px 0px #4e4e4e;
-      width: 80%;
-      height: 100%;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-      overflow: scroll;
-      background-color: rgba(255, 255, 255, 0.7);
-    }
-
     .schedule-info-body>* {
       flex: 1 0 14%;
     }

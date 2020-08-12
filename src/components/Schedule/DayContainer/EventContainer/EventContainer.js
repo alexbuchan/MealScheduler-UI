@@ -5,10 +5,11 @@ import Event from './Event/Event';
 const propTypes = {
   events: PropTypes.array,
   rows: PropTypes.number,
-  openSidebar: PropTypes.func
+  openSidebar: PropTypes.func,
+  openPopup: PropTypes.func
 };
 
-const EventContainer = ({ events, rows, openSidebar }) => {
+const EventContainer = ({ events, rows, openSidebar, openPopup }) => {
   let spliced;
 
   const formatEventQuantity = () => {
@@ -46,7 +47,7 @@ const EventContainer = ({ events, rows, openSidebar }) => {
 
   return (
     <div className='events-wrapper'>
-      { formatEventQuantity().map(event => <Event key={ event.id } event={ event } />) }
+      { formatEventQuantity().map(event => <Event key={ event.id } event={ event } openPopup={ openPopup } />) }
       { renderSpliced() }
     </div>
   );

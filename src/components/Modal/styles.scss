@@ -1,0 +1,60 @@
+.custom-modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  
+  .custom-modal-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 440px;
+    border: 1px solid black;
+    box-shadow: 25px 30px 54px black;
+    background-color: white;
+
+    .custom-modal-close-button-wrapper {    
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-bottom: 10px;
+
+      .custom-modal-close-button {
+        height: 29px;
+      }
+    }
+
+    .custom-modal-header {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid gray;
+      margin-bottom: 20px;
+
+      .custom-modal-title {
+        font-weight: bold;
+      }
+    }
+  
+    .custom-modal-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 1px solid gray;
+      margin-bottom: 20px;
+
+      .custom-modal-subtitle {
+        font-weight: normal;
+      }
+    
+      .custom-modal-paragraph {
+        font-size: small;
+        margin: 15px;
+      }
+    }
+  }
+}

@@ -17,11 +17,14 @@
 @import '../components/Schedule/DayContainer/EventContainer/Event/styles';
 @import '../components/ScheduleSidebar/styles';
 @import '../components/ScheduleHeader/styles';
+@import '../components/EventCard/styles';
 @import '../components/NavBar/styles';
 @import '../components/Footer/styles';
 @import '../components/SignupForm/styles';
 @import '../components/FlashMessage/styles';
 @import '../components/TextField/styles';
+@import '../components/Popup/styles';
+@import '../components/Modal/styles';
 
 p {
   margin: 0;
@@ -120,11 +123,11 @@ p {
     padding: 0;
     height: 100%;
   }
-  
+
   #root {
     height: 100%;
   }
-  
+
   .container-fluid {
     padding: 0;
     height: 100%;
@@ -185,11 +188,11 @@ p {
     padding: 0;
     height: 100%;
   }
-  
+
   #root {
     height: 100%;
   }
-  
+
   .container-fluid {
     padding: 0;
     height: 100%;

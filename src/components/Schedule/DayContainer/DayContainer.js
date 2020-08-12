@@ -11,7 +11,8 @@ const propTypes = {
     events: PropTypes.array
   }),
   numberOfDayContainers: PropTypes.number,
-  openSidebar: PropTypes.func
+  openSidebar: PropTypes.func,
+  openPopup: PropTypes.func
 };
 
 class DayContainer extends React.Component {
@@ -62,7 +63,7 @@ class DayContainer extends React.Component {
           </div>
         </div>
 
-        <EventContainer events={ this.props.day.events } rows={ this.numberOfRows() } openSidebar={ this.props.openSidebar }/>
+        <EventContainer events={ this.props.day.events } rows={ this.numberOfRows() } openSidebar={ this.props.openSidebar } openPopup={ this.props.openPopup } />
       </div>
     );
   }

@@ -1,0 +1,44 @@
+.event-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 20px;
+
+  .event-title-wrapper {
+    border-bottom: 1px solid gray;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  .shopping-event-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .shopping-event-recipes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .food-event-data {
+    display: flex;
+
+    .recipe-label {
+      margin-right: 5px;
+    }
+  }
+
+  .recipe-link {
+    background-color: lightgray;
+    color: black;
+    border: 1px solid black;
+    width: 120px;
+    text-align: center;
+  }
+}

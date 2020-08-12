@@ -86,12 +86,14 @@ class ScheduleView extends React.Component {
         <Background />
         <div className={ `schedule-info-wrapper ${this.scheduleInfoWrapperWidth()}` }>
           <h1 className="schedule-title">Schedule</h1>
+
           <ScheduleNavbar
             month={ this.state.schedule.month }
             year={ this.state.schedule.year }
             handleMoveOneMonth={ this.handleMoveOneMonth }
           />
           <ScheduleHeader />
+
           <ScheduleWithLoader
             isLoading={ this.state.isLoading }
             schedule={ this.state.schedule.schedule }
