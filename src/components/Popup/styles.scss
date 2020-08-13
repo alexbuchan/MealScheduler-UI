@@ -8,8 +8,36 @@
   margin-left: -150px;
   margin-top: -100px;
 
-    .popup-button-wrapper {
+    .popup-header-wrapper {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      box-shadow: 2px 4px 9px 2px #343a40;
+      margin-bottom: 15px;
+
+      .invisible-wrapper {
+        width: 10%;
+      }
+
+      .popup-title-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 0 9px 0;
+        width: 80%;
+
+        .popup-title {
+          font-size: large;
+        }
+      }
+
+      .popup-button-wrapper {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        width: 10%;
+
+        .popup-button {
+        }
+      }
     }
 }

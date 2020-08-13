@@ -61,8 +61,9 @@ class Schedule extends React.Component {
             open={ this.state.openPopup }
             closePopup={ this.closePopup }
             backgroundColor={ this.popupColor() }
+            title={ this.state.event.title }
           >
-            <EventCard event={ this.state.event } />
+            <EventCard event={ this.state.event } title={ false } />
           </Popup>
         </div>
       </div>

@@ -13,38 +13,52 @@
   transition: all 0.3s;
   overflow: scroll;
 
-  .schedule-sidebar-close-button-wrapper {
+  .schedule-sidebar-header-wrapper {
     display: flex;
-    height: 40px;
-    align-items: center;
-    justify-content: flex-end;
-    margin: 5px 15px 0 0;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid black;
 
-    .schedule-sidebar-close-button-visible {
-      visibility: visible;
-      height: 100%;
-      width: 40px;
-      border: 0px solid transparent;
-      background: none;
-      box-shadow: 2px 2px 4px 0px grey;
-      font-size: x-large;
-      font-weight: 300;
+    .invisible-wrapper {
+      width: 10%;
     }
 
-    .schedule-sidebar-close-button-hidden {
-      visibility: hidden;
+    .schedule-sidebar-title-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
     }
 
-    .schedule-sidebar-close-button-visible:hover {
-      background-color: grey;
+    .schedule-sidebar-close-button-wrapper {
+      display: flex;
+      height: 40px;
+      align-items: flex-start;
+      justify-content: flex-end;
+      width: 10%;
+
+      .schedule-sidebar-close-button-visible {
+        visibility: visible;
+        height: 100%;
+        width: 40px;
+        border: 0px solid transparent;
+        background: none;
+        box-shadow: 2px 2px 4px 0px grey;
+        font-size: x-large;
+        font-weight: 300;
+      }
+
+      .schedule-sidebar-close-button-hidden {
+        visibility: hidden;
+      }
+
+      .schedule-sidebar-close-button-visible:hover {
+        background-color: grey;
+      }
     }
   }
 
   .schedule-sidebar-body {
-    .schedule-sidebar-title-wrapper {
-      display: flex;
-      justify-content: center;
-      border-bottom: 1px solid gray;
-    }
   }
 }

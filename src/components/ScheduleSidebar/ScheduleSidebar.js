@@ -49,14 +49,17 @@ class ScheduleSidebar extends React.Component {
   render() {
     return (
       <div className={ this.sidebarVisibility() }>
-        <div className='schedule-sidebar-close-button-wrapper'>
-          <button onClick={ this.handleCloseSidebar } className={ this.closeButtonVisibility() }>X</button>
-        </div>
-        <div className='schedule-sidebar-body'>
+        <div className='schedule-sidebar-header-wrapper'>
+          <div className='invisible-wrapper'></div>
           <div className='schedule-sidebar-title-wrapper'>
             <h3>{ this.props.day.day_name } { this.props.day.day }</h3>
           </div>
+          <div className='schedule-sidebar-close-button-wrapper'>
+            <button onClick={ this.handleCloseSidebar } className={ this.closeButtonVisibility() }>X</button>
+          </div>
+        </div>
 
+        <div className='schedule-sidebar-body'>
           { this.displayEvents() }
         </div>
       </div>

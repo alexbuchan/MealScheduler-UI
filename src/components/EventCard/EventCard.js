@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   event: PropTypes.object,
+  title: PropTypes.bool
 };
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, title }) => {
   const foodEventRecipe = () => {
     return (
       <div className='food-event-data'>
@@ -44,11 +45,21 @@ const EventCard = ({ event }) => {
     }
   }
 
+  const eventCardTitle = () => {
+    if (title) {
+      return (
+        <div className='event-title-wrapper'>
+          <h5 className='event-title'>{ event.title }</h5>
+        </div>
+      );
+    }
+
+    return null;
+  }
+
   return (
     <div className={ `event-card` } style={ { backgroundColor: eventCardColor() } }>
-      <div className='event-title-wrapper'>
-        <h5 className='event-title'>{ event.title }</h5>
-      </div>
+      { eventCardTitle() }
 
       <p>Date: { event.date }</p>
 
@@ -60,6 +71,10 @@ const EventCard = ({ event }) => {
       { specificEventData() }
     </div>
   );
+}
+
+EventCard.defaultProps = {
+  title: true
 }
 
 EventCard.propTypes = propTypes;
