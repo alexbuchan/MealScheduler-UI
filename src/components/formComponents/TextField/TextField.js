@@ -16,7 +16,6 @@ const propTypes = {
 
 const TextField = ({ label, name, type, value, disabled, placeholder, onChange, validationField, inline }) => {
   const inlineLabel = () => {
-    debugger
     return (inline) ? "form-element-inline" : "form-element";
   }
 
@@ -59,7 +58,7 @@ const TextField = ({ label, name, type, value, disabled, placeholder, onChange, 
   const noValidation = () => {
     return (
       <div className={ inlineLabel() }>
-        <label>{ label }</label>
+        <label className='text-field-label'>{ label }</label>
         <input
           name={ name }
           type={ type }
