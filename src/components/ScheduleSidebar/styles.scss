@@ -18,7 +18,7 @@
     justify-content: space-between;
     width: 100%;
     height: 60px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #b5b5b5;
 
     .invisible-wrapper {
       width: 10%;
@@ -33,20 +33,27 @@
 
     .schedule-sidebar-close-button-wrapper {
       display: flex;
-      height: 40px;
-      align-items: flex-start;
-      justify-content: flex-end;
+      height: 45px;
+      align-items: center;
+      justify-content: center;
       width: 10%;
 
       .schedule-sidebar-close-button-visible {
         visibility: visible;
-        height: 100%;
-        width: 40px;
+        height: 50px;
+        width: 50px;
         border: 0px solid transparent;
         background: none;
-        box-shadow: 2px 2px 4px 0px grey;
-        font-size: x-large;
-        font-weight: 300;
+        margin: 0;
+        font-size: xx-small;
+
+        .schedule-sidebar-close-icon {
+          transform: rotate(180deg);
+        }
+      }
+
+      .schedule-sidebar-close-button-visible:focus {
+        outline: none;
       }
 
       .schedule-sidebar-close-button-hidden {

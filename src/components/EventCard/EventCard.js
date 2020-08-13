@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   event: PropTypes.object,
-  title: PropTypes.bool,
   accordionEffect: PropTypes.bool
 };
 
@@ -42,24 +41,12 @@ class EventCard extends React.Component {
   eventCardColor = () => {
     switch(this.props.event.event_type) {
       case 'FOOD':
-        return '#4fd44fEE';
+        return '#a7f9a7';
       case 'SHOPPING':
-        return '#e85f5fEE';
+        return '#fdc88c';
       default:
         return 'gray';
     }
-  }
-
-  eventCardTitle = () => {
-    if (this.props.title) {
-      return (
-        <div onClick={ this.togglePanel } className={ `event-title-wrapper ${this.eventCardAccordionEffect('tab')}` }>
-          <h5 className='event-title'>{ this.props.event.title }</h5>
-        </div>
-      );
-    }
-
-    return null;
   }
 
   eventCardAccordionEffect = (type) => {
@@ -83,7 +70,9 @@ class EventCard extends React.Component {
   render() {
     return (
       <div className='event-card' style={ { backgroundColor: this.eventCardColor() } }>
-        { this.eventCardTitle() }
+        <div onClick={ this.togglePanel } className={ `event-title-wrapper ${this.eventCardAccordionEffect('tab')}` }>
+          <h5 className='event-title'>{ this.props.event.title }</h5>
+        </div>
 
         <div className={ `event-card-body ${this.eventCardAccordionEffect('body')}` }>
           <p>Date: { this.props.event.date }</p>

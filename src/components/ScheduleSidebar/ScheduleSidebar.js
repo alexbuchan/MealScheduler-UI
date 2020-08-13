@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import EventCard from '../EventCard/EventCard';
+import CloseIcon from '../../assets/images/svg/return.svg';
 
 const propTypes = {
   day: PropTypes.shape({
@@ -50,13 +51,15 @@ class ScheduleSidebar extends React.Component {
     return (
       <div className={ this.sidebarVisibility() }>
         <div className='schedule-sidebar-header-wrapper'>
-          <div className='invisible-wrapper'></div>
+          <div className='schedule-sidebar-close-button-wrapper'>
+            <button onClick={ this.handleCloseSidebar } className={ this.closeButtonVisibility() }>
+              <CloseIcon className='schedule-sidebar-close-icon' />
+            </button>
+          </div>
           <div className='schedule-sidebar-title-wrapper'>
             <h3>{ this.props.day.day_name } { this.props.day.day }</h3>
           </div>
-          <div className='schedule-sidebar-close-button-wrapper'>
-            <button onClick={ this.handleCloseSidebar } className={ this.closeButtonVisibility() }>X</button>
-          </div>
+          <div className='invisible-wrapper'></div>
         </div>
 
         <div className='schedule-sidebar-body'>

@@ -10,34 +10,25 @@
 
     .popup-header-wrapper {
       display: flex;
-      justify-content: space-between;
-      box-shadow: 2px 4px 9px 2px #343a40;
-      margin-bottom: 15px;
+      justify-content: flex-end;
+    }
 
-      .invisible-wrapper {
-        width: 10%;
+    .popup-close-button {
+      border: none;
+      background: none;
+
+      .popup-close-icon {
+        width: 15px;
       }
 
-      .popup-title-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 15px 0 9px 0;
-        width: 80%;
-
-        .popup-title {
-          font-size: large;
-        }
+      .popup-close-icon:hover {
+        width: 15px;
+        stroke: black;
+        stroke-width: 20px;
       }
+    }
 
-      .popup-button-wrapper {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        width: 10%;
-
-        .popup-button {
-        }
-      }
+    .popup-close-button:focus {
+      outline: none;
     }
 }

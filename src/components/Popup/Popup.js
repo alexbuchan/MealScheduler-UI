@@ -1,31 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import CloseIcon from '../../assets/images/svg/close.svg';
 
-const Popup = ({ open, closePopup, children, backgroundColor, title }) => {
+const propTypes = {
+  closePopup: PropTypes.func.isRequired,
+  accordionEffect: PropTypes.bool,
+  children: PropTypes.object.isRequired,
+  backgroundColor: PropTypes.string
+};
+
+const Popup = ({ open, closePopup, children, backgroundColor }) => {
   const handleClosePopup = (ev) => {
     ev.stopPropagation();
     closePopup(ev);
-  }
-
-  const popupTitle = () => {
-    if (popupTitle) {
-      return (
-        <div className='popup-title-wrapper'>
-          <h3 className='popup-title'>{ title }</h3>
-        </div>
-      );
-    }
-
-    return null;
   }
 
   if (open) {
     return (
       <div className='popup' style={ { backgroundColor } }>
         <div className='popup-header-wrapper'>
-          <div className='invisible-wrapper'></div>
-          { popupTitle() }
           <div className='popup-button-wrapper'>
-            <button className='popup-button' onClick={ handleClosePopup }>X</button>
+            <button className='popup-close-button' onClick={ handleClosePopup }>
+              <CloseIcon className='popup-close-icon' />
+            </button>
           </div>
         </div>
         <div>
@@ -38,4 +35,5 @@ const Popup = ({ open, closePopup, children, backgroundColor, title }) => {
   return null;
 }
 
+Popup.propTypes = propTypes;
 export default Popup;
