@@ -86,7 +86,6 @@ class ScheduleView extends React.Component {
       <div className="schedule-view">
         <Background />
         <div className={ `schedule-info-wrapper ${this.scheduleInfoWrapperWidth()}` }>
-          <h1 className="schedule-title">Schedule</h1>
 
           <ScheduleNavbar
             month={ this.state.schedule.month }

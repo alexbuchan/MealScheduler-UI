@@ -40,3 +40,5 @@ To run in watch mode:
 To run regular jest:
 
 `npm run jest`
+
+Icons made by [Gregor Cresnar](https://www.flaticon.com/authors/gregor-cresnar) from [Flaticon](https://www.flaticon.com/)

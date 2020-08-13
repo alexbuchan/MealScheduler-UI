@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import BackwardArrow from '../../assets/images/svg/back.svg';
+import ForwardArrow from '../../assets/images/svg/next.svg';
 
 const propTypes = {
   month: PropTypes.string,
@@ -12,9 +14,15 @@ const ScheduleNavbar = ({ month, year, handleMoveOneMonth }) => {
     <div className='schedule-navbar'>
       <p className='invisible-wrapper'></p>
       <div className='select-month-wrapper'>
-        <button onClick={ () => handleMoveOneMonth('backward') }>{ '<=' }</button>
-        <p>{ month } { year }</p>
-        <button onClick={ () => handleMoveOneMonth('forward') }>{ '=>' }</button>
+        <button className='move-button' onClick={ () => handleMoveOneMonth('backward') }>
+          <BackwardArrow className='schedule-arrow'/>
+        </button>
+
+        <h3 className='month-and-year-display'>{ month } { year }</h3>
+
+        <button className='move-button' onClick={ () => handleMoveOneMonth('forward') }>
+          <ForwardArrow className='schedule-arrow'/>
+        </button>
       </div>
       <div className='create-event-wrapper'>
         <button>Create Event</button>

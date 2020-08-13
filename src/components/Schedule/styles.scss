@@ -7,7 +7,7 @@
     margin-bottom: 10px;
     flex-wrap: wrap;
     overflow: scroll;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.54);
   }
 
   // CLASSES FOR ACTIVE DAYS
@@ -22,7 +22,7 @@
   .day-container {
     border: 1px solid lightgray;
     padding: 0;
-    background-color: ghostwhite;
+    background-color: #f8f8ffcf;
     overflow: hidden;
 
     .title-wrapper {
@@ -56,6 +56,16 @@
           font-weight: 400;
         }
       }
+    }
+  }
+
+  .day-container:hover {
+    box-shadow: inset 1px 1px 8px 1px gray;
+    transition: 0.4s;
+
+    .day-of-the-week-wrapper {
+      background-color: rgb(119, 182, 219);
+      transition: 0.4s;
     }
   }
 

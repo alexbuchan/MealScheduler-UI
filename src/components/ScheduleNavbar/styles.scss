@@ -1,10 +1,10 @@
 .schedule-navbar {
-  margin: 1px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height: 70px;
   width: 80%;
+  background-color: #ffffffc7;
 
   .invisible-wrapper {
     width: 33%;
@@ -15,6 +15,31 @@
     align-items: center;
     justify-content: space-around;
     width: 33%;
+
+    .month-and-year-display{
+      font-size: large;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .move-button{
+      width: 40px;
+      height: 40px;
+      border: none;
+      background-color: transparent;
+
+      .schedule-arrow {
+        overflow: hidden;
+        vertical-align: middle;
+        stroke: black;
+        width: 30px;
+        height: 30px;
+      }
+
+      .schedule-arrow:hover {
+        stroke-width: 30px;
+      }
+    }
   }
 
   .create-event-wrapper {
