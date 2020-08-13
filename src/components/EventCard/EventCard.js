@@ -3,39 +3,44 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   event: PropTypes.object,
-  title: PropTypes.bool
+  title: PropTypes.bool,
+  accordionEffect: PropTypes.bool
 };
 
-const EventCard = ({ event, title }) => {
-  const foodEventRecipe = () => {
+class EventCard extends React.Component {
+  state = {
+    togglePanel: false
+  }
+
+  foodEventRecipe = () => {
     return (
       <div className='food-event-data'>
         <p className='recipe-label'>Recipe:</p>
-        <a href='#' className='recipe-link'>{ event.recipe.name }</a>
+        <a href='#' className='recipe-link'>{ this.props.event.recipe.name }</a>
       </div>
     );
   }
 
-  const shoppingEventRecipes = () => {
+  shoppingEventRecipes = () => {
     return (
       <div className='shopping-event-data'>
         <p>Recipes:</p>
-        <div className='shopping-event-recipes'>{ event.recipes.map((recipe, index) => <a key={ index } href='#' className='recipe-link'>{ recipe.name }</a>) }</div>
+        <div className='shopping-event-recipes'>{ this.props.event.recipes.map((recipe, index) => <a key={ index } href='#' className='recipe-link'>{ recipe.name }</a>) }</div>
       </div>
     );
   }
 
-  const specificEventData = () => {
-    switch(event.event_type) {
+  specificEventData = () => {
+    switch(this.props.event.event_type) {
       case 'FOOD':
-        return foodEventRecipe();
+        return this.foodEventRecipe();
       case 'SHOPPING':
-        return shoppingEventRecipes();
+        return this.shoppingEventRecipes();
     }
   }
 
-  const eventCardColor = () => {
-    switch(event.event_type) {
+  eventCardColor = () => {
+    switch(this.props.event.event_type) {
       case 'FOOD':
         return '#4fd44fEE';
       case 'SHOPPING':
@@ -45,11 +50,11 @@ const EventCard = ({ event, title }) => {
     }
   }
 
-  const eventCardTitle = () => {
-    if (title) {
+  eventCardTitle = () => {
+    if (this.props.title) {
       return (
-        <div className='event-title-wrapper'>
-          <h5 className='event-title'>{ event.title }</h5>
+        <div onClick={ this.togglePanel } className={ `event-title-wrapper ${this.eventCardAccordionEffect('tab')}` }>
+          <h5 className='event-title'>{ this.props.event.title }</h5>
         </div>
       );
     }
@@ -57,24 +62,48 @@ const EventCard = ({ event, title }) => {
     return null;
   }
 
-  return (
-    <div className={ `event-card` } style={ { backgroundColor: eventCardColor() } }>
-      { eventCardTitle() }
+  eventCardAccordionEffect = (type) => {
+    if (this.props.accordionEffect) {
+      if (type === 'tab') return 'accordion';
+      if (type === 'body') {
+        if (this.state.togglePanel === false) return 'panel';
+        if (this.state.togglePanel === true) return 'panel-visible';
+      }
+    }
 
-      <p>Date: { event.date }</p>
+    return null;
+  }
 
-      <div className='event-begin-end-wrapper'>
-        <p>Starts at: { event.begin_at }</p>
-        <p>Ends at: { event.end_at }</p>
+  togglePanel = () => {
+    this.setState({
+      togglePanel: !this.state.togglePanel
+    });
+  }
+
+  render() {
+    return (
+      <div className='event-card' style={ { backgroundColor: this.eventCardColor() } }>
+        { this.eventCardTitle() }
+
+        <div className={ `event-card-body ${this.eventCardAccordionEffect('body')}` }>
+          <p>Date: { this.props.event.date }</p>
+
+          <div className='event-begin-end-wrapper'>
+            <p>Starts at: { this.props.event.begin_at }</p>
+            <p>Ends at: { this.props.event.end_at }</p>
+          </div>
+
+          { this.specificEventData() }
+        </div>
+
       </div>
-
-      { specificEventData() }
-    </div>
-  );
+    );
+  }
 }
 
 EventCard.defaultProps = {
-  title: true
+  title: true,
+  accordionEffect: false
 }
 
 EventCard.propTypes = propTypes;

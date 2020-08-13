@@ -58,7 +58,12 @@
       }
     }
   }
+}
 
-  .schedule-sidebar-body {
-  }
+.schedule-sidebar-visible::-webkit-scrollbar {
+  display: none;
+}
+
+.schedule-sidebar-visible {
+  -ms-overflow-style: none;
 }

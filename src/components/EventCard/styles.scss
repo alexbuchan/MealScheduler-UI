@@ -6,6 +6,25 @@
   height: 100%;
   padding-bottom: 20px;
 
+  .accordion {
+    width: 100%;
+    transition: 0.4s;
+    cursor: pointer;
+  }
+
+  .accordion:hover {
+    background-color: white;
+  }
+
+  .panel {
+    display: none;
+    overflow: hidden;
+  }
+
+  .panel-visible {
+    display: block;
+  }
+
   .event-title-wrapper {
     border-bottom: 1px solid gray;
     box-shadow: 2px 4px 9px 2px #343a40;
