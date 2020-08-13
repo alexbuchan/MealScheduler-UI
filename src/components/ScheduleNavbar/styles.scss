@@ -47,5 +47,34 @@
     justify-content: flex-end;
     align-items: center;
     width: 33%;
+
+    .create-event {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 175px;
+
+      .create-event-label {
+        width: 95px;
+      }
+
+      .create-event-button {
+        width: 50px;
+        border: none;
+        background: none;
+
+        .create-event-icon {
+          fill: black;
+        }
+
+        .create-event-icon:hover {
+          fill: gray;
+        }
+      }
+
+      .create-event-button:focus {
+        outline: none;
+      }
+    }
   }
 }

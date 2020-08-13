@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BackwardArrow from '../../assets/images/svg/back.svg';
 import ForwardArrow from '../../assets/images/svg/next.svg';
+import AddButton from '../../assets/images/svg/plus.svg';
 
 const propTypes = {
   month: PropTypes.string,
@@ -25,7 +26,10 @@ const ScheduleNavbar = ({ month, year, handleMoveOneMonth }) => {
         </button>
       </div>
       <div className='create-event-wrapper'>
-        <button>Create Event</button>
+        <div className='create-event'>
+          <p className='create-event-label'>Create Event</p>
+          <button className='create-event-button'><AddButton className='create-event-icon' /></button>
+        </div>
       </div>
     </div>
   );
