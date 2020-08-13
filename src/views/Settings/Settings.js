@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from '../../components/Form/Form';
-import TextField from '../../components/TextField/TextField';
+import TextField from '../../components/formComponents/TextField/TextField';
 import Actions from '../../actions/settings/SettingsActions';
 import UserStore from '../../stores/UserStore/UserStore';
 import FlashMessage from '../../components/FlashMessage/FlashMessage';

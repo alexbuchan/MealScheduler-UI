@@ -1,5 +1,5 @@
 import TextField from './TextField';
-import { componentSetup, findByTestAttribute } from '../../testUtils/testUtils';
+import { componentSetup, findByTestAttribute } from '../../../testUtils/testUtils';
 
 describe('TextField', () => {
   describe('When validation is disabled', () => {

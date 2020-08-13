@@ -8,6 +8,8 @@ import Schedule from '../../components/Schedule/Schedule';
 import ScheduleSidebar from '../../components/ScheduleSidebar/ScheduleSidebar';
 import ScheduleNavbar from '../../components/ScheduleNavbar/ScheduleNavbar';
 import ScheduleHeader from '../../components/ScheduleHeader/ScheduleHeader';
+import CreateEventForm from '../../components/CreateEventForm/CreateEventForm'
+import Modal from '../../components/Modal/Modal';
 import withLoader from '../../HOC/Loader/Loader';
 import { modulo } from '../../lib/Helpers/helpers';
 
@@ -22,7 +24,8 @@ class ScheduleView extends React.Component {
       isLoading: false,
       schedule: ScheduleStore.getScheduleState(),
       sidebarActive: false,
-      day: {}
+      day: {},
+      openModal: false
     }
   }
 
@@ -80,17 +83,37 @@ class ScheduleView extends React.Component {
     });
   }
 
+  handleOpenModal = (ev) => {
+    this.setState({ openModal: true });
+  }
+
+  handleCloseModal = (ev) => {
+    this.setState({ openModal: false });
+  }
+
+  renderModal = () => {
+    if (this.state.openModal) {
+      return (
+        <Modal closeModal={ this.handleCloseModal }>
+          <CreateEventForm />
+        </Modal>
+      );
+    }
+
+    return null;
+  }
+
   render() {
     const ScheduleWithLoader = withLoader(Schedule);
     return (
       <div className="schedule-view">
         <Background />
         <div className={ `schedule-info-wrapper ${this.scheduleInfoWrapperWidth()}` }>
-
           <ScheduleNavbar
             month={ this.state.schedule.month }
             year={ this.state.schedule.year }
             handleMoveOneMonth={ this.handleMoveOneMonth }
+            handleOpenModal={ this.handleOpenModal }
           />
           <ScheduleHeader />
 
@@ -99,6 +122,8 @@ class ScheduleView extends React.Component {
             schedule={ this.state.schedule.schedule }
             openSidebar={ this.openSidebar }
           />
+
+          { this.renderModal() }
         </div>
 
         <ScheduleSidebar visible={ this.state.sidebarActive } closeSidebar={ this.closeSidebar } day={ this.state.day } />

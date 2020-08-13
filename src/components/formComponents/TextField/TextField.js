@@ -10,10 +10,16 @@ const propTypes = {
   placeholder: PropTypes.string,        // Optional placeholder for textfield
   onChange: PropTypes.func.isRequired,  // The onChange function for updating the field
   validationField: PropTypes.object,    // Validation object returned from the Validator instance.
-  isRequired: PropTypes.bool            // When validation from a form is turned on, this marks the field as required
+  isRequired: PropTypes.bool,           // When validation from a form is turned on, this marks the field as required
+  inline: PropTypes.bool                // Places the label inline with the textfield 
 };
 
-const TextField = ({ label, name, type, value, disabled, placeholder, onChange, validationField }) => {
+const TextField = ({ label, name, type, value, disabled, placeholder, onChange, validationField, inline }) => {
+  const inlineLabel = () => {
+    debugger
+    return (inline) ? "form-element-inline" : "form-element";
+  }
+
   const inputFieldClass = () => {
     return (!validationField.isInvalid) ? "" : "input-field-error";
   }
@@ -28,7 +34,7 @@ const TextField = ({ label, name, type, value, disabled, placeholder, onChange, 
 
   const withValidation = () => {
     return (
-      <div className='form-element'>
+      <div className={ inlineLabel() }>
         <div>
           <label>{ label }</label>
           { isRequiredLabel() }
@@ -52,7 +58,7 @@ const TextField = ({ label, name, type, value, disabled, placeholder, onChange, 
 
   const noValidation = () => {
     return (
-      <div className='form-element'>
+      <div className={ inlineLabel() }>
         <label>{ label }</label>
         <input
           name={ name }
@@ -74,7 +80,8 @@ const TextField = ({ label, name, type, value, disabled, placeholder, onChange, 
 }
 
 TextField.defaultProps = {
-  type: 'text'
+  type: 'text',
+  inline: false
 }
 
 TextField.propTypes = propTypes;

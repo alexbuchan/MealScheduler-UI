@@ -1,5 +1,5 @@
 import Checkbox from './Checkbox';
-import { componentSetup, findByTestAttribute } from '../../testUtils/testUtils';
+import { componentSetup, findByTestAttribute } from '../../../testUtils/testUtils';
 
 describe('Checkbox', () => {
   describe('When no label is specified', () => {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import UserActions from '../../actions/user/UserActions';
 import Form from '../Form/Form';
-import TextField from '../TextField/TextField';
+import TextField from '../formComponents/TextField/TextField';
 
 const propTypes = {
   user: PropTypes.object   // User prop makes sure once registration has taken place that form can redirect.

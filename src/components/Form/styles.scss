@@ -1,0 +1,29 @@
+.my-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 86px;
+}
+
+.form-element-inline {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 86px;
+}
+
+.form-submit-button {
+  width: 178px;
+}
+
+.form-link {
+  font-size: small;
+  margin-top: 10px;
+}

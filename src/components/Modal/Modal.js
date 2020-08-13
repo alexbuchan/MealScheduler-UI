@@ -1,36 +1,32 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import CloseButton from '../../assets/images/svg/close.svg';
 
-const Modal = ({ closeModal }) => {
+const propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired
+};
 
-  handleCloseModal = (ev) => {
+const Modal = ({ closeModal, children }) => {
+  const handleCloseModal = (ev) => {
     closeModal(ev);
   }
 
-  if (this.props.open) {
-    return (
-      <div className='custom-modal'>
-        <div className='custom-modal-main'>
-          <div className='custom-modal-close-button-wrapper'>
-            <button className='custom-modal-close-button' onClick={ handleCloseModal }>X</button>
-          </div>
-          <div className='custom-modal-header'>
-            <h1 className='custom-modal-title'>Hello Modal!</h1>
-          </div>
-          <div className='custom-modal-content'>
-            <h5 className='custom-modal-subtitle'>Modal Content</h5>
-            <p className='custom-modal-paragraph'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nibh ex, ultrices quis enim vitae, congue maximus libero. Praesent porttitor magna in euismod tempor. Fusce vel nunc massa. Nunc rhoncus ante vitae nulla iaculis, laoreet posuere nunc lacinia. Praesent quis mi leo. Quisque eget fringilla nisl. Duis consequat enim vitae ultricies auctor. Cras eget bibendum velit. Vivamus dignissim iaculis enim, eu fermentum diam pulvinar quis.</p>
-          </div> 
-          <div className='custom-modal-footer'>
-            <p>Footer</p>
-          </div>           
+  return (
+    <div className='custom-modal'>
+      <div className='custom-modal-main'>
+        <div className='custom-modal-close-button-wrapper'>
+          <button className='custom-modal-close-button' onClick={ handleCloseModal }>
+            <CloseButton className='custom-modal-close-icon' />
+          </button>
         </div>
+        { children }
       </div>
-    );
-  }
-  
-  return null;
+    </div>
+  );
 }
 
+Modal.propTypes = propTypes;
 export default Modal;
 
 /* HOW TO CONNECT IN PARENT COMPONENT

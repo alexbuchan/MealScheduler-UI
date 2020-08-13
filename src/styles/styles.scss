@@ -17,14 +17,16 @@
 @import '../components/Schedule/DayContainer/EventContainer/Event/styles';
 @import '../components/ScheduleSidebar/styles';
 @import '../components/ScheduleHeader/styles';
+@import '../components/CreateEventForm/styles';
 @import '../components/EventCard/styles';
 @import '../components/NavBar/styles';
 @import '../components/Footer/styles';
 @import '../components/SignupForm/styles';
 @import '../components/FlashMessage/styles';
-@import '../components/TextField/styles';
+@import '../components/formComponents/TextField/styles';
 @import '../components/Popup/styles';
 @import '../components/Modal/styles';
+@import '../components/Form/styles';
 
 html, body {
   font-family: Arial;
@@ -39,28 +41,6 @@ p {
   flex-direction: column;
   align-items: center;
   width: 90%;
-}
-
-.my-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.form-element {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 86px;
-}
-
-.form-submit-button {
-  width: 178px;
-}
-
-.form-link {
-  font-size: small;
-  margin-top: 10px;
 }
 
 @media only screen and (min-width: 1080px) {
