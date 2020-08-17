@@ -31,12 +31,13 @@
       .schedule-arrow {
         overflow: hidden;
         vertical-align: middle;
-        stroke: black;
+        fill: gray;
         width: 30px;
         height: 30px;
       }
 
       .schedule-arrow:hover {
+        stroke: black;
         stroke-width: 30px;
       }
     }
@@ -64,11 +65,13 @@
         background: none;
 
         .create-event-icon {
-          fill: black;
+          fill: gray;
+          transition: transform 0.2s ease-in;
         }
 
         .create-event-icon:hover {
-          fill: gray;
+          fill: black;
+          transform: rotate(90deg);
         }
       }
 
