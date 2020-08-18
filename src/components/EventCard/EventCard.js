@@ -7,46 +7,27 @@ const propTypes = {
 };
 
 class EventCard extends React.Component {
-  state = {
-    togglePanel: false
-  }
+  constructor(props) {
+    super(props);
 
-  foodEventRecipe = () => {
-    return (
-      <div className='food-event-data'>
-        <p className='recipe-label'>Recipe:</p>
-        <a href='#' className='recipe-link'>{ this.props.event.recipe.name }</a>
-      </div>
-    );
-  }
-
-  shoppingEventRecipes = () => {
-    return (
-      <div className='shopping-event-data'>
-        <p>Recipes:</p>
-        <div className='shopping-event-recipes'>{ this.props.event.recipes.map((recipe, index) => <a key={ index } href='#' className='recipe-link'>{ recipe.name }</a>) }</div>
-      </div>
-    );
-  }
-
-  specificEventData = () => {
-    switch(this.props.event.event_type) {
-      case 'FOOD':
-        return this.foodEventRecipe();
-      case 'SHOPPING':
-        return this.shoppingEventRecipes();
+    this.state = {
+      togglePanel: false
     }
+
+    this.date = (this.props.event.date) ? new Date(this.props.event.date) : new Date;
   }
 
-  eventCardColor = () => {
-    switch(this.props.event.event_type) {
-      case 'FOOD':
-        return '#a7f9a7';
-      case 'SHOPPING':
-        return '#fdc88c';
-      default:
-        return 'gray';
+  eventRecipes = () => {
+    if (this.props.event.event_type) {
+      return (
+        <div className='event-data'>
+          <p className='event-recipe-label'>Recipes:</p>
+          <div className='event-recipes'>{ this.props.event.recipes.map((recipe, index) => <a key={ index } href='#' className='recipe-link'>{ recipe.name }</a>) }</div>
+        </div>
+      );
     }
+
+    return null;
   }
 
   eventCardAccordionEffect = (type) => {
@@ -58,7 +39,7 @@ class EventCard extends React.Component {
       }
     }
 
-    return null;
+    return '';
   }
 
   togglePanel = () => {
@@ -67,22 +48,54 @@ class EventCard extends React.Component {
     });
   }
 
+  getDateDay = () => {
+    return ('0' + this.date.getDate()).slice(-2);
+  }
+
+  getDateDayName = () => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return days[this.date.getDay()];
+  }
+
+  getDateMonthName = () => {
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return monthNames[this.date.getMonth()];
+  }
+
+  getDateYear = () => {
+    return this.date.getFullYear();;
+  }
+
+  formatEventTypeString = () => {
+    if (this.props.event.event_type) {
+      return this.props.event.event_type.charAt(0).toUpperCase() + this.props.event.event_type.slice(1).toLowerCase();
+    }
+
+    return null;
+  }
+
   render() {
     return (
-      <div className='event-card' style={ { backgroundColor: this.eventCardColor() } }>
-        <div onClick={ this.togglePanel } className={ `event-title-wrapper ${this.eventCardAccordionEffect('tab')}` }>
-          <h5 className='event-title'>{ this.props.event.title }</h5>
+      <div className='event-card'>
+        <div className='event-header'>
+          <div className='event-date-day-number-wrapper'>
+            <h3 className='event-date-day-number'>{ this.getDateDay() }</h3>
+          </div>
+          <div className='event-date-wrapper'>
+            <h3 className='event-date-day-name'>{ this.getDateDayName().toUpperCase() }</h3>
+            <h4 className='event-month-year-and-time'>{ this.getDateMonthName() } { this.getDateYear() } | From { this.props.event.begin_at } to { this.props.event.end_at }</h4>
+          </div>
+          <div className='event-type-border'>
+            <p className='event-type'>{ this.formatEventTypeString() }</p>
+          </div>
         </div>
 
-        <div className={ `event-card-body ${this.eventCardAccordionEffect('body')}` }>
-          <p>Date: { this.props.event.date }</p>
-
-          <div className='event-begin-end-wrapper'>
-            <p>Starts at: { this.props.event.begin_at }</p>
-            <p>Ends at: { this.props.event.end_at }</p>
+        <div className='event-card-body'>
+          <div onClick={ this.togglePanel } className='event-title-wrapper'>
+            <h5 className='event-card-title'>{ this.props.event.title }</h5>
           </div>
 
-          { this.specificEventData() }
+          { this.eventRecipes() }
         </div>
 
       </div>

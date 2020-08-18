@@ -1,23 +1,29 @@
-.event-title {
-  margin-top: 1px;
-  font-size: small;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
+.event-component {
+  .event-title {
+    margin-top: 1px;
+    font-size: small;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 
-.food-event-color {
-  background-color: #a7f9a7;
-}
+  .food-event-color {
+    background-color: #a7f9a7;
+  }
 
-.cooking-event-color {
-  background-color: yellow;
-}
+  .cooking-event-color {
+    background-color: yellow;
+  }
 
-.shopping-event-color {
-  background-color: #fdc88c;
-}
+  .shopping-event-color {
+    background-color: #fdc88c;
+  }
 
-.event-click {
-  cursor: pointer;
+  .event-click {
+    cursor: pointer;
+  }
+
+  .popup-schedule-info-body {
+    height: 100%;
+  }
 }

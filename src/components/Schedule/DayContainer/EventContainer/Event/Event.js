@@ -15,9 +15,13 @@ const propTypes = {
 };
 
 class Event extends React.Component {
-  state = {
-    openPopup: false,
-    event: {}
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      openPopup: false,
+      event: {}
+    }
   }
 
   openPopup = (event) => {
@@ -26,17 +30,6 @@ class Event extends React.Component {
 
   closePopup = () => {
     this.setState({ openPopup: false });
-  }
-
-  popupColor = () => {
-    switch(this.props.event.event_type) {
-      case 'FOOD':
-        return '#4fd44fEE';
-      case 'SHOPPING':
-        return '#e85f5fEE';
-      default:
-        return 'gray';
-    }
   }
 
   eventColor = () => {
@@ -49,23 +42,24 @@ class Event extends React.Component {
         return 'shopping-event-color';
     }
   }
-
   render() {
     return (
-      <div
-        className={ `event-click event-title ${this.eventColor()}` }
-        onMouseEnter={ () => this.openPopup(this.props.event) }
-        onMouseLeave={ this.closePopup }
-      >
-        { this.props.event.title }
-        <div className="popup-schedule-info-body">
-            <Popup
-              open={ this.state.openPopup }
-              backgroundColor={ this.popupColor() }
-            >
-              <EventCard event={ this.state.event } />
-            </Popup>
-          </div>
+      <div className='event-component'>
+        <div
+          className={ `event-click event-title ${this.eventColor()}` }
+          onMouseEnter={ () => this.openPopup(this.props.event) }
+          onMouseLeave={ this.closePopup }
+        >
+          { this.props.event.title }
+          <div className="popup-schedule-info-body">
+              <Popup
+                open={ this.state.openPopup }
+                backgroundColor='lightGray'
+              >
+                <EventCard event={ this.state.event }/>
+              </Popup>
+            </div>
+        </div>
       </div>
     );
   }

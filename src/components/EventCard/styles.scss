@@ -4,65 +4,126 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  cursor: context-menu;
+  border-radius: 4px;
 
-  .accordion {
-    width: 100%;
-    transition: 0.4s;
-    cursor: pointer;
-  }
-
-  .accordion:hover {
-    background-color: white;
-  }
-
-  .panel {
-    display: none;
-    overflow: hidden;
-  }
-
-  .panel-visible {
-    display: block;
-  }
-
-  .event-title-wrapper {
-    border-bottom: 1px solid white;
+  .event-header {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
-    height: 60px;
+    height: 50px;
+    border-bottom: 1px solid white;
+    margin-bottom: 10px;
+    background-color: #cccccc;
 
-    .event-title {
-      font-size: large;
-      margin: 0;
+    .event-date-day-number-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 15%;
+      margin: 5px;
+
+      .event-date-day-number {
+        margin: 0;
+        font-family: Old Standard TT, 'Times New Roman', Times, serif;
+        font-size: xxx-large;
+        font-weight: 500;
+        font-stretch: ultra-condensed;
+      }
+    }
+
+    .event-date-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      height: 100%;
+      width: 65%;
+
+      .event-date-day-name {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 800;
+        font-stretch: condensed;
+      }
+
+      .event-month-year-and-time {
+        font-size: 14px;
+        margin: 0;
+        font-stretch: semi-condensed;
+        font-weight: 600;
+        color: #777777;
+      }
+    }
+
+    .event-type-border {
+      margin: 5px;
+      width: 20%;
+      background-color: #e2619f;
+      border: 2px solid #f98fc2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+
+      .event-type {
+        font-size: medium;
+        margin: 0;
+        color: #fbfdf1;
+        font-stretch: condensed;
+      }
     }
   }
 
-  .shopping-event-data {
+  .event-card-body {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 
-    .shopping-event-recipes {
+    .event-title-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      margin: 0 0 10px 10px;
+
+      .event-card-title {
+        font-size: large;
+        margin: 0;
+      }
+    }
+
+    .event-data {
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      .event-recipe-label {
+        font-size: large;
+        font-weight: 600;
+      }
     }
-  }
 
-  .food-event-data {
-    display: flex;
+    .event-recipes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #00000042;
+      width: 80%;
+      border-radius: 4px;
 
-    .recipe-label {
-      margin-right: 5px;
+      .recipe-link {
+        color: black;
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+        border-bottom: 1px solid white;
+        font-size: large;
+        font-stretch: extra-expanded;
+        font-variant: all-petite-caps;
+      }
     }
-  }
-
-  .recipe-link {
-    background-color: lightgray;
-    color: black;
-    border: 1px solid black;
-    width: 120px;
-    text-align: center;
   }
 }
