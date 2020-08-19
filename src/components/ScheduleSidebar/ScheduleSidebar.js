@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EventCard from '../EventCard/EventCard';
+import EventCardSidebar from '../EventCardSidebar/EventCardSidebar';
 import CloseIcon from '../../assets/images/svg/return.svg';
 
 const propTypes = {
@@ -16,6 +16,8 @@ const propTypes = {
 };
 
 class ScheduleSidebar extends React.Component {
+  date = (this.props.day.date) ? new Date(this.props.day.date) : new Date;
+
   sidebarVisibility = () => {
     if (this.props.visible) {
       return 'schedule-sidebar-visible';
@@ -40,8 +42,34 @@ class ScheduleSidebar extends React.Component {
   displayEvents = () => {
     if (!(Object.values(this.props.day).length === 0)) {
       return this.props.day.events.map((event, index) => {
-        return <EventCard key={ index } event={ event } accordionEffect={ true } />;
+        return <EventCardSidebar key={ index } event={ event } accordionEffect={ true } />;
       });
+    }
+
+    return null;
+  }
+
+  getDateMonthName = () => {
+    if (!(Object.values(this.props.day).length === 0)) {
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+      return monthNames[this.date.getMonth()];
+    }
+
+    return null;
+  }
+
+  getDayName = () => {
+    if (!(Object.values(this.props.day).length === 0)) {
+      return this.props.day.day_name.toUpperCase();
+    }
+
+    return null;
+  }
+
+  getDateYear = () => {
+    if (!(Object.values(this.props.day).length === 0)) {
+      return this.date.getFullYear();
     }
 
     return null;
@@ -56,9 +84,20 @@ class ScheduleSidebar extends React.Component {
               <CloseIcon className='schedule-sidebar-close-icon' />
             </button>
           </div>
+
           <div className='schedule-sidebar-title-wrapper'>
-            <h3>{ this.props.day.day_name } { this.props.day.day }</h3>
+            <div className='schedule-sidebar-title'>
+              <div className='schedule-sidebar-day-number-wrapper'>
+                <h3 className='schedule-sidebar-day-number'>{ this.props.day.day }</h3>
+              </div>
+
+              <div className='schedule-sidebar-date-wrapper'>
+                <h3 className='schedule-sidebar-date-day-name'>{ this.getDayName() }</h3>
+                <h4 className='schedule-sidebar-month-year-and-time'>{ this.getDateMonthName() } { this.getDateYear() }</h4>
+              </div>
+            </div>
           </div>
+
           <div className='invisible-wrapper'></div>
         </div>
 
