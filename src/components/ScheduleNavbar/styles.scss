@@ -41,6 +41,10 @@
         stroke-width: 30px;
       }
     }
+
+    .move-button:focus {
+      outline: none;
+    }
   }
 
   .create-event-wrapper {
