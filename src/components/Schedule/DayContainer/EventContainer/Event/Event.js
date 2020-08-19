@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EventCard from '../../../../EventCard/EventCard';
+import EventCardPopup from '../../../../EventCardPopup/EventCardPopup';
 import Popup from '../../../../Popup/Popup';
 
 const propTypes = {
@@ -56,7 +56,7 @@ class Event extends React.Component {
                 open={ this.state.openPopup }
                 backgroundColor='lightGray'
               >
-                <EventCard event={ this.state.event }/>
+                <EventCardPopup event={ this.state.event }/>
               </Popup>
             </div>
         </div>
