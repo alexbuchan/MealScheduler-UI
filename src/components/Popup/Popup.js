@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import CloseIcon from '../../assets/images/svg/close.svg';
 
 const propTypes = {
-  open: PropTypes.bool,                   // Parent component state for opening the popup
-  closePopup: PropTypes.func,             // closeHandler function
-  children: PropTypes.object.isRequired,  // Populate popup with data
-  backgroundColor: PropTypes.string,      // Add a background color for popup
-  clickToClose: PropTypes.bool,            // Adds a clickable X close button to close popup
+  open: PropTypes.bool,                     // Parent component state for opening the popup
+  closePopup: PropTypes.func,               // closeHandler function
+  children: PropTypes.object.isRequired,    // Populate popup with data
+  clickToClose: PropTypes.bool,             // Adds a clickable X close button to close popup
   eventComponentPosition: PropTypes.object
 };
 
-const Popup = ({ open, closePopup, children, backgroundColor, clickToClose, parentComponentPosition }) => {
+const Popup = ({ open, closePopup, children, clickToClose, parentComponentPosition }) => {
+  let side;
+
   const handleClosePopup = (ev) => {
     ev.stopPropagation();
     closePopup(ev);
@@ -39,7 +40,7 @@ const Popup = ({ open, closePopup, children, backgroundColor, clickToClose, pare
     if (parentComponentPosition.top < 610) {
       // Top Left
       if (parentComponentPosition.left < 710) {
-        console.log('Top left popup. Down bottom and to the right!');
+        side = 'topLeft';
         styles = {
           transform: `translate(${parentComponentPosition.width - 23}px, 0px)`
         };
@@ -47,7 +48,7 @@ const Popup = ({ open, closePopup, children, backgroundColor, clickToClose, pare
 
       // Top Right
       if (parentComponentPosition.left > 711) {
-        console.log('Top right popup. Down bottom and to the left!');
+        side = 'topRight';
         styles = {
           transform: `translate(calc(-100% + 23px), 0px)`
         };
@@ -58,7 +59,7 @@ const Popup = ({ open, closePopup, children, backgroundColor, clickToClose, pare
     if (parentComponentPosition.top > 611) {
       // Bottom Left
       if (parentComponentPosition.left < 710) {
-        console.log('Bottom left popup. Up top and to the right!');
+        side = 'bottomLeft';
         styles = {
           transform: `translate(${parentComponentPosition.width - 23}px, calc(-100% - ${parentComponentPosition.height}px))`
         };
@@ -66,24 +67,68 @@ const Popup = ({ open, closePopup, children, backgroundColor, clickToClose, pare
 
       // Bottom Right
       if (parentComponentPosition.left > 711) {
-        console.log('Bottom left popup. Up top and to the left!');
+        side = 'bottomRight';
         styles = {
           transform: `translate(calc(-100% + 23px), calc(-100% - ${parentComponentPosition.height}px))`
         };
       }
     }
 
+    styles.transition = `150ms transform`
+    return styles;
+  }
+
+  const trianglePopupPosition = (side) => {
+    let styles;
+
+    if (side === 'topLeft') {
+      styles = {
+        textAlign: 'left', textShadow: "black 0px -2px 14px"
+      };
+    }
+
+    if (side === 'topRight') {
+      styles = {
+        textAlign: 'right', textShadow: "black 0px -2px 14px"
+      };
+    }
+
+    if (side === 'bottomLeft') {
+      styles = {
+        textAlign: 'left', textShadow: "black 0px 10px 14px"
+      };
+    }
+
+    if (side === 'bottomRight') {
+      styles = {
+        textAlign: 'right', textShadow: "black 0px 10px 14px"
+      };
+    }
 
     return styles;
   }
 
+  const trianglePopupTop = (side) => {
+    if (side === 'topLeft' || side === 'topRight') {
+      return <div className='popup-triangle' style={ trianglePopupPosition(side) }>▲</div>;
+    }
+  }
+
+  const trianglePopupBottom = (side) => {
+    if (side === 'bottomLeft' || side === 'bottomRight') {
+      return <div className='popup-triangle' style={ trianglePopupPosition(side) }>▼</div>;
+    }
+  }
+
   if (open) {
     return (
-      <div className='popup' style={ { backgroundColor, ...popupComponentPosition() } }>
+      <div className='popup' style={ popupComponentPosition() }>
+        { trianglePopupTop(side) }
         { clickToClosePopup() }
         <div>
           { children }
         </div>
+        { trianglePopupBottom(side) }
       </div>
     );
   }

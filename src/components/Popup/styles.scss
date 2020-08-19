@@ -1,8 +1,13 @@
 .popup {
-  box-shadow: 0px 0px 32px;
   position: absolute;
   width: 350px;
-  border-radius: 4px;
+
+  .popup-triangle {
+    margin: -13px 0 -13px 0;
+    font-size: xx-large;
+    color: lightgray;
+    letter-spacing: 0px;
+  }
 
   .popup-header-wrapper {
     display: flex;
