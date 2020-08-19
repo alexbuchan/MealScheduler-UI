@@ -7,7 +7,7 @@
   cursor: context-menu;
   border-radius: 4px;
 
-  .event-header {
+  .event-card-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -16,7 +16,7 @@
     border-bottom: 1px solid white;
     margin-bottom: 10px;
     background-color: #cccccc;
-
+  
     .event-date-day-number-wrapper {
       display: flex;
       justify-content: center;
@@ -24,7 +24,7 @@
       height: 100%;
       width: 15%;
       margin: 5px;
-
+  
       .event-date-day-number {
         margin: 0;
         font-family: Old Standard TT, 'Times New Roman', Times, serif;
@@ -33,7 +33,7 @@
         font-stretch: ultra-condensed;
       }
     }
-
+  
     .event-date-wrapper {
       display: flex;
       flex-direction: column;
@@ -41,14 +41,14 @@
       justify-content: center;
       height: 100%;
       width: 65%;
-
+  
       .event-date-day-name {
         margin: 0;
         font-size: 17px;
         font-weight: 800;
         font-stretch: condensed;
       }
-
+  
       .event-month-year-and-time {
         font-size: 14px;
         margin: 0;
@@ -57,7 +57,7 @@
         color: #777777;
       }
     }
-
+  
     .event-type-border {
       margin: 5px;
       width: 20%;
@@ -67,7 +67,7 @@
       align-items: center;
       justify-content: center;
       border-radius: 4px;
-
+  
       .event-type {
         font-size: medium;
         margin: 0;

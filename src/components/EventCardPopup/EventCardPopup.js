@@ -2,18 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  event: PropTypes.object,
-  accordionEffect: PropTypes.bool
+  event: PropTypes.object
 };
 
-class EventCard extends React.Component {
+class EventCardPopup extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      togglePanel: false
-    }
-
     this.date = (this.props.event.date) ? new Date(this.props.event.date) : new Date;
   }
 
@@ -28,24 +22,6 @@ class EventCard extends React.Component {
     }
 
     return null;
-  }
-
-  eventCardAccordionEffect = (type) => {
-    if (this.props.accordionEffect) {
-      if (type === 'tab') return 'accordion';
-      if (type === 'body') {
-        if (this.state.togglePanel === false) return 'panel';
-        if (this.state.togglePanel === true) return 'panel-visible';
-      }
-    }
-
-    return '';
-  }
-
-  togglePanel = () => {
-    this.setState({
-      togglePanel: !this.state.togglePanel
-    });
   }
 
   getDateDay = () => {
@@ -76,15 +52,17 @@ class EventCard extends React.Component {
 
   render() {
     return (
-      <div className='event-card'>
-        <div className='event-header'>
+      <div className='event-card-popup'>
+        <div className='event-card-header'>
           <div className='event-date-day-number-wrapper'>
             <h3 className='event-date-day-number'>{ this.getDateDay() }</h3>
           </div>
+
           <div className='event-date-wrapper'>
             <h3 className='event-date-day-name'>{ this.getDateDayName().toUpperCase() }</h3>
             <h4 className='event-month-year-and-time'>{ this.getDateMonthName() } { this.getDateYear() } | From { this.props.event.begin_at } to { this.props.event.end_at }</h4>
           </div>
+
           <div className='event-type-border'>
             <p className='event-type'>{ this.formatEventTypeString() }</p>
           </div>
@@ -94,22 +72,19 @@ class EventCard extends React.Component {
           <div onClick={ this.togglePanel } className='event-title-wrapper'>
             <h5 className='event-card-title'>{ this.props.event.title }</h5>
           </div>
-
           { this.eventRecipes() }
         </div>
-
       </div>
     );
   }
 }
 
-EventCard.defaultProps = {
-  title: true,
-  accordionEffect: false
+EventCardPopup.defaultProps = {
+  title: true
 }
 
-EventCard.propTypes = propTypes;
-export default EventCard;
+EventCardPopup.propTypes = propTypes;
+export default EventCardPopup;
 
 // begin_at: "09:00"
 // comments: "One hell of a breakfast"
