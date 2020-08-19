@@ -20,8 +20,15 @@ class Event extends React.Component {
 
     this.state = {
       openPopup: false,
-      event: {}
+      event: {},
+      eventComponentPosition: {}
     }
+  }
+
+  componentDidMount() {
+    this.setState({
+      eventComponentPosition: this.eventComponentRef.getBoundingClientRect()
+    });
   }
 
   openPopup = (event) => {
@@ -42,9 +49,10 @@ class Event extends React.Component {
         return 'shopping-event-color';
     }
   }
+
   render() {
     return (
-      <div className='event-component'>
+      <div className='event-component' ref={ ref => this.eventComponentRef = ref }>
         <div
           className={ `event-click event-title ${this.eventColor()}` }
           onMouseEnter={ () => this.openPopup(this.props.event) }
@@ -55,6 +63,7 @@ class Event extends React.Component {
               <Popup
                 open={ this.state.openPopup }
                 backgroundColor='lightGray'
+                parentComponentPosition={ this.state.eventComponentPosition }
               >
                 <EventCardPopup event={ this.state.event }/>
               </Popup>
