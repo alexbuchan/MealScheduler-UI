@@ -20,9 +20,11 @@ class EventCardSidebar extends React.Component {
   eventRecipes = () => {
     if (this.props.event.event_type) {
       return (
-        <div className='event-data'>
-          <p className='event-recipe-label'>Recipes:</p>
-          <div className='event-recipes'>{ this.props.event.recipes.map((recipe, index) => <a key={ index } href='#' className='recipe-link'>{ recipe.name }</a>) }</div>
+        <div className='event-card-sidebar-data'>
+          <p className='event-card-sidebar-recipe-label'>Recipes:</p>
+          <div className='event-card-sidebar-recipes'>
+            { this.props.event.recipes.map((recipe, index) => <a key={ index } href='#' className='event-card-sidebar-recipe-link'>{ recipe.name }</a>) }
+          </div>
         </div>
       );
     }
@@ -30,12 +32,20 @@ class EventCardSidebar extends React.Component {
     return null;
   }
 
+  eventComments = () => {
+    return (
+      <div className='event-card-sidebar-comments-wrapper'>
+        <p className='event-card-sidebar-comments'>{ this.props.event.comments }</p>
+      </div>
+    );
+  }
+
   eventCardAccordionEffect = (type) => {
     if (this.props.accordionEffect) {
-      if (type === 'tab') return 'accordion';
-      if (type === 'body') {
-        if (this.state.togglePanel === false) return 'panel';
-        if (this.state.togglePanel === true) return 'panel-visible';
+      if (type === 'tab') return 'event-card-sidebar-accordion';
+      if (type === 'panel') {
+        if (this.state.togglePanel === false) return 'event-card-sidebar-panel';
+        if (this.state.togglePanel === true) return 'event-card-sidebar-panel-visible';
       }
     }
 
@@ -76,15 +86,17 @@ class EventCardSidebar extends React.Component {
 
   render() {
     return (
-      <div className='event-card'>
-        <div className={ `event-card-tab ${this.eventCardAccordionEffect('tab')}`}>
-          <div onClick={ this.togglePanel } className='event-title-wrapper'>
-            <h5 className='event-card-title'>{ this.props.event.title }</h5>
+      <div className='event-card-sidebar'>
+        <div onClick={ this.togglePanel } className={`event-card-sidebar-title-wrapper ${this.eventCardAccordionEffect('tab')}`}>
+          <h5 className='event-card-sidebar-title'>{ this.props.event.title }</h5>
+          <div className='event-card-sidebar-date-wrapper'>
+            <h4 className='event-card-sidebar-month-year-and-time'>From { this.props.event.begin_at } to { this.props.event.end_at }</h4>
           </div>
+        </div>
 
-          <div className={`event-card-panel ${this.eventCardAccordionEffect('panel')}`}>
-            { this.eventRecipes() }
-          </div>
+        <div className={`event-card-sidebar-panel ${this.eventCardAccordionEffect('panel')}`}>
+          { this.eventComments() }
+          { this.eventRecipes() }
         </div>
       </div>
     );
