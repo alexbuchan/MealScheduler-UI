@@ -51,8 +51,13 @@
     }
 
     .searchable-dropdown-items-wrapper {
-      background-color: white;
+      background-color: #ececec;
       width: 100%;
+      position: relative;
+      border-color: darkgray;
+      border-style: solid;
+      border-width: 0 1px 1px 1px;
+      border-radius: 0 0 4px 4px;
 
       .searchable-dropdown-item {
         transition: 0.4s;
@@ -60,6 +65,8 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        border-bottom: 1px solid #dedede;
+        margin-left: 2px;
       }
 
       .searchable-dropdown-item:hover {

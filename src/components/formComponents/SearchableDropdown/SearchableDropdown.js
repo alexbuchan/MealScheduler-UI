@@ -96,11 +96,11 @@ class SearchableDropdown extends React.Component {
       this.setState({ openDropdown: false });
     }
 
-    if (ev.target.nodeName === 'P') {
+    if (ev.target.nodeName === 'P' && this.searchableDropdownRef.current.contains(ev.target)) {
       this.selectDropdownOption(ev.target.innerText);
     }
 
-    if (ev.target.nodeName === 'BUTTON' || ev.target.nodeName === 'svg') {
+    if ((ev.target.nodeName === 'BUTTON' || ev.target.nodeName === 'svg') && this.searchableDropdownRef.current.contains(ev.target)) {
       this.handleToggleOpenDropdown();
     }
   }
@@ -111,9 +111,9 @@ class SearchableDropdown extends React.Component {
 
   render() {
     return (
-      <div className={ this.inlineLabel() }>
+      <div className={ this.inlineLabel() } ref={ this.searchableDropdownRef }>
         <label className='searchable-dropdown-label'>{ this.props.label }</label>
-        <div className="searchable-dropdown" ref={ this.searchableDropdownRef } style={ { width: this.props.width } }>
+        <div className="searchable-dropdown" style={ { width: this.props.width } }>
           <div className='searchable-dropdown-dropdown'>
             <input 
               className='searchable-dropdown-searchbar' 
