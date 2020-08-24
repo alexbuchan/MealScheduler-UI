@@ -2,15 +2,85 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 
   .create-event-form {
     display: flex;
+    flex-direction: column;
+    width: 90%;
+
+    .create-event-form-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      margin-bottom: 15px;
+    }
 
     .create-event-form-column {
-      margin: 20px;
-      border: 1px solid black;
-      padding: 10px;
-      width: 50%;
+      height: 100%;
+      align-items: flex-end;
+    }
+
+    .create-event-form-row-1 {
+      .create-event-form-row-title {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+      }
+
+      .create-event-form-row-2-date {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+      }
+    }
+
+    .create-event-form-row-2 {
+      .create-event-form-row-event-type {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+      }
+
+      .create-event-form-row-2-begin-at {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+      }
+    }
+
+    .create-event-form-row-3 {
+      .create-event-form-row-recipes {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+      }
+
+      .create-event-form-row-2-end-at {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+      }
+    }
+
+    .create-event-form-row-4 {
+      .create-event-form-row-comments {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+
+        .create-event-form-row-comments-label {
+          text-align: center;
+          margin: 0 10px 0 0;
+        }
+
+        .create-event-form-row-comments-textarea {
+          resize: none;
+          height: 80px;
+          border: 1px solid lightgray;
+          border-radius: 4px;
+        }
+      }
     }
   }
 }

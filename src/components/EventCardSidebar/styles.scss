@@ -8,43 +8,73 @@
 
   .event-card-sidebar-title-wrapper {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: lightgray;
+    background-color: #81cdff;
     padding: 8px 0 8px 0;
-    border-bottom: 2px solid white;
+    border-bottom: 1px solid darkgray;
+    margin: 0;
 
-    .event-card-sidebar-title {
-      font-size: large;
-      margin: 0;
-      text-align: center;
-      width: 100%;
+    .event-card-sidebar-invisible-area {
+      width: 20%;
     }
 
-    .event-card-sidebar-date-wrapper {
+    .event-card-sidebar-title-center {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      height: 100%;
-      width: 100%;
-      margin: 4px 0 4px 0;
+      align-items: center;
+      width: 80%;
 
-      .event-card-sidebar-date-day-name {
+      .event-card-sidebar-title {
+        font-size: large;
         margin: 0;
-        font-size: 17px;
-        font-weight: 800;
-        font-stretch: condensed;
+        text-align: center;
+        width: 100%;
       }
 
-      .event-card-sidebar-month-year-and-time {
-        font-size: 14px;
+      .event-card-sidebar-date-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        margin: 4px 0 4px 0;
+
+        .event-card-sidebar-date-day-name {
+          margin: 0;
+          font-size: 17px;
+          font-weight: 800;
+          font-stretch: condensed;
+        }
+
+        .event-card-sidebar-month-year-and-time {
+          font-size: 14px;
+          margin: 0;
+          font-stretch: semi-condensed;
+          font-weight: 600;
+          color: #616161;
+        }
+      }
+    }
+
+    .event-type-border {
+      margin: 5px;
+      width: 20%;
+      background-color: #e2619f;
+      border: 2px solid #f98fc2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+
+      .event-type {
+        font-size: medium;
         margin: 0;
-        font-stretch: semi-condensed;
-        font-weight: 600;
-        color: #777777;
+        color: #fbfdf1;
+        font-stretch: condensed;
       }
     }
   }
@@ -64,8 +94,11 @@
   }
 
   .event-card-sidebar-panel-visible {
+    margin: 0;
     transition: 1s;
     display: block;
+    background-image: linear-gradient(0deg, #7fd4ff, #cbecfd);
+    border-bottom: 1px solid darkgray;
 
     .event-card-sidebar-comments-wrapper {
       display: flex;
@@ -78,6 +111,7 @@
         quotes: "“" "”" "‘" "’";
         line-height: 20px;
         text-align: center;
+        font-stretch: extra-expanded;
       }
 
       .event-card-sidebar-comments:before {
@@ -120,7 +154,6 @@
           width: 100%;
           text-align: center;
           padding: 5px;
-          border-bottom: 1px solid white;
           font-size: large;
           font-stretch: extra-expanded;
           font-variant: all-petite-caps;
@@ -130,10 +163,8 @@
   }
 
   .event-card-sidebar-panel {
-    margin: 1px;
   }
 
   .event-card-sidebar-panel-visible {
-    margin: 1px;
   }
 }

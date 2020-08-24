@@ -25,10 +25,13 @@
 @import '../components/Footer/styles';
 @import '../components/SignupForm/styles';
 @import '../components/FlashMessage/styles';
-@import '../components/formComponents/TextField/styles';
 @import '../components/Popup/styles';
 @import '../components/Modal/styles';
 @import '../components/Form/styles';
+
+/* FORM COMPONENTS */
+@import '../components/formComponents/TextField/styles';
+@import '../components/formComponents/SearchableDropdown/styles';
 
 html, body {
   font-family: Arial;

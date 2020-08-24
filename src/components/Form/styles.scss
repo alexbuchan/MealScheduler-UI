@@ -2,25 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.form-element {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 86px;
-}
-
-.form-element-inline {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 86px;
+  width: 100%;
 }
 
 .form-submit-button {
   width: 178px;
+  height: 40px;
+  margin-top: 30px;
+  background-image: linear-gradient(0deg, #4db1f3, #b0d8f3);
+  border: 1px solid #4575ad;
+  border-radius: 4px;
 }
 
 .form-link {

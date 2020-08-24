@@ -37,14 +37,14 @@
 
         .schedule-sidebar-close-icon {
           transition: transform 0.15s ease-in;
-          stroke: gray;
+          stroke: #5f7df5;
           stroke-width: 15px;
           width: 20px;
         }
 
         .schedule-sidebar-close-icon:hover {
           transform: rotate(180deg);
-          stroke: black;
+          stroke: #122d98;
           stroke-width: 25px;
         }
       }

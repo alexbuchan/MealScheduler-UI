@@ -1,3 +1,15 @@
+.text-field-component {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.text-field-inline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .text-field-is-required { 
   flex-direction: row;
   margin-left: 3px;
@@ -7,4 +19,15 @@
 
 .text-field-label {
   margin: 0 10px 0 0;
+}
+
+.text-field-input {
+  height: 35px;
+  width: 200px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+}
+
+.text-field-input::-webkit-calendar-picker-indicator {
+  opacity: 0.75;
 }

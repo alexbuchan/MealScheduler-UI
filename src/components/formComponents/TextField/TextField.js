@@ -6,6 +6,8 @@ const propTypes = {
   name: PropTypes.string.isRequired,    // The name of the field
   type: PropTypes.string,               // The type of input for the field
   value: PropTypes.string.isRequired,   // The value of the input in the field
+  width: PropTypes.number,              // The width property for input
+  height: PropTypes.number,             // The height property for input
   disabled: PropTypes.bool,             // Disables the text field
   placeholder: PropTypes.string,        // Optional placeholder for textfield
   onChange: PropTypes.func.isRequired,  // The onChange function for updating the field
@@ -14,9 +16,9 @@ const propTypes = {
   inline: PropTypes.bool                // Places the label inline with the textfield 
 };
 
-const TextField = ({ label, name, type, value, disabled, placeholder, onChange, validationField, inline }) => {
+const TextField = ({ label, name, type, value, width, height, disabled, placeholder, onChange, validationField, inline }) => {
   const inlineLabel = () => {
-    return (inline) ? "form-element-inline" : "form-element";
+    return (inline) ? "text-field-inline" : "text-field-component";
   }
 
   const inputFieldClass = () => {
@@ -41,8 +43,9 @@ const TextField = ({ label, name, type, value, disabled, placeholder, onChange, 
 
         <input
           data-test='input-with-validation'
-          className={ inputFieldClass() }
+          className={ `${inputFieldClass()} text-field-input` }
           name={ name }
+          style={ { width, height } }
           type={ type }
           value={ value }
           disabled={ disabled }
@@ -61,6 +64,8 @@ const TextField = ({ label, name, type, value, disabled, placeholder, onChange, 
         <label className='text-field-label'>{ label }</label>
         <input
           name={ name }
+          className='text-field-input'
+          style={ { width, height } }
           type={ type }
           value={ value }
           disabled={ disabled }

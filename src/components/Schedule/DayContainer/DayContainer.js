@@ -54,9 +54,20 @@ class DayContainer extends React.Component {
     }
   }
 
+  today = () => {
+    const today = new Date();
+    const dateString = today.getFullYear() + "-" + ("0" + (today.getMonth()+1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2);
+
+    if (this.props.day.date === dateString) {
+      return 'day-container-today';
+    }
+
+    return null;
+  }
+
   render() {
     return (
-      <div className={ `day-container${this.postpendClassNameActiveness()} ${ this.dynamicHeight() }` }>
+      <div className={ `day-container${this.postpendClassNameActiveness()} ${this.dynamicHeight()} ${this.today()}` }>
         <div onClick={ this.handleOpenSidebar } className={ `title-wrapper${this.postpendClassNameActiveness()}` }>
           <div className={ `day-of-the-week-wrapper${this.postpendClassNameActiveness()}` }>
             <p className={ `day-of-the-week${this.postpendClassNameActiveness()}` }>{ this.props.day.day }</p>

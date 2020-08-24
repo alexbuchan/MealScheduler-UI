@@ -69,12 +69,12 @@
         background: none;
 
         .create-event-icon {
-          fill: gray;
+          fill: #5f7df5;
           transition: transform 0.2s ease-in;
         }
 
         .create-event-icon:hover {
-          fill: black;
+          fill: #122d98;
           transform: rotate(90deg);
         }
       }

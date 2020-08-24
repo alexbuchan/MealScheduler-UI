@@ -88,9 +88,18 @@ class EventCardSidebar extends React.Component {
     return (
       <div className='event-card-sidebar'>
         <div onClick={ this.togglePanel } className={`event-card-sidebar-title-wrapper ${this.eventCardAccordionEffect('tab')}`}>
-          <h5 className='event-card-sidebar-title'>{ this.props.event.title }</h5>
-          <div className='event-card-sidebar-date-wrapper'>
-            <h4 className='event-card-sidebar-month-year-and-time'>From { this.props.event.begin_at } to { this.props.event.end_at }</h4>
+          <div className='event-card-sidebar-invisible-area'>
+          </div>
+
+          <div className='event-card-sidebar-title-center'>
+            <h5 className='event-card-sidebar-title'>{ this.props.event.title }</h5>
+            <div className='event-card-sidebar-date-wrapper'>
+              <h4 className='event-card-sidebar-month-year-and-time'>From { this.props.event.begin_at } to { this.props.event.end_at }</h4>
+            </div>
+          </div>
+
+          <div className='event-type-border'>
+            <p className='event-type'>{ this.formatEventTypeString() }</p>
           </div>
         </div>
 
