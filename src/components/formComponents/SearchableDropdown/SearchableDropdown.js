@@ -10,7 +10,8 @@ const propTypes = {
   month: PropTypes.string,
   year: PropTypes.number,
   handleMoveOneMonth: PropTypes.func,
-  handleOpenModal: PropTypes.func
+  handleOpenModal: PropTypes.func,
+  multipleSelection: PropTypes.bool
 };
 
 class SearchableDropdown extends React.Component {
@@ -25,7 +26,7 @@ class SearchableDropdown extends React.Component {
     this.searchableDropdownRef = React.createRef();
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
   }
-  
+
   componentDidMount() {
     document.addEventListener('click', this.handleDropdownClick);
   }
@@ -39,29 +40,34 @@ class SearchableDropdown extends React.Component {
   }
 
   selectDropdownOption = (item) => {
-    this.setState({
-      openDropdown: false,
-      searchableValue: item,
-      dropdownOption: item
-    });
-  }
-
-  dropdownOptions = () => {
-    if (this.state.dropdownOption === this.state.searchableValue) {
-      return this.props.dropdownItems;
+    if (!(this.props.multipleSelection)) {
+      this.setState({
+        openDropdown: false,
+        searchableValue: item,
+        dropdownOption: item
+      });
     }
 
-    return this.props.dropdownItems.filter(item => {
-      if (this.state.searchableValue === '') return item;
-      if (item.toLowerCase().includes(this.state.searchableValue.toLowerCase())) return item;
-    });
+    this.props.handleSearchableDropdownChange(item);
+  }
+
+  selectedDropdownOptions = () => {
+    return this.state.multipleDropdownOptions.map(option => <p>{ option }</p>)
+  }
+
+  dropdownValue = () => {
+    if (this.props.multipleSelection) {
+      return '';
+    }
+
+    return this.state.searchableValue;
   }
 
   renderDropdownOptions = () => {
     if (this.state.openDropdown) {
       return ( 
         <div className='searchable-dropdown-items-wrapper'>
-          { this.dropdownOptions().map((item, index) => {
+          { this.props.dropdownItems.map((item, index) => {
             return <p key={ index } className='searchable-dropdown-item'>{ item }</p>;
           }) }
         </div>
@@ -120,8 +126,8 @@ class SearchableDropdown extends React.Component {
               onChange={ this.handleSearchableDropdownInput }
               onClick={ this.handleOpenDropdown }
               onKeyPress={ this.handleSearchableDropdownKeypress }
-              value={ this.state.searchableValue } 
               type="text" 
+              value={ this.dropdownValue() }
               placeholder={ this.props.placeholder }>
             </input>
             <button className="searchable-dropdown-button">{ this.dropdownArrow() }</button>

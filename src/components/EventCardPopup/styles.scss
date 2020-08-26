@@ -4,10 +4,6 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  cursor: context-menu;
-  border-radius: 4px;
-  background-color: lightgray;
-  box-shadow: 0px 0px 32px;
 
   .event-card-header {
     display: flex;
@@ -46,13 +42,13 @@
   
       .event-date-day-name {
         margin: 0;
-        font-size: 17px;
+        font-size: 15px;
         font-weight: 800;
         font-stretch: condensed;
       }
   
       .event-month-year-and-time {
-        font-size: 14px;
+        font-size: 12px;
         margin: 0;
         font-stretch: semi-condensed;
         font-weight: 600;
@@ -86,14 +82,17 @@
 
     .event-title-wrapper {
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
       width: 100%;
-      margin: 0 0 10px 10px;
+      padding: 5px 15px 8px 15px;
 
       .event-card-title {
         font-size: large;
         margin: 0;
+      }
+
+      .event-card-date-frequency {
       }
     }
 

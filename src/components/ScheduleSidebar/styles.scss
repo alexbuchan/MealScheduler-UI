@@ -119,6 +119,15 @@
       width: 10%;
     }
   }
+
+  .schedule-sidebar-body {
+    .no-events-to-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #8a8a8a
+    }
+  }
 }
 
 .schedule-sidebar-visible::-webkit-scrollbar {

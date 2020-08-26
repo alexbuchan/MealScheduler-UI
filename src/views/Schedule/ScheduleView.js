@@ -95,7 +95,7 @@ class ScheduleView extends React.Component {
     if (this.state.openModal) {
       return (
         <Modal closeModal={ this.handleCloseModal }>
-          <CreateEventForm />
+          <CreateEventForm closeModal={ this.handleCloseModal }/>
         </Modal>
       );
     }

@@ -50,6 +50,14 @@ class EventCardPopup extends React.Component {
     return null;
   }
 
+  dateFrequency = () => {
+    if (this.props.event.event_type === 'SHOPPING') {
+      return <h5 className='event-card-date-frequency'>{ this.props.event.frequency }</h5>;
+    }
+
+    return null;
+  }
+
   render() {
     return (
       <div className='event-card-popup'>
@@ -71,6 +79,7 @@ class EventCardPopup extends React.Component {
         <div className='event-card-body'>
           <div onClick={ this.togglePanel } className='event-title-wrapper'>
             <h5 className='event-card-title'>{ this.props.event.title }</h5>
+            { this.dateFrequency() }
           </div>
           { this.eventRecipes() }
         </div>

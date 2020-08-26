@@ -9,6 +9,16 @@
     flex-direction: column;
     width: 90%;
 
+    .label-wrapper {
+      display: flex;
+      justify-content: start;
+      width: 300px;
+
+      .label {
+        margin: 0 10px 0 0;
+      }
+    }
+
     .create-event-form-row {
       display: flex;
       justify-content: space-around;
@@ -22,43 +32,90 @@
     }
 
     .create-event-form-row-1 {
-      .create-event-form-row-title {
+      .create-event-form-row-title-wrapper {
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
         width: 50%;
+
+        .create-event-form-row-title {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+
+          .title-text-input {
+            width: 300px;
+          }
+        }
       }
 
+      .create-event-form-row-event-type-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+
+        .create-event-form-row-event-type {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          width: 300px;
+        }
+      }
+    }
+
+    .create-event-form-row-2 {
       .create-event-form-row-2-date {
         display: flex;
         justify-content: center;
         width: 50%;
       }
-    }
 
-    .create-event-form-row-2 {
-      .create-event-form-row-event-type {
+      .create-event-form-row-times-wrapper {
         display: flex;
         justify-content: center;
+        align-items: flex-end;
         width: 50%;
-      }
 
-      .create-event-form-row-2-begin-at {
-        display: flex;
-        justify-content: center;
-        width: 50%;
+        .create-event-form-row-times {
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-end;
+          width: 88%;
+
+          .create-event-form-row-2-begin-at {
+            display: flex;
+            width: 50%;
+          }
+
+          .create-event-form-row-2-end-at {
+            display: flex;
+            width: 50%;
+          }
+        }
       }
     }
 
     .create-event-form-row-3 {
-      .create-event-form-row-recipes {
+      .create-event-form-row-recipes-wrapper {
         display: flex;
         justify-content: center;
+        align-items: flex-start;
         width: 50%;
       }
 
-      .create-event-form-row-2-end-at {
+      .create-event-form-date-frequency-wrapper {
         display: flex;
         justify-content: center;
+        align-items: flex-start;
+        width: 50%;
+      }
+
+      .create-event-form-invisible-wrapper {
         width: 50%;
       }
     }
