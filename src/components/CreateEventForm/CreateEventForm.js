@@ -1,6 +1,17 @@
 import React from 'react';
-import Actions from '../../actions/schedule/ScheduleActions';
 
+// IMPORT ACTIONS
+import Actions from '../../actions/schedule/ScheduleActions';
+import RecipeActions from '../../actions/recipe/RecipeActions';
+import EventTypeActions from '../../actions/EventTypeActions/EventTypeActions';
+import DateFrequencyActions from '../../actions/DateFrequencyActions/DateFrequencyActions';
+
+// IMPORT STORES
+import RecipeStore from '../../stores/RecipeStore/RecipeStore';
+import EventTypeStore from '../../stores/EventTypeStore/EventTypeStore';
+import DateFrequencyStore from '../../stores/DateFrequencyStore/DateFrequencyStore';
+
+// IMPORT COMPONENTS
 import Form from '../Form/Form';
 import { Dropdown } from 'semantic-ui-react';
 import { Input } from 'semantic-ui-react'
@@ -9,11 +20,6 @@ import TextField from '../formComponents/TextField/TextField';
 const propTypes = {};
 
 class CreateEventForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleEventTypeChange = this.handleEventTypeChange.bind(this);
-  }
   state = {
     form: {
       title: '',
@@ -25,34 +31,33 @@ class CreateEventForm extends React.Component {
       endAt: '',
       comments: ''
     },
-    eventTypes: [],
-    recipes: [],
-    dateFrequencies: []
+    eventTypes: EventTypeStore.getEventTypesState().eventTypes,
+    recipes: RecipeStore.getRecipesState().recipes,
+    dateFrequencies: DateFrequencyStore.getDateFrequenciesState().dateFrequencies
+  }
+
+  _onChange = () => {
+    this.setState({
+      recipes: RecipeStore.getRecipesState().recipes,
+      eventTypes: EventTypeStore.getEventTypesState().eventTypes,
+      dateFrequencies: DateFrequencyStore.getDateFrequenciesState().dateFrequencies
+    });
   }
 
   componentDidMount() {
-    // const recipes = RecipeActions.getRecipes();
-    // const eventTypes = Actions.getEventTypes();
-    const recipes = [
-      { id: 1, name: 'ham sandwich' },
-      { id: 2, name: 'cheese sandwich' },
-      { id: 3, name: 'fajitas' }
-    ];
+    RecipeActions.getRecipes();
+    EventTypeActions.getEventTypes();
+    DateFrequencyActions.getDateFrequencies();
 
-    const eventTypes = [
-      { id: 1, name: 'FOOD' },
-      { id: 2, name: 'COOKING' },
-      { id: 3, name: 'SHOPPING' }
-    ];
+    RecipeStore.addChangeListener(this._onChange);
+    EventTypeStore.addChangeListener(this._onChange);
+    DateFrequencyStore.addChangeListener(this._onChange);
+  }
 
-    const dateFrequencies = [
-      { id: 1, name: 'DAILY' },
-      { id: 2, name: 'WEEKLY' },
-      { id: 3, name: 'BIWEEKLY' },
-      { id: 4, name: 'MONTHLY' }
-    ];
-
-    this.setState({ recipes, eventTypes, dateFrequencies });
+  componentWillUnmount() {
+    RecipeStore.removeChangeListener(this._onChange);
+    EventTypeStore.removeChangeListener(this._onChange);
+    DateFrequencyStore.removeChangeListener(this._onChange);
   }
 
   handleOnSubmit = () => {

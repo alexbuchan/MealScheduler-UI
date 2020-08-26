@@ -55,7 +55,7 @@ class Event extends React.Component {
 
     if (this.state.eventComponentPosition.top <= topScreen) {
       if (this.state.eventComponentPosition.left <= leftScreen) {
-        return 'top Screen';
+        return 'top left';
       }
 
       if (this.state.eventComponentPosition.left > leftScreen) {
