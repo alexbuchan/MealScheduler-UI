@@ -1,0 +1,102 @@
+.recipes-view {
+  height: $contentHeight;
+  display: flex;
+  align-items: center;
+
+  .recipes-body-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .recipes-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 65%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+
+      .recipes-title {
+        margin: 25px;
+        font-size: x-large;
+        font-weight: bold;
+        color: #4c4c4c;
+        font-family: Arial;
+      }
+
+      .recipes-navbar-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        height: 50px;
+
+        .recipes-navbar {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          width: 50%;
+          height: 100%;
+
+          .recipes-search-bar {
+            width: 66%;
+            padding: 0 50px 0 50px;
+
+            .recipes-search-bar-input {
+              width: 100%;
+            }
+          }
+
+          .recipes-create-recipe-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50px;
+
+            .recipes-create-recipe {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              .recipes-create-recipe-label {
+                font-size: medium;
+                font-weight: 100;
+                font-stretch: extra-expanded;
+                color: #565656;
+              }
+
+              .recipes-create-recipe-button {
+                width: 50px;
+                border: none;
+                background: none;
+
+                .recipes-create-recipe-icon {
+                  fill: #5f7df5;
+                  transition: transform 0.2s ease-in;
+                }
+
+                .recipes-create-recipe-icon:hover {
+                  fill: #122d98;
+                  transform: rotate(90deg);
+                }
+              }
+
+              .recipes-create-recipe-button:focus {
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+
+      .recipes-list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 80%;
+        border-top: 1px solid #bfbfbf;
+        margin-top: 10px;
+      }
+    }
+  }
+}
