@@ -32,60 +32,56 @@ class NavBar extends React.Component  {
     UserStore.removeChangeListener(this._onChange);
   }
 
-  renderUsername = () => {
+  renderAuthorisedLinks = () => {
     if (this.state.user) {
       return (
-        <li className="nav-item mobile-nav-item">
-          <span className="nav-link user-profile" to="/schedule">{ this.state.user.username }<span className="sr-only">(current)</span></span>
-        </li>
+        <ul className="navbar-nav">
+          <li className="nav-item mobile-nav-item">
+            <span className="nav-link user-profile" to="/schedule">{ this.state.user.username }<span className="sr-only">(current)</span></span>
+          </li>
+
+          <li className="nav-item mobile-nav-item">
+            <Link className="nav-link" to="/schedule">Schedule</Link>
+          </li>
+
+          <li className="nav-item mobile-nav-item">
+            <Link className="nav-link" to="/recipes">Recipes</Link>
+          </li>
+
+          <li className="nav-item mobile-nav-item">
+            <Link className="nav-link" data-test='settings-nav-link' to="/settings">Settings<span className="sr-only">(current)</span></Link>
+          </li>
+
+          <li className="nav-item mobile-nav-item">
+            <Link
+              onClick={ this.handleLogout }
+              className="nav-link"
+              data-test='logout-nav-link'
+              to="/login"
+            >
+              Log out
+              <span className="sr-only">(current)</span>
+            </Link>
+          </li>
+        </ul>
       );
     }
 
     return null;
   }
 
-  renderSignup = () => {
+  renderAllAccessLinks = () => {
     if (!this.state.user) {
       return (
-        <li className="nav-item mobile-nav-item">
-          <Link className="nav-link" to="/">Signup</Link>
-        </li>
-      );
-    }
+        <ul className="navbar-nav">
+          <li className="nav-item mobile-nav-item">
+            <Link className="nav-link" to="/">Signup</Link>
+          </li>
 
-    return null;
-  }
-
-  renderLogin = () => {
-    if (this.state.user) {
-      return (
-        <li className="nav-item mobile-nav-item">
-          <Link
-            onClick={ this.handleLogout }
-            className="nav-link"
-            data-test='logout-nav-link'
-            to="/login"
-          >
-            Log out
-            <span className="sr-only">(current)</span>
-          </Link>
-        </li>
-      );
-    }
-
-    return (
-      <li className="nav-item mobile-nav-item">
-        <Link className="nav-link" to="/login">Login<span className="sr-only">(current)</span></Link>
-      </li>
-    );
-  }
-
-  renderSettings = () => {
-    if (this.state.user) {
-      return (
-        <li className="nav-item mobile-nav-item">
-          <Link className="nav-link" data-test='settings-nav-link' to="/settings">Settings<span className="sr-only">(current)</span></Link>
-        </li>
+          <li className="nav-item mobile-nav-item">
+            <Link className="nav-link" to="/login">Login<span className="sr-only">(current)</span></Link>
+          </li>
+        </ul>
       );
     }
 
@@ -101,14 +97,8 @@ class NavBar extends React.Component  {
         </button>
         <div className="collapse navbar-collapse justify-content-sm-end" id="navbarNav">
           <ul className="navbar-nav">
-            { this.renderUsername() }
-            <li className="nav-item mobile-nav-item">
-              <Link className="nav-link" to="/schedule">Schedule</Link>
-            </li>
-
-            { this.renderSettings() }
-            { this.renderSignup() }
-            { this.renderLogin() }
+            { this.renderAuthorisedLinks() }
+            { this.renderAllAccessLinks() }
           </ul>
         </div>
       </nav>
