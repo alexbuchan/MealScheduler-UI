@@ -37,6 +37,7 @@ class RecipeStepsWrapper extends React.Component {
         index={ childrenArray.length }
         handleOnChange={ this.handleRecipeStepChange }
         handleDeleteStep={ this.handleDeleteStep } 
+        handleAddStep={ this.handleAddStep }
         label={ `Step ${ childrenArray.length + 1 }` }
         name={ `step${ childrenArray.length + 1 }` }
         value=''

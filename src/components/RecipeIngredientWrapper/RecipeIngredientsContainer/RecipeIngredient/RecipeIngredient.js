@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input, Dropdown } from 'semantic-ui-react';
+import AddButton from '../../../../assets/images/svg/plus.svg';
 import CloseIcon from '../../../../assets/images/svg/close.svg';
 
 class RecipeIngredient extends React.Component {
@@ -34,7 +35,7 @@ class RecipeIngredient extends React.Component {
   }
 
   render() {
-    const { index, onAmountChange, onUnitOfMeasurementChange, deleteIngredient, label } = this.props;
+    const { index, label, onAmountChange, onUnitOfMeasurementChange, deleteIngredient, addIngredient } = this.props;
 
     return (
       <div className='recipe-ingredient-wrapper'>
@@ -47,6 +48,7 @@ class RecipeIngredient extends React.Component {
               className='recipe-ingredient-dropdown'
               placeholder='Ingredient'
               fluid
+              search
               selection
               options={ this.formatIngredients() }
               onChange={ (ev, value) => this.handleOnIngredientChange(ev, value, index) }
@@ -63,7 +65,7 @@ class RecipeIngredient extends React.Component {
               name='amount'
               type='number'
               fluid
-              label={ <Dropdown value={ this.state.defaultUnitOfMeasureValue } options={ this.formatMeasureSystem(this.state.ingredient) } onChange={ (ev, value) => onUnitOfMeasurementChange(ev, value, index) }/> }
+              label={ <Dropdown placeholder='unit of measurement' defaultValue={ this.state.defaultUnitOfMeasureValue } options={ this.formatMeasureSystem(this.state.ingredient) } onChange={ (ev, value) => onUnitOfMeasurementChange(ev, value, index) }/> }
               labelPosition='right'
               onChange={ (ev, value) => onAmountChange(ev, value, index) }
             />
@@ -71,6 +73,9 @@ class RecipeIngredient extends React.Component {
         </div>
         
         <div className='delete-ingredient-wrapper'>
+          <button className='add-ingredient-button' onClick={ () => addIngredient(index) }>
+            <AddButton className='add-ingredient-icon' />
+          </button>
           <button className='delete-ingredient-button' onClick={ () => deleteIngredient(index) }>
             <CloseIcon className='delete-ingredient-icon'/>
           </button>

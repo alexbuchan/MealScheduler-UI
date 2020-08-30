@@ -62,8 +62,9 @@ class CreateRecipeForm extends React.Component {
       } 
     });
 
-    let stepsArray = this.state.form.steps.map(stepObj => Object.entries(stepObj).flat());
-    stepsArray = stepsArray.flat().join('-');
+    let stepsArray = this.state.form.steps.map(step => {
+      return { [`step${step.step}`]: step.value };
+    });
 
     const form = { ...this.state.form };
     form.selectedIngredients = ingredientsArray;

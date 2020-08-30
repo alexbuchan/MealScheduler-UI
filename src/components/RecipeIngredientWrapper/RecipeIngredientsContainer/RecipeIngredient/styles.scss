@@ -40,12 +40,12 @@
     .delete-ingredient-button {
       border: none;
       background: none;
-      width: 36px;
 
       .delete-ingredient-icon {
         fill: #5f7df5;
         stroke: #5f7df5;
         transition: transform 0.2s ease-in;
+        width: 20px;
       }
 
       .delete-ingredient-icon:hover {
@@ -57,6 +57,37 @@
 
     .delete-ingredient-button:focus {
       outline: none;
+
+      .delete-ingredient-icon {
+        fill: #122d98;
+        stroke: #122d98;
+        stroke-width: 20px;
+      }
+    }
+
+    .add-ingredient-button {
+      border: none;
+      background: none;
+
+      .add-ingredient-icon {
+        fill: #5f7df5;
+        transition: transform 0.2s ease-in;
+        width: 20px;
+      }
+
+      .add-ingredient-icon:hover {
+        fill: #122d98;
+        transform: rotate(90deg);
+      }
+    }
+
+    .add-ingredient-button:focus {
+      outline: none;
+
+      .add-ingredient-icon {
+        fill: #122d98;
+        transform: rotate(90deg);
+      }
     }
   }
 }

@@ -47,6 +47,11 @@
 
       .recipe-steps-add-step-button:focus {
         outline: none;
+
+        .recipe-steps-add-step-icon {
+          fill: #122d98;
+          transform: rotate(90deg);
+        }
       }
     }
   }

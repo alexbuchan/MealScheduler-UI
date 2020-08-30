@@ -47,6 +47,11 @@
 
       .recipe-ingredients-add-ingredient-button:focus {
         outline: none;
+
+        .recipe-ingredients-add-ingredient-icon {
+          fill: #122d98;
+          transform: rotate(90deg);
+        }
       }
     }
   }

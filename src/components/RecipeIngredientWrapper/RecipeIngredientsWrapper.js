@@ -74,7 +74,8 @@ class RecipeIngredientsWrapper extends React.Component {
         onIngredientChange={ this.handleOnIngredientChange }
         onAmountChange={ this.handleOnAmountChange }
         onUnitOfMeasurementChange={ this.handleOnUnitOfMeasurementChange }
-        deleteIngredient={ this.handleDeleteIngredient } 
+        deleteIngredient={ this.handleDeleteIngredient }
+        addIngredient={ this.handleAddIngredient }
         label={ `Ingredient ${ childrenArray.length + 1 }` }
         ingredients={ this.props.ingredients }
         measureSystem={ this.props.measureSystem }

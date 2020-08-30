@@ -27,32 +27,64 @@
     }
   }
 
-  .delete-step-text-input-wrapper {
+  .steps-buttons-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     width: 20%;
 
-    .delete-step-text-input-button {
+    .add-step-button {
       border: none;
       background: none;
-      width: 36px;
+      padding: 0;
 
-      .delete-step-text-input-icon {
+      .add-step-icon {
+        fill: #5f7df5;
+        transition: transform 0.2s ease-in;
+        width: 30px;
+      }
+
+      .add-step-icon:hover {
+        fill: #122d98;
+        transform: rotate(90deg);
+      }
+    }
+
+    .add-step-button:focus {
+      outline: none;
+
+      .add-step-icon {
+        fill: #122d98;
+        transform: rotate(90deg);
+      }
+    }
+
+    .delete-step-button {
+      border: none;
+      background: none;
+
+      .delete-step-icon {
         fill: #5f7df5;
         stroke: #5f7df5;
         transition: transform 0.2s ease-in;
+        width: 30px;
       }
 
-      .delete-step-text-input-icon:hover {
+      .delete-step-icon:hover {
         fill: #122d98;
         stroke: #122d98;
         stroke-width: 20px;
       }
     }
 
-    .delete-step-text-input-button:focus {
+    .delete-step-button:focus {
       outline: none;
+
+      .delete-step-icon {
+        fill: #122d98;
+        stroke: #122d98;
+        stroke-width: 20px;
+      }
     }
   }
 }
