@@ -1,0 +1,62 @@
+.recipe-ingredient-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  background-color: #d0d7da;
+  padding: 5px;
+  width: 100%;
+
+  .recipe-ingredient {
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+
+    .recipe-ingredient-dropdown-wrapper {
+      width: 50%;
+      padding-right: 10px;
+
+      .recipe-ingredient-dropdown {
+        width: 100%;
+      }
+    }
+
+    .recipe-ingredient-amount-wrapper {
+      width: 50%;
+      padding-left: 10px;
+
+      .recipe-ingredient-amount {
+        width: 100%;
+      }
+    }
+  }
+
+  .delete-ingredient-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+
+    .delete-ingredient-button {
+      border: none;
+      background: none;
+      width: 36px;
+
+      .delete-ingredient-icon {
+        fill: #5f7df5;
+        stroke: #5f7df5;
+        transition: transform 0.2s ease-in;
+      }
+
+      .delete-ingredient-icon:hover {
+        fill: #122d98;
+        stroke: #122d98;
+        stroke-width: 20px;
+      }
+    }
+
+    .delete-ingredient-button:focus {
+      outline: none;
+    }
+  }
+}

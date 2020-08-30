@@ -1,0 +1,115 @@
+.create-recipe-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .create-recipe-form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+
+    .label-wrapper {
+      display: flex;
+      justify-content: start;
+      width: 300px;
+
+      .label {
+        margin: 0 10px 0 0;
+      }
+    }
+
+    .invisble-column {
+      width: 300px;
+    }
+
+    .create-recipe-form-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      margin-bottom: 15px;
+
+      .create-recipe-form-row-item-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        align-items: flex-end;
+
+        .create-recipe-form-row-name {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+
+          .name-text-input {
+            width: 300px;
+          }
+
+          .name-text-input {
+            width: 300px;
+
+            .label {
+              background-color: #9cd0f3;
+              color: #0c0c0c;
+              font-weight: 500;
+              font-stretch: ultra-expanded;
+              font-family: Arial;
+              font-variant: all-petite-caps;
+            }
+          }
+        }
+        
+        .create-recipe-form-row-recipe-difficulty {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          width: 300px;
+        }
+      }
+    }
+
+    .create-recipe-form-row-4 {
+      .create-recipe-form-row-ingredients-wrapper {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .create-recipe-form-row-5 {
+      .create-recipe-form-row-steps-wrapper {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .create-recipe-form-row-6 {
+      .create-recipe-form-row-comments {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+
+        .create-recipe-form-row-comments-label {
+          text-align: center;
+          margin: 0 10px 0 0;
+        }
+
+        .create-recipe-form-row-comments-textarea {
+          resize: none;
+          height: 80px;
+          border: 1px solid lightgray;
+          border-radius: 4px;
+        }
+
+        .create-recipe-form-row-comments-textarea:focus {
+          outline: none;
+          box-shadow: 0px 0px 0px 1pt #9cd0f3;
+        }
+      }
+    }
+  }
+}

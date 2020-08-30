@@ -1,0 +1,53 @@
+.recipe-steps {
+  display: flex;
+  flex-direction: column;
+
+  .recipe-steps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .invisible-wrapper {
+      width: 33%;
+    }
+
+    .recipe-steps-title {
+      text-align: center;
+      width: 33%;
+      margin: 0 10px 0 0;
+      font-size: medium;
+    }
+
+    .recipe-steps-add-step-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 33%;
+
+      .recipe-steps-add-step-label {
+        margin: 0;
+      }
+      
+      .recipe-steps-add-step-button {
+        border: none;
+        background: none;
+        width: 45px;
+
+        .recipe-steps-add-step-icon {
+          fill: #5f7df5;
+          transition: transform 0.2s ease-in;
+        }
+
+        .recipe-steps-add-step-icon:hover {
+          fill: #122d98;
+          transform: rotate(90deg);
+        }
+      }
+
+      .recipe-steps-add-step-button:focus {
+        outline: none;
+      }
+    }
+  }
+}

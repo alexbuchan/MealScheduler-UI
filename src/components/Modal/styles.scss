@@ -16,6 +16,7 @@
     height: 600px;
     box-shadow: 25px 30px 54px black;
     background-color: #dce4e8;
+    overflow-y: scroll;
 
     .custom-modal-close-button-wrapper {    
       display: flex;
@@ -44,5 +45,9 @@
         stroke-width: 20px;
       }
     }
+  }
+
+  .custom-modal-main::-webkit-scrollbar {
+    display: none;
   }
 }

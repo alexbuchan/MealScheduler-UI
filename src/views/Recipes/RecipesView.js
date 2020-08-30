@@ -14,7 +14,8 @@ import withLoader from '../../HOC/Loader/Loader';
 import Background from '../../components/Background/Background';
 import Modal from '../../components/Modal/Modal';
 import RecipesContainer from '../../components/RecipesContainer/RecipesContainer';
-import { Dropdown, Input } from 'semantic-ui-react'
+import CreateRecipeForm from '../../components/CreateRecipeForm/CreateRecipeForm';
+import { Dropdown, Input } from 'semantic-ui-react';
 
 // IMPORT HELPERS
 import { modulo } from '../../lib/Helpers/helpers';
@@ -97,7 +98,7 @@ class RecipesView extends React.Component {
     if (this.state.openModal) {
       return (
         <Modal closeModal={ this.handleCloseModal }>
-          <h1>Create Recipe</h1>
+          <CreateRecipeForm closeModal={ this.handleCloseModal }/>
         </Modal>
       );
     }

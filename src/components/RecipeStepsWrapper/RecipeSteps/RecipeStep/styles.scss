@@ -1,0 +1,58 @@
+.recipe-steps-step-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  background-color: #d0d7da;
+  padding: 5px;
+
+  .recipe-steps-step {
+    width: 80%;
+
+    .step-text-input {
+      resize: none;
+      height: 80px;
+      width: 100%;
+      border: 1px solid lightgray;
+      border-radius: 4px;
+    }
+
+    .step-text-input:focus {
+      outline: none;
+      box-shadow: 0px 0px 0px 1pt #9cd0f3;
+    }
+
+    .step-text-input::placeholder {
+      padding-left: 5px;
+    }
+  }
+
+  .delete-step-text-input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+
+    .delete-step-text-input-button {
+      border: none;
+      background: none;
+      width: 36px;
+
+      .delete-step-text-input-icon {
+        fill: #5f7df5;
+        stroke: #5f7df5;
+        transition: transform 0.2s ease-in;
+      }
+
+      .delete-step-text-input-icon:hover {
+        fill: #122d98;
+        stroke: #122d98;
+        stroke-width: 20px;
+      }
+    }
+
+    .delete-step-text-input-button:focus {
+      outline: none;
+    }
+  }
+}

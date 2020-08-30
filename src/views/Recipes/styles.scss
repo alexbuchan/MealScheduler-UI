@@ -96,6 +96,11 @@
         width: 80%;
         border-top: 1px solid #bfbfbf;
         margin-top: 10px;
+        overflow-y: scroll;
+      }
+
+      .recipes-list::-webkit-scrollbar {
+        display: none;
       }
     }
   }
