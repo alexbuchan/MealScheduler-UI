@@ -39,9 +39,10 @@ class RecipeIngredientsWrapper extends React.Component {
     }
   }
 
-  handleOnIngredientChange = (_, { value }, index) => {
+  handleOnIngredientChange = (_, { value }, index, unitOfMeasurement) => {
     const ingredientValues = [...this.state.ingredientValues];
     ingredientValues[index].ingredient = value;
+    ingredientValues[index].unitOfMeasurement = unitOfMeasurement;
 
     this.setState({ ingredientValues });
   }
@@ -63,6 +64,7 @@ class RecipeIngredientsWrapper extends React.Component {
   handleAddIngredient = () => {
     const childrenArray = [...this.state.childrenArray];
     const ingredientValues = [...this.state.ingredientValues];
+
     ingredientValues.push({ ingredient: '', amount: '', unitOfMeasurement: '' });
 
     childrenArray.push(

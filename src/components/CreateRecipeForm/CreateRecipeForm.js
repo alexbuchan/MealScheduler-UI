@@ -68,7 +68,7 @@ class CreateRecipeForm extends React.Component {
     const form = { ...this.state.form };
     form.selectedIngredients = ingredientsArray;
     form.steps = stepsArray;
-    //RecipeActions.createRecipe(form);
+    RecipeActions.createRecipe(form);
     this.props.closeModal();
   }
 

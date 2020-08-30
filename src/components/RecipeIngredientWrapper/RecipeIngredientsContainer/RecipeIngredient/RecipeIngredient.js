@@ -15,8 +15,9 @@ class RecipeIngredient extends React.Component {
 
   handleOnIngredientChange = (ev, value, index) => {
     const ingredient = this.props.ingredients.find(ingredient => ingredient.name === value.value);
-    this.setState({ ingredient, defaultUnitOfMeasureValue: this.formatMeasureSystem(ingredient)[0].text });
-    this.props.onIngredientChange(ev, value, index);
+    const defaultUnitOfMeasure = this.formatMeasureSystem(ingredient)[0].text;
+    this.setState({ ingredient, defaultUnitOfMeasureValue: defaultUnitOfMeasure });
+    this.props.onIngredientChange(ev, value, index, defaultUnitOfMeasure);
   }
 
   formatIngredients = () => {
@@ -33,7 +34,7 @@ class RecipeIngredient extends React.Component {
   }
 
   render() {
-    const { index, onIngredientChange, onAmountChange, onUnitOfMeasurementChange, deleteIngredient, label, ingredients, measureSystem } = this.props;
+    const { index, onAmountChange, onUnitOfMeasurementChange, deleteIngredient, label } = this.props;
 
     return (
       <div className='recipe-ingredient-wrapper'>
