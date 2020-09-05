@@ -23,7 +23,7 @@ class CreateRecipeForm extends React.Component {
       preparationTime: '',
       cookingTime: [],
       difficulty: '',
-      steps: {},
+      steps: [],
       measureSystem: RecipeStore.getRecipesState().measureSystems.find(system => system.name === 'metric'),
       selectedIngredients: [],
       comments: ''
@@ -33,7 +33,7 @@ class CreateRecipeForm extends React.Component {
   }
 
   _onChange = () => {
-    const form = [ ...this.state.form ];
+    const form = { ...this.state.form };
     form.measureSystem = RecipeStore.getRecipesState().measureSystems.find(system => system.name === 'metric');
 
     this.setState({
@@ -63,12 +63,13 @@ class CreateRecipeForm extends React.Component {
     });
 
     let stepsArray = this.state.form.steps.map(step => {
-      return { [`step${step.step}`]: step.value };
+      return Object.entries({ [`step${step.step}`]: step.value });
     });
+
 
     const form = { ...this.state.form };
     form.selectedIngredients = ingredientsArray;
-    form.steps = stepsArray;
+    form.steps = stepsArray.flat().flat().join('-');
     RecipeActions.createRecipe(form);
     this.props.closeModal();
   }
@@ -203,6 +204,7 @@ class CreateRecipeForm extends React.Component {
                     placeholder='Preparation Time'
                     name='preparationTime'
                     type='number'
+                    min={ 0 }
                     label={ { tag: false, content: 'minutes' } }
                     labelPosition='right'
                     onChange={ this.handleTextFieldChange }
@@ -220,6 +222,7 @@ class CreateRecipeForm extends React.Component {
                       placeholder='Cooking Time'
                       name='cookingTime'
                       type='number'
+                      min={ 0 }
                       label={ { tag: false, content: 'minutes' } }
                       labelPosition='right'
                       onChange={ this.handleTextFieldChange }
@@ -236,6 +239,7 @@ class CreateRecipeForm extends React.Component {
                   </div>
                   <Dropdown
                     placeholder='Measurement System'
+                    name='measureSystem'
                     fluid
                     selection
                     options={ this.formatMeasureSystems() }
@@ -284,27 +288,3 @@ class CreateRecipeForm extends React.Component {
 
 CreateRecipeForm.propTypes = propTypes;
 export default CreateRecipeForm;
-
-// :id,
-// :name,
-// :measure_system_id,
-// :preparation_time,
-// :cooking_time,
-// :difficulty,
-// :steps,
-// recipe_ingredients_attributes: [
-//   :ingredient_id,
-//   :amount,
-//   :measure_unit_id
-// ]
-// :comments,
-
-
-// name => text input DONE
-// difficulty => dropdown DONE
-// preparation_time => number input DONE
-// cooking_time => number input DONE
-// measure_system => dropdown (API) DONE
-// steps => CUSTOM COMPONENT DONE
-// ingredients => CUSTOM COMPONENT (ingredient id, amount, measure unit) DONE
-// comments => text input DONE

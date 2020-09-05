@@ -42,7 +42,7 @@ class RecipeActions {
       cooking_time: parseInt(recipe.cookingTime),
       measure_system_id: recipe.measureSystem.id,
       recipe_ingredients_attributes: recipe.selectedIngredients,
-      steps: recipe.steps.join('-'),
+      steps: recipe.steps,
       comments: recipe.comments
     };
 

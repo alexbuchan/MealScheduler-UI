@@ -98,7 +98,7 @@ class RecipesView extends React.Component {
     if (this.state.openModal) {
       return (
         <Modal closeModal={ this.handleCloseModal }>
-          <CreateRecipeForm closeModal={ this.handleCloseModal }/>
+          <CreateRecipeForm closeModal={ this.handleCloseModal } validate={ true }/>
         </Modal>
       );
     }

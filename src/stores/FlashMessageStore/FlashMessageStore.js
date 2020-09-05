@@ -30,7 +30,7 @@ class FlashMessageStore extends Store {
   }
 
   addErrorMessage = (error) => {
-    flashMessageState.message = (Array.isArray(error.data.error)) ? error.data.error : [error.data.error]
+    flashMessageState.message = (Array.isArray(error.data.errors)) ? error.data.errors : [error.data.errors]
     flashMessageState.open = true;
     flashMessageState.type = 'error';
 

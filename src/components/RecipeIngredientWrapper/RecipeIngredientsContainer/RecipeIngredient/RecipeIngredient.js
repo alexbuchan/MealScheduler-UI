@@ -14,6 +14,12 @@ class RecipeIngredient extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.measureSystem !== this.props.measureSystem) {
+      this.setState({ defaultUnitOfMeasureValue: this.formatMeasureSystem(this.state.ingredient)[0].text });
+    }
+  }
+
   handleOnIngredientChange = (ev, value, index) => {
     const ingredient = this.props.ingredients.find(ingredient => ingredient.name === value.value);
     const defaultUnitOfMeasure = this.formatMeasureSystem(ingredient)[0].text;
@@ -36,7 +42,6 @@ class RecipeIngredient extends React.Component {
 
   render() {
     const { index, label, onAmountChange, onUnitOfMeasurementChange, deleteIngredient, addIngredient } = this.props;
-
     return (
       <div className='recipe-ingredient-wrapper'>
         <div className='recipe-ingredient'>
@@ -65,6 +70,7 @@ class RecipeIngredient extends React.Component {
               name='amount'
               type='number'
               fluid
+              min={ 0 }
               label={ <Dropdown placeholder='unit of measurement' defaultValue={ this.state.defaultUnitOfMeasureValue } options={ this.formatMeasureSystem(this.state.ingredient) } onChange={ (ev, value) => onUnitOfMeasurementChange(ev, value, index) }/> }
               labelPosition='right'
               onChange={ (ev, value) => onAmountChange(ev, value, index) }

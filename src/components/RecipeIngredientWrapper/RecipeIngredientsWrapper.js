@@ -19,7 +19,6 @@ class RecipeIngredientsWrapper extends React.Component {
 
     this.state = {
       childrenArray: [],
-      numChildren: 0,
       ingredientValues: []
     };
   }
@@ -30,19 +29,21 @@ class RecipeIngredientsWrapper extends React.Component {
       const childrenArray = [...this.state.childrenArray];
       const updatedChildrenArray = childrenArray.map((child, index) => {
         return React.cloneElement(
-          child, 
+          child,
           { measureSystem: this.props.measureSystem }
         );
       });
 
-      this.setState({ childrenArray: updatedChildrenArray });
+      this.setState({
+        childrenArray: updatedChildrenArray,
+        defaultMeasureSystem: this.props.measureSystem
+      });
     }
   }
 
   handleOnIngredientChange = (_, { value }, index, unitOfMeasurement) => {
     const ingredientValues = [...this.state.ingredientValues];
     ingredientValues[index].ingredient = value;
-    ingredientValues[index].unitOfMeasurement = unitOfMeasurement;
 
     this.setState({ ingredientValues });
   }
@@ -69,7 +70,7 @@ class RecipeIngredientsWrapper extends React.Component {
 
     childrenArray.push(
       <RecipeIngredient
-        key={ uuidv4() } 
+        key={ uuidv4() }
         index={ childrenArray.length }
         onIngredientChange={ this.handleOnIngredientChange }
         onAmountChange={ this.handleOnAmountChange }
@@ -83,7 +84,6 @@ class RecipeIngredientsWrapper extends React.Component {
     );
 
     this.setState({
-      numChildren: this.state.numChildren + 1,
       childrenArray: childrenArray,
       ingredientValues: ingredientValues
     });
@@ -98,15 +98,12 @@ class RecipeIngredientsWrapper extends React.Component {
 
     const updatedChildrenArray = childrenArray.map((child, index) => {
       return React.cloneElement(
-        child, 
+        child,
         { index, label: `Ingredient ${ index + 1 }` }
       );
     });
 
-    // const updateIngredientValues = ingredientValues.map((ingredient, index) => { return { step: index + 1, value: ingredient.value } });
-
     this.setState({
-      numChildren: this.state.numChildren - 1,
       childrenArray: updatedChildrenArray
     });
   }
