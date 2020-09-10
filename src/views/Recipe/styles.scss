@@ -1,0 +1,30 @@
+.recipe-view {
+  height: $contentHeight;
+  display: flex;
+  align-items: center;
+
+  .recipe-view-body-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .recipe-view-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 65%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+
+      .recipe-view-title {
+        margin: 25px;
+        font-size: x-large;
+        font-weight: bold;
+        color: #4c4c4c;
+        font-family: Arial;
+      }
+    }
+  }
+}

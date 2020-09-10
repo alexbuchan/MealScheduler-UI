@@ -23,6 +23,22 @@ class RecipeActions {
     }
   }
 
+  getRecipeWithId = async (id) => {
+    const _endpoint = `${ServiceConfig}/recipes/${id}`;
+    const jwt = ActionsHelper.getCookie('user');
+
+    let error, response;
+    [error, response] = await ActionsHelper.asyncHelper(
+      request.get(_endpoint, { headers: { Authorization: `Bearer ${jwt}` } })
+    );
+
+    if (error) {
+      FlashMessageActions.dispatchErrorMessage(error.response);
+    } else {
+      ActionDispatch.dispatchRecipeWithIdData(response.data);
+    }
+  }
+
   getIngredients = async () => {
     console.log('Not implemented');
   }

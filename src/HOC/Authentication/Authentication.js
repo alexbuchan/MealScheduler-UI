@@ -28,7 +28,7 @@ const withAuthentication = (WrappedComponent) => {
   
     render() {
       if (!this.state.auth) return <Redirect to='/login' />;
-      return <WrappedComponent />;
+      return <WrappedComponent id={ this.props.match.params.id }/>;
     }
   }
 }

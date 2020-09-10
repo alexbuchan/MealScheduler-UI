@@ -8,6 +8,7 @@ import UserActions from '../actions/user/UserActions';
 /* VIEW IMPORTS */
 import Schedule from '../views/Schedule/ScheduleView';
 import Recipes from '../views/Recipes/RecipesView';
+import Recipe from '../views/Recipe/RecipeView';
 import Settings from '../views/Settings/Settings';
 import GenericNotFound from '../views/GenericNotFoundPage/GenericNotFound';
 
@@ -43,7 +44,8 @@ class App extends React.Component {
             <Route exact path="/" component={ withUserEntry(SignupForm) } />
             <Route exact path="/login" component={ withUserEntry(LoginForm) } />
             <Route exact path="/schedule" component={ withAuthentication(Schedule) } />
-            <Route exact path="/Recipes" component={ withAuthentication(Recipes) } />
+            <Route exact path="/recipes" component={ withAuthentication(Recipes) } />
+            <Route exact path="/recipes/:id" component={ withAuthentication(Recipe) } />
             <Route exact path="/settings" component={ withAuthentication(Settings) } />
             <Route path='/*' component={ GenericNotFound } />
           </Switch>

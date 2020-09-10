@@ -7,6 +7,7 @@ class RecipeStore extends Store {
 
     this.recipesState = {
       recipes: [],
+      recipe: '',
       ingredients: [
         { id: 1, name: 'ham', measure_unit_type_id: 1, measure_unit_type: 'weight' },
         { id: 2, name: 'cheese', measure_unit_type_id: 1, measure_unit_type: 'weight' },
@@ -27,6 +28,9 @@ class RecipeStore extends Store {
       case Constants.GET_RECIPES:
         this.getRecipesData(action.data);
         break;
+      case Constants.GET_RECIPE_WITH_ID:
+        this.getRecipeWithIdData(action.data);
+        break;
     }
   }
 
@@ -35,8 +39,17 @@ class RecipeStore extends Store {
     this.emitChange();
   }
 
+  getRecipeWithIdData = (data) => {
+    this.recipesState.recipe = data;
+    this.emitChange();
+  }
+
   getRecipesState = () => {
     return this.recipesState;
+  }
+
+  getRecipeWithId = () => {
+    return this.recipesState.recipe;
   }
 }
 

@@ -12,14 +12,7 @@ import withLoader from '../../HOC/Loader/Loader';
 
 // IMPORT COMPONENTS
 import Background from '../../components/Background/Background';
-import Modal from '../../components/Modal/Modal';
-import RecipesContainer from '../../components/RecipesContainer/RecipesContainer';
-import CreateRecipeForm from '../../components/CreateRecipeForm/CreateRecipeForm';
-import { Dropdown, Input } from 'semantic-ui-react';
-
-// IMPORT HELPERS
-import { modulo } from '../../lib/Helpers/helpers';
-import AddButton from '../../assets/images/svg/plus.svg';
+import Recipes from '../../components/Recipes/Recipes';
 
 const propTypes = {};
 
@@ -30,12 +23,8 @@ class RecipesView extends React.Component {
     this.loadingTime = 500;
     this.state = {
       isLoading: false,
-      recipes: [...Store.getRecipesState().recipes],
-      filteredRecipes: [...Store.getRecipesState().recipes],
-      openModal: false,
-      recipeSearchType: 'name'
+      recipes: [...Store.getRecipesState().recipes]
     }
-    this.handleRecipeSearch = this.handleRecipeSearch.bind(this);
   }
 
   _onChange = () => {
@@ -46,7 +35,13 @@ class RecipesView extends React.Component {
   }
 
   componentDidMount() {
-    Actions.getRecipes();
+    this.setState({ isLoading: true }, () => {
+      Actions.getRecipes();
+      setTimeout(() => {
+        this.setState({ isLoading: false });
+      }, this.loadingTime);
+    });
+
     Store.addChangeListener(this._onChange);
   }
 
@@ -54,98 +49,12 @@ class RecipesView extends React.Component {
     Store.removeChangeListener(this._onChange);
   }
 
-  searchOptions = () => {
-    return [
-      { value: 'name', text: 'name' },
-      { value: 'difficulty', text: 'difficulty' },
-      { value: 'measure_system', text: 'measure_system' },
-      { value: 'preparation_time', text: 'preparation_time' },
-      { value: 'cooking_time', text: 'cooking_time' }
-    ];
-  }
-
-  handleRecipeSearch = (_, { value }) => {
-    const recipes = this.state.recipes.filter(recipe => {
-      switch (this.state.recipeSearchType) {
-        case 'name':
-        case 'difficulty':
-        case 'measure_system':
-          return recipe[this.state.recipeSearchType].toLowerCase().includes(value.toLowerCase());
-        case 'preparation_time':
-        case 'cooking_time':
-          if (value !== '') return recipe[this.state.recipeSearchType] === parseInt(value);
-        default:
-          return this.state.recipes;
-      }
-    });
-
-    this.setState({ filteredRecipes: recipes });
-  }
-
-  handleRecipeSearchType = (_, { value }) => {
-    this.setState({ recipeSearchType: value });
-  }
-
-  handleOpenModal = (ev) => {
-    this.setState({ openModal: true });
-  }
-
-  handleCloseModal = (ev) => {
-    this.setState({ openModal: false });
-  }
-
-  renderModal = () => {
-    if (this.state.openModal) {
-      return (
-        <Modal closeModal={ this.handleCloseModal }>
-          <CreateRecipeForm closeModal={ this.handleCloseModal } validate={ true }/>
-        </Modal>
-      );
-    }
-
-    return null;
-  }
-
   render() {
+    const RecipesWithLoader = withLoader(Recipes);
     return (
       <div className="recipes-view">
         <Background />
-        <div className='recipes-body-wrapper'>
-          <div className='recipes-body'>
-            <h1 className='recipes-title'>My Recipes</h1>
-
-            <div className='recipes-navbar-wrapper'>
-              <div className='recipes-navbar'>
-                <div className='recipes-search-bar'>
-                  <Input
-                    icon='search'
-                    iconPosition='left'
-                    placeholder='Search...'
-                    label={ <Dropdown defaultValue='name' options={ this.searchOptions() } onChange={ this.handleRecipeSearchType } /> }
-                    labelPosition='right'
-                    onChange={ this.handleRecipeSearch }
-                    className='recipes-search-bar-input'
-                  />
-                </div>
-
-                <div className='recipes-create-recipe-wrapper'>
-                  <div className='recipes-create-recipe'>
-                    <p className='recipes-create-recipe-label'>Create Recipe</p>
-                    <button className='recipes-create-recipe-button' onClick={ this.handleOpenModal }>
-                      <AddButton className='recipes-create-recipe-icon' />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className='recipes-list'>
-              <RecipesContainer recipes={ this.state.filteredRecipes }/>
-            </div>
-          </div>
-
-          { this.renderModal() }
-        </div>
+        <RecipesWithLoader isLoading={ this.state.isLoading } recipes={ this.state.recipes }/>
       </div>
     );
   }

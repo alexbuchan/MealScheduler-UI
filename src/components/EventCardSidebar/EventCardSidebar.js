@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
+
 const propTypes = {
   event: PropTypes.object,
   accordionEffect: PropTypes.bool
@@ -23,7 +25,7 @@ class EventCardSidebar extends React.Component {
         <div className='event-card-sidebar-data'>
           <p className='event-card-sidebar-recipe-label'>Recipes:</p>
           <div className='event-card-sidebar-recipes'>
-            { this.props.event.recipes.map((recipe, index) => <a key={ index } href='#' className='event-card-sidebar-recipe-link'>{ recipe.name }</a>) }
+            { this.props.event.recipes.map((recipe, index) => <Link key={ index } to={ `/recipes/${recipe.id}` } className='event-card-sidebar-recipe-link'>{ recipe.name }</Link>) }
           </div>
         </div>
       );

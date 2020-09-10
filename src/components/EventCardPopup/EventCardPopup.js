@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
+
 const propTypes = {
   event: PropTypes.object
 };
@@ -16,7 +18,9 @@ class EventCardPopup extends React.Component {
       return (
         <div className='event-data'>
           <p className='event-recipe-label'>Recipes:</p>
-          <div className='event-recipes'>{ this.props.event.recipes.map((recipe, index) => <a key={ index } href='#' className='recipe-link'>{ recipe.name }</a>) }</div>
+          <div className='event-recipes'>
+            { this.props.event.recipes.map((recipe, index) => <Link key={ index } to={ `/recipes/${recipe.id}` } className='recipe-link'>{ recipe.name }</Link>) }
+          </div>
         </div>
       );
     }

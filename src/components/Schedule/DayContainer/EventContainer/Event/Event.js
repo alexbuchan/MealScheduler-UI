@@ -93,13 +93,17 @@ class Event extends React.Component {
   render() {
     return (
       <Popup
-        open={ this.state.openPopup }
         trigger={ this.renderEvent() }
-        content={ <EventCardPopup event={ this.state.event }/> }
         wide='very'
         style={ { margin: '10px 0 10px 0', padding: '10px 0 10px 0', border: 'none' } }
         position={ this.popupComponentPosition() }
-      />
+        hoverable
+        flowing
+        mouseEnterDelay={ 100 }
+        mouseLeaveDelay={ 100 }
+      >
+        <EventCardPopup event={ this.state.event }/>
+      </Popup>
     );
   }
 }

@@ -8,6 +8,13 @@ class ActionDispatch {
       data
     });
   }
+
+  dispatchRecipeWithIdData = (data) => {
+    Dispatcher.dispatch({
+      actionType: Constants.GET_RECIPE_WITH_ID,
+      data
+    });
+  }
 }
 
 export default new ActionDispatch();

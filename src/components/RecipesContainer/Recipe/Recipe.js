@@ -23,7 +23,7 @@ const Recipe = ({ recipe }) => {
   }
 
   return ( 
-    <Link className='recipe-component' to='#'>
+    <Link className='recipe-component' to={ `/recipes/${recipe.id}` }>
       <div className='recipe-main-img-wrapper'>
         <img alt='img'></img>
       </div>

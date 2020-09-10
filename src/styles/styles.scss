@@ -5,6 +5,7 @@
 /* VIEW IMPORTS */
 @import '../views/Schedule/styles';
 @import '../views/Recipes/styles';
+@import '../views/Recipe/styles';
 @import '../views/Settings/styles';
 @import '../views/GenericNotFoundPage/styles';
 
@@ -12,13 +13,20 @@
 @import '../HOC/Loader/styles';
 
 /* COMPONENT IMPORTS */
+
+// Signup
+@import '../components/SignupForm/styles';
+
+// Schedule
 @import '../components/Schedule/styles';
-@import '../components/ScheduleNavbar/styles';
-@import '../components/Schedule/DayContainer/EventContainer/styles';
-@import '../components/Schedule/DayContainer/EventContainer/Event/styles';
-@import '../components/ScheduleSidebar/styles';
 @import '../components/ScheduleHeader/styles';
-@import '../components/CreateEventForm/styles';
+@import '../components/ScheduleNavbar/styles';
+@import '../components/ScheduleSidebar/styles';
+@import '../components/Schedule/DayContainer/styles';
+
+// Recipes
+@import '../components/Recipes/styles';
+@import '../components/RecipesContainer/Recipe/styles';
 @import '../components/CreateRecipeForm/styles';
 @import '../components/RecipeStepsWrapper/styles';
 @import '../components/RecipeStepsWrapper/RecipeSteps/styles';
@@ -26,19 +34,30 @@
 @import '../components//RecipeIngredientWrapper/styles';
 @import '../components//RecipeIngredientWrapper/RecipeIngredientsContainer/styles';
 @import '../components//RecipeIngredientWrapper/RecipeIngredientsContainer/RecipeIngredient/styles';
+@import '../components/Recipe/styles';
+@import '../components/Recipe/IngredientsContainer/Ingredient/styles';
+@import '../components/Recipe/StepsContainer/styles';
+@import '../components/Recipe/StepsContainer/Step/styles';
+
+// Events
+@import '../components/CreateEventForm/styles';
 @import '../components/EventCardPopup/styles';
 @import '../components/EventCardSidebar/styles';
-@import '../components/Schedule/DayContainer/styles';
-@import '../components/NavBar/styles';
-@import '../components/Footer/styles';
-@import '../components/SignupForm/styles';
-@import '../components/FlashMessage/styles';
+@import '../components/Schedule/DayContainer/EventContainer/styles';
+@import '../components/Schedule/DayContainer/EventContainer/Event/styles';
+
+// Reusable Components
 @import '../components/Popup/styles';
 @import '../components/Modal/styles';
-@import '../components/Form/styles';
-@import '../components/RecipesContainer/Recipe/styles';
+
+// Recurring Page Components
+@import '../components/NavBar/styles';
+@import '../components/Footer/styles';
+@import '../components/FlashMessage/styles';
+
 
 /* FORM COMPONENTS */
+@import '../components/Form/styles';
 @import '../components/formComponents/TextField/styles';
 @import '../components/formComponents/SearchableDropdown/styles';
 
