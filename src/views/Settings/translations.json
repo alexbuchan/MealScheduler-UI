@@ -1,0 +1,19 @@
+{
+  "en": {
+    "settings": {
+      "page_title": "Settings"
+    }
+  },
+
+  "es": {
+    "settings": {
+      "page_title": "Ajustes"
+    }
+  },
+
+  "fr": {
+    "settings": {
+      "page_title": "Paramètres"
+    }
+  }
+}

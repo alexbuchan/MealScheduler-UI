@@ -51,6 +51,7 @@ class RecipeView extends React.Component {
   render() {
     let { name } = this.state.recipe;
     const RecipeWithLoader = withLoader(Recipe);
+
     return (
       <div className="recipe-view">
         <Background />

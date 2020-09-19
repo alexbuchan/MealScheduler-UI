@@ -54,7 +54,7 @@ class RecipesView extends React.Component {
     return (
       <div className="recipes-view">
         <Background />
-        <RecipesWithLoader isLoading={ this.state.isLoading } recipes={ this.state.recipes }/>
+        <RecipesWithLoader isLoading={ this.state.isLoading } recipes={ this.state.recipes } locale={ this.props.props.locale }/>
       </div>
     );
   }

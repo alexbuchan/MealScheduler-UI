@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import translations from './translations.json';
+import { translate } from '../../lib/i18n/i18n';
+let t = translate(translations);
 
 // IMPORT COMPONENTS
 import RecipesContainer from '../../components/RecipesContainer/RecipesContainer';
@@ -23,10 +26,12 @@ class Recipes extends React.Component {
       recipeSearchType: 'name'
     }
 
+    this.t = t(this.props.locale);
     this.handleRecipeSearch = this.handleRecipeSearch.bind(this);
   }
 
   componentDidUpdate(prevProps) {
+    this.t = t(this.props.locale);
     if (prevProps.recipes !== this.props.recipes) {
       this.setState({ filteredRecipes: this.props.recipes });
     }
@@ -85,10 +90,12 @@ class Recipes extends React.Component {
   }
 
   render() {
+    const { locale } = this.props;
+
     return (
       <div className='recipes-body-wrapper'>
         <div className='recipes-body'>
-          <h1 className='recipes-title'>My Recipes</h1>
+          <h1 className='recipes-title'>{ this.t('recipes_view.title') }</h1>
           <div className='recipes-navbar-wrapper'>
             <div className='recipes-navbar'>
               <div className='recipes-search-bar'>

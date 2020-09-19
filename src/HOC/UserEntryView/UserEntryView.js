@@ -2,7 +2,7 @@ import React from 'react';
 import UserStore from '../../stores/UserStore/UserStore';
 import Background from '../../components/Background/Background';
 
-const withUserEntry = (WrappedComponent) => {
+const withUserEntry = (WrappedComponent, props={}) => {
   return class UserEntryView extends React.Component {
     constructor() {
       super();
@@ -31,7 +31,7 @@ const withUserEntry = (WrappedComponent) => {
         <div className='signup-login-view-wrapper'>
           <div className='signup-login-view'>
             <Background />
-            <WrappedComponent user={ this.state.user } />
+            <WrappedComponent user={ this.state.user } props={ props } />
           </div>
         </div>
       );

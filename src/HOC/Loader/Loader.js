@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const withLoader = (WrappedComponent) => {
+const withLoader = (WrappedComponent, props) => {
   const propTypes = {
     isLoading: PropTypes.bool,          // Determines whether the loader displays or the wrapped component
     loaderClassName: PropTypes.string,  // Styles class for the loader

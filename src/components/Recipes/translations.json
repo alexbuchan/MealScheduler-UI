@@ -1,0 +1,13 @@
+{
+  "en": {
+    "recipes_view": {
+      "title": "My Recipes"
+    }
+  },
+
+  "es": {
+    "recipes_view": {
+      "title": "Mis Recetas"
+    }
+  }
+}

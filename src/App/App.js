@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 /* ACTION IMPORTS */
 import UserActions from '../actions/user/UserActions';
+import AppStore from '../stores/AppStore/AppStore';
 
 /* VIEW IMPORTS */
 import Schedule from '../views/Schedule/ScheduleView';
@@ -31,7 +32,23 @@ class App extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      appState: AppStore.getAppState()
+    };
+
     UserActions.retrieveUserDataOnRefresh();
+  }
+
+  _onChange = () => {
+    this.setState({ appState: AppStore.getAppState() });
+  }
+
+  componentDidMount() {
+    AppStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    AppStore.removeChangeListener(this._onChange);
   }
 
   render() {
@@ -41,12 +58,12 @@ class App extends React.Component {
           <NavBar />
 
           <Switch>
-            <Route exact path="/" component={ withUserEntry(SignupForm) } />
-            <Route exact path="/login" component={ withUserEntry(LoginForm) } />
-            <Route exact path="/schedule" component={ withAuthentication(Schedule) } />
-            <Route exact path="/recipes" component={ withAuthentication(Recipes) } />
-            <Route exact path="/recipes/:id" component={ withAuthentication(Recipe) } />
-            <Route exact path="/settings" component={ withAuthentication(Settings) } />
+            <Route exact path="/" component={ withUserEntry(SignupForm, this.state.appState) } />
+            <Route exact path="/login" component={ withUserEntry(LoginForm, this.state.appState) } />
+            <Route exact path="/schedule" component={ withAuthentication(Schedule, this.state.appState) } />
+            <Route exact path="/recipes" component={ withAuthentication(Recipes, this.state.appState) } />
+            <Route exact path="/recipes/:id" component={ withAuthentication(Recipe, this.state.appState) } />
+            <Route exact path="/settings" component={ withAuthentication(Settings, this.state.appState) } />
             <Route path='/*' component={ GenericNotFound } />
           </Switch>
 

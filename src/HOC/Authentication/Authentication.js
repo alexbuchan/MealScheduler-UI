@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import UserStore from '../../stores/UserStore/UserStore';
 
-const withAuthentication = (WrappedComponent) => {
+const withAuthentication = (WrappedComponent, props={}) => {
   return class Authentication extends React.Component {
     constructor() {
       super();
@@ -28,7 +28,7 @@ const withAuthentication = (WrappedComponent) => {
   
     render() {
       if (!this.state.auth) return <Redirect to='/login' />;
-      return <WrappedComponent id={ this.props.match.params.id }/>;
+      return <WrappedComponent id={ this.props.match.params.id } props={ props }/>;
     }
   }
 }

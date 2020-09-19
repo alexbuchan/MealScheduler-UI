@@ -1,13 +1,27 @@
 import React from 'react';
+
+// ACTIONS
+import Actions from '../../actions/settings/SettingsActions';
+import AppActions from '../../actions/app/AppActions';
+
+// STORES
+import UserStore from '../../stores/UserStore/UserStore';
+
+// COMPONENTS
 import Form from '../../components/Form/Form';
 import TextField from '../../components/formComponents/TextField/TextField';
-import Actions from '../../actions/settings/SettingsActions';
-import UserStore from '../../stores/UserStore/UserStore';
-import FlashMessage from '../../components/FlashMessage/FlashMessage';
+// import FlashMessage from '../../components/FlashMessage/FlashMessage';
+import { Dropdown } from 'semantic-ui-react';
 
+// TRANSLATIONS
+import translations from './translations.json';
+import { translate } from '../../lib/i18n/i18n';
+let t = translate(translations);
+
+// Settings View Component
 class Settings extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.initialState = {
       username: UserStore.getUser().username,
@@ -18,6 +32,7 @@ class Settings extends React.Component {
 
     this.state = this.initialState;
     this.submitted = false;
+    this.t = t(props.props.locale);
   }
 
   _onChange = () => {
@@ -32,6 +47,7 @@ class Settings extends React.Component {
   }
 
   componentDidMount() {
+    this.t = t(this.props.props.locale);
     UserStore.addChangeListener(this._onChange);
   }
 
@@ -80,12 +96,20 @@ class Settings extends React.Component {
     this.setState(this.initialState);
   }
 
+  handleLocaleChange = (_, { value }) => {
+    AppActions.changeLocale(value);
+  }
+
+  appLocales = () => {
+    return this.props.props.locales.map(locale => { return { text: locale, value: locale } });
+  }
+
   render() {
     const fields = { username: this.state.username, email: this.state.email };
 
     return (
       <div className="settings-view">
-        <h1 className="settings-header">Settings</h1>
+        <h1 className="settings-header">{ this.t('settings.page_title') }</h1>
 
         <div className="settings">
           <div className="user-signup">
@@ -124,6 +148,16 @@ class Settings extends React.Component {
               />
             </Form>
           </div>
+
+          <Dropdown
+            placeholder='Language'
+            fluid
+            search
+            selection
+            value={ this.props.props.locale }
+            options={ this.appLocales() }
+            onChange={ this.handleLocaleChange }
+          />
         </div>
       </div>
     );
