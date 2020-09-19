@@ -1,0 +1,37 @@
+{
+  "en": {
+    "navbar": {
+      "schedule": "Schedule",
+      "recipes": "Recipes",
+      "settings": "Settings",
+      "logout": "Log out"
+    }
+  },
+
+  "es": {
+    "navbar": {
+      "schedule": "Calendario",
+      "recipes": "Recetas",
+      "settings": "Ajustes",
+      "logout": "Cerrar Sesión"
+    }
+  },
+
+  "fr": {
+    "navbar": {
+      "schedule": "Programme",
+      "recipes": "Recette",
+      "settings": "Paramètres",
+      "logout": "Se déconnecter"
+    }
+  },
+
+  "cat": {
+    "navbar": {
+      "schedule": "Horari",
+      "recipes": "Recetes",
+      "settings": "Configuració",
+      "logout": "Tancar Sessió"
+    }
+  }
+}

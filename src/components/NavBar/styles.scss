@@ -1,47 +1,86 @@
-.navbar-height {
+.navbar {
   height: $navbarHeight;
-  padding-top: $navbarPaddingTop;
-  padding-right: $navbarPaddingRight;
-}
+  background-color: #343a40;
+  display: flex;
+  justify-content: space-between;
 
-@media only screen and (min-width: 650px) {
-  .user-profile {
-    display: flex;
-    justify-content: center;
-    height: 43px;
-    width: 100%;
-    margin-right: 7px;
-    border: 1px solid gray;
-    background-color: #ffe4c4;
-    color: black !important;
-  }
-}
-
-@media only screen and (max-width: 649px) {
   .navbar-brand {
-    font-size: medium;
-  }
-
-  .user-profile {
     display: flex;
     justify-content: center;
-    width: 100%;
-    color: black;
+    align-items: center;
+    height: 100%;
+    padding-left: 25px;
+
+    .navbar-brand-name {
+      font-size: x-large;
+      font-family: Arial;
+      font-stretch: extra-expanded;
+      font-variant: petite-caps;
+      color: #d6d6d6;
+      font-weight: 500;
+      font-family: math;
+    }
+
+    .navbar-brand-logo-wrapper {
+      height: 100%;
+      width: 50px;
+      margin-left: 20px;
+      background-color: linear-g;
+      background-image: linear-gradient(12deg, #18638a, #cbecfd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
-  .mobile-nav-item {
+  .navbar-menu-list {
     display: flex;
-    justify-content: center;
-    width: 100%;
-    border: 1px solid black;
-    background-color: lightgray;
-  }
-
-  .navbar-nav {
-    margin-top: 7px;
-  }
-
-  .nav-link {
-    color: black !important;
+    align-items: center;
+    margin: 0;
+    padding: 0 15px 0 0;
   }
 }
+
+
+
+// @media only screen and (min-width: 650px) {
+//   .user-profile {
+//     display: flex;
+//     justify-content: center;
+//     height: 43px;
+//     width: 100%;
+//     margin-right: 7px;
+//     border: 1px solid gray;
+//     background-color: #ffe4c4;
+//     color: black !important;
+//   }
+// }
+
+// @media only screen and (max-width: 649px) {
+//   .navbar-brand {
+//     font-size: medium;
+//   }
+
+//   .user-profile {
+//     display: flex;
+//     justify-content: center;
+//     width: 100%;
+//     color: black;
+//   }
+
+//   .mobile-nav-item {
+//     display: flex;
+//     justify-content: center;
+//     width: 100%;
+//     border: 1px solid black;
+//     background-color: lightgray;
+//   }
+
+//   .navbar-nav {
+//     margin-top: 7px;
+//   }
+
+//   .nav-link {
+//     color: black !important;
+//   }
+// }

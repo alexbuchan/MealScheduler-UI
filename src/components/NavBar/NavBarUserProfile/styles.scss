@@ -1,0 +1,26 @@
+.navbar-menu-profile {
+  display: flex;
+  flex-direction: column;
+
+  .user-profile-wrapper {
+    width: 60px;
+    height: 80%;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+
+    .user-profile-icon {
+      height: 100%;
+      width: 100%;
+      margin: 5px;
+      fill: #b6b7a3;
+    }
+  }
+}
+
+.user-profile {
+  color:  #d6d6d6;
+}

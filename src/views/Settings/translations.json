@@ -15,5 +15,11 @@
     "settings": {
       "page_title": "Paramètres"
     }
+  },
+
+  "cat": {
+    "settings": {
+      "page_title": "Configuració"
+    }
   }
 }

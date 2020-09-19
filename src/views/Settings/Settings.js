@@ -47,7 +47,6 @@ class Settings extends React.Component {
   }
 
   componentDidMount() {
-    this.t = t(this.props.props.locale);
     UserStore.addChangeListener(this._onChange);
   }
 
@@ -101,10 +100,13 @@ class Settings extends React.Component {
   }
 
   appLocales = () => {
-    return this.props.props.locales.map(locale => { return { text: locale, value: locale } });
+    return this.props.props.locales
+      .sort()
+      .map(locale => { return { text: locale, value: locale } });
   }
 
   render() {
+    this.t = t(this.props.props.locale);
     const fields = { username: this.state.username, email: this.state.email };
 
     return (

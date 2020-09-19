@@ -55,7 +55,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className='container-fluid'>
-          <NavBar />
+          <NavBar appState={ this.state.appState }/>
 
           <Switch>
             <Route exact path="/" component={ withUserEntry(SignupForm, this.state.appState) } />
@@ -68,7 +68,7 @@ class App extends React.Component {
           </Switch>
 
           <FlashMessage />
-          <Footer />
+          <Footer appState={ this.state.appState }/>
         </div>
       </Router>
     );

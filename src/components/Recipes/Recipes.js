@@ -31,7 +31,6 @@ class Recipes extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    this.t = t(this.props.locale);
     if (prevProps.recipes !== this.props.recipes) {
       this.setState({ filteredRecipes: this.props.recipes });
     }
@@ -90,7 +89,7 @@ class Recipes extends React.Component {
   }
 
   render() {
-    const { locale } = this.props;
+    this.t = t(this.props.locale);
 
     return (
       <div className='recipes-body-wrapper'>

@@ -2,15 +2,24 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import UserActions from '../../actions/user/UserActions';
 import UserStore from '../../stores/UserStore/UserStore';
+import NavBarItem from './NavBarItem/NavBarItem';
+import NavBarLogout from './NavBarLogout/NavBarLogout';
+import NavBarUserProfile from './NavBarUserProfile/NavBarUserProfile';
+
+import translations from './translations.json';
+import { translate } from '../../lib/i18n/i18n';
+let t = translate(translations);
+
 
 class NavBar extends React.Component  {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       user: UserStore.getUserState().user
     }
 
+    this.t = t(this.props.appState.locale);
     this._onChange = this._onChange.bind(this);
   }
 
@@ -35,34 +44,12 @@ class NavBar extends React.Component  {
   renderAuthorisedLinks = () => {
     if (this.state.user) {
       return (
-        <ul className="navbar-nav">
-          <li className="nav-item mobile-nav-item">
-            <span className="nav-link user-profile" to="/schedule">{ this.state.user.username }<span className="sr-only">(current)</span></span>
-          </li>
-
-          <li className="nav-item mobile-nav-item">
-            <Link className="nav-link" to="/schedule">Schedule</Link>
-          </li>
-
-          <li className="nav-item mobile-nav-item">
-            <Link className="nav-link" to="/recipes">Recipes</Link>
-          </li>
-
-          <li className="nav-item mobile-nav-item">
-            <Link className="nav-link" data-test='settings-nav-link' to="/settings">Settings<span className="sr-only">(current)</span></Link>
-          </li>
-
-          <li className="nav-item mobile-nav-item">
-            <Link
-              onClick={ this.handleLogout }
-              className="nav-link"
-              data-test='logout-nav-link'
-              to="/login"
-            >
-              Log out
-              <span className="sr-only">(current)</span>
-            </Link>
-          </li>
+        <ul className="navbar-menu-list">
+          <NavBarItem title={ this.t('navbar.schedule') } link='/schedule'/>
+          <NavBarItem title={ this.t('navbar.recipes') } link='/recipes'/>
+          <NavBarItem title={ this.t('navbar.settings') } link='/settings'/>
+          <NavBarUserProfile username={ this.state.user.username } link='/schedule'/>
+          <NavBarLogout title={ this.t('navbar.logout') } link='/login' handleOnClick={ this.handleLogout } dataTest='logout-nav-link'/>
         </ul>
       );
     }
@@ -73,13 +60,13 @@ class NavBar extends React.Component  {
   renderAllAccessLinks = () => {
     if (!this.state.user) {
       return (
-        <ul className="navbar-nav">
-          <li className="nav-item mobile-nav-item">
-            <Link className="nav-link" to="/">Signup</Link>
+        <ul className="navbar-menu-list">
+          <li className="navbar-menu-list-item">
+            <Link className="navbar-menu-list-item-title" to="/">Signup</Link>
           </li>
 
-          <li className="nav-item mobile-nav-item">
-            <Link className="nav-link" to="/login">Login<span className="sr-only">(current)</span></Link>
+          <li className="navbar-menu-list-item">
+            <Link className="navbar-menu-list-item-title" to="/login">Login</Link>
           </li>
         </ul>
       );
@@ -89,18 +76,18 @@ class NavBar extends React.Component  {
   }
 
   render() {
+    this.t = t(this.props.appState.locale);
+
     return (
-      <nav className="navbar-height navbar navbar-expand-xs navbar-expand-sm navbar-expand-md navbar-expand-lg navbar-dark bg-dark">
-        <Link className="navbar-brand" to="">Meal Scheduler</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse justify-content-sm-end" id="navbarNav">
-          <ul className="navbar-nav">
-            { this.renderAuthorisedLinks() }
-            { this.renderAllAccessLinks() }
-          </ul>
+      <nav className="navbar">
+        <div className='navbar-brand'>
+          <Link className="navbar-brand-name" to="">Meal Scheduler</Link>
+          <div className="navbar-brand-logo-wrapper">
+            <img className='navbar-brand-logo' alt='l'></img>
+          </div>
         </div>
+        { this.renderAuthorisedLinks() }
+        { this.renderAllAccessLinks() }
       </nav>
     );
   }

@@ -11,7 +11,8 @@
 }
 
 .footer-copyright {
-  color: white;
+  color: #d6d6d6;
+  font-size: smaller;
 }
 
 @media only screen and (max-width: 649px) {
@@ -28,7 +29,7 @@
   }
   
   .footer-copyright {
-    color: white;
-    font-size: small;
+    color: #d6d6d6;
+    font-size: smaller;
   }
 }

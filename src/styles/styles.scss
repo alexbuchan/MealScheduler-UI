@@ -52,6 +52,9 @@
 
 // Recurring Page Components
 @import '../components/NavBar/styles';
+@import '../components/NavBar/NavBarItem/styles';
+@import '../components/NavBar/NavBarUserProfile/styles';
+@import '../components/NavBar/NavBarLogout/styles';
 @import '../components/Footer/styles';
 @import '../components/FlashMessage/styles';
 

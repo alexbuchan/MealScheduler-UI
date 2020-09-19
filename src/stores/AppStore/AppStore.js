@@ -7,7 +7,7 @@ class AppStore extends Store {
 
     this.appState = {
       locale: 'es',
-      locales: ['en', 'es', 'fr']
+      locales: ['en', 'es', 'fr', 'cat']
     };
   }
 

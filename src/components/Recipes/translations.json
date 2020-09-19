@@ -9,5 +9,17 @@
     "recipes_view": {
       "title": "Mis Recetas"
     }
+  },
+
+  "fr": {
+    "recipes_view": {
+      "title": "Mes Recettes"
+    }
+  },
+
+  "cat": {
+    "recipes_view": {
+      "title": "Les meves recetes"
+    }
   }
 }

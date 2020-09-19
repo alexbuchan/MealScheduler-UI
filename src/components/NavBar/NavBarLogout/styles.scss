@@ -1,0 +1,54 @@
+.navbar-logout {
+  margin: 0 10px 0 10px;
+  list-style: none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  width: 104px;
+
+  .navbar-logout-title {
+    color: #d6d6d6;
+    font-size: small;
+    font-family: Arial;
+    font-variant: petite-caps;
+    color: #bbbbbb;
+    font-weight: 500;
+  }
+
+  .navbar-logout-icon {
+    width: 44%;
+    height: 80%;
+    fill: #e0e0e0;
+  }
+}
+
+.navbar-logout-hover {
+  margin: 0 10px 0 10px;
+  list-style: none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  width: 104px;
+  background-color: #d0e8ff21;
+
+  .navbar-logout-title {
+    color: #d6d6d6;
+    font-size: small;
+    font-family: Arial;
+    font-variant: petite-caps;
+    color: #bbbbbb;
+    font-weight: 500;
+  }
+
+  .navbar-logout-icon {
+    width: 44%;
+    height: 80%;
+    fill: white;
+  }
+} 
