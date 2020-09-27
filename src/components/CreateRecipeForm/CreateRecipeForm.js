@@ -23,23 +23,24 @@ class CreateRecipeForm extends React.Component {
 
     this.uploadMainImageRef = React.createRef();
     this.uploadRecipeImagesRef = React.createRef();
+    this.state = {
+      form: {
+        name: '',
+        preparationTime: '',
+        cookingTime: [],
+        difficulty: '',
+        steps: [],
+        measureSystem: RecipeStore.getRecipesState().measureSystems.find(system => system.name === 'metric'),
+        selectedIngredients: [],
+        comments: '',
+        images: []
+      },
+      ingredients: RecipeStore.getRecipesState().ingredients,
+      measureSystems: RecipeStore.getRecipesState().measureSystems,
+      order_index: 0
+    }
   }
-  state = {
-    form: {
-      name: '',
-      preparationTime: '',
-      cookingTime: [],
-      difficulty: '',
-      steps: [],
-      measureSystem: RecipeStore.getRecipesState().measureSystems.find(system => system.name === 'metric'),
-      selectedIngredients: [],
-      comments: '',
-      images: []
-    },
-    ingredients: RecipeStore.getRecipesState().ingredients,
-    measureSystems: RecipeStore.getRecipesState().measureSystems,
-    order_index: 0
-  }
+
 
   _onChange = () => {
     const form = { ...this.state.form };
@@ -162,21 +163,26 @@ class CreateRecipeForm extends React.Component {
     );
   }
 
-  onChangeHandler = (ev, image_type, step=null) => {
+  handleImageUpload = (ev, image_type, step=null) => {
     let imageObject = { file: ev.target.files[0] , image_type, order_index: this.state.order_index, step: step };
+    let form = { ...this.state.form };
 
     switch(image_type) {
       case 'main_image':
         const main_image_index = this.state.form.images.findIndex(image => image.image_type === 'main_image');
-        if (main_image_index > 0) this.state.form.images.splice(main_image_index, 1, imageObject);
-        else this.state.form.images.push(imageObject);
+
+        if (main_image_index > 0) {
+          form.images.splice(main_image_index, 1, imageObject);
+        } else {
+          form.images.push(imageObject);
+        }
         break;
       default:
-        this.state.form.images.push(imageObject);
+        form.images.push(imageObject);
         break;
     }
 
-    this.setState({ order_index: this.state.order_index + 1 });
+    this.setState({ order_index: this.state.order_index + 1, form });
   }
 
   deleteUploadedImage = (image_type) => {
@@ -251,6 +257,10 @@ class CreateRecipeForm extends React.Component {
     }
 
     return [];
+  }
+
+  allowSameFileUpload = (ev) => {
+    ev.target.value = null;
   }
 
   render() {
@@ -365,7 +375,7 @@ class CreateRecipeForm extends React.Component {
               <div className='create-recipe-form-row-wrapper'>
                 <RecipeStepsWrapper
                   updateStepValues={ this.handleUpdateStepValues }
-                  handleStepsImageUpload={ this.onChangeHandler }
+                  handleStepsImageUpload={ this.handleImageUpload }
                   previewUploadImages={ this.stepPreviewImages() }
                 />
               </div>
@@ -426,8 +436,20 @@ class CreateRecipeForm extends React.Component {
               </div>
             </div>
           </div>
-          <input type="file" hidden onChange={ ev => this.onChangeHandler(ev, 'main_image') } ref={ this.uploadMainImageRef }/>
-          <input type="file" multiple hidden onChange={ ev => this.onChangeHandler(ev, 'recipe_images') } ref={ this.uploadRecipeImagesRef }/>
+          <input
+            type="file"
+            hidden onChange={ ev => this.handleImageUpload(ev, 'main_image') }
+            onClick={ this.allowSameFileUpload }
+            ref={ this.uploadMainImageRef }
+          />
+          <input
+            type="file"
+            multiple
+            hidden
+            onChange={ ev => this.handleImageUpload(ev, 'recipe_images') }
+            onClick={ this.allowSameFileUpload }
+            ref={ this.uploadRecipeImagesRef }
+          />
         </Form>
       </div>
     );
