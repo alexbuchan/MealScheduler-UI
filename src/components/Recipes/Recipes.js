@@ -14,7 +14,8 @@ import { Dropdown, Input } from 'semantic-ui-react';
 import AddButton from '../../assets/images/svg/plus.svg';
 
 const propTypes = {
-  recipes: PropTypes.array
+  recipes: PropTypes.array,
+  locale: PropTypes.string
 };
 
 class Recipes extends React.Component {
@@ -38,11 +39,11 @@ class Recipes extends React.Component {
 
   searchOptions = () => {
     return [
-      { value: 'name', text: 'name' },
-      { value: 'difficulty', text: 'difficulty' },
-      { value: 'measure_system', text: 'measure_system' },
-      { value: 'preparation_time', text: 'preparation_time' },
-      { value: 'cooking_time', text: 'cooking_time' }
+      { value: 'name', text: this.t('recipes_view.recipes_navbar.searchbar.options.name') },
+      { value: 'difficulty', text: this.t('recipes_view.recipes_navbar.searchbar.options.difficulty') },
+      { value: 'measure_system', text: this.t('recipes_view.recipes_navbar.searchbar.options.measure_system') },
+      { value: 'preparation_time', text: this.t('recipes_view.recipes_navbar.searchbar.options.preparation_time') },
+      { value: 'cooking_time', text: this.t('recipes_view.recipes_navbar.searchbar.options.cooking_time') }
     ];
   }
 
@@ -101,7 +102,7 @@ class Recipes extends React.Component {
                 <Input
                   icon='search'
                   iconPosition='left'
-                  placeholder='Search...'
+                  placeholder={ this.t('recipes_view.recipes_navbar.searchbar.placeholder') }
                   label={ <Dropdown defaultValue='name' options={ this.searchOptions() } onChange={ this.handleRecipeSearchType } /> }
                   labelPosition='right'
                   onChange={ this.handleRecipeSearch }
@@ -111,7 +112,7 @@ class Recipes extends React.Component {
 
               <div className='recipes-create-recipe-wrapper'>
                 <div className='recipes-create-recipe'>
-                  <p className='recipes-create-recipe-label'>Create Recipe</p>
+                  <p className='recipes-create-recipe-label'>{ this.t('recipes_view.recipes_navbar.create_recipe') }</p>
                   <button className='recipes-create-recipe-button' onClick={ this.handleOpenModal }>
                     <AddButton className='recipes-create-recipe-icon' />
                   </button>
@@ -121,7 +122,7 @@ class Recipes extends React.Component {
           </div>
 
           <div className='recipes-list'>
-            <RecipesContainer recipes={ this.state.filteredRecipes }/>
+            <RecipesContainer recipes={ this.state.filteredRecipes } t={ this.t }/>
           </div>
         </div>
         { this.renderModal() }

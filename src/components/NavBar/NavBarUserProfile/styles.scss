@@ -1,10 +1,18 @@
 .navbar-menu-profile {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+
+  .user-profile {
+    color:  #d6d6d6;
+    margin-top: 5px;
+    font-family: Arial;
+    font-size: small;
+  }
 
   .user-profile-wrapper {
-    width: 60px;
-    height: 80%;
+    width: 38px;
+    height: 60%;
     border-radius: 50%;
     background-color: #e0e0e0;
     display: flex;
@@ -21,6 +29,34 @@
   }
 }
 
-.user-profile {
-  color:  #d6d6d6;
+.navbar-menu-profile-hover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #d0e8ff21;
+
+  .user-profile {
+    color:  white;
+    margin-top: 5px;
+    font-family: Arial;
+    font-size: small;
+  }
+
+  .user-profile-wrapper {
+    width: 38px;
+    height: 60%;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+
+    .user-profile-icon {
+      height: 100%;
+      width: 100%;
+      margin: 5px;
+      fill: gray;
+    }
+  }
 }

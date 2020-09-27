@@ -9,14 +9,21 @@ import RecipeStore from '../../stores/RecipeStore/RecipeStore';
 
 // IMPORT COMPONENTS
 import Form from '../Form/Form';
-import { Dropdown } from 'semantic-ui-react';
+import { Button, Dropdown } from 'semantic-ui-react';
 import RecipeStepsWrapper from '../RecipeStepsWrapper/RecipeStepsWrapper';
 import RecipeIngredientsWrapper from '../RecipeIngredientWrapper/RecipeIngredientsWrapper';
-import { Input } from 'semantic-ui-react'
+import { Input, Icon } from 'semantic-ui-react'
+import Carousel from '../Carousel/Carousel';
 
 const propTypes = {};
 
 class CreateRecipeForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.uploadMainImageRef = React.createRef();
+    this.uploadRecipeImagesRef = React.createRef();
+  }
   state = {
     form: {
       name: '',
@@ -26,10 +33,12 @@ class CreateRecipeForm extends React.Component {
       steps: [],
       measureSystem: RecipeStore.getRecipesState().measureSystems.find(system => system.name === 'metric'),
       selectedIngredients: [],
-      comments: ''
+      comments: '',
+      images: []
     },
     ingredients: RecipeStore.getRecipesState().ingredients,
-    measureSystems: RecipeStore.getRecipesState().measureSystems
+    measureSystems: RecipeStore.getRecipesState().measureSystems,
+    order_index: 0
   }
 
   _onChange = () => {
@@ -56,10 +65,10 @@ class CreateRecipeForm extends React.Component {
   handleOnSubmit = () => {
     const ingredientsArray = this.state.form.selectedIngredients.map(ingredient => {
       return {
-        ingredient_id: this.findIngredientId(ingredient.ingredient), 
-        amount: ingredient.amount, 
+        ingredient_id: this.findIngredientId(ingredient.ingredient),
+        amount: ingredient.amount,
         measure_unit_id: this.findMeasureUnitId(ingredient.unitOfMeasurement)
-      } 
+      }
     });
 
     let stepsArray = this.state.form.steps.map(step => {
@@ -153,6 +162,97 @@ class CreateRecipeForm extends React.Component {
     );
   }
 
+  onChangeHandler = (ev, image_type, step=null) => {
+    let imageObject = { file: ev.target.files[0] , image_type, order_index: this.state.order_index, step: step };
+
+    switch(image_type) {
+      case 'main_image':
+        const main_image_index = this.state.form.images.findIndex(image => image.image_type === 'main_image');
+        if (main_image_index > 0) this.state.form.images.splice(main_image_index, 1, imageObject);
+        else this.state.form.images.push(imageObject);
+        break;
+      default:
+        this.state.form.images.push(imageObject);
+        break;
+    }
+
+    this.setState({ order_index: this.state.order_index + 1 });
+  }
+
+  deleteUploadedImage = (image_type) => {
+    switch(image_type) {
+      case 'main_image':
+        const main_image_index = this.state.form.images.findIndex(image => image.image_type === 'main_image');
+        let form = { ...this.state.form };
+        form.images.splice(main_image_index, 1);
+        this.setState({ form });
+        break;
+      default:
+        break;
+    }
+  }
+
+  displayMainImage = () => {
+    const main_image_index = this.state.form.images.findIndex(image => image.image_type === 'main_image');
+    if (main_image_index >= 0) {
+      return (
+        <div className='upload-recipe-main-image-preview-div'>
+          <img
+            className='upload-recipe-main-image-preview'
+            src={URL.createObjectURL(this.state.form.images[main_image_index].file) }
+            onClick={ () => this.deleteUploadedImage('main_image') }
+          ></img>
+        </div>
+      );
+    }
+
+    return (
+      <div className='label-wrapper-upload-image'>
+        <label className='label-upload-image'>Main recipe image</label>
+      </div>
+    );
+  }
+
+  displayRecipeImages = () => {
+    const recipe_images = this.state.form.images.filter(image => image.image_type === 'recipe_images');
+    const settings = {
+      visibleSlides: 3,
+      totalSlides: recipe_images.length,
+      step: 3,
+      dragStep: 1,
+      naturalSlideWidth: 400,
+      naturalSlideHeight: 500
+    };
+
+    if (recipe_images.length > 0) {
+      return (
+        <Carousel settings={ settings } >
+          { recipe_images.map((image, index) => {
+              return (
+                <div key={ index } className='upload-recipe-images-preview-div'>
+                  <img className='upload-recipe-images-preview' src={ URL.createObjectURL(image.file) }></img>
+                </div>
+              )
+          }) }
+        </Carousel>
+      );
+    }
+
+    return (
+      <div className='label-wrapper-upload-image'>
+        <label className='label-upload-image'>Add more photos to your recipe's image gallery</label>
+      </div>
+    );
+  }
+
+  stepPreviewImages = () => {
+    if (this.state.form.images.length > 0) {
+      return this.state.form.images.filter(image => image.image_type === 'steps_image');
+    }
+
+    return [];
+  }
+
   render() {
     return (
       <div className='create-recipe-body'>
@@ -162,10 +262,10 @@ class CreateRecipeForm extends React.Component {
           onSubmit={ this.handleOnSubmit }
         >
           <div className='create-recipe-form'>
-            <div className='create-recipe-form-row'>
+            <div className='create-recipe-form-row-2-columns'>
               <div className='create-recipe-form-row-item-wrapper'>
                 <div className='create-recipe-form-row-name'>
-                  <div className='label-wrapper'>
+                  <div className='label-wrapper-2-columns'>
                     <label className='label'>Name</label>
                   </div>
                   <Input
@@ -179,7 +279,7 @@ class CreateRecipeForm extends React.Component {
 
               <div className='create-recipe-form-row-item-wrapper'>
                 <div className='create-recipe-form-row-recipe-difficulty'>
-                  <div className='label-wrapper'>
+                  <div className='label-wrapper-2-columns'>
                     <label className='label'>Difficulty</label>
                   </div>
                   <Dropdown
@@ -193,10 +293,10 @@ class CreateRecipeForm extends React.Component {
               </div>
             </div>
 
-            <div className='create-recipe-form-row'>
+            <div className='create-recipe-form-row-2-columns'>
               <div className='create-recipe-form-row-item-wrapper'>
                 <div className='create-recipe-form-row-name'>
-                  <div className='label-wrapper'>
+                  <div className='label-wrapper-2-columns'>
                     <label className='label'>Preparation Time</label>
                   </div>
                   <Input
@@ -214,27 +314,27 @@ class CreateRecipeForm extends React.Component {
 
               <div className='create-recipe-form-row-item-wrapper'>
                 <div className='create-recipe-form-row-name'>
-                  <div className='label-wrapper'>
-                      <label className='label'>Cooking Time</label>
-                    </div>
-                    <Input
-                      className='name-text-input'
-                      placeholder='Cooking Time'
-                      name='cookingTime'
-                      type='number'
-                      min={ 0 }
-                      label={ { tag: false, content: 'minutes' } }
-                      labelPosition='right'
-                      onChange={ this.handleTextFieldChange }
-                    />
+                  <div className='label-wrapper-2-columns'>
+                    <label className='label'>Cooking Time</label>
+                  </div>
+                  <Input
+                    className='name-text-input'
+                    placeholder='Cooking Time'
+                    name='cookingTime'
+                    type='number'
+                    min={ 0 }
+                    label={ { tag: false, content: 'minutes' } }
+                    labelPosition='right'
+                    onChange={ this.handleTextFieldChange }
+                  />
                 </div>
               </div>
             </div>
 
-            <div className='create-recipe-form-row'>
+            <div className='create-recipe-form-row-2-columns'>
               <div className='create-recipe-form-row-item-wrapper'>
                 <div className='create-recipe-form-row-name'>
-                  <div className='label-wrapper'>
+                  <div className='label-wrapper-2-columns'>
                     <label className='label'>Measurement System</label>
                   </div>
                   <Dropdown
@@ -251,8 +351,8 @@ class CreateRecipeForm extends React.Component {
               { this.renderInvisibleColumn() }
             </div>
 
-            <div className='create-recipe-form-row create-recipe-form-row-4'>
-              <div className='create-recipe-form-row-ingredients-wrapper'>
+            <div className='create-recipe-form-row-1-column'>
+              <div className='create-recipe-form-row-wrapper'>
                 <RecipeIngredientsWrapper
                   updateIngredientValues={ this.handleUpdateIngredientValues }
                   ingredients={ this.state.ingredients }
@@ -261,15 +361,21 @@ class CreateRecipeForm extends React.Component {
               </div>
             </div>
 
-            <div className='create-recipe-form-row create-recipe-form-row-5'>
-              <div className='create-recipe-form-row-steps-wrapper'>
-                <RecipeStepsWrapper updateStepValues={ this.handleUpdateStepValues }/>
+            <div className='create-recipe-form-row-1-column'>
+              <div className='create-recipe-form-row-wrapper'>
+                <RecipeStepsWrapper
+                  updateStepValues={ this.handleUpdateStepValues }
+                  handleStepsImageUpload={ this.onChangeHandler }
+                  previewUploadImages={ this.stepPreviewImages() }
+                />
               </div>
             </div>
 
-            <div className='create-recipe-form-row create-recipe-form-row-6'>
-              <div className='create-recipe-form-row-comments'>
-                <label className='create-recipe-form-row-comments-label'>Comments</label>
+            <div className='create-recipe-form-row-1-column'>
+              <div className='create-recipe-form-row-wrapper'>
+                <div className='label-wrapper-1-column'>
+                  <label className='label'>Comments</label>
+                </div>
                 <textarea
                   className='create-recipe-form-row-comments-textarea'
                   name='comments'
@@ -279,7 +385,49 @@ class CreateRecipeForm extends React.Component {
                 </textarea>
               </div>
             </div>
+
+            <div className='create-recipe-form-row-1-column'>
+              <div className='create-recipe-form-row-wrapper'>
+                <div className='upload-recipe-images-wrapper'>
+                  <div className='upload-recipe-images-button-wrapper'>
+                    <Button
+                      className='upload-recipe-images-button'
+                      name='upload-main-image'
+                      onClick={ () => this.uploadMainImageRef.current.click() }
+                    >
+                      <Icon name='upload' size='large' className='upload-recipe-images-icon' />
+                    </Button>
+                  </div>
+
+                  <div className='upload-recipe-images-preview-wrapper'>
+                    { this.displayMainImage() }
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className='create-recipe-form-row-1-column'>
+              <div className='create-recipe-form-row-wrapper'>
+                <div className='upload-recipe-images-wrapper'>
+                  <div className='upload-recipe-images-button-wrapper'>
+                    <Button
+                      className='upload-recipe-images-button'
+                      name='upload-recipe-images'
+                      onClick={ () => this.uploadRecipeImagesRef.current.click() }
+                    >
+                      <Icon name='upload' size='large' className='upload-recipe-images-icon' />
+                    </Button>
+                  </div>
+
+                  <div className='upload-recipe-images-preview-wrapper'>
+                    { this.displayRecipeImages() }
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <input type="file" hidden onChange={ ev => this.onChangeHandler(ev, 'main_image') } ref={ this.uploadMainImageRef }/>
+          <input type="file" multiple hidden onChange={ ev => this.onChangeHandler(ev, 'recipe_images') } ref={ this.uploadRecipeImagesRef }/>
         </Form>
       </div>
     );

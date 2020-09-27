@@ -14,7 +14,12 @@ import withLoader from '../../HOC/Loader/Loader';
 import Background from '../../components/Background/Background';
 import Recipes from '../../components/Recipes/Recipes';
 
-const propTypes = {};
+const propTypes = {
+  appState: PropTypes.shape({
+    locale: PropTypes.string,
+    locales: PropTypes.array
+  })
+};
 
 class RecipesView extends React.Component {
   constructor() {

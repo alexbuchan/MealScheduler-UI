@@ -235,11 +235,33 @@ class CreateEventForm extends React.Component {
                     <label className='label'>Recipes</label>
                   </div>
                   <Dropdown
+                    className='create-event-form-row-recipes-dropdown'
                     placeholder='Search Recipes'
                     fluid
                     multiple
                     search
                     selection
+                    options={ this.recipes() }
+                    onChange={ this.handleRecipesChange }
+                  />
+                </div>
+              </div>
+
+              { this.renderDateFrequency() }
+            </div>
+
+            <div className='create-event-form-row create-event-form-row-3'>
+              <div className='create-event-form-column create-event-form-row-recipes-wrapper'>
+                <div className='create-event-form-row-recipes'>
+                  <div className='label-wrapper'>
+                    <label className='label'>Recipes</label>
+                  </div>
+                  <Input
+                    icon='tags'
+                    iconPosition='left'
+                    label={{ tag: true, content: 'Add Tag' }}
+                    labelPosition='right'
+                    placeholder='Enter tags'
                     options={ this.recipes() }
                     onChange={ this.handleRecipesChange }
                   />

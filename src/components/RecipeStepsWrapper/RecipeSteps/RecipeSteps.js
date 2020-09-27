@@ -1,9 +1,9 @@
 import React from 'react';
 
-const RecipeSteps = ({ steps }) => {
+const RecipeSteps = ({ steps, handleStepsImageUpload, previewUploadImages }) => {
   return (
     <>
-      { steps.map(child => child) }
+      { steps.map(child => { return React.cloneElement(child, { handleStepsImageUpload, previewUploadImages }) }) }
     </>
   );
 }

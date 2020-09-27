@@ -1,25 +1,81 @@
 {
   "en": {
     "settings": {
-      "page_title": "Settings"
+      "page_title": "Settings",
+
+      "user_details": {
+        "title": "User Details",
+        "form": {
+          "edit": "Edit",
+          "username": "Username",
+          "email": "Email",
+          "submit": "Submit"
+        }
+      },
+
+      "change_language": {
+        "label": "Change Language"
+      }
     }
   },
 
   "es": {
     "settings": {
-      "page_title": "Ajustes"
+      "page_title": "Ajustes",
+
+      "user_details": {
+        "title": "Detalles del usuario",
+        "form": {
+          "edit": "Editar",
+          "username": "Nombre de usuario",
+          "email": "Correo electrónico",
+          "submit": "Enviar"
+        }
+      },
+
+      "change_language": {
+        "label": "Cambiar de idioma"
+      }
     }
   },
 
   "fr": {
     "settings": {
-      "page_title": "Paramètres"
+      "page_title": "Paramètres",
+
+      "user_details": {
+        "title": "Détails de l'utilisateur",
+        "form": {
+          "edit": "Éditer",
+          "username": "Nom d'utilisateur",
+          "email": "Email",
+          "submit": "Soumettre"
+        }
+      },
+
+      "change_language": {
+        "label": "Changer de langue"
+      }
     }
   },
 
   "cat": {
     "settings": {
-      "page_title": "Configuració"
+      "page_title": "Configuració",
+
+      "user_details": {
+        "title": "Detalls del usuari",
+        "form": {
+          "edit": "Editar",
+          "username": "Nom d'usuari",
+          "email": "Correu electrònic",
+          "submit": "Submit"
+        }
+      },
+
+      "change_language": {
+        "label": "Canviar d'idioma"
+      }
     }
   }
 }

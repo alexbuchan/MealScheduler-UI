@@ -59,7 +59,8 @@ class RecipeActions {
       measure_system_id: recipe.measureSystem.id,
       recipe_ingredients_attributes: recipe.selectedIngredients,
       steps: recipe.steps,
-      comments: recipe.comments
+      comments: recipe.comments,
+      images: recipe.images
     };
 
     let error, response;

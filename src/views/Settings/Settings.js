@@ -63,7 +63,7 @@ class Settings extends React.Component {
 
   renderEditClick = () => {
     if (!this.state.edit) {
-      return <button data-test='edit-button' className="edit-form-button" onClick={ this.handleEditClick }>Edit</button>;
+      return <button data-test='edit-button' className="edit-form-button" onClick={ this.handleEditClick }>{ this.t('settings.user_details.form.edit') }</button>;
     }
 
     return null;
@@ -114,52 +114,66 @@ class Settings extends React.Component {
         <h1 className="settings-header">{ this.t('settings.page_title') }</h1>
 
         <div className="settings">
-          <div className="user-signup">
-            <div className="user-details">
-              <h4 className="user-details-title">User Details</h4>
-              { this.renderEditClick() }
-              { this.renderCancelEditClick() }
+          <section className="settings-section">
+            <div className='settings-subsection'>
+              <div className="subsection-title-wrapper">
+                <h4 className="subsection-title">{ this.t('settings.user_details.title') }</h4>
+              </div>
 
+              <div className='settings-subsection-body'>
+                <div className='user-settings-body-nav'>
+                  { this.renderEditClick() }
+                  { this.renderCancelEditClick() }
+                </div>
+
+                <Form
+                disableSubmitButton={ this.state.disableSubmitButton }
+                submitButtonLabel={ this.t('settings.user_details.form.submit') }
+                validate={ true }
+                fields={ fields }
+                areRequired={ ['username', 'email'] }
+                onSubmit={ this.handleOnSubmit }
+                >
+                  <TextField
+                    label={ this.t('settings.user_details.form.username') }
+                    name='username'
+                    type='text'
+                    value={ this.state.username }
+                    disabled={ !this.state.edit }
+                    onChange={ this.handleOnChange }
+                    isRequired={ true }
+                  />
+
+                  <TextField
+                    label={ this.t('settings.user_details.form.email') }
+                    name='email'
+                    type='text'
+                    value={ this.state.email }
+                    onChange={ this.handleOnChange }
+                    disabled={ !this.state.edit }
+                    isRequired={ true }
+                  />
+                </Form>
+              </div>
             </div>
 
-            <Form
-              disableSubmitButton={ this.state.disableSubmitButton }
-              validate={ true }
-              fields={ fields }
-              areRequired={ ['username', 'email'] }
-              onSubmit={ this.handleOnSubmit }
-            >
-              <TextField
-                label='Username'
-                name='username'
-                type='text'
-                value={ this.state.username }
-                disabled={ !this.state.edit }
-                onChange={ this.handleOnChange }
-                isRequired={ true }
-              />
-
-              <TextField
-                label='Email'
-                name='email'
-                type='text'
-                value={ this.state.email }
-                onChange={ this.handleOnChange }
-                disabled={ !this.state.edit }
-                isRequired={ true }
-              />
-            </Form>
-          </div>
-
-          <Dropdown
-            placeholder='Language'
-            fluid
-            search
-            selection
-            value={ this.props.props.locale }
-            options={ this.appLocales() }
-            onChange={ this.handleLocaleChange }
-          />
+            <div className='settings-subsection'>
+              <div className="subsection-title-wrapper">
+                <h4 className='subsection-title'>{ this.t('settings.change_language.label') }</h4>
+              </div>
+              <div className='settings-subsection-body'>
+                <Dropdown
+                  fluid
+                  search
+                  selection
+                  value={ this.props.props.locale }
+                  options={ this.appLocales() }
+                  onChange={ this.handleLocaleChange }
+                  className='settings-change-language-dropdown'
+                />
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     );

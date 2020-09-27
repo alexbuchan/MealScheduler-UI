@@ -1,5 +1,9 @@
 export const translate = (translations) => (locale) => (path) => {
-  return getNestedValue(translations, `${locale}.${path}`);
+  try {
+    return getNestedValue(translations, `${locale}.${path}`);
+  } catch(err) {
+    return `I18n: Translation missing for ${locale}.${path}`
+  }
 }
 
 const getNestedValue = (obj, path) => {

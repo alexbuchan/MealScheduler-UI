@@ -36,7 +36,7 @@
   
         .recipes-search-bar {
           width: 66%;
-          padding: 0 50px 0 50px;
+          margin: 0 50px 0 50px;
   
           .recipes-search-bar-input {
             width: 100%;
@@ -54,10 +54,11 @@
             align-items: center;
   
             .recipes-create-recipe-label {
-              font-size: medium;
+              font-size: small;
               font-weight: 100;
               font-stretch: extra-expanded;
               color: #565656;
+              width: 80px;
             }
   
             .recipes-create-recipe-button {

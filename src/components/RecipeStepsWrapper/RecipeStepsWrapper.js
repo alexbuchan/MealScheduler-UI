@@ -26,20 +26,26 @@ class RecipeStepsWrapper extends React.Component {
     this.setState({ stepValues });
   }
 
+  handleImageUpload = (ev, index) => {
+    this.props.handleStepsImageUpload(ev, 'steps_image', index);
+  }
+
   handleAddStep = () => {
     const childrenArray = [...this.state.childrenArray];
     const stepValues = [...this.state.stepValues];
     stepValues.push({ step: childrenArray.length + 1, value: '' });
 
     childrenArray.push(
-      <RecipeStep 
-        key={ uuidv4() } 
+      <RecipeStep
+        key={ uuidv4() }
         index={ childrenArray.length }
         handleOnChange={ this.handleRecipeStepChange }
-        handleDeleteStep={ this.handleDeleteStep } 
+        handleDeleteStep={ this.handleDeleteStep }
         handleAddStep={ this.handleAddStep }
+        handleImageUpload={ this.handleImageUpload }
         label={ `Step ${ childrenArray.length + 1 }` }
         name={ `step${ childrenArray.length + 1 }` }
+        previewUploadImages={ this.props.previewUploadImages }
         value=''
       />
     );
@@ -59,7 +65,7 @@ class RecipeStepsWrapper extends React.Component {
 
     const updatedChildrenArray = childrenArray.map((child, index) => {
       return React.cloneElement(
-        child, 
+        child,
         { index, label: `Step ${ index + 1 }`, name: `step${ index + 1 }` }
       );
     });
@@ -91,11 +97,11 @@ class RecipeStepsWrapper extends React.Component {
         </div>
 
         <div className='recipe-steps-body'>
-          <RecipeSteps steps={ this.state.childrenArray } />
+          <RecipeSteps steps={ this.state.childrenArray } previewUploadImages={ this.props.previewUploadImages } />
         </div>
       </div>
     );
   }
 }
- 
+
 export default RecipeStepsWrapper;

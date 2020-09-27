@@ -1,25 +1,93 @@
 {
   "en": {
     "recipes_view": {
-      "title": "My Recipes"
+      "title": "My Recipes",
+      "recipes_navbar": {
+        "searchbar": {
+          "placeholder": "Search...",
+          "options": {
+            "name": "name",
+            "difficulty": "difficulty",
+            "measure_system": "measure system",
+            "preparation_time": "preparation time",
+            "cooking_time": "cooking time"
+          }
+        },
+        "create_recipe": "Create Recipe"
+      },
+      "time": {
+        "minute": "minute",
+        "minutes": "minutes"
+      }
     }
   },
 
   "es": {
     "recipes_view": {
-      "title": "Mis Recetas"
+      "title": "Mis Recetas",
+      "recipes_navbar": {
+        "searchbar": {
+          "placeholder": "Buscar...",
+          "options": {
+            "name": "nombre",
+            "difficulty": "dificultad",
+            "measure_system": "sistema de medida",
+            "preparation_time": "tiempo de preparación",
+            "cooking_time": "tiempo de cocción"
+          }
+        },
+        "create_recipe": "Crear Receta"
+      },
+      "time": {
+        "minute": "minuto",
+        "minutes": "minutos"
+      }
     }
   },
 
   "fr": {
     "recipes_view": {
-      "title": "Mes Recettes"
+      "title": "Mes Recettes",
+      "recipes_navbar": {
+        "searchbar": {
+          "placeholder": "Chercher...",
+          "options": {
+            "name": "nom",
+            "difficulty": "difficulté",
+            "measure_system": "système de mesure",
+            "preparation_time": "temps de préparation",
+            "cooking_time": "temps de cuisson"
+          }
+        },
+        "create_recipe": "Créer Recette"
+      },
+      "time": {
+        "minute": "minute",
+        "minutes": "minutes"
+      }
     }
   },
 
   "cat": {
     "recipes_view": {
-      "title": "Les meves recetes"
+      "title": "Les meves recetes",
+      "recipes_navbar": {
+        "searchbar": {
+          "placeholder": "Cercar...",
+          "options": {
+            "name": "nom",
+            "difficulty": "dificultat",
+            "measure_system": "sistema de mesura",
+            "preparation_time": "temps de preparació",
+            "cooking_time": "temps de cocció"
+          }
+        },
+        "create_recipe": "Crear Receta"
+      },
+      "time": {
+        "minute": "minut",
+        "minutes": "minuts"
+      }
     }
   }
 }

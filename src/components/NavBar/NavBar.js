@@ -47,8 +47,7 @@ class NavBar extends React.Component  {
         <ul className="navbar-menu-list">
           <NavBarItem title={ this.t('navbar.schedule') } link='/schedule'/>
           <NavBarItem title={ this.t('navbar.recipes') } link='/recipes'/>
-          <NavBarItem title={ this.t('navbar.settings') } link='/settings'/>
-          <NavBarUserProfile username={ this.state.user.username } link='/schedule'/>
+          <NavBarUserProfile username={ this.state.user.username } link='/settings'/>
           <NavBarLogout title={ this.t('navbar.logout') } link='/login' handleOnClick={ this.handleLogout } dataTest='logout-nav-link'/>
         </ul>
       );
