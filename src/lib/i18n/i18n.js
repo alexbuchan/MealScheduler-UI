@@ -1,4 +1,7 @@
+import genericTranslations from './genericTranslations.json';
+
 export const translate = (translations) => (locale) => (path) => {
+  translations = mergeGenericTranslations(translations);
   try {
     return getNestedValue(translations, `${locale}.${path}`);
   } catch(err) {
@@ -10,6 +13,11 @@ const getNestedValue = (obj, path) => {
   return path
     .split('.')
     .reduce((result, key) => result[key], obj);
+}
+
+const mergeGenericTranslations = (viewTranslations) => {
+  Object.entries(genericTranslations).forEach(genericTrans => Object.assign(viewTranslations[genericTrans[0]], genericTrans[1]));
+  return viewTranslations;
 }
 
 // Usage:

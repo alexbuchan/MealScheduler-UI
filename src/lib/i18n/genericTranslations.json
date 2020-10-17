@@ -1,0 +1,57 @@
+{
+  "en": {
+    "time": {
+      "minute": "minute",
+      "minutes": "minutes"
+    },
+    "recipe_attributes": {
+      "name": "Name",
+      "difficulty": "Difficulty",
+      "measurement_system": "Measure system",
+      "preparation_time": "Preparation time",
+      "cooking_time": "Cooking time"
+    }
+  },
+
+  "es": {
+    "time": {
+      "minute": "minuto",
+      "minutes": "minutos"
+    },
+    "recipe_attributes": {
+      "name": "Nombre",
+      "difficulty": "Dificultad",
+      "measurement_system": "Sistema de medida",
+      "preparation_time": "Tiempo de preparación",
+      "cooking_time": "Tiempo de cocción"
+    }
+  },
+
+  "fr": {
+    "time": {
+      "minute": "minute",
+      "minutes": "minutes"
+    },
+    "recipe_attributes": {
+      "name": "Nom",
+      "difficulty": "Difficulté",
+      "measurement_system": "Système de mesure",
+      "preparation_time": "Temps de préparation",
+      "cooking_time": "Temps de cuisson"
+    }
+  },
+
+  "cat": {
+    "time": {
+      "minute": "minut",
+      "minutes": "minuts"
+    },
+    "recipe_attributes": {
+      "name": "Nom",
+      "difficulty": "Dificultat",
+      "measurement_system": "Sistema de mesura",
+      "preparation_time": "Temps de preparació",
+      "cooking_time": "Temps de cocció"
+    }
+  }
+}

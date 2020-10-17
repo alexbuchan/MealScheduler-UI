@@ -1,0 +1,60 @@
+.custom-button {
+  background: none;
+  border-radius: 15px;
+}
+
+.custom-button-label {
+  margin: 0;
+  padding: 0;
+}
+
+.type-normal-button {
+  border: 2px solid #3399FF;
+}
+
+.type-normal-button-label {
+  color: #3399FF;
+}
+
+.type-warning-button {
+  border: 2px solid red;
+}
+
+.type-warning-button-label {
+  color: red;
+}
+
+.type-urgent-button {
+  border: 2px solid red;
+}
+
+.type-urgent-button-label {
+  color: red;
+}
+
+.size-small-button {
+  width: 60px;
+  height: 38px;
+  margin: 0 10px 0 10px;
+}
+
+.size-small-button-label {
+}
+
+.size-medium-button {
+  width: 60px;
+  height: 38px;
+  margin: 0 10px 0 10px;
+}
+
+.size-medium-button-label {
+}
+
+.size-large-button {
+  width: 60px;
+  height: 38px;
+  margin: 0 10px 0 10px;
+}
+
+.size-large-button-label {
+}

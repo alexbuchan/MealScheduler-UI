@@ -80,6 +80,7 @@ class CreateRecipeForm extends React.Component {
     const form = { ...this.state.form };
     form.selectedIngredients = ingredientsArray;
     form.steps = stepsArray.flat().flat().join('-');
+    // form.steps = stepsArray.flat().flat().join('-#*#-');
     RecipeActions.createRecipe(form);
     this.props.closeModal();
   }
