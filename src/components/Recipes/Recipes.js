@@ -10,12 +10,17 @@ import Modal from '../../components/Modal/Modal';
 import CreateRecipeForm from '../../components/CreateRecipeForm/CreateRecipeForm';
 import { Dropdown, Input } from 'semantic-ui-react';
 
+// IMPORT HOCS
+import withLoader from '../../HOC/Loader/Loader';
+
 // IMPORT ICONS
 import AddButton from '../../assets/images/svg/plus.svg';
 
 const propTypes = {
   recipes: PropTypes.array,
-  locale: PropTypes.string
+  locale: PropTypes.string,
+  isLoading: PropTypes.bool,
+  handleDeleteRecipe: PropTypes.func
 };
 
 class Recipes extends React.Component {
@@ -24,7 +29,9 @@ class Recipes extends React.Component {
     this.state = {
       filteredRecipes: this.props.recipes,
       openModal: false,
-      recipeSearchType: 'name'
+      recipeSearchType: 'name',
+      deleting: false,
+      deletingRecipeId: -1
     }
 
     this.t = t(this.props.locale);
@@ -33,7 +40,7 @@ class Recipes extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.recipes !== this.props.recipes) {
-      this.setState({ filteredRecipes: this.props.recipes });
+      this.setState({ filteredRecipes: this.props.recipes, deleting: false });
     }
   }
 
@@ -89,7 +96,25 @@ class Recipes extends React.Component {
     return null;
   }
 
+  renderRecipeDeletingLoader = () => {
+    if (this.state.deleting) {
+      return (
+        <div className='recipe-deleting-loader-wrapper'>
+          <h3 className='recipe-deleting-loader'></h3>
+        </div>
+      );
+    }
+
+    return null;
+  }
+
+  deleteRecipe = (recipe_id) => {
+    this.setState({ deleting: true, deletingRecipeId: recipe_id });
+    this.props.handleDeleteRecipe(recipe_id);
+  }
+
   render() {
+    const RecipesContainerWithLoader = withLoader(RecipesContainer);
     this.t = t(this.props.locale);
 
     return (
@@ -122,7 +147,8 @@ class Recipes extends React.Component {
           </div>
 
           <div className='recipes-list'>
-            <RecipesContainer recipes={ this.state.filteredRecipes } t={ this.t }/>
+            { this.renderRecipeDeletingLoader() }
+            <RecipesContainerWithLoader isLoading={ this.props.isLoading } deletingRecipeId={ this.state.deletingRecipeId } recipes={ this.state.filteredRecipes } t={ this.t } handleDeleteRecipe={ this.deleteRecipe }/>
           </div>
         </div>
         { this.renderModal() }

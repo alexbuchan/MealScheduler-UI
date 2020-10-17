@@ -35,10 +35,11 @@ class RecipeView extends React.Component {
 
   componentDidMount() {
     this.setState({ isLoading: true }, () => {
-      Actions.getRecipeWithId(this.props.id);
-      setTimeout(() => {
-        this.setState({ isLoading: false });
-      }, this.loadingTime);
+      Actions
+        .getRecipeWithId(this.props.id)
+        .then(() => {
+          this.setState({ isLoading: false });
+        });
     });
 
     Store.addChangeListener(this._onChange);
@@ -48,15 +49,30 @@ class RecipeView extends React.Component {
     Store.removeChangeListener(this._onChange);
   }
 
+  mainImageUrl = () => {
+    if (this.state.recipe) {
+      let mainImage = this.state.recipe.images.filter(image => image.image_type === 'main_image');
+      if (mainImage.length === 1) {
+        return mainImage[0].file_name;
+      }
+    }
+
+    return '';
+  }
+
+  s3_bucket_url = () => {
+    return 'https://meal-scheduler-images.s3.eu-west-2.amazonaws.com/'
+  }
+
   render() {
     let { name } = this.state.recipe;
     const RecipeWithLoader = withLoader(Recipe);
-
     return (
       <div className="recipe-view">
         <Background />
         <div className='recipe-view-body-wrapper'>
           <div className='recipe-view-body'>
+            <img src={ `${this.s3_bucket_url()}${this.mainImageUrl()}` }></img>
             <h1 className='recipe-view-title'>{ name }</h1>
             <RecipeWithLoader isLoading={ this.state.isLoading } recipe={ this.state.recipe }/>
           </div>

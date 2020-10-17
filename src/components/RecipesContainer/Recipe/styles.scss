@@ -1,121 +1,275 @@
-.recipe-component {
+.recipe-component-wrapper {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   width: 100%;
-  margin: 15px 0 15px 0;
-  background-color: #eaeaea;
-  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
 
-  .recipe-main-img-wrapper {
+  .recipe-component {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-    border-radius: 50%;
-    width: 75px;
-    height: 68px;
-    margin-right: 10px;
-
-    .recipe-main-img {
-      margin: 1px;
-    }
-  }
-
-  .recipe-body {
-    display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 100%;
+    margin: 15px 0 15px 0;
+    background-color: #eaeaea;
+    padding: 20px;
 
-    .recipe-title-wrapper {
+    .recipe-main-img-wrapper {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      width: 50%;
-      height: 100%;
+      align-items: center;
+      border: 1px solid black;
+      border-radius: 50%;
+      width: 75px;
+      height: 68px;
+      margin-right: 10px;
 
-      .recipe-name {
-        margin: 0;
-        color: #4183c4;
-      }
-
-      .recipe-subtitle-wrapper {
-        display: flex;
-        justify-content: flex-start;
-        font-weight: 600;
-        color: #777777;
-
-        .recipe-preparation-time-wrapper {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-start;
-          margin-right: 5px;
-
-          .recipe-preparation-time-label {
-            margin: 0 5px 0 0;
-          }
-
-          .recipe-preparation-time {
-            color: #444444;
-            margin: 0;
-          }
-        }
-
-        .recipe-cooking-time-wrapper {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-start;
-          margin-left: 5px;
-
-          .recipe-cooking-time-label {
-            margin: 0 0 0 5px;
-          }
-
-          .recipe-cooking-time {
-            color: #444444;
-            margin: 0 0 0 5px;
-          }
-        }
-
-        .recipe-subtitle-separator {
-          margin: 1px;
-        }
+      .recipe-main-img {
+        margin: 1px;
       }
     }
 
-    .recipe-difficulty-tag-wrapper {
+    .recipe-body {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
-      width: 50%;
+      width: 100%;
       height: 100%;
 
-      .recipe-difficulty-tag {
+      .recipe-title-wrapper {
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
-        padding: 16px 35px 16px 35px;
-        height: 40%;
-        width: 23%;
-        background-color: #e2619f;
-        border: 5px solid #f98fc2;
-        border-radius: 4px;
+        width: 50%;
+        height: 100%;
 
-        .recipe-difficulty {
-          font-stretch: extra-expanded;
-          font-variant: all-petite-caps;
-          font-weight: 700;
-          color: #2b2b2b;
+        .recipe-name {
+          margin: 0;
+          color: #4183c4;
+        }
+
+        .recipe-subtitle-wrapper {
+          display: flex;
+          justify-content: flex-start;
+          font-weight: 600;
+          color: #777777;
+
+          .recipe-preparation-time-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin-right: 5px;
+
+            .recipe-preparation-time-label {
+              margin: 0 5px 0 0;
+            }
+
+            .recipe-preparation-time {
+              color: #444444;
+              margin: 0;
+            }
+          }
+
+          .recipe-cooking-time-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin-left: 5px;
+
+            .recipe-cooking-time-label {
+              margin: 0 0 0 5px;
+            }
+
+            .recipe-cooking-time {
+              color: #444444;
+              margin: 0 0 0 5px;
+            }
+          }
+
+          .recipe-subtitle-separator {
+            margin: 1px;
+          }
+        }
+      }
+
+      .recipe-difficulty-tag-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 50%;
+        height: 100%;
+
+        .recipe-difficulty-tag {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px 35px 10px 35px;
+          height: 40%;
+          width: 23%;
+          background-color: #e2619f;
+          border: 5px solid #f98fc2;
+          border-radius: 4px;
+
+          .recipe-difficulty {
+            font-stretch: extra-expanded;
+            font-variant: all-petite-caps;
+            font-weight: 700;
+            color: #2b2b2b;
+          }
         }
       }
     }
   }
-}
 
-.recipe-component:hover {
-  background-color: #eaeaea91;
+  .recipe-component:hover {
+    background-color: #eaeaea91;
+  }
+
+  .recipe-component-deleting {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 15px 0 15px 0;
+    background-color: #efefef;
+    padding: 20px;
+
+    .recipe-main-img-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      border-radius: 50%;
+      width: 75px;
+      height: 68px;
+      margin-right: 10px;
+
+      .recipe-main-img {
+        margin: 1px;
+      }
+    }
+
+    .recipe-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+
+      .recipe-title-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+
+        .recipe-name {
+          margin: 0;
+          color: #4183c48c;
+        }
+
+        .recipe-subtitle-wrapper {
+          display: flex;
+          justify-content: flex-start;
+          font-weight: 600;
+          color: #77777796;
+
+          .recipe-preparation-time-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin-right: 5px;
+
+            .recipe-preparation-time-label {
+              margin: 0 5px 0 0;
+            }
+
+            .recipe-preparation-time {
+              color: #4444449e;
+              margin: 0;
+            }
+          }
+
+          .recipe-cooking-time-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin-left: 5px;
+
+            .recipe-cooking-time-label {
+              margin: 0 0 0 5px;
+            }
+
+            .recipe-cooking-time {
+              color: #4444449e;
+              margin: 0 0 0 5px;
+            }
+          }
+
+          .recipe-subtitle-separator {
+            margin: 1px;
+          }
+        }
+      }
+
+      .recipe-difficulty-tag-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 50%;
+        height: 100%;
+
+        .recipe-difficulty-tag {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px 35px 10px 35px;
+          height: 40%;
+          width: 23%;
+          background-color: #cccccc;
+          border: 5px solid #d8d8d8;
+          border-radius: 4px;
+
+          .recipe-difficulty {
+            font-stretch: extra-expanded;
+            font-variant: all-petite-caps;
+            font-weight: 700;
+            color: #2b2b2b;
+          }
+        }
+      }
+    }
+  }
+
+  .recipe-delete-button {
+    border: none;
+    background: none;
+    margin-left: 15px;
+
+    .recipe-delete-icon {
+      fill: #5f7df5;
+      stroke: #5f7df5;
+      transition: transform 0.2s ease-in;
+      width: 25px;
+    }
+
+    .recipe-delete-icon:hover {
+      fill: #122d98;
+      stroke: #122d98;
+      stroke-width: 20px;
+    }
+  }
+
+  .recipe-delete-button:focus {
+    outline: none;
+
+    .recipe-delete-icon {
+      fill: #122d98;
+      stroke: #122d98;
+      stroke-width: 20px;
+    }
+  }
 }

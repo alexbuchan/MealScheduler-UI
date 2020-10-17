@@ -7,9 +7,6 @@ import Actions from '../../actions/recipe/RecipeActions';
 // IMPORT STORES
 import Store from '../../stores/RecipeStore/RecipeStore';
 
-// IMPORT HOCS
-import withLoader from '../../HOC/Loader/Loader';
-
 // IMPORT COMPONENTS
 import Background from '../../components/Background/Background';
 import Recipes from '../../components/Recipes/Recipes';
@@ -25,9 +22,9 @@ class RecipesView extends React.Component {
   constructor() {
     super();
 
-    this.loadingTime = 500;
+    this.loadingTime = 100;
     this.state = {
-      isLoading: false,
+      isLoading: true,
       recipes: [...Store.getRecipesState().recipes]
     }
   }
@@ -41,10 +38,11 @@ class RecipesView extends React.Component {
 
   componentDidMount() {
     this.setState({ isLoading: true }, () => {
-      Actions.getRecipes();
-      setTimeout(() => {
-        this.setState({ isLoading: false });
-      }, this.loadingTime);
+      Actions
+        .getRecipes()
+        .then(() => {
+          this.setState({ isLoading: false });
+        });
     });
 
     Store.addChangeListener(this._onChange);
@@ -54,12 +52,16 @@ class RecipesView extends React.Component {
     Store.removeChangeListener(this._onChange);
   }
 
+
+  handleDeleteRecipe = (recipe_id) => {
+    Actions.deleteRecipe(recipe_id);
+  }
+
   render() {
-    const RecipesWithLoader = withLoader(Recipes);
     return (
       <div className="recipes-view">
         <Background />
-        <RecipesWithLoader isLoading={ this.state.isLoading } recipes={ this.state.recipes } locale={ this.props.props.locale }/>
+        <Recipes isLoading={ this.state.isLoading } recipes={ this.state.recipes } locale={ this.props.props.locale } handleDeleteRecipe={ this.handleDeleteRecipe }/>
       </div>
     );
   }

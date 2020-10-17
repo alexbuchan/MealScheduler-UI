@@ -5,13 +5,21 @@ import Recipe from './Recipe/Recipe';
 
 const propTypes = {
   recipes: PropTypes.array,
-  t: PropTypes.func
+  t: PropTypes.func,
+  handleDeleteRecipe: PropTypes.func,
+  deletingRecipeId: PropTypes.number
 };
 
-const RecipesContainer = ({ recipes, t }) => {
+const RecipesContainer = ({ recipes, t, handleDeleteRecipe, deletingRecipeId }) => {
   return recipes.map((recipe, index) => {
+    let deleting = false;
+
+    if (deletingRecipeId === recipe.id) {
+      deleting = true;
+    }
+
     return (
-      <Recipe key={ index } recipe={ recipe } t={ t }/>
+      <Recipe key={ index } recipe={ recipe } t={ t } handleDeleteRecipe={ handleDeleteRecipe } deleting={ deleting }/>
     );
   });
 }

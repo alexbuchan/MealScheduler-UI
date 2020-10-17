@@ -37,14 +37,16 @@ class ScheduleView extends React.Component {
 
   componentDidMount() {
     this.setState({ isLoading: true }, () => {
-      ScheduleActions.getSchedule({ month: this.state.schedule.month, year: this.state.schedule.year });
-      setTimeout(() => {
-        this.setState({ isLoading: false });
-      }, this.loadingTime);
+      ScheduleActions
+        .getSchedule({ month: this.state.schedule.month, year: this.state.schedule.year })
+        .then(() => {
+          this.setState({ isLoading: false });
+        });
     });
 
     ScheduleStore.addChangeListener(this._onChange);
   }
+
 
   componentWillUnmount() {
     ScheduleStore.removeChangeListener(this._onChange);
