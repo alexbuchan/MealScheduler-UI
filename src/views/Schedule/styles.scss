@@ -25,6 +25,16 @@
     align-items: center;
     transition: 0.5s;
 
+    .schedule-view-loader-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 4px 6px 13px 0px #4e4e4e;
+      width: 80%;
+      height: 100%;
+      background-color: white;
+    }
+
     .schedule-info-body>* {
       flex: 1 0 14%;
     }
