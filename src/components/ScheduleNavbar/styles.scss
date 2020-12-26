@@ -22,23 +22,25 @@
       margin: 0;
     }
 
-    .move-button{
+    .move-button {
       width: 40px;
       height: 40px;
       border: none;
       background-color: transparent;
+      transition: 0.5s;
 
       .schedule-arrow {
         overflow: hidden;
         vertical-align: middle;
-        fill: gray;
+        fill: #5f7df5;
         width: 30px;
         height: 30px;
+        stroke-width: 30px;
       }
 
       .schedule-arrow:hover {
-        stroke: black;
-        stroke-width: 30px;
+        stroke: #3655d0;
+        stroke-width: 28px;
       }
     }
 

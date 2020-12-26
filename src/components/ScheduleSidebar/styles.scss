@@ -23,16 +23,18 @@
 
   .schedule-sidebar-header-wrapper {
     display: flex;
-    justify-content: initial;
-    width: 109%;
-    height: 66px;
-    border-bottom: 1px solid #b5b5b5;
-    margin-bottom: 15px;
+    /* justify-content: initial; */
+    width: 100%;
+    height: 80px;
+    /* border-bottom: 1px solid #b5b5b5; */
+    /* margin-bottom: 15px; */
 
     .schedule-sidebar-close-button-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 20%;
+      height: 100%;
 
       .schedule-sidebar-close-button-visible {
         visibility: visible;
@@ -50,7 +52,7 @@
           transition: transform 0.15s ease-in;
           stroke: #5f7df5;
           stroke-width: 15px;
-          width: 20px;
+          width: 30px;
         }
 
         .schedule-sidebar-close-icon:hover {
@@ -72,24 +74,27 @@
     .schedule-sidebar-title-wrapper {
       display: flex;
       justify-content: center;
-      align-items: center;
-      width: 100%;
+      width: 80%;
       height: 100%;
+      padding: 0;
+      margin: 0;
+      border: none;
 
       .schedule-sidebar-title {
         display: flex;
         align-items: center;
+        justify-content: flex-start;
         width: 100%;
-        border-bottom: 1px solid white;
         background-color: #cccccc;
+        border: none;
 
         .schedule-sidebar-day-number-wrapper {
           display: flex;
           justify-content: center;
           align-items: center;
           height: 100%;
-          width: 15%;
-          margin: 5px;
+          margin-right: 2vw;
+          margin-left: 0.5vw;
 
           .schedule-sidebar-day-number {
             margin: 0;
@@ -106,7 +111,7 @@
           align-items: flex-start;
           justify-content: center;
           height: 100%;
-          width: 65%;
+          margin-left: 1.5vw;
 
           .schedule-sidebar-date-day-name {
             margin: 0;

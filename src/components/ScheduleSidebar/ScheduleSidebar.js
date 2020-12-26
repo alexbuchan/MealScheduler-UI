@@ -79,26 +79,23 @@ class ScheduleSidebar extends React.Component {
     return (
       <div className={ this.sidebarVisibility() }>
         <div className='schedule-sidebar-header-wrapper'>
+          <div className='schedule-sidebar-title-wrapper'>
+            <div className='schedule-sidebar-title'>
+              <div className='schedule-sidebar-date-wrapper'>
+                <h3 className='schedule-sidebar-date-day-name'>{ this.getDayName() }</h3>
+                <h4 className='schedule-sidebar-month-year-and-time'>{ this.getDateMonthName() } { this.getDateYear() }</h4>
+              </div>
+              <div className='schedule-sidebar-day-number-wrapper'>
+                <h3 className='schedule-sidebar-day-number'>{ this.props.day.day }</h3>
+              </div>
+            </div>
+          </div>
+
           <div className='schedule-sidebar-close-button-wrapper'>
             <button onClick={ this.handleCloseSidebar } className={ this.closeButtonVisibility() }>
               <CloseIcon className='schedule-sidebar-close-icon' />
             </button>
           </div>
-
-          <div className='schedule-sidebar-title-wrapper'>
-            <div className='schedule-sidebar-title'>
-              <div className='schedule-sidebar-day-number-wrapper'>
-                <h3 className='schedule-sidebar-day-number'>{ this.props.day.day }</h3>
-              </div>
-
-              <div className='schedule-sidebar-date-wrapper'>
-                <h3 className='schedule-sidebar-date-day-name'>{ this.getDayName() }</h3>
-                <h4 className='schedule-sidebar-month-year-and-time'>{ this.getDateMonthName() } { this.getDateYear() }</h4>
-              </div>
-            </div>
-          </div>
-
-          <div className='invisible-wrapper'></div>
         </div>
 
         <div className='schedule-sidebar-body'>
