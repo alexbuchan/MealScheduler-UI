@@ -1,11 +1,11 @@
 import React from 'react';
 import Step from './Step/Step';
 
-const StepsContainer = ({ steps }) => {
+const StepsContainer = ({ steps, stepImages }) => {
   if (steps) {
-    return Object.entries(steps).map((step, index) => {
+    return steps.map((step, index) => {
       return (
-        <Step key={ index } step={ step }/>
+        <Step key={ index } step={ step } stepImages={ '' }/>
       );
     });
   }

@@ -11,6 +11,7 @@ import Recipe from '../../components/Recipe/Recipe';
 import Background from '../../components/Background/Background';
 import withLoader from '../../HOC/Loader/Loader';
 import Button from '../../components/formComponents/Button/Button';
+import { Icon } from 'semantic-ui-react'
 
 import translations from './translations.json';
 import { translate } from '../../lib/i18n/i18n';
@@ -57,15 +58,20 @@ class RecipeView extends React.Component {
     Store.removeChangeListener(this._onChange);
   }
 
-  mainImageUrl = () => {
-    if (this.state.recipe) {
-      let mainImage = this.state.recipe.images.filter(image => image.image_type === 'main_image');
-      if (mainImage.length === 1) {
-        return mainImage[0].file_name;
-      }
+  recipeMainImage = () => {
+    if (this.state.recipe.main_image && this.state.recipe.main_image.length > 0) {
+      return (
+        <div className='recipe-main-image-wrapper'>
+          <img className='recipe-main-image' src={ this.state.recipe.main_image[0].file_name }></img>
+        </div>
+      );
     }
 
-    return '';
+    return (
+      <div className='recipe-main-image-missing-wrapper'>
+        <Icon className='recipe-main-image-missing' name='image' size='massive'/>
+      </div>
+    );
   }
 
   minuteOrMinutes = (time) => {
@@ -88,9 +94,7 @@ class RecipeView extends React.Component {
           <div className='recipe-view-body-no-scroll'>
             <div className='recipe-view-body'>
               <section className='recipe-view-header-section'>
-                <div className='recipe-main-image-wrapper'>
-                  <img className='recipe-main-image' src={ this.mainImageUrl() }></img>
-                </div>
+                { this.recipeMainImage() }
                 <div className='recipe-view-general-info-wrapper'>
                   <div className='recipe-view-info-attribute-wrapper'>
                     <label className='recipe-view-info-attribute-label'>{ this.t('recipe_attributes.preparation_time') }</label>
@@ -124,6 +128,10 @@ class RecipeView extends React.Component {
                   <Button size='medium' type='normal' label='Edit'/>
                   <Button size='medium' type='urgent' label='Delete'/>
                 </div>
+              </div>
+
+              <div className='comments-wrapper'>
+                <p className='comments'>{ comments }</p>
               </div>
               
               <RecipeWithLoader isLoading={ this.state.isLoading } recipe={ this.state.recipe }/>
