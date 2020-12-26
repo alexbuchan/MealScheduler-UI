@@ -48,7 +48,7 @@ class EventCardPopup extends React.Component {
 
   formatEventTypeString = () => {
     if (this.props.event.event_type) {
-      return this.props.event.event_type.charAt(0).toUpperCase() + this.props.event.event_type.slice(1).toLowerCase();
+      return this.props.event.event_type.replace(/Event/, '');
     }
 
     return null;

@@ -42,7 +42,7 @@ class ScheduleSidebar extends React.Component {
   displayEvents = () => {
     if (!(Object.values(this.props.day).length === 0) && !(this.props.day.events.length === 0)) {
       return this.props.day.events.map((event, index) => {
-        return <EventCardSidebar key={ index } event={ event } accordionEffect={ true } />;
+        return <EventCardSidebar key={ index } event={ event } accordionEffect={ true } visible={ this.props.visible } />;
       });
     }
 

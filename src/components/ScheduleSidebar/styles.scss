@@ -1,16 +1,24 @@
 .schedule-sidebar-hidden {
-  margin-right: -400px;
+  position: relative;
   visibility: hidden;
+  height: 100%;
+  width: 0vw;
   overflow: hidden;
+  transition-duration: 0.5s;
+
+  .schedule-sidebar-header-wrapper {
+    visibility: hidden;
+  }
 }
 
 .schedule-sidebar-visible {
+  position: relative;
   visibility: visible;
   height: 100%;
-  width: 25%;
+  width: 35vw;
   background-color: ghostwhite;
   box-shadow: -4px 0px 8px 0px #4e4e4e;
-  transition: all 0.3s;
+  transition-duration: 0.5s;
   overflow: scroll;
 
   .schedule-sidebar-header-wrapper {
@@ -28,8 +36,11 @@
 
       .schedule-sidebar-close-button-visible {
         visibility: visible;
-        height: 50px;
-        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
         border: 0px solid transparent;
         background: none;
         margin: 0;

@@ -40,11 +40,11 @@ class Event extends React.Component {
 
   eventColor = () => {
     switch(this.props.event.event_type) {
-      case 'FOOD':
+      case 'FoodEvent':
         return 'food-event-color';
-      case 'COOKING':
+      case 'CookingEvent':
         return 'cooking-event-color';
-      case 'SHOPPING':
+      case 'ShoppingEvent':
         return 'shopping-event-color';
     }
   }

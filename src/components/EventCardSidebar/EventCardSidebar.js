@@ -74,7 +74,7 @@ class EventCardSidebar extends React.Component {
 
   formatEventTypeString = () => {
     if (this.props.event.event_type) {
-      return this.props.event.event_type.charAt(0).toUpperCase() + this.props.event.event_type.slice(1).toLowerCase();
+      return this.props.event.event_type.replace(/Event/, '');
     }
 
     return null;
@@ -87,30 +87,34 @@ class EventCardSidebar extends React.Component {
   }
 
   render() {
-    return (
-      <div className='event-card-sidebar'>
-        <div onClick={ this.togglePanel } className={`event-card-sidebar-title-wrapper ${this.eventCardAccordionEffect('tab')}`}>
-          <div className='event-card-sidebar-invisible-area'>
-          </div>
+    if (this.props.visible) {
+      return (
+        <div className='event-card-sidebar'>
+          <div onClick={ this.togglePanel } className={`event-card-sidebar-title-wrapper ${this.eventCardAccordionEffect('tab')}`}>
+            <div className='event-card-sidebar-invisible-area'>
+            </div>
 
-          <div className='event-card-sidebar-title-center'>
-            <h5 className='event-card-sidebar-title'>{ this.props.event.title }</h5>
-            <div className='event-card-sidebar-date-wrapper'>
-              <h4 className='event-card-sidebar-month-year-and-time'>From { this.props.event.begin_at } to { this.props.event.end_at }</h4>
+            <div className='event-card-sidebar-title-center'>
+              <h5 className='event-card-sidebar-title'>{ this.props.event.title }</h5>
+              <div className='event-card-sidebar-date-wrapper'>
+                <h4 className='event-card-sidebar-month-year-and-time'>From { this.props.event.begin_at } to { this.props.event.end_at }</h4>
+              </div>
+            </div>
+
+            <div className='event-type-border'>
+              <p className='event-type'>{ this.formatEventTypeString() }</p>
             </div>
           </div>
 
-          <div className='event-type-border'>
-            <p className='event-type'>{ this.formatEventTypeString() }</p>
+          <div className={`event-card-sidebar-panel ${this.eventCardAccordionEffect('panel')}`}>
+            { this.eventComments() }
+            { this.eventRecipes() }
           </div>
         </div>
+      );
+    }
 
-        <div className={`event-card-sidebar-panel ${this.eventCardAccordionEffect('panel')}`}>
-          { this.eventComments() }
-          { this.eventRecipes() }
-        </div>
-      </div>
-    );
+    return null;
   }
 }
 

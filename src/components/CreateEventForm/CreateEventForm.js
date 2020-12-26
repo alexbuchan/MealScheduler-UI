@@ -78,7 +78,7 @@ class CreateEventForm extends React.Component {
   }
 
   eventTypes = () => {
-    return this.state.eventTypes.map((event, index) => { return { value: index, text: this.capitalize(event.name) } });
+    return this.state.eventTypes.map((event, index) => { return { value: index, text: event } });
   }
 
   recipes = () => {
@@ -90,12 +90,12 @@ class CreateEventForm extends React.Component {
   }
 
   renderDateFrequency = () => {
-    switch (this.state.form.eventType.name) {
-      case 'FOOD':
+    switch (this.state.form.eventType) {
+      case 'FoodEvent':
         return this.renderInvisibleColumn();
-      case 'COOKING':
+      case 'CookingEvent':
         return this.renderInvisibleColumn();
-      case 'SHOPPING':
+      case 'ShoppingEvent':
         return (
           <div className='create-event-form-column create-event-form-date-frequency-wrapper'>
             <div className='create-event-form-date-frequency'>
@@ -262,8 +262,8 @@ class CreateEventForm extends React.Component {
                     label={{ tag: true, content: 'Add Tag' }}
                     labelPosition='right'
                     placeholder='Enter tags'
-                    options={ this.recipes() }
-                    onChange={ this.handleRecipesChange }
+                    // options={ this.recipes() }
+                    // onChange={ this.handleRecipesChange }
                   />
                 </div>
               </div>

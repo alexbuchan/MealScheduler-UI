@@ -23,33 +23,41 @@ class ScheduleActions {
     }
   }
 
+  specificEventData = (event) => {
+    let data;
+
+    switch (event.eventType) {
+      case 'FoodEvent':
+        data = { recipe_ids: event.recipes.map(recipe => recipe.id) };
+        break;
+      case 'CookingEvent':
+        data = {
+          recipe_id: event.recipes.map(recipe => recipe.id)[0]
+        }
+      case 'ShoppingEvent':
+        data = {
+          date_frequency_id: event.dateFrequency.id,
+          recipe_ids: event.recipes.map(recipe => recipe.id)
+        };
+        break;
+    }
+
+    return data;
+  }
+
   createEvent = async (event, type) => {
     const _endpoint = `${ServiceConfig}/events`;
     const jwt = ActionsHelper.getCookie('user');
     let eventPayload = {
-      title: event.title,
-      event_type_id: event.eventType.id,
-      date: event.date,
-      begin_at: event.beginAt,
-      end_at: event.endAt,
-      comments: event.comments
-    }
-
-    switch (type) {
-      case 'FOOD':
-        eventPayload.food_event_attributes = { recipe_id: event.recipes.map(recipe => recipe.id)[0] };
-        break;
-
-      case 'COOKING':
-        eventPayload.cooking_event_attributes = {};
-        break;
-
-      case 'SHOPPING':
-        eventPayload.shopping_event_attributes = {
-          recipe_ids: event.recipes.map(recipe => recipe.id),
-          date_frequency_id: event.dateFrequency.id
-        };
-        break;
+      event: {
+        title: event.title,
+        eventable_type: event.eventType,
+        date: event.date,
+        begin_at: event.beginAt,
+        end_at: event.endAt,
+        comments: event.comments
+      },
+      specific_event_data: this.specificEventData(event)
     }
 
     let error, response;
