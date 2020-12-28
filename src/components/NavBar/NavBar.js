@@ -5,6 +5,7 @@ import UserStore from '../../stores/UserStore/UserStore';
 import NavBarItem from './NavBarItem/NavBarItem';
 import NavBarLogout from './NavBarLogout/NavBarLogout';
 import NavBarUserProfile from './NavBarUserProfile/NavBarUserProfile';
+import Logo from '../../assets/images/meal_scheduler_logo_round_no_container.jpeg';
 
 import translations from './translations.json';
 import { translate } from '../../lib/i18n/i18n';
@@ -80,10 +81,12 @@ class NavBar extends React.Component  {
     return (
       <nav className="navbar">
         <div className='navbar-brand'>
-          <Link className="navbar-brand-name" to="">Meal Scheduler</Link>
-          <div className="navbar-brand-logo-wrapper">
+          <Link className="navbar-brand-name" to="">
+            <img className='navbar-brand-logo' src={ Logo }></img>
+          </Link>
+          {/* <div className="navbar-brand-logo-wrapper">
             <img className='navbar-brand-logo' alt='l'></img>
-          </div>
+          </div> */}
         </div>
         { this.renderAuthorisedLinks() }
         { this.renderAllAccessLinks() }
