@@ -2,73 +2,115 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   cursor: context-menu;
   border-radius: 4px;
 
-  .event-card-sidebar-title-wrapper {
+  .event-card-sidebar-header-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
     background-color: #81cdff;
     padding: 8px 0 8px 0;
     border-bottom: 1px solid darkgray;
     margin: 0;
 
-    .event-card-sidebar-invisible-area {
-      width: 20%;
-    }
-
-    .event-card-sidebar-title-center {
+    .event-card-sidebar-header-buttons {
+      width: 100%;
+      height: 25px;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 80%;
+      justify-content: flex-end;
 
-      .event-card-sidebar-title {
-        font-size: large;
-        margin: 0;
-        text-align: center;
-        width: 100%;
-      }
-
-      .event-card-sidebar-date-wrapper {
+      .event-card-sidebar-buttons-wrapper {
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100%;
-        width: 100%;
-        margin: 4px 0 4px 0;
+        width: 17%;
 
-        .event-card-sidebar-date-day-name {
+        .schedule-sidebar-button {
+          stroke-width: 15px;
+          width: 30px;
+          height: 30px;
+          background: none;
+          border: none;
+          padding: 0;
           margin: 0;
-          font-size: 17px;
-          font-weight: 800;
-          font-stretch: condensed;
+
+          .schedule-sidebar-icon {
+            stroke: #5f7df5;
+            stroke-width: 15px;
+            width: 60%;
+            height: 60%;
+          }
+
+          .schedule-sidebar:hover {
+            stroke: #304cbd;
+            stroke-width: 25px;
+            width: 100%;
+            height: 100%;
+          }
         }
 
-        .event-card-sidebar-month-year-and-time {
-          font-size: 14px;
+        .schedule-sidebar-button:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .event-card-sidebar-title-wrapper {
+      display: flex;
+      width: 100%;
+
+      .event-card-sidebar-title-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+        padding-left: 2vw;
+        margin-top: -27px;
+
+        .event-card-sidebar-title {
+          font-size: large;
           margin: 0;
-          font-stretch: semi-condensed;
-          font-weight: 600;
-          color: #616161;
+          width: 100%;
+        }
+
+        .event-card-sidebar-date-wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+
+          .event-card-sidebar-date-day-name {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 800;
+            font-stretch: condensed;
+          }
+
+          .event-card-sidebar-month-year-and-time {
+            font-size: 14px;
+            margin: 0;
+            font-stretch: semi-condensed;
+            font-weight: 600;
+            color: #616161;
+          }
         }
       }
     }
 
     .event-type-border {
       margin: 5px;
-      width: 20%;
+      width: 25%;
       background-color: #e2619f;
       border: 2px solid #f98fc2;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 4px;
+      height: 30px;
 
       .event-type {
         font-size: medium;
@@ -160,11 +202,5 @@
         }
       }
     }
-  }
-
-  .event-card-sidebar-panel {
-  }
-
-  .event-card-sidebar-panel-visible {
   }
 }

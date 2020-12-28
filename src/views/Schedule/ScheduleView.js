@@ -25,7 +25,7 @@ class ScheduleView extends React.Component {
       schedule: ScheduleStore.getScheduleState(),
       sidebarActive: false,
       day: {},
-      openModal: false
+      openCreateEventModal: false
     }
   }
 
@@ -91,19 +91,31 @@ class ScheduleView extends React.Component {
     });
   }
 
-  handleOpenModal = (ev) => {
-    this.setState({ openModal: true });
+  handleOpenCreateEventModal = (ev) => {
+    this.setState({ openCreateEventModal: true });
   }
 
   handleCloseModal = (ev) => {
-    this.setState({ openModal: false });
+    this.setState({ openCreateEventModal: false });
   }
 
-  renderModal = () => {
-    if (this.state.openModal) {
+  createEventModal = () => {
+    if (this.state.openCreateEventModal) {
       return (
         <Modal closeModal={ this.handleCloseModal }>
           <CreateEventForm closeModal={ this.handleCloseModal }/>
+        </Modal>
+      );
+    }
+
+    return null;
+  }
+
+  editEventModal = () => {
+    if (this.state.openCreateEventModal) {
+      return (
+        <Modal closeModal={ this.handleCloseModal }>
+          {/* <EditEventForm closeModal={ this.handleCloseModal }/> */}
         </Modal>
       );
     }
@@ -129,7 +141,7 @@ class ScheduleView extends React.Component {
             month={ this.state.schedule.month }
             year={ this.state.schedule.year }
             handleMoveOneMonth={ this.handleMoveOneMonth }
-            handleOpenModal={ this.handleOpenModal }
+            handleOpenCreateEventModal={ this.handleOpenCreateEventModal }
           />
           <ScheduleHeader />
 
@@ -139,7 +151,7 @@ class ScheduleView extends React.Component {
             openSidebar={ this.openSidebar }
           />
 
-          { this.renderModal() }
+          { this.createEventModal() }
         </div>
 
         <ScheduleSidebar visible={ this.state.sidebarActive } closeSidebar={ this.closeSidebar } day={ this.state.day } />

@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Link } from 'react-router-dom';
+import PencilIcon from '../../assets/images/svg/pencil.svg';
+import DeleteIcon from '../../assets/images/svg/delete.svg';
 
 const propTypes = {
   event: PropTypes.object,
   accordionEffect: PropTypes.bool
 };
 
-class EventCardSidebar extends React.Component {
+class EventCardSidebarTitle extends React.Component {
   constructor(props) {
     super(props);
 
@@ -17,29 +18,6 @@ class EventCardSidebar extends React.Component {
     }
 
     this.date = (this.props.event.date) ? new Date(this.props.event.date) : new Date;
-  }
-
-  eventRecipes = () => {
-    if (this.props.event.event_type) {
-      return (
-        <div className='event-card-sidebar-data'>
-          <p className='event-card-sidebar-recipe-label'>Recipes:</p>
-          <div className='event-card-sidebar-recipes'>
-            { this.props.event.recipes.map((recipe, index) => <Link key={ index } to={ `/recipes/${recipe.id}` } className='event-card-sidebar-recipe-link'>{ recipe.name }</Link>) }
-          </div>
-        </div>
-      );
-    }
-
-    return null;
-  }
-
-  eventComments = () => {
-    return (
-      <div className='event-card-sidebar-comments-wrapper'>
-        <p className='event-card-sidebar-comments'>{ this.props.event.comments }</p>
-      </div>
-    );
   }
 
   eventCardAccordionEffect = (type) => {
@@ -87,13 +65,22 @@ class EventCardSidebar extends React.Component {
   }
 
   render() {
-    if (this.props.visible) {
-      return (
-        <div className='event-card-sidebar'>
-          <div onClick={ this.togglePanel } className={`event-card-sidebar-title-wrapper ${this.eventCardAccordionEffect('tab')}`}>
-            <div className='event-card-sidebar-invisible-area'>
+    return (
+      <div className='event-card-sidebar'>
+        <div className='event-card-sidebar-header-wrapper'>
+          <div className='event-card-sidebar-header-buttons'>
+            <div className='event-card-sidebar-buttons-wrapper'>
+              <button onClick={ this.handleCloseSidebar } className='schedule-sidebar-button'>
+                <PencilIcon className='schedule-sidebar-icon' />
+              </button>
+              
+              <button onClick={ this.handleCloseSidebar } className='schedule-sidebar-button'>
+                <DeleteIcon className='schedule-sidebar-icon' />
+              </button>
             </div>
+          </div>
 
+          <div className='event-card-sidebar-title-wrapper'>
             <div className='event-card-sidebar-title-center'>
               <h5 className='event-card-sidebar-title'>{ this.props.event.title }</h5>
               <div className='event-card-sidebar-date-wrapper'>
@@ -105,26 +92,19 @@ class EventCardSidebar extends React.Component {
               <p className='event-type'>{ this.formatEventTypeString() }</p>
             </div>
           </div>
-
-          <div className={`event-card-sidebar-panel ${this.eventCardAccordionEffect('panel')}`}>
-            { this.eventComments() }
-            { this.eventRecipes() }
-          </div>
         </div>
-      );
-    }
-
-    return null;
+      </div>
+    );
   }
 }
 
-EventCardSidebar.defaultProps = {
+EventCardSidebarTitle.defaultProps = {
   title: true,
   accordionEffect: false
 }
 
-EventCardSidebar.propTypes = propTypes;
-export default EventCardSidebar;
+EventCardSidebarTitle.propTypes = propTypes;
+export default EventCardSidebarTitle;
 
 // begin_at: "09:00"
 // comments: "One hell of a breakfast"

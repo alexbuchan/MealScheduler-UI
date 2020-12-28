@@ -1,7 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EventCardSidebar from '../EventCardSidebar/EventCardSidebar';
+import { Accordion, Transition } from 'semantic-ui-react'
+
+import EventCardSidebarTitle from '../EventCardSidebar/EventCardSidebarTitle';
+import EventCardSidebarPanel from '../EventCardSidebar/EventCardSidebarPanel';
 import CloseIcon from '../../assets/images/svg/return.svg';
+
+
+const Title = () => {
+  return (
+    <div>
+      <h1>Title</h1>
+      <p>Stuff about the title</p>
+    </div>
+  )
+}
 
 const propTypes = {
   day: PropTypes.shape({
@@ -16,6 +29,10 @@ const propTypes = {
 };
 
 class ScheduleSidebar extends React.Component {
+  state = {
+    activeIndex: [],
+    inactiveIndex: []
+  }
   date = (this.props.day.date) ? new Date(this.props.day.date) : new Date;
 
   sidebarVisibility = () => {
@@ -39,9 +56,41 @@ class ScheduleSidebar extends React.Component {
     this.props.closeSidebar();
   }
 
+  handleAccordion = (ev, titleProps) => {
+    // Prevent event edit and delete buttons from opening accordion
+    if(!(ev.target.tagName === 'DIV' || ev.target.tagName === 'H4' || ev.target.tagName === 'H5' || ev.target.tagName === 'P')) return;
+
+    const { index } = titleProps;
+    const { activeIndex } = this.state;
+    const newIndex = activeIndex;
+
+    const currentIndexPosition = activeIndex.indexOf(index);
+    if (currentIndexPosition > -1) {
+      newIndex.splice(currentIndexPosition, 1);
+    } else {
+      newIndex.push(index);
+    }
+
+    this.setState({ activeIndex: newIndex });
+  }
+
   displayEvents = () => {
     if (!(Object.values(this.props.day).length === 0) && !(this.props.day.events.length === 0)) {
       return this.props.day.events.map((event, index) => {
+        const isActive = this.state.activeIndex.includes(index);
+        const isInactive = this.state.inactiveIndex.includes(index);
+        return (
+          <div key={index}>
+            <Accordion.Title className='schedule-sidebar-accordion-title' onClick={ this.handleAccordion } index={index}>
+              <EventCardSidebarTitle event={ event } />
+            </Accordion.Title>
+            <Accordion.Content active={isActive}>
+            <Transition visible={isActive} animation='drop' duration={500}>
+              <EventCardSidebarPanel event={ event }/>
+            </Transition>
+            </Accordion.Content>
+          </div>
+        );
         return <EventCardSidebar key={ index } event={ event } accordionEffect={ true } visible={ this.props.visible } />;
       });
     }
@@ -99,7 +148,9 @@ class ScheduleSidebar extends React.Component {
         </div>
 
         <div className='schedule-sidebar-body'>
-          { this.displayEvents() }
+          <Accordion>
+            { this.displayEvents() }
+          </Accordion>
         </div>
       </div>
     );

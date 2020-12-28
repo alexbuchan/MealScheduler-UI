@@ -8,10 +8,10 @@ const propTypes = {
   month: PropTypes.string,
   year: PropTypes.number,
   handleMoveOneMonth: PropTypes.func,
-  handleOpenModal: PropTypes.func
+  handleOpenCreateEventModal: PropTypes.func
 };
 
-const ScheduleNavbar = ({ month, year, handleMoveOneMonth, handleOpenModal }) => {
+const ScheduleNavbar = ({ month, year, handleMoveOneMonth, handleOpenCreateEventModal }) => {
   return (
     <div className='schedule-navbar'>
       <p className='invisible-wrapper'></p>
@@ -29,7 +29,7 @@ const ScheduleNavbar = ({ month, year, handleMoveOneMonth, handleOpenModal }) =>
       <div className='create-event-wrapper'>
         <div className='create-event'>
           <p className='create-event-label'>Create Event</p>
-          <button onClick={ handleOpenModal } className='create-event-button'><AddButton className='create-event-icon' /></button>
+          <button onClick={ handleOpenCreateEventModal } className='create-event-button'><AddButton className='create-event-icon' /></button>
         </div>
       </div>
     </div>
