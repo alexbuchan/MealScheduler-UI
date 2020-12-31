@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PencilIcon from '../../assets/images/svg/pencil.svg';
+import EditIcon from '../../assets/images/svg/pen.svg';
 import DeleteIcon from '../../assets/images/svg/delete.svg';
 
 const propTypes = {
   event: PropTypes.object,
-  accordionEffect: PropTypes.bool
+  accordionEffect: PropTypes.bool,
+  handleOpenEditEventModal: PropTypes.func
 };
 
 class EventCardSidebarTitle extends React.Component {
@@ -70,8 +71,8 @@ class EventCardSidebarTitle extends React.Component {
         <div className='event-card-sidebar-header-wrapper'>
           <div className='event-card-sidebar-header-buttons'>
             <div className='event-card-sidebar-buttons-wrapper'>
-              <button onClick={ this.handleCloseSidebar } className='schedule-sidebar-button'>
-                <PencilIcon className='schedule-sidebar-icon' />
+              <button onClick={ (ev) => this.props.handleOpenEditEventModal(ev, this.props.event.id) } className='schedule-sidebar-button'>
+                <EditIcon className='schedule-sidebar-icon' />
               </button>
               
               <button onClick={ this.handleCloseSidebar } className='schedule-sidebar-button'>

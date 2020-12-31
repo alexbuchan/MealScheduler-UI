@@ -8,7 +8,7 @@ import Schedule from '../../components/Schedule/Schedule';
 import ScheduleSidebar from '../../components/ScheduleSidebar/ScheduleSidebar';
 import ScheduleNavbar from '../../components/ScheduleNavbar/ScheduleNavbar';
 import ScheduleHeader from '../../components/ScheduleHeader/ScheduleHeader';
-import CreateEventForm from '../../components/CreateEventForm/CreateEventForm'
+import EventForm from '../../components/EventForm/EventForm'
 import Modal from '../../components/Modal/Modal';
 import withLoader from '../../HOC/Loader/Loader';
 import { modulo } from '../../lib/Helpers/helpers';
@@ -24,8 +24,9 @@ class ScheduleView extends React.Component {
       isLoading: false,
       schedule: ScheduleStore.getScheduleState(),
       sidebarActive: false,
-      day: {},
-      openCreateEventModal: false
+      dayId: 1,
+      openCreateEventModal: false,
+      eventId: 0
     }
   }
 
@@ -60,8 +61,8 @@ class ScheduleView extends React.Component {
     return 'schedule-info-wrapper-no-sidebar';
   }
 
-  openSidebar = (day) => {
-    this.setState({ sidebarActive: true, day });
+  openSidebar = (dayId) => {
+    this.setState({ sidebarActive: true, dayId });
   }
 
   closeSidebar = () => {
@@ -91,19 +92,16 @@ class ScheduleView extends React.Component {
     });
   }
 
-  handleOpenCreateEventModal = (ev) => {
-    this.setState({ openCreateEventModal: true });
-  }
-
-  handleCloseModal = (ev) => {
-    this.setState({ openCreateEventModal: false });
-  }
+  handleOpenCreateEventModal = (_) => this.setState({ openCreateEventModal: true });
+  handleCloseCreateEventModal = (_) => this.setState({ openCreateEventModal: false });
+  handleOpenEditEventModal = (_, eventId) => this.setState({ openEditEventModal: true, eventId: eventId });
+  handleCloseEditEventModal = (_) => this.setState({ openEditEventModal: false });
 
   createEventModal = () => {
     if (this.state.openCreateEventModal) {
       return (
-        <Modal closeModal={ this.handleCloseModal }>
-          <CreateEventForm closeModal={ this.handleCloseModal }/>
+        <Modal closeModal={ this.handleCloseCreateEventModal }>
+          <EventForm closeModal={ this.handleCloseCreateEventModal } type='create'/>
         </Modal>
       );
     }
@@ -112,10 +110,12 @@ class ScheduleView extends React.Component {
   }
 
   editEventModal = () => {
-    if (this.state.openCreateEventModal) {
+    if (this.state.openEditEventModal) {
+      const currentDay = this.state.schedule.schedule[this.state.dayId];
+      const current_event = currentDay.events.filter(event => event.id === this.state.eventId)[0];
       return (
-        <Modal closeModal={ this.handleCloseModal }>
-          {/* <EditEventForm closeModal={ this.handleCloseModal }/> */}
+        <Modal closeModal={ this.handleCloseEditEventModal }>
+          <EventForm closeModal={ this.handleCloseEditEventModal } form={ current_event } type='edit' eventId={this.state.eventId} />
         </Modal>
       );
     }
@@ -129,6 +129,21 @@ class ScheduleView extends React.Component {
         { children }
       </div>
     );
+  }
+
+  renderScheduleSidebar = () => {
+    if (this.state.schedule.schedule.length > 0) {
+      return (
+        <ScheduleSidebar
+          visible={ this.state.sidebarActive }
+          closeSidebar={ this.closeSidebar }
+          day={ this.state.schedule.schedule[this.state.dayId] }
+          handleOpenEditEventModal={ this.handleOpenEditEventModal }
+        />
+      );
+    }
+
+    return null;
   }
 
   render() {
@@ -152,9 +167,10 @@ class ScheduleView extends React.Component {
           />
 
           { this.createEventModal() }
+          { this.editEventModal() }
         </div>
 
-        <ScheduleSidebar visible={ this.state.sidebarActive } closeSidebar={ this.closeSidebar } day={ this.state.day } />
+        { this.renderScheduleSidebar() }
       </div>
     );
   }

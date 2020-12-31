@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // IMPORT ACTIONS
 import Actions from '../../actions/schedule/ScheduleActions';
@@ -17,23 +18,60 @@ import { Dropdown } from 'semantic-ui-react';
 import { Input } from 'semantic-ui-react'
 import TextField from '../formComponents/TextField/TextField';
 
-const propTypes = {};
+const propTypes = {
+  form: PropTypes.shape({
+    title: PropTypes.string,
+    eventType: PropTypes.string,
+    recipes: PropTypes.array,
+    date: PropTypes.string,
+    dateFrequency: PropTypes.object,
+    beginAt: PropTypes.string,
+    endAt: PropTypes.string,
+    comments: PropTypes.string
+  }),
+  type: PropTypes.bool,
+  eventId: PropTypes.number
+};
 
-class CreateEventForm extends React.Component {
-  state = {
-    form: {
-      title: '',
-      eventType: '',
-      recipes: [],
-      date: '',
-      dateFrequency: {},
-      beginAt: '',
-      endAt: '',
-      comments: ''
-    },
-    eventTypes: EventTypeStore.getEventTypesState().eventTypes,
-    recipes: RecipeStore.getRecipesState().recipes,
-    dateFrequencies: DateFrequencyStore.getDateFrequenciesState().dateFrequencies
+class EventForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    if (props.form) {
+      const { title, event_type, recipes, date, date_frequency, begin_at, end_at, comments } = props.form;
+      this.state = {
+        form: {
+          title: title,
+          eventType: event_type,
+          recipes: recipes,
+          date: date,
+          dateFrequency: date_frequency,
+          beginAt: begin_at,
+          endAt: end_at,
+          comments: comments
+        },
+        eventTypes: EventTypeStore.getEventTypesState().eventTypes,
+        recipes: RecipeStore.getRecipesState().recipes,
+        dateFrequencies: DateFrequencyStore.getDateFrequenciesState().dateFrequencies,
+        eventId: props.eventId
+      }
+    } else {
+      this.state = {
+        form: {
+          title: '',
+          eventType: '',
+          recipes: [],
+          date: '',
+          dateFrequency: {},
+          beginAt: '',
+          endAt: '',
+          comments: ''
+        },
+        eventTypes: EventTypeStore.getEventTypesState().eventTypes,
+        recipes: RecipeStore.getRecipesState().recipes,
+        dateFrequencies: DateFrequencyStore.getDateFrequenciesState().dateFrequencies
+      }
+    }
   }
 
   _onChange = () => {
@@ -61,7 +99,12 @@ class CreateEventForm extends React.Component {
   }
 
   handleOnSubmit = () => {
-    Actions.createEvent(this.state.form, this.state.form.eventType.name);
+    if (this.props.type === 'create') {
+      Actions.createEvent(this.state.form);
+    } else {
+      Actions.editEvent(this.state.form, this.props.eventId);
+    }
+    
     this.props.closeModal();
   }
 
@@ -149,6 +192,20 @@ class CreateEventForm extends React.Component {
     this.setState({ form });
   }
 
+  findEventType = () => {
+    if (this.eventTypes().length > 0 && this.state.form.eventType) {
+      return this.eventTypes().filter(eventType => eventType.text === this.state.form.eventType)[0].value;
+    }
+
+    return '';
+  }
+
+  findDefaultRecipes = () => {
+    const recipeIds = this.state.form.recipes.map(recipe => recipe.id)
+    const eventRecipes = this.state.recipes.filter(recipe => recipeIds.find(id => recipe.id - 1 === id - 1))
+    return eventRecipes.map(recipe => recipe.id - 1)
+  }
+
   render() {
     return (
       <div className='create-event-body'>
@@ -168,6 +225,7 @@ class CreateEventForm extends React.Component {
                     className='title-text-input'
                     placeholder='Title'
                     name='title'
+                    value={ this.state.form.title }
                     onChange={ this.handleTextFieldChange }
                   />
                 </div>
@@ -184,6 +242,7 @@ class CreateEventForm extends React.Component {
                     search
                     selection
                     options={ this.eventTypes() }
+                    value={ this.findEventType() }
                     onChange={ this.handleEventTypeChange }
                   />
                 </div>
@@ -207,7 +266,8 @@ class CreateEventForm extends React.Component {
                   <div className='create-event-form-column create-event-form-row-2-begin-at'>
                     <TextField
                       label='Begin at'
-                      name='beginAt' type='time'
+                      name='beginAt'
+                      type='time'
                       value={ this.state.form.beginAt }
                       width={ 149 }
                       onChange={ this.handleTextFieldChange }
@@ -241,6 +301,7 @@ class CreateEventForm extends React.Component {
                     multiple
                     search
                     selection
+                    value={ this.findDefaultRecipes() }
                     options={ this.recipes() }
                     onChange={ this.handleRecipesChange }
                   />
@@ -250,7 +311,7 @@ class CreateEventForm extends React.Component {
               { this.renderDateFrequency() }
             </div>
 
-            <div className='create-event-form-row create-event-form-row-3'>
+            {/* <div className='create-event-form-row create-event-form-row-3'>
               <div className='create-event-form-column create-event-form-row-recipes-wrapper'>
                 <div className='create-event-form-row-recipes'>
                   <div className='label-wrapper'>
@@ -269,7 +330,7 @@ class CreateEventForm extends React.Component {
               </div>
 
               { this.renderDateFrequency() }
-            </div>
+            </div> */}
 
             <div className='create-event-form-row create-event-form-row-4'>
               <div className='create-event-form-row-comments'>
@@ -290,8 +351,8 @@ class CreateEventForm extends React.Component {
   }
 }
 
-CreateEventForm.propTypes = propTypes;
-export default CreateEventForm;
+EventForm.propTypes = propTypes;
+export default EventForm;
 
 // Datepicker (date)
 // Timepicker (being_at, end_at)

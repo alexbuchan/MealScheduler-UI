@@ -6,16 +6,6 @@ import EventCardSidebarTitle from '../EventCardSidebar/EventCardSidebarTitle';
 import EventCardSidebarPanel from '../EventCardSidebar/EventCardSidebarPanel';
 import CloseIcon from '../../assets/images/svg/return.svg';
 
-
-const Title = () => {
-  return (
-    <div>
-      <h1>Title</h1>
-      <p>Stuff about the title</p>
-    </div>
-  )
-}
-
 const propTypes = {
   day: PropTypes.shape({
     active: PropTypes.bool,
@@ -25,7 +15,8 @@ const propTypes = {
     events: PropTypes.array
   }),
   visible: PropTypes.bool,
-  closeSidebar: PropTypes.func
+  closeSidebar: PropTypes.func,
+  handleOpenEditEventModal: PropTypes.func
 };
 
 class ScheduleSidebar extends React.Component {
@@ -82,7 +73,7 @@ class ScheduleSidebar extends React.Component {
         return (
           <div key={index}>
             <Accordion.Title className='schedule-sidebar-accordion-title' onClick={ this.handleAccordion } index={index}>
-              <EventCardSidebarTitle event={ event } />
+              <EventCardSidebarTitle event={ event } handleOpenEditEventModal={ this.props.handleOpenEditEventModal } />
             </Accordion.Title>
             <Accordion.Content active={isActive}>
             <Transition visible={isActive} animation='drop' duration={500}>
@@ -91,7 +82,6 @@ class ScheduleSidebar extends React.Component {
             </Accordion.Content>
           </div>
         );
-        return <EventCardSidebar key={ index } event={ event } accordionEffect={ true } visible={ this.props.visible } />;
       });
     }
 

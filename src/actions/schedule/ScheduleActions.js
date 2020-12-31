@@ -45,7 +45,7 @@ class ScheduleActions {
     return data;
   }
 
-  createEvent = async (event, type) => {
+  createEvent = async (event) => {
     const _endpoint = `${ServiceConfig}/events`;
     const jwt = ActionsHelper.getCookie('user');
     let eventPayload = {
@@ -63,6 +63,35 @@ class ScheduleActions {
     let error, response;
     [error, response] = await ActionsHelper.asyncHelper(
       request.post(_endpoint, { event: eventPayload }, { headers: { Authorization: `Bearer ${jwt}` } })
+    );
+
+    if (error) {
+      FlashMessageActions.dispatchErrorMessage(error.response);
+    } else {
+      FlashMessageActions.dispatchSuccessMessage(response.data);
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      this.getSchedule({ month: monthNames[new Date().getMonth()], year: new Date().getFullYear() });
+    }
+  }
+
+  editEvent = async (event, eventId) => {
+    const _endpoint = `${ServiceConfig}/events/${eventId}`;
+    const jwt = ActionsHelper.getCookie('user');
+    let eventPayload = {
+      event: {
+        title: event.title,
+        eventable_type: event.eventType,
+        date: event.date,
+        begin_at: event.beginAt,
+        end_at: event.endAt,
+        comments: event.comments
+      },
+      specific_event_data: this.specificEventData(event)
+    }
+
+    let error, response;
+    [error, response] = await ActionsHelper.asyncHelper(
+      request.patch(_endpoint, { event: eventPayload }, { headers: { Authorization: `Bearer ${jwt}` } })
     );
 
     if (error) {

@@ -49,7 +49,7 @@ class DayContainer extends React.Component {
   }
 
   handleOpenSidebar = () => {
-    this.props.openSidebar(this.props.day);
+    this.props.openSidebar(this.props.day.day);
   }
 
   today = () => {
