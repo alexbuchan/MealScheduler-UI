@@ -140,8 +140,10 @@ class ScheduleView extends React.Component {
         <Modal closeModal={ this.handleCloseDeleteEventModal } size='small'>
           <>
             <h3>Are sure you want to delete this event?</h3>
-            <button onClick={ () => this.handleDeleteEvent(currentEvent.id) }>Delete</button>
-            <button onClick={ this.handleCloseDeleteEventModal }>Cancel</button>
+            <div className='delete-event-button-wrapper'>
+              <button className='delete-event-button' onClick={ () => this.handleDeleteEvent(currentEvent.id) }>Delete</button>
+              <button className='cancel-event-button' onClick={ this.handleCloseDeleteEventModal }>Cancel</button>  
+            </div>
           </>
         </Modal>
       );
