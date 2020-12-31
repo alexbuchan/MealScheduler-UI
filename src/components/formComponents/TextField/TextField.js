@@ -17,6 +17,14 @@ const propTypes = {
 };
 
 const TextField = ({ label, name, type, value, width, height, disabled, placeholder, onChange, validationField, inline }) => {
+  const dimmedValue = () => {
+    if (value) {
+      return 'undimmed-text';
+    }
+
+    return 'dimmed-text';
+  }
+
   const inlineLabel = () => {
     return (inline) ? "text-field-inline" : "text-field-component";
   }
@@ -43,7 +51,7 @@ const TextField = ({ label, name, type, value, width, height, disabled, placehol
 
         <input
           data-test='input-with-validation'
-          className={ `${inputFieldClass()} text-field-input` }
+          className={ `${inputFieldClass()} text-field-input ${dimmedValue()}` }
           name={ name }
           style={ { width, height } }
           type={ type }
@@ -64,7 +72,7 @@ const TextField = ({ label, name, type, value, width, height, disabled, placehol
         <label className='text-field-label'>{ label }</label>
         <input
           name={ name }
-          className='text-field-input'
+          className={ `text-field-input ${dimmedValue()}` }
           style={ { width, height } }
           type={ type }
           value={ value }

@@ -28,11 +28,20 @@
   border-radius: 4px;
 }
 
-.text-field-input::-webkit-calendar-picker-indicator {
+.undimmed-text::-webkit-calendar-picker-indicator {
+  color: black;
+}
+
+.dimmed-text::-webkit-calendar-picker-indicator {
   opacity: 0.75;
 }
 
-.text-field-input::-webkit-datetime-edit-fields-wrapper {
+.undimmed-text::-webkit-datetime-edit-fields-wrapper {
+  margin-left: 13px;
+  color: black;
+}
+
+.dimmed-text::-webkit-datetime-edit-fields-wrapper {
   opacity: 0.3;
   margin-left: 13px;
 }
