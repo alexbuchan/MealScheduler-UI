@@ -29,7 +29,7 @@ const propTypes = {
     endAt: PropTypes.string,
     comments: PropTypes.string
   }),
-  type: PropTypes.bool,
+  type: PropTypes.string,
   eventId: PropTypes.number
 };
 
@@ -104,7 +104,7 @@ class EventForm extends React.Component {
     } else {
       Actions.editEvent(this.state.form, this.props.eventId);
     }
-    
+
     this.props.closeModal();
   }
 
@@ -206,12 +206,28 @@ class EventForm extends React.Component {
     return eventRecipes.map(recipe => recipe.id - 1)
   }
 
+  formStaticText = () => {
+    if (this.props.type === 'create') {
+      return {
+        title: 'Create Event',
+        submitButtonLabel: 'Create Event'
+      };
+    }
+
+    return {
+      title: 'Edit Event',
+      submitButtonLabel: 'Edit Event'
+    };
+  }
+
   render() {
+    const { title, submitButtonLabel } = this.formStaticText();
+
     return (
       <div className='create-event-body'>
-        <h3>Create Event</h3>
+        <h3>{ title }</h3>
         <Form
-          submitButtonLabel='Create Event'
+          submitButtonLabel={ submitButtonLabel }
           onSubmit={ this.handleOnSubmit }
         >
           <div className='create-event-form'>

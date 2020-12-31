@@ -26,6 +26,8 @@ class ScheduleView extends React.Component {
       sidebarActive: false,
       dayId: 1,
       openCreateEventModal: false,
+      openEditEventModal: false,
+      openDeleteEventModal: false,
       eventId: 0
     }
   }
@@ -96,6 +98,8 @@ class ScheduleView extends React.Component {
   handleCloseCreateEventModal = (_) => this.setState({ openCreateEventModal: false });
   handleOpenEditEventModal = (_, eventId) => this.setState({ openEditEventModal: true, eventId: eventId });
   handleCloseEditEventModal = (_) => this.setState({ openEditEventModal: false });
+  handleOpenDeleteEventModal = (_, eventId) => this.setState({ openDeleteEventModal: true, eventId: eventId });
+  handleCloseDeleteEventModal = (_, eventId) => this.setState({ openDeleteEventModal: false, eventId: eventId });
 
   createEventModal = () => {
     if (this.state.openCreateEventModal) {
@@ -112,10 +116,33 @@ class ScheduleView extends React.Component {
   editEventModal = () => {
     if (this.state.openEditEventModal) {
       const currentDay = this.state.schedule.schedule[this.state.dayId];
-      const current_event = currentDay.events.filter(event => event.id === this.state.eventId)[0];
+      const currentEvent = currentDay.events.filter(event => event.id === this.state.eventId)[0];
       return (
         <Modal closeModal={ this.handleCloseEditEventModal }>
-          <EventForm closeModal={ this.handleCloseEditEventModal } form={ current_event } type='edit' eventId={this.state.eventId} />
+          <EventForm closeModal={ this.handleCloseEditEventModal } form={ currentEvent } type='edit' eventId={this.state.eventId} />
+        </Modal>
+      );
+    }
+
+    return null;
+  }
+
+  handleDeleteEvent = (eventId) => {
+    ScheduleActions.deleteEvent(eventId);
+    this.handleCloseDeleteEventModal();
+  }
+
+  deleteEventModal = () => {
+    if (this.state.openDeleteEventModal) {
+      const currentDay = this.state.schedule.schedule[this.state.dayId];
+      const currentEvent = currentDay.events.filter(event => event.id === this.state.eventId)[0];
+      return (
+        <Modal closeModal={ this.handleCloseDeleteEventModal } size='small'>
+          <>
+            <h3>Are sure you want to delete this event?</h3>
+            <button onClick={ () => this.handleDeleteEvent(currentEvent.id) }>Delete</button>
+            <button onClick={ this.handleCloseDeleteEventModal }>Cancel</button>
+          </>
         </Modal>
       );
     }
@@ -139,6 +166,7 @@ class ScheduleView extends React.Component {
           closeSidebar={ this.closeSidebar }
           day={ this.state.schedule.schedule[this.state.dayId] }
           handleOpenEditEventModal={ this.handleOpenEditEventModal }
+          handleDeleteEvent={ this.handleOpenDeleteEventModal }
         />
       );
     }
@@ -168,6 +196,7 @@ class ScheduleView extends React.Component {
 
           { this.createEventModal() }
           { this.editEventModal() }
+          { this.deleteEventModal() }
         </div>
 
         { this.renderScheduleSidebar() }

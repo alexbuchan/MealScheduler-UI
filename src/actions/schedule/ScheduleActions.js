@@ -102,6 +102,24 @@ class ScheduleActions {
       this.getSchedule({ month: monthNames[new Date().getMonth()], year: new Date().getFullYear() });
     }
   }
+
+  deleteEvent = async (eventId) => {
+    const _endpoint = `${ServiceConfig}/events/${eventId}`;
+    const jwt = ActionsHelper.getCookie('user');
+
+    let error, response;
+    [error, response] = await ActionsHelper.asyncHelper(
+      request.delete(_endpoint, { headers: { Authorization: `Bearer ${jwt}` } })
+    );
+
+    if (error) {
+      FlashMessageActions.dispatchErrorMessage(error.response);
+    } else {
+      FlashMessageActions.dispatchSuccessMessage(response.data);
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      this.getSchedule({ month: monthNames[new Date().getMonth()], year: new Date().getFullYear() });
+    }
+  }
 }
 
 export default new ScheduleActions();

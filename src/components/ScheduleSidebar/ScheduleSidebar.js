@@ -16,7 +16,8 @@ const propTypes = {
   }),
   visible: PropTypes.bool,
   closeSidebar: PropTypes.func,
-  handleOpenEditEventModal: PropTypes.func
+  handleOpenEditEventModal: PropTypes.func,
+  handleDeleteEvent: PropTypes.func
 };
 
 class ScheduleSidebar extends React.Component {
@@ -73,7 +74,11 @@ class ScheduleSidebar extends React.Component {
         return (
           <div key={index}>
             <Accordion.Title className='schedule-sidebar-accordion-title' onClick={ this.handleAccordion } index={index}>
-              <EventCardSidebarTitle event={ event } handleOpenEditEventModal={ this.props.handleOpenEditEventModal } />
+              <EventCardSidebarTitle
+                event={ event }
+                handleOpenEditEventModal={ this.props.handleOpenEditEventModal }
+                handleDeleteEvent={ this.props.handleDeleteEvent }
+              />
             </Accordion.Title>
             <Accordion.Content active={isActive}>
             <Transition visible={isActive} animation='drop' duration={500}>

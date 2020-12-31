@@ -7,7 +7,8 @@ import DeleteIcon from '../../assets/images/svg/delete.svg';
 const propTypes = {
   event: PropTypes.object,
   accordionEffect: PropTypes.bool,
-  handleOpenEditEventModal: PropTypes.func
+  handleOpenEditEventModal: PropTypes.func,
+  handleDeleteEvent: PropTypes.func
 };
 
 class EventCardSidebarTitle extends React.Component {
@@ -75,7 +76,7 @@ class EventCardSidebarTitle extends React.Component {
                 <EditIcon className='schedule-sidebar-icon' />
               </button>
               
-              <button onClick={ this.handleCloseSidebar } className='schedule-sidebar-button'>
+              <button onClick={ (ev) => this.props.handleDeleteEvent(ev, this.props.event.id) } className='schedule-sidebar-button'>
                 <DeleteIcon className='schedule-sidebar-icon' />
               </button>
             </div>

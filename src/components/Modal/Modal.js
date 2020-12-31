@@ -4,17 +4,31 @@ import CloseButton from '../../assets/images/svg/close.svg';
 
 const propTypes = {
   closeModal: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  size: PropTypes.string
 };
 
-const Modal = ({ closeModal, children }) => {
+const Modal = ({ closeModal, children, size }) => {
   const handleCloseModal = (ev) => {
     closeModal(ev);
   }
 
+  const modalSize = () => {
+    switch(size) {
+      case 'small':
+        return { width: 400 };
+      case 'medium':
+        return { width: 766 };
+      case 'large':
+        return { width: 900 };
+      default:
+        return { width: 766 };
+    }
+  }
+
   return (
     <div className='custom-modal'>
-      <div className='custom-modal-main'>
+      <div className='custom-modal-main' style={ { ...modalSize() } }>
         <div className='custom-modal-close-button-wrapper'>
           <button className='custom-modal-close-button' onClick={ handleCloseModal }>
             <CloseButton className='custom-modal-close-icon' />
