@@ -8,7 +8,7 @@ import Schedule from '../../components/Schedule/Schedule';
 import ScheduleSidebar from '../../components/ScheduleSidebar/ScheduleSidebar';
 import ScheduleNavbar from '../../components/ScheduleNavbar/ScheduleNavbar';
 import ScheduleHeader from '../../components/ScheduleHeader/ScheduleHeader';
-import EventForm from '../../components/EventForm/EventForm'
+import EventForm from '../../components/EventForm/EventForm';
 import Modal from '../../components/Modal/Modal';
 import withLoader from '../../HOC/Loader/Loader';
 import { modulo } from '../../lib/Helpers/helpers';
@@ -142,7 +142,7 @@ class ScheduleView extends React.Component {
             <h3>Are sure you want to delete this event?</h3>
             <div className='delete-event-button-wrapper'>
               <button className='delete-event-button' onClick={ () => this.handleDeleteEvent(currentEvent.id) }>Delete</button>
-              <button className='cancel-event-button' onClick={ this.handleCloseDeleteEventModal }>Cancel</button>  
+              <button className='cancel-event-button' onClick={ this.handleCloseDeleteEventModal }>Cancel</button>
             </div>
           </>
         </Modal>

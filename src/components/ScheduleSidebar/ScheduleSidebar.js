@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Accordion, Transition } from 'semantic-ui-react'
+import { Accordion, Transition } from 'semantic-ui-react';
 
 import EventCardSidebarTitle from '../EventCardSidebar/EventCardSidebarTitle';
 import EventCardSidebarPanel from '../EventCardSidebar/EventCardSidebarPanel';
